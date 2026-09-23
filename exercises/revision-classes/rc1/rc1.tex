@@ -1,0 +1,172 @@
+\input{../common/preamble.tex}
+\begin{document} 
+%
+\heading{Michaelmas revision class}
+This sheet contains what was written on the board in the revision class on Monday 27 April 2026.
+
+\section{General exam advice}
+\begin{enumerate}[label=(\alph*)]
+	\item Format: 
+		\begin{itemize}
+			\item Section A: Q1--4. 10 marks each.
+			\item Section B: Q5--8. 15 marks each.
+			\item No choice.
+		\end{itemize}
+	\item Within each sections, questions do not increase in difficulty.
+	\item Think about order (read it all first).
+	\item Think about timing -- how long to give to each question.
+	\item Read the whole question. Maybe something at the end will tell you a hint or an assumption you can use.
+	\item Lost? Can you do part (b) even if you can't do part (a)? This might require having to write down an assumption but that's OK.
+	\item Move on! Use the mark distribution for time guidance.
+	\item Use lots of paper! (Ask for more!)
+	\begin{enumerate}[label=(\roman*)]
+		\item no rough paper
+		\item I will mark everything unless you cross it out
+		\item new question, new page
+		\item I want to give you marks, so make it easy for me! Write neatly!
+	\end{enumerate}
+\end{enumerate}	
+
+\section{Math Bio exam advice}
+\begin{enumerate}[label=(\alph*)]
+	\item Do last year's paper and the practice paper already! (Don't save it.)
+	\item Use bullet points.
+	\item Draw pictures.
+\end{enumerate}
+
+\section{Rough course outline}
+\begin{enumerate}[label=(\alph*)]
+	\item 1D population models (time-dependent only)
+	\begin{enumerate}[label=(\roman*)]
+		\item equilibria (feasible/permissible)
+		\item stability (drawing the phase space graph of $\fd{x}{t}$ against $x$ is nearly always the best way to determine stability in 1D)
+		\item interpretation (drawing a picture is again the best method)
+	\end{enumerate}
+	\item 1D \& 2D population models
+	\begin{enumerate}[label=(\roman*)]
+		\item nondimensionalisation
+		\item linear stability analysis formally (with $\varepsilon$)
+		\item bifurcations (changes in the number or behaviour of equilibria): drawing bifurcation diagrams for 1D models and interpreting them
+	\end{enumerate}
+	\item 2D population models
+	\begin{enumerate}[label=(\roman*)]
+		\item linear stability analysis shortcuts (just writing down $\m{J}$, det/tr rules)
+		\item phase portraits (draw and interpret)
+	\end{enumerate}
+	\item 3D population models
+	\begin{enumerate}[label=(\roman*)]
+		\item e.g.\ SIR
+		\item reduction to 2D
+	\end{enumerate}
+	\item (advection--)diffusion
+	\begin{enumerate}[label=(\roman*)]
+		\item derivations
+		\item separation of variables (bounded domain)
+		\item Fourier transforms and Green's functions (unbounded domain)
+		%\item similarity solutions (finite diffusion)
+	\end{enumerate}
+	\item travelling waves
+	\begin{enumerate}[label=(\roman*)]
+		\item existence (between which equilibria?)
+		\item stability (indicating permissible wavespeeds)
+	\end{enumerate}
+	\item PDE stability (the start)
+\end{enumerate}
+%
+\section{How an exam question is written}
+\begin{itemize}
+	\item The little bolt-on (e.g.\ interpret, non-dimensionalise, consider a simpler version)
+	\item The meat
+	\item Something that tests understanding
+\end{itemize}
+%
+\section{Bifurcations}
+You need to be able to go between
+\[ \text{single-species model} \longleftrightarrow \text{bifurcation diagram}.\]
+For example,
+\[\fd{x}{t} = x-k\]
+has equilibrium $x_0=k$. Is it stable or unstable? 
+
+Drawing the phase portrait shows that $k$ is unstable.
+
+So drawing the bifurcation diagram of $x_0$ again $k$, you get a dotted line of slope 1 which passes through the origin.
+
+You should practice this for single-species (aka 1D) models that we've seen.
+
+If you saw a bifurcation diagram, can you write down what $\fd{x}{t}$ should be?
+
+\section{Nondimensionalisation}
+e.g.\ \textbf{Exam 2022 Q2}:
+
+Convert
+\[ \pd{u}{t} = D \pdd{u}{x} + ru\left(1-\frac{u}{K}\right), \quad x \in [0,L] \]
+into, after hats have been removed,
+\[ \pd{u}{t} = \pdd{u}{x} + \alpha u(1-u), \quad x \in [0,1].\]
+
+Normal procedure:
+\[ u = U \hat{u}, \quad x = X\hat{x}, \quad t = T\hat{t},\]
+which includes substituting in the interval definition:
+\begin{align*}
+	\frac{U}{T} \pdd{\hat{u}}{\hat{t}} &= \frac{DU}{X^2}\pdd{\hat{u}}{\hat{x}}+rU\hat{u}\left(1-\frac{U\hat{u}}{K}\right), \quad X \hat{x} \in [0,L]\\
+	\implies \pdd{\hat{u}}{\hat{t}} &= \frac{DT}{X^2}\pdd{\hat{u}}{\hat{x}}+rT\hat{u}\left(1-\frac{U\hat{u}}{K}\right), \quad \hat{x} \in \left[0,\frac{L}{X}\right]
+\end{align*}
+Starting with the interval definition, we get $X=L$. The diffusion term gives us $T = L^2/D$. Therefore $\alpha = rT = rL^2/D$.
+
+If we have a boundary condition, e.g.
+\[u(L,t) = \beta,\]
+Think about what this means. It means
+\begin{align*}
+	u = \beta \; & \text{when} \; x=L \; \text{and} \; \forall t \\
+	\implies U\hat{u} = \beta \; & \text{when} \; X\hat{x}=L \; \text{and} \; \forall T\hat{t} \\
+	\implies \hat{u} = \frac{\beta}{U} \; & \text{when} \; \hat{x}=\frac{L}{X} \; \text{and} \; \forall \hat{t},
+\end{align*}
+i.e.
+\[\hat{u}\left(\frac{L}{X},\hat{t}\right) = \frac{\beta}{U}.\]
+
+\section{Phase portraits}
+e.g.\ \textbf{Exam 2022 Q8.5}:
+
+System is
+\begin{align*}
+	\fd{S}{t} &= \alpha(N-S-I)-\beta IS - \nu S,\\
+	\fd{I}{t} &= \beta IS - \gamma I.
+\end{align*}
+It has nullclines
+\begin{align*}
+	0 &= \alpha(N-S-I)-\beta IS - \nu S &&\implies I = \frac{\alpha N-(\alpha+\nu)S}{\alpha+\beta S},\\
+	0 &= I(\beta S - \gamma) && \implies I = 0, \, S = \frac\gamma\beta.\end{align*}
+
+Remember that nullclines can be curves, not just straight lines.
+\begin{center}
+	\includegraphics[width=0.7\textwidth]{images/sir-graph}
+\end{center}
+To draw the $I$ nullcline here, see that for small $S$, the equation for the nullcline looks like $-S$, and for large $S$, it looks like a constant.
+
+There is no requirement in the question to put in trajectories, but if you wanted to, you could
+\begin{enumerate}[label=(\roman*)]
+	\item put in numbers to check a region, or
+	\item try $(\varepsilon,\varepsilon)$,
+\end{enumerate}
+e.g.
+\[\fd{S}{t}\sim\alpha N > 0, \qquad \fd{I}{t} \sim - \gamma \varepsilon < 0,\]
+
+then use the fact that signs flip over the relevant nullclines.
+
+\section{Travelling waves}
+Travelling waves go from equilibrium to equilibrium. Which way? Think domino-o-oes.
+
+For $x-ct$ you have a rightward travelling wave:
+\begin{center}
+stable \quad $\to$ \quad unstable
+
+\textbackslash\textbackslash\textbackslash\textbackslash $\mid\mid\mid\mid\mid\mid\mid$
+\end{center}
+
+For $x+ct$ you have a leftward travelling wave:
+\begin{center}
+unstable \quad $\leftarrow$ \quad stable
+
+$\mid\mid\mid\mid\mid\mid\mid$////
+\end{center}
+
+\end{document}

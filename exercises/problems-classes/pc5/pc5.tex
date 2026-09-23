@@ -1,0 +1,149 @@
+\documentclass[a4paper,12pt]{article}
+\input{../common/preamble.tex}
+\begin{document} 
+%
+\heading{Epiphany}{Problems class 5}
+\newcommand{\sol}[1]{}
+%\heading{Epiphany}{Problems class 5: Solutions}
+%\newcommand{\sol}[1]{\\ \hrule\hfill \\ \textcolor{blue}{\textbf{SOLUTION:}} #1 \\ \hrule\hfill}
+
+\section{Review: Simple disease dynamics (Again! Shouldn't we be done with this already...?)}
+    Recall the SIS model from Michaelmas:
+    \begin{align*}
+        \fd{S}{t} &= \delta I - \beta SI,\\
+        \fd{I}{t} &= \beta SI-\delta I.
+    \end{align*}
+\begin{enumerate}[label=(\alph*)]
+    \item If $S(t)$ is the number of susceptible individuals at time $t$, and $I(t)$ the number of infected, what do the parameters $\delta$ and $\beta$ represent? What assumptions are inherent to this model which makes it different from other compartmental epidemiological models you've seen (e.g.\ SIR)?
+    \sol{The parameter $\beta$ has the same interpretation as in SIR and other compartmental models - this is the per capita rate of infection (per capita meaning that if an $S$ and an $I$ individual meet, this is the rate at which the $S$ becomes infected. The parameter $\delta$ is possibly less familiar, and represents the rate of recovery of an infected individual. This assumes of course that someone is either susceptible to the disease or infectious, which is almost never strictly true. Nevertheless, on some timescales, or in the presence of many strains of the illness, this model can be a reasonable approximation. Note as well that we are not considering population growth, and that we are not tracking anyone who dies, from the illness or otherwise.}
+    \item Show that the quantity $N(t) = S(t) + I(t)$ does not change in time. How would you compute $N(t)$ if you knew the initial susceptible and infected populations? 
+    \sol{To check this we compute:
+    \begin{equation*}
+        \fd{N}{t} = \fd{S}{t}+\fd{I}{t} = \delta I - \beta SI + \beta SI-\delta I = 0.
+    \end{equation*}
+    So therefore $N(t)$ is a constant (i.e.~not a function of $t$). Hence we can compute its value as $N(t) = N(0) = S(0)+I(0)$, assuming we know the initial susceptible and infected populations.}
+    \item Use the fact that $N$ is a constant to write an equation for the rate of change of the proportion of infected individuals, $p = I/N$. That is, find an equation for $\fd{p}{t}$ in terms of just $p$ that looks like
+    $$
+    \fd{p}{t} = (B-\delta)p - Bp^2,
+    $$
+    where you should specify $B$ in terms of model parameters.
+    \sol{The key idea here is to use $N$ to reduce one variable from either equation. So we could write $S(t) = N-I(t)$ to get:
+    $$
+    \fd{I}{t} = \beta SI-\delta I = \beta (N-I)I-\delta I = (\beta N-\delta)I-\beta I^2.
+    $$
+    Now we replace $I=Np$, and for convenience define a new parameter $B = N \beta$. Clearing an N from the equation we get:
+    $$
+    \fd{p}{t} = (B-\delta)p - Bp^2.
+    $$}
+    \item Compute the equilibria of this equation for $p$, and determine their permissibility and linear stability.
+    \sol{Equilibria satisfy:
+    $$
+    0 = (B-\delta)p_0 - B(p_0)^2.
+    $$
+    So $p_0=0$ is always a solution. We have that $p_0 = (B-\delta)/B$ is also a solution, but it is only permissible (positive and hence biologically meaningful) if $(B-\delta)>0$. 
+    
+    Remember that we can \emph{always} derive the equation for linear stability by taking $p = p_0 + \varepsilon p_1(t)$, plugging this into our equation and collecting the $O(\varepsilon)$ terms. Or, we can skip this and note that the first term in a Taylor series will just be the derivative of the right-hand side. So we have that linear perturbations satisfy:
+    $$
+    \fd{p_1}{t} = f'(p_0)p_1 = ((B-\delta) - 2Bp_0)p_1,
+    $$
+    where this is just saying that $p_1$ grows or decays exponentially at a rate $f'(p_0)$, and hence the sign of this term determines the stability.
+    
+    For $p_0=0$, we have $f'(0) = (B-\delta)$, so it is unstable if $B> \delta$ and stable if $B < \delta$. We also have $f'((B-\delta)/B) = \delta-B$, so this steady state has the opposite stability (and is stable if and only if it is permissible). This is an example of a transcritical bifurcation, where the nonzero steady state and the zero steady state become the same at the point $B = \delta$, and exchange stability so that only one of them is ever stable.
+    }
+\end{enumerate}
+
+\section{Differences that models make}
+    Now let's consider a discrete-time variant of the SIS model where an infection starts on the first day with $S_0$ susceptible individuals and $I_0$ infected individuals. We model the number of people who are susceptible and infected on day $n$ by:
+    \begin{align*}
+        S_{n} &= S_{n-1}+ \delta I_{n-1} - \beta S_{n-1}I_{n-1},\\
+        I_n &= I_{n-1} +\beta S_{n-1}I_{n-1}-\delta I_{n-1},
+    \end{align*}
+    where the (always positive) parameters now represent rates of infection, recovery etc within one day (we have already nondimensionalized one day to be the difference between $n$ and $n-1$).
+\begin{enumerate}[label=(\alph*)]
+    \item What terms are different in this model from its continuous-time (ODE) counterpart? Explain in words what each term in each equation represents.
+    \sol{
+    The new terms are the $S_{n-1}$ and $I_{n-1}$ on the right-hand-side of each equation for $S_n$ and $I_n$ respectively. The difference here is that in the ODE model, the right-hand-side represented a rate of change. Here, the equation for the number of susceptibles on day $n$ reads "number of susceptibles on day $n$ = number of susceptibles on day $n-1$ + any recovered individuals - anyone who becomes infected." Similarly the equation for $I_n$ means "number of infected people on day $n$ = number of infected people on day $n-1$ + number of people infected on day $n$ - number of infected people who recover on day $n$."
+    }
+    \item Define a discrete-time version of the total population and show that it will not change in time (that is, $N$ is a number which doesn't depend on the day $n$).
+    \sol{
+    We let $N_n = S_n+I_n$. We can then add the two equations together to see that $N_n=S_{n-1}+I_{n-1} = N_{n-1}$, and hence $N_n=N_0=N$ is a constant depending on the initial population.
+    }
+    \item Using the above constant total population, reduce this model to a single difference equation for the total proportion of infected individuals, $p_n = I_n/N$ of the form,
+    $$
+    p_n = R_0p_{n-1}-Bp_{n-1}^2,
+    $$
+    where you should define both $R_0$ and $B$ in terms of the original parameters in the model.
+    \sol{
+    We divide the $I_n$ equation by $N$ to find,
+    $$
+    I_n = I_{n-1}+\beta S_{n-1}I_{n-1}-\delta I_{n-1} = I_{n-1}+\beta(N-I_{n-1})I_{n-1} -\delta I_{n-1}.
+    $$
+    We can divide this equation by $N$ and factor out an $N$ from the term involving $\beta$ to find:
+    $$
+    p_n = p_{n-1}+N\beta(1-p_{n-1})p_{n-1} -\delta p_{n-1} = (1+B-\delta)p_{n-1}-Bp_{n-1}^2,
+    $$
+    where $B=\beta N$ and we can define $R_0=1+N\beta-\delta$.
+    }
+    \item Compute the equilibria $p^*$ of this model. Determine the permissibility and linear stability of any of these equilibria as the parameters $R_0$ and $B$ vary.
+    \sol{
+    The equilibria satisfy:
+    $$
+    p_n^* = R_0p_{n-1}^*-B(p_{n-1}^*)^2,
+    $$
+    so we have the solutions $$
+    p^*=0 \,\,\textrm{ and } \,\, p^* = \frac{R_0-1}{B}.
+    $$
+    The first of these is always permissible, and the second is only permissible if $R_0>1$.
+    
+    Linearising we find,
+    $$
+    f'(p^*) = R_0-2Bp^*.
+    $$
+    Hence $f'(0)=R_0$, so the extinction equilibrium $p^*=0$ is stable if $R_0<1$, and unstable if $R_0>1$. The endemic equilibrium, which only exists for $R_0>1$, has $f'((R_0-1)/B)=R_0-2(R_0-1) = 2-R_0$. Hence this equilibrium is stable for $1 < R_0 < 3$, and undergoes qualitatively the same kinds of behaviours as the logistic model discussed in lecture with period-doubling beyond $R_0=3$ etc.
+    }
+\end{enumerate}
+\section{Discrete SIR}
+    Now let's consider a discrete-time variant of the SIR model of the form:
+    \begin{align*}
+        S_n &= S_{n-1}- \beta S_{n-1}I_{n-1},\\
+        I_n &= I_{n-1}+\beta S_{n-1}I_{n-1}-\delta I_{n-1},\\
+        R_n &= R_{n-1}+ \delta I_{n-1},
+    \end{align*}
+    where $\beta>0$ and $\delta>0$.
+    \begin{enumerate}[label=(\alph*)]
+        \item Define a total population $N$ and show that it must be constant.
+        \sol{
+        As before this will be $N = S_n+I_n+R_n = S_0+I_0+R_0$ which we can see by adding up the three equations.
+        }
+        \item What are the equilibria of this model? How do they relate to the total population $N$? 
+        \sol{
+        As usual, equilibria satisfy,
+            \begin{align*}
+        S^* &= S^*- \beta S^*I^*,\\
+        I^* &= I^*+\beta S^*I^*-\delta I^*,\\
+        R^* &= R^*+ \delta I^*.
+    \end{align*}
+        We can spot that $S^*=0$ satisfies the first equation, which entails $I^*=0$ from the second. Any constant would then satisfy the third equation, so we must have $R^*=N$ in this case.
+        
+        If we instead assume $S^*>0$ but $I^*=0$, by similar reasoning to the above we find that $S^*$ and $R^*$ can be any constants which satisfy $S^*+R^*=0$. In fact, this generalises the solution found above in the case $S^*=0$. These are the only equilibria, as if $I^* \neq$, then the first equation can never be satisfied for $S^*\neq 0$.
+        }
+        \item Compute the net rate of new infected individuals each day. Use this to determine a condition as a function of the parameters and $S_{n-1}$ such that the net rate of infectives on day $n$ is decreasing. 
+        \sol{
+        The new number of infected individuals each day is given by,
+        $$
+        I_n-I_{n-1} = (\beta S_{n-1}-\delta)I_{n-1}.
+        $$
+        Hence for this to be negative, we require,
+        $$
+        \beta S_{n-1}<\delta.
+        $$
+        }
+        \item Assuming we have an initial population composed of $N=S_0+I_0$ infected and susceptible people, and that we can control the rate at which infected people recover $\delta$. What is the smallest value that we could set $\delta$ to be equal to in order to prevent the total number of infected people from ever rising? Interpret this result for a fixed number of initially infected people $I_0$ for different population sizes $N$. 
+        \sol{
+        From the previous part we would need to set $$
+        \delta=\beta S_0.
+        $$
+        Essentially this result says that we have to provide more treatment/control of the disease independently of the initial number of infected individuals, but proportionally to the population of susceptibles. This makes some sense in that thinking of the net rate of new infected people will be proportional to the total number of infected, but the constant of proportionality can change sign based on this condition. 
+        }
+    \end{enumerate}
+\end{document}

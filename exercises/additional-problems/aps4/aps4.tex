@@ -1,0 +1,781 @@
+\documentclass[a4paper, 12pt]{article}
+\input{../common/preamble.tex}
+\setbool{show_question}{true}
+\setbool{show_solution}{false}
+\newcommand{\mvec}[2]{\left(
+    \begin{array}{c}#1\\#2
+\end{array}\right)}
+\begin{document}
+%
+\heading{Epiphany}{Additional problem sheet 4\solutioninheading}
+\ifbool{show_question}{\textbf{Topics covered}: Chapters 10--11.}{}
+
+\begin{enumerate}[label={\bf \arabic{*}.\;}, ref={\arabic{*}},itemsep=3ex, left=0ex]
+
+    \question{Turing conditions (Exam section A type)}
+    {
+      Consider the following \emph{non-dimensionalised} reaction--diffusion equation for the scalar densities $u$ and $v$:
+      \begin{subequations}
+        \label{rds2}
+        \begin{align}
+          \pd{u}{t} &= \nabla^2 u + \gamma F(u,v),\\
+          \pd{v}{t} &= D \nabla^2 v + \gamma G(u,v),
+        \end{align}
+      \end{subequations}
+      where $D>0$ and $\gamma>0$ are constants. We assume \emph{no-flux} boundary conditions on a Cartesian domain $[0,L_1]\times[0,L_2]$ with coordinates $(x_1,x_2)$. The Turing conditions for pattern formation are
+      \begin{align}
+        & F_u +G_v <0, \quad F_uG_v  -G_uF_v> 0,\nonumber \\
+        & G_v + DF_u>0,\quad (G_v+ D F_u)^2 - 4 D (F_uG_v  -G_uF_v) >0,\label{turingconditions2}
+      \end{align}
+      where we have used the the notation
+      \begin{align*}
+        &F_{u} = \pd{F}{u}\bigg\vert_{u=u_0,v=v_0},\quad F_{v} = \pd{F}{v}\bigg\vert_{u=u_0,v=v_0},\\
+        &G_{u} = \pd{G}{u}\bigg\vert_{u=u_0,v=v_0},\quad G_{v} = \pd{G}{v}\bigg\vert_{u=u_0,v=v_0}.
+      \end{align*}
+      \begin{enumerate}[label=(\alph*)]
+        \item{State the conditions for a homogeneous equilibrium of \cref{rds2}.
+          }
+        \item{  Define what is meant by a pattern in this context, give the explicit mathematical form for the pattern and describe what the conditions in \cref{turingconditions2} enforce.
+          }
+        \item{State a condition on $D$ under the assumption that $F_u>0.$
+          }
+      \end{enumerate}
+    }
+    {
+      \begin{enumerate}[label=(\alph*)]
+        \item The homogeneous equilibrium satisfies
+          \begin{equation}
+            F(u,v) =0,\quad G(u,v) = 0.
+          \end{equation}
+
+        \item This homogeneous equilibrium is unstable to small variations in density. This instability develops into an inhomogeneous pattern in the form often of spots or stripes (this being a Cartesian grid). The linearised version of the main equations has solutions in the form
+          \begin{equation}
+            \sum_{i=0}^{\infty}\sum_{j=0}^{\infty}\e^{\lambda(k_s^{ij}) t}\cos\left(\frac{ i \pi}{L_1}x_1\right)\cos\left(\frac{ j\pi}{L_2}x_2\right),
+          \end{equation}
+          where
+          \begin{equation}
+            k_s^{ij} = \frac{ i^2\pi^2}{L_1^2}+\frac{j^2\pi^2}{L_2^2}
+          \end{equation}
+          is the pattern number.
+          The function $\lambda(k_s)$ dictates if the mode decays exponentially $\lambda(k_s)<0,$ or grows, $\lambda(k_s)\geq 0$. The growing modes form the pattern.
+
+          The first two conditions,
+          \begin{equation}
+            F_u +G_v <0, \quad F_uG_v  -G_u F_v> 0,
+          \end{equation}
+          ensure that the $k_s^{00}=0$ mode, the homogeneous perturbation, always decays.
+
+          The other two conditions,
+          \begin{equation}
+            G_v + DF_u>0,\quad (G_v+ D F_u)^2 - 4 D (F_uG_v  -G_uF_v)>0,
+          \end{equation}
+          ensure there is some finite set of wave modes $k_s\in[k_s^{\min},k_s^{\max}]$ for which $\lambda(k_s^{ij})>0$ and hence a pattern can form.
+
+        \item
+          If $F_u>0$ the first condition requires $G_v<0$ and $\vert G_v\vert> \vert F_u\vert$. The third condition then shows
+          \begin{equation}
+            D \vert F_u\vert - \vert G_v\vert >0 \implies
+            D>  \frac{\vert G_v\vert}{\vert F_u\vert},
+          \end{equation}
+          and hence $D>1$.
+
+      \end{enumerate}
+
+    }
+    %
+
+    %===========================================================================
+
+    %
+    \question{Periodic boundary conditions (Exam section B type)}
+    {
+      Consider the following generic reaction--diffusion system,
+      \begin{subequations}
+        \begin{align}
+          \pd{u}{t} &= \nabla^2 u + \gamma F(u,v),\\
+          \pd{v}{t} &=  D\nabla^2 v + \gamma G(u,v),
+        \end{align}
+      \end{subequations}
+      with $D$ and $\gamma$ positive constants. We assume a Cartesian domain $[0,L_1]\times[0,L_2]$ with coordinates $(x_1,x_2)$. We assume the densities $u$ and $v$ have periodic boundary conditions
+      \begin{align}
+        u(0,x_2) &= u(L_1,x_2), & u(x_1,0) &= u(x_1,L_2),\nonumber\\
+        v(0,x_2) &= v(L_1,x_2), & v(x_1,0) &= v(x_1,L_2).
+      \end{align}
+      \begin{enumerate}[label=(\alph*)]
+        \item{State what is meant by a homogeneous equilibrium and state the equations of such equilibria in this case.
+          }
+        \item{
+            Consider an expansion $u(x,t)= u_0 + \epsilon u_1(x,t)$ and $v(x,t)= v_0 + \epsilon v_1(x,t)$, show that, to $\order(\epsilon)$, solutions to $u_1$ and $v_1$ take the form
+            \begin{align}
+              \sum_{i=0}^{\infty}\sum_{j=0}^{\infty}\e^{\lambda(i,j)t}\left[C_1^{ij}\sin\left(\frac{i\pi}{L_1}x_1\right)\sin\left(\frac{j\pi}{L_2}x_2\right) + C_2^{ij}\sin\left(\frac{i\pi}{L_1}x_1\right)\cos\left(\frac{j 2\pi}{L_2}x_2\right)\right.\nonumber \\
+              \left. + C_3^{ij}\cos\left(\frac{i 2 \pi}{L_1}x_1\right)\sin\left(\frac{j \pi}{L_2}x_2\right)  + C_4^{ij}\cos\left(\frac{i 2\pi}{ L_1}x_1\right)\cos\left(\frac{j 2\pi}{L_2}x_2\right) \right],
+            \end{align}
+            where the $C_\alpha^{ij}$ are constants. You must state the explicit form of the functions $\lambda(i,j)$.
+          }
+        \item{What would the linearised solution look like if we had instead chosen Dirichlet boundary conditions, i.e.\
+            \begin{align}
+              u(x_1,0) &= u(x_1,L_2)  = u(0,x_2) = u(L_1,x_2)= u_0,\nonumber\\
+              v(x_1,0) &= v(x_1,L_2)  =v(0,x_2) = v(L_1,x_2)= v_0,
+            \end{align}
+            where $u_0$ and $v_0$ are the homogeneous equilibrium values?
+          }
+        \item{We have now considered two distinct sets of boundary conditions. In which case are the Turing conditions
+            \begin{equation}
+              F_u  + G_v<0, \quad F_uG_v  + F_v G_u>0,
+            \end{equation}
+            necessary for  pattern formation? Justify your answer with respect to the linear solutions for $u_1$ in both cases.
+          }
+      \end{enumerate}
+    }
+    {
+      \begin{enumerate}[label=(\alph*)]
+        \item{
+            A homogeneous equilibrium is one for which both spatial and temporal derivatives vanish. In the case at hand the equations of a homogenous equilibrium $(u_0,v_0)$ are
+            \begin{equation}
+              F(u_0,v_0)  =G(u_0,v_0) = 0.
+            \end{equation}
+          }
+        \item{
+            To $\order(\epsilon)$ the main equations are
+            \begin{align}
+              \pd{u_1}{t} &= \nabla^2 u_1 + \gamma\left(F_u u_1 + F_v v_1\right),\\
+              \pd{v_1}{t} &= D\nabla^2 v_1 + \gamma\left(G_u u_1 + G_v v_1\right),
+            \end{align}
+            where, for example, $F_u = \pd{F}{u}$, evaluated at $u=u_0$.
+            We seek solutions in the form $u_1 = \Re\left(A\e^{\i\v{k}\cdot  x + \lambda t}\right)$ and $v_1 = \Re\left(B\e^{\i\v{k}\cdot  x + \lambda t}\right)$; then our linearised equations take the form
+            \begin{equation}
+              \label{lineq}
+              \lambda
+              \begin{pmatrix}u\\v
+              \end{pmatrix} = \m{J}
+              \begin{pmatrix}u \\ v
+              \end{pmatrix},
+            \end{equation}
+            where
+            \begin{equation}
+              \m{J} =
+              \begin{pmatrix}
+                -(k_1^2 + k_2^2) + \gamma F_u & \gamma F_v \\
+                \gamma G_u & -D(k_1^2 + k_2^2) + \gamma G_v
+              \end{pmatrix}.
+            \end{equation}
+            We now apply the boundary conditions. Consider the $x_1$ boundary conditions. Depending on the choice of the constants $A$ (or $B$) the solutions will take the form
+            \begin{equation}
+              A\e^{\i k_2 x_2 + \lambda t}\sin(k_1x_1) \quad \mbox{ or } \quad A\e^{\i k_2 x_2 + \lambda t}\cos(k_1x_1).
+            \end{equation}
+            For the sine case the boundary conditions require
+            \begin{equation}
+              \sin(0) = \sin(k_1 L_1),
+            \end{equation}
+            so $k_1 L_1 = n \pi$ for $n\in 0,1,2,3\dots$.
+
+            For the cosine case we require
+            \begin{equation}
+              \cos(0) = \cos(k_1 L_1),
+            \end{equation}
+            so $k_1 L_1 =  n 2\pi$  for $n\in 0,1,2,3\dots$.
+
+            One can easily apply this argument to the $x_2$ direction. The quoted solution is then the sum over all permissible combinations.
+
+            Finally, in order to solve \cref{lineq} for nontrivial solutions $u_1$ and $v_1$ we require $\det(\m{J}-\lambda \m{I}=0$ where $\m{I}$ is the identity matrix. Solutions to this take the form
+              \begin{equation}
+                \lambda(i,j) = \frac{1}{2}\left[\tr\m{J} \pm \sqrt{\left(\tr\m{J}\right)^2 - 4\det\m{J}}\right]
+              \end{equation}
+              with
+              \begin{align}
+                \tr\m{J} &= \gamma(F_u + G_v)  - k_s(i,j)(D+1),\\
+                \det\m{J} & =D k_s(i,j)^2 - \gamma k_s(i,j) \left(D F_u + G_v\right)  + \gamma^2(F_uG_v- F_vG_u),
+              \end{align}
+              and
+              \begin{align}
+                k_s(i,j) = \pi^2\left( \frac{i^2}{L_1^2}+ \frac{j^2}{L_2^2}\right),\\
+                k_s(i,j) = \pi^2\left( \frac{i^2}{L_1^2}+ \frac{4 j^2}{L_2^2}\right),\\
+                k_s(i,j) = \pi^2\left( \frac{4i^2}{L_1^2}+ \frac{j^2}{L_2^2}\right),\\
+                k_s(i,j) = \pi^2\left( \frac{4i^2}{L_1^2}+ \frac{4 j^2}{L_2^2}\right),
+              \end{align}
+              depending on the particular solution type.
+            }
+          \item{
+              In this case the linearised solutions $u_1$ and $v_1$ must satisfy
+              \begin{align}
+                u_1(x_1,0) = u_1(x_1,L_2)  = u_1(0,x_2) = u_1(L_1,x_2) &= 0,\\   v_1(x_1,0) = v_1(x_1,L_2)  =v_1(0,x_2) = v_1(L_1,x_2) &= 0.
+              \end{align}
+              In this case the cosine form of the solutions cannot satisfy the boundary conditions as $\cos(0)=1$. The sine boundary condition then require
+              \begin{equation}
+                k_1 = \frac{n\pi}{L_1} \quad \text{and} \quad k_2 = \frac{m\pi}{L_2},
+              \end{equation}
+              so that
+              \begin{align}
+                \sum_{i=1}^{\infty}\sum_{j=1}^{\infty}\e^{\lambda(i,j)t}C_1^{ij}\sin\left(\frac{i\pi}{L_1}x_1\right)\sin\left(\frac{j\pi}{L_2}x_2\right).
+              \end{align}
+              The summation accounts for the fact that the zeroth mode $i=j=0$ is $0$. The form of $\lambda(i,j)$ will be as in the periodic case with
+              \begin{align}
+                k_s(i,j) = \pi^2\left( \frac{i^2}{L_1^2}+ \frac{j^2}{L_2^2}\right).
+              \end{align}
+            }
+          \item{
+              These two conditions enforce that constant changes in the system, the $i=j=0$ modes, do not grow in time. This is necessary to ensure any potential patterns are not drowned out. In the Dirichlet case (form the previous part) there is no non-zero $i=j=0$ mode, so we have no need to enforce the conditions. For the periodic case the $\cos()\cos()$ solution is potentially non-zero (if $C_4^{00}\neq 0$) so we must enforce these two conditions.
+            }
+        \end{enumerate}
+
+      }
+      %
+
+      %===========================================================================
+
+      %
+      \question{Nonlinear diffusion (Exam section B type)}
+      {
+        Consider the following variant of a reaction--diffusion system,
+        \begin{subequations}
+          \begin{align}
+            \pd{u}{t} &= \nabla^2 u +  F(u,v) + \vnabla u \cdot \vnabla (v^2),\\
+            \pd{v}{t} &=  D\nabla^2 v +  G(u,v)+ v\nabla^2 u,
+          \end{align}
+        \end{subequations}
+        with $D>0$ constant. We assume a Cartesian domain $[0,L_1]\times[0,L_2]$ with coordinates $(x_1,x_2)$, and we also assume the densities $u$ and $v$ satisfy no-flux boundary conditions.
+        \begin{enumerate}[label=(\alph*)]
+          \item{State the equations of homogeneous equilibria of this system
+            }
+          \item{
+              State explicitly the boundary conditions of the system.
+            }
+          \item{Show that the Turing conditions required for pattern formation take the form
+              \begin{align}
+                &F_u + G_v<0,\quad  F_uG_v- F_vG_u>0,\nonumber\\
+                &D F_u + G_v - v_0 F_v >0, \quad \left(D F_u + G_v - v_0 F_v\right)^2 - 4D(F_uG_v- F_vG_u)>0.
+              \end{align}
+            }
+          \item{
+              Consider the case
+              \begin{equation}
+                F(u,v) = u(1-u) - uv,\quad G(u,v)= v(1-v) + \gamma u v,
+              \end{equation}
+              where $\gamma$ is a real constant. Find all the equilibria for which at least one of  $u$ or $v$ is $0$.
+            }
+          \item{For each of the equilibria found in the previous question, establish whether the Turing conditions can be satisfied. If they can be satisfied state the  domain of $\gamma$ values for which patterns can form.
+            }
+          \item{\emph{Good practice bonus question:} Find the other possible nonzero equilibrium and state conditions on $\gamma$ (if any) for which permit pattern formation. I am happy to look at/discuss your solutions if you bring them to me.}
+        \end{enumerate}
+      }
+      {
+        \begin{enumerate}[label=(\alph*)]
+          \item Homogeneous equilibria satisfy
+            \begin{equation}
+              F(u,v) = 0,\quad G(u,v)=0.
+            \end{equation}
+
+          \item The boundary conditions are
+            \begin{align}
+              \pd{u}{x_1}(0,x_2)= \pd{u}{x_1}(L_1,x_2)=  \pd{u}{x_2}(x_1,0) = \pd{u}{x_2}(x_1,L_2)=0,\\
+              \pd{v}{x_1}(0,x_2)= \pd{v}{x_1}(L_1,x_2)=  \pd{v}{x_2}(x_1,0) = \pd{v}{x_2}(x_1,L_2)=0.
+            \end{align}
+            I would accept other notation as long as it is clear, e.g.
+            \begin{equation}
+              \pd{u}{x_1}\bigg\vert_{x_1=0} = 0,\; \forall x_2\in[0,L_2].
+            \end{equation}
+
+          \item{
+              We assume the homogeneous equilibria are labelled $u_0$  and $v_0$. We assume $u(x,t) = u_0+\epsilon u_1(x,t)$ and $v(x,t) = v_0+\epsilon v_1(x,t)$. We expand the main equations; the linear and $F$, $G$ expansions are clear and obvious. For the nonlinear terms we have
+              \begin{align}
+                \vnabla (u^2) &= \vnabla(u_0 + \epsilon 2u_0 u_1) + \order(\epsilon^2) = \epsilon 2u_0\vnabla u_1 + \order(\epsilon^2) ,\\
+                \vnabla v\cdot \vnabla (u^2) &= \order(\epsilon^2),\\
+                \nabla^2  u  &= \epsilon \nabla^2 u_1 \implies v\nabla^2  u=  \epsilon v_0 \nabla^2 u_1 +  \order(\epsilon^2).
+              \end{align}
+              So to $\order(\epsilon)$ our equations read
+              \begin{align}
+                \pd{u_1}{t} &= \nabla^2 u_1 + \gamma\left(F_u u_1 + F_v v_1\right),\\
+                \pd{v_1}{t} &= D\nabla^2 v_1 + \gamma\left(G_u u_1 + G_v v_1\right) + v_0 \nabla^2 u_1,
+              \end{align}
+              where $F_u = \pd{F}{u}$ evaluated at $u=u_0$, etc.
+
+              We seek solutions in the form $u_1 = \Re\left(A\e^{\i\v{k}\cdot  x + \lambda t}\right)$ and $v_1 = \Re\left(B\e^{\i\v{k}\cdot  x + \lambda t}\right)$. Our linearised equations then take the form
+              \begin{equation}
+                \lambda
+                \begin{pmatrix}u\\v
+                \end{pmatrix} = \t{J}
+                \begin{pmatrix}u\\v
+                \end{pmatrix},
+              \end{equation}
+              where
+              \begin{equation}
+                \t{J} = \mat{-k_s+ \gamma F_u }{\gamma F_v}{-k_sv_0  + \gamma G_u}{-Dk_s + \gamma G_v}
+              \end{equation}
+              and where $k_s = k_1^2 + k_2^2$.
+
+              In order to have nontrivial $u_1,v_1$ we require $\det(\m{J}-\lambda \m{I})=0$ so
+              \begin{equation}
+                \lambda(i,j) = \frac{1}{2}\left[\tr\m{J} \pm \sqrt{\left(\tr\m{J}\right)^2 - 4\det\m{J}}\right]
+              \end{equation}
+              with
+              \begin{align}
+                \tr\m{J} &= \gamma(F_u + G_v)  - k_s(D+1),\\
+                \det\m{J} & =D k_s^2 - \gamma k_s\left(D F_u + G_v - v_0 F_v\right)  + \gamma^2(F_uG_v- F_vG_u).
+              \end{align}
+              The boundary conditions require
+              \begin{equation}
+                k_s = \pi^2\left(\frac{n_1^2}{L_1^2}+\frac{n_2^2}{L_2^2}\right).
+              \end{equation}
+              First we require the $k_s=0$ mode be asymptotically stable (decay) so we require $\tr\m{J}<0$ and $\det\m{J}>0$ when $k_s=0$, i.e.
+              \begin{equation}
+                F_u + G_v<0,\mbox{ and }F_uG_v- F_vG_u>0.
+              \end{equation}
+              Next we want some $k_s>0$ such that some modes $(n_1,n_2)$ grow. Since $(F_u + G_v)<0$ the trace must be negative, so this can only occur if $\det\m{J}<0$. Since $F_uG_v- F_vG_u>0$ we require
+              \begin{equation}
+                D F_u + G_v - v_0 F_v >0,
+              \end{equation}
+              a necessary but not sufficient condition.
+
+              Finally, since the quadratic component of $k_s$ is positive we can guarantee solutions if the quadratic $\det\m{J}$ crosses the real axis, thus the discriminant of the quadratic $\det\m{J}$ must be greater than $0$, i.e.
+              \begin{equation}
+                \left(D F_u + G_v - v_0 F_v\right)^2 - 4D(F_uG_v- F_vG_u) >0.
+              \end{equation}
+            }
+          \item{
+              If we set $u=0$ we get $v=0,1$. If we set $v=0$ we get $u=0,1$. So our equilibria are $(0,0)$, $(1,0)$ and $(0,1)$.
+            }
+          \item{
+              We have
+              \begin{equation}
+                F_u = 1-2u_0 -v_0,\quad F_v = -u_0,\quad G_v = 1-2v_0+\gamma u_0,\quad G_u = \gamma v_0.
+              \end{equation}
+
+              Consider the $(0,0)$ equilibrium: We try the first condition
+              \begin{equation}
+                F_u + G_v = 2 >0
+              \end{equation}
+              so we cannot satisfy the first condition.
+
+              Consider the $(1,0)$ equilibrium: The first condition reads
+              \begin{equation}
+                F_u + G_v =\gamma  <0,
+              \end{equation}
+              so we require that $\gamma$ be negative. The second condition is
+              \begin{equation}
+                F_u G_v - F_v G_u= -(1+\gamma) >0
+              \end{equation}
+              so this requires that $\gamma$ is less than $-1$. The third condition reads
+              \begin{equation}
+                D F_u + G_v =-D + (1+\gamma) >0 \implies \gamma > D-1.
+              \end{equation}
+              We see that it is not possible to satisfy $\gamma<-1$ and $\gamma> D-1$. So we cannot satisfy all the Turing conditions.
+
+              Now consider the $(0,1)$ equilibrium:
+              \begin{equation}
+                F_u + G_v  =-1<0.
+              \end{equation}
+              The second condition requires
+              \begin{equation}
+                F_u G_v - F_v G_u  = 0 >0
+              \end{equation}
+              which cannot be satisfied.
+
+              So in fact we cannot have any pattern formation from homogeneous equilibria for which one of the densities is zero.
+            }
+        \end{enumerate}
+
+      }
+      %
+
+      %===========================================================================
+
+      %
+      \question{Patterns and polar coordinates (Exam section A, 2017)}
+      {
+        Consider the following \emph{non-dimensionalised} reaction--diffusion equation for the scalar densities $u$ and $v$
+        \begin{subequations}
+          \label{rds}
+          \begin{align}
+            \pd{u}{t} = \nabla^2 u + \gamma F(u,v),\\
+            \pd{v}{t} = D \nabla^2 v + \gamma G(u,v),
+          \end{align}
+        \end{subequations}
+        where $D>0$ and $\gamma>0$ are constants. We assume \emph{no-flux} boundary conditions on a Cartesian domain $[0,L_1]\times[0,L_2]$ with coordinates $(x_1,x_2)$. The Turing conditions for pattern formation are
+        \begin{align}
+          & F_u +G_v <0, \quad F_uG_v  -G_uF_v> 0,\nonumber \\
+          & G_v + DF_u>0,\quad (G_v+ D F_u)^2 - 4 D (F_uG_v  -G_uF_v) >0, \label{turingconditions3}
+        \end{align}
+        where we have used the notation
+        \begin{align*}
+          &F_{u} = \pd{F}{u}\bigg\vert_{u=u_0,v=v_0},\quad F_{v} = \pd{F}{v}\bigg\vert_{u=u_0,v=v_0},\\
+          &G_{u} = \pd{G}{u}\bigg\vert_{u=u_0,v=v_0},\quad G_{v} = \pd{G}{v}\bigg\vert_{u=u_0,v=v_0},
+        \end{align*}
+        with $(u_0,v_0)$ a homogeneous equilibrium of the system.
+        \begin{enumerate}[label=(\alph*)]
+          \item State the conditions for a homogeneous equilibrium of \cref{rds}.
+          \item Define what is meant by a pattern in this context, give the explicit mathematical form for the pattern and describe what the conditions in \cref{turingconditions3} enforce.
+
+          \item What would be the mathematical form of the patterns if the domain had instead been an annulus, covered with a polar coordinate system $(r,\theta)$? You do \emph{not} need to state the condition on the pattern numbers $k_s$ which results from the boundary conditions.
+
+        \end{enumerate}
+      }
+      {
+        \begin{enumerate}[label=(\alph*)]
+          \item The homogeneous equilibrium satisfies
+            \begin{equation}
+              F(u,v) =0,\quad G(u,v) = 0.
+            \end{equation}
+
+          \item{
+              This homogeneous equilibrium is unstable to small variations in density. This instability develops into an inhomogeneous pattern in the form often of spots or stripes (this being a Cartesian grid). The linearised version of the main equations has solutions in the form
+              \begin{equation}
+                \sum_{i=0}^{\infty}\sum_{j=0}^{\infty}\e^{\lambda(k_s^{ij}) t}\cos\left(\frac{i\pi}{L_1}x_1\right)\cos\left(\frac{j\pi}{L_2}x_2\right),
+              \end{equation}
+              where
+              \begin{equation}
+                k_s^{ij} = \frac{i^2\pi^2}{L_1^2}+\frac{j^2\pi^2}{L_2^2}.
+              \end{equation}
+              The function $\lambda(k_s)$ dictates if the mode decays exponentially $\lambda(k_s)<0,$ or grows, $\lambda(k_s)\geq 0$. The growing modes form the pattern.
+
+              The first two conditions, $F_u +G_v <0$ and $F_uG_v  -G_uF_v> 0$, ensure that the $k_s^{00}=0$ mode, the homogeneous perturbation, always decays.
+
+              The other two conditions, $G_v + DF_u>0$ and $(G_v+ D F_u)^2 - 4 D (F_uG_v  -G_uF_v)>0$, ensure there is some finite set of wave modes $k_s\in[k_s^{\min},k_s^{\max}]$ for which $\lambda(k_s^{ij})>0$ and hence a pattern can form.
+            }
+          \item{
+              The patterns (solutions to the linearised system) take the form
+              \begin{align}
+                \sum_{n=0}^{\infty}\sum_{i=1}^{\infty}\left\{\left[A_{ni}J_n(\sqrt{k_{sn}^{i}}r)  + B_{ni}Y_n(\sqrt{k_{sn}^{i}}r) \right]\cos(n \theta) \right. \qquad \nonumber\\ + \left.\left[C_{ni}J_n(\sqrt{k_{sn}^{i}}r)  + E_{ni}Y_n(\sqrt{k_{sn}^{i}}r) \right]\sin(n\theta)\right\}.
+              \end{align}
+              Here $J_n$ and $Y_n$ are the Bessel functions of the first and second kind respectively, $A_{ni}, B_{ni}, C_{ni}$ and $E_{ni}$ are constants and $k_{sn}^{i}$ is the $i^{\rm th}$ pattern number associated with the $n^{\rm th}$ Fourier mode.
+            }
+        \end{enumerate}
+
+      }
+      %
+
+      %===========================================================================
+
+      %
+      \question{More Turing analysis (Exam section B, 2017)}
+      {
+        Consider the following generic  reaction--diffusion system
+        \begin{align*}
+          \pd{u}{t} &= \nabla^2 u + \gamma F(u,v) + \nabla^2{uv},\\
+          \pd{v}{t} &= D\nabla^2 v + \gamma G(u,v),
+        \end{align*}
+        where $D$ is the ratio of diffusion of $v$ and $u$ and $\gamma$ is a positive constant. We assume that nothing can leave or enter the system and that the domain $V$ is Cartesian.
+        \begin{enumerate}[label=(\alph*)]
+          \item{State the boundary conditions of this system.}
+          \item{State the equations which would determine the homogeneous equilibria $(u_0,v_0)$ of this system.
+            }
+          \item{Perform the steps of the Turing analysis for this system to show that there will be a growing inhomogeneous pattern for the system when
+              \begin{align*}
+                &F_u + G_v <0, \quad F_u G_v - F_vG_u >0,\\
+                &G_v(1+v_0) + D F_u - G_u u_0 >0,\\
+                &\left[G_v(1+v_0) + D F_u - G_u u_0\right]^2 - 4 D(1+v_0)(F_u G_v - F_vG_u) \geq 0,
+              \end{align*}
+              where we have used the notation
+              \begin{align*}
+                &F_{u} = \pd{F}{u}\bigg\vert_{u=u_0,v=v_0},\quad F_{v} = \pd{F}{v}\bigg\vert_{u=u_0,v=v_0}\\
+                &G_{u} = \pd{G}{u}\bigg\vert_{u=u_0,v=v_0},\quad G_{v} = \pd{G}{v}\bigg\vert_{u=u_0,v=v_0}.
+              \end{align*}
+            }
+          \item{
+              Now we set
+              \begin{equation}
+                F  = u\left(\frac{k_1 v}{k_2+v}-u\right),\quad G = (u-1)(v-1),
+              \end{equation}
+              where the constants $k_1$ and $k_2$ are positive. Find the three equilibria of the system and in each case state whether they can satisfy the inequalities
+              \begin{align*}
+                &F_u + G_v <0, \quad F_u G_v - F_vG_u >0,\\
+                &G_v(1+v_0) + D F_u - G_u u_0 >0.
+              \end{align*}
+            }
+        \end{enumerate}
+      }
+      {
+        \begin{enumerate}[label=(\alph*)]
+          \item The boundary conditions are
+            $\vnabla u \cdot \uv{n} =0$ and $\vnabla v \cdot \uv{n}$, where $\uv{n}$ is the unit normal to $\partial{V}$.
+
+          \item The homogeneous equilibria are determined by
+            $F(u_0,v_0)=0$ and $G(u_0,v_0)=0$.
+
+          \item{
+              We linearise our system by Taylor expanding $u \approx u_0 + \epsilon u_1$ and $v \approx v_0 +\epsilon v_1$. Denoting $F_{u} = \pd{F}{u}\vert_{u=u_0,v=v_0}$ etc.\ we have, at order $\epsilon$,
+              \begin{align*}
+                \pd{u_1}{t} &= \nabla^2 u_1 + \gamma F_u u_1 + \gamma F_v v_1 + u_0\nabla^2v_1 + v_0\nabla^2u_1,\\
+                \pd{v_1}{t} &= D\nabla^2 v_1 + \gamma G_u u_1 + \gamma G_v v_1.
+              \end{align*}
+              Assuming $u_1 =C_u\e^{\i \v{k}\cdot \v{x} + \lambda t}$ and $v_1 =C_v\e^{\i \v{k}\cdot \v{x} + \lambda t}$. We can write this as a matrix equation
+              \begin{equation}
+                \lambda \mvec{u_1}{v_1} = \m{J}\mvec{u_1}{v_1},
+              \end{equation}
+              where
+              \begin{equation}
+                \m{J} = \mat{-k_s(1+v_0) +\gamma F_u}{-k_s u_0+\gamma F_v}{\gamma G_u}{-Dk_s+ \gamma G_v}
+              \end{equation}
+              and $k_s = \v{k}\cdot\v{k}$. So solutions can only occur when $\det(\m{J}-\lambda \m{I})=0$. We know from the notes that solutions take the form
+              \begin{equation}
+                \lambda = \frac{1}{2}\left[\tr\m{J} \pm \sqrt{(\tr\m{J})^2 - 4\det\m{J}}\right],
+              \end{equation}
+              where
+              \begin{align}
+                \label{tures}
+                \tr\m{J} & =  \gamma(F_u + G_v)- k_s(D+v_0+1),\\
+                \nonumber \det\m{J}& =  D(1+v_0)k_s^2 - k_s\gamma\left(G_v(1+v_0) + D F_u - G_u u_0\right) + \gamma^2(F_u G_v - F_vG_u).
+              \end{align}
+              We first need the homogeneous perturbations $k_s=0$ to decay, thus we require $\tr <0$ and $\det>0$, so
+              \begin{equation}
+                F_u + G_v<0 \mbox{ and } F_uG_v - F_vG_u >0.
+              \end{equation}
+              This gives the first two conditions.
+
+              Next we want there to be some $k_s>0$ for which $\lambda(k_s)>0$, so they grow. Since $F_u + G_v<0$ the trace must be negative ($v_0$ must be positive) so we can only have positive eigenvalues $\lambda$ when $\det<0$, i.e.
+              \begin{equation}
+                D(1+v_0)k_s^2 - k_s\gamma\left(G_v(1+v_0) + D F_u - G_u u_0\right) + \gamma^2(F_u G_v - F_vG_u) >0.
+              \end{equation}
+              Since $F_uG_v - F_vG_u>0$ and $D(1+v_0)>0$ this can only occur if
+              \begin{equation}
+                G_v(1+v_0) + D F_u - G_u u_0 >0,
+              \end{equation}
+              the third condition. But this is necessary not sufficient, finally, if we want real $k_s$ to solve $\det\m{J}=0$ we need the discriminant of the quadratic in $k_s$ to be positive, i.e.
+              \begin{equation}
+                \left(G_v(1+v_0) + D F_u - G_u u_0\right)^2 - 4 D(1+v_0)(F_u G_v - F_vG_u)\geq 0,
+              \end{equation}
+              the final condition.
+            }
+          \item{
+              First $F=0$ when $u=0$, so $v=1$. We also solve $F=0$ by setting
+              \begin{equation}
+                \label{ucon}
+                u = \frac{k_1v}{k_2+v}.
+              \end{equation}
+              So either $v=1$ or $u=1$ and \cref{ucon} gives the final two equilibria. The three equilibria $(u_0,v_0)$ are
+              \begin{equation}
+                (0,1),\quad \left(1,\frac{k_2}{k_1-1}\right) ,\quad \left(\frac{k_1}{1+k_2},1\right).
+              \end{equation}
+              We have
+              \begin{align}
+                F_u &= \frac{k_1 v_0}{k_2+ v_0}-2u_0, & F_v &= u_0\left(\frac{k_1}{k_2 +v_0}- \frac{k_1 v_0}{(k_2+v_0)^2}\right),\nonumber\\
+                G_u &= v_0-1, & G_v & = u_0-1.
+              \end{align}
+
+              First the case $u_0=0$, $v_0=1$:
+              \begin{equation}
+                F_uG_v - F_vG_u =-\frac{k_1}{k_2+1} >0.
+              \end{equation}
+              This is a contradiction as $k_1,k_2>0$, so this equilibrium cannot satisfy \cref{tures}.
+
+              Note for the next two cases, $u_0 = \frac{k_1 v_0}{k_2+ v_0}$, so
+              \begin{equation}
+                F_u = \frac{k_1 v_0}{k_2+ v_0}-2u_0 = -u_0.
+              \end{equation}
+
+              Next $(1,\frac{k_2}{k_1-1})$: The third condition gives
+              \begin{equation}
+                G_v(1+v_0) + D F_u - u_0G_u=  -D -(v_0-1) > 0.
+              \end{equation}
+              So at the very least we need $v_0<1$. Now the second condition
+              \begin{equation}
+                F_uG_v-F_vG_u = -F_vG_u >0.
+              \end{equation}
+              If $v_0<1$ then $G_u<0$ and we see that
+              \begin{equation}
+                F_v = \frac{u_0k_1}{k_2+v_0}\left(1- \frac{v_0}{k_2+v_0}\right).
+              \end{equation}
+              must be positive. So the second condition is satisfied if $v_0<1$. Finally the first condition
+              \begin{equation}
+                F_u + G_v= -u_0 <0.
+              \end{equation}
+              is satisfied. So if $v_0<1-D$, then the first three conditions will be satisfied.
+
+              The final case is $(\frac{k_1}{k_2 +1},1)$. The second condition gives
+              \begin{equation}
+                F_uG_v - F_vG_u  = u_0(1-u_0)>0,
+              \end{equation}
+              so we require $u_0<1$.
+              The third condition is
+              \begin{equation}
+                G_v(1+v_0) +DF_u - u_0G_u= (u_0-1)(1+v_0) -Du_0 > 0.
+              \end{equation}
+              But we needed $u_0<1$ so we cannot satisfy this condition.
+            }
+        \end{enumerate}
+
+      }
+      %
+
+      %===========================================================================
+
+      %
+      \question{Boundary condition effects (Exam section A type)}
+      {
+        Consider the following \emph{non-dimensionalised} reaction--diffusion equation for the scalar densities $u(x,t)$ and $v(x,t)$,
+        \begin{align*}
+          \pd{u}{t} &= \nabla^2 u + \gamma F(u,v),\\
+          \nonumber\pd{v}{t} &= D \nabla^2 v + \gamma G(u,v),
+        \end{align*}
+        where $D>0$ and $\gamma>0$ are constants. We assume \emph{no-flux} boundary conditions on a Cartesian domain $[0,L_1]\times[0,L_2]$ with coordinates $(x_1,x_2)$. The Turing conditions for pattern formation are
+        \begin{align}
+          & F_u +G_v <0, \quad F_uG_v  -G_uF_v> 0, \nonumber \\
+          & G_v + DF_u>0,\quad (G_v+ D F_u)^2 - 4 D (F_uG_v  -G_uF_v) >0,\label{tcons}
+        \end{align}
+        where we have used the notation
+        \begin{align*}
+          &F_{u} = \pd{F}{u}\bigg\vert_{u=u_0,v=v_0},\quad F_{v} = \pd{F}{v}\bigg\vert_{u=u_0,v=v_0}\\
+          &G_{u} = \pd{G}{u}\bigg\vert_{u=u_0,v=v_0},\quad G_{v} = \pd{G}{v}\bigg\vert_{u=u_0,v=v_0},
+        \end{align*}
+        with $(u_0,v_0)$ a homogeneous equilibrium of the system.
+        \begin{enumerate}[label=(\alph*)]
+          \item
+            Define what is meant by a pattern in this context, give the explicit mathematical form for the pattern and describe what the conditions in \cref{tcons} enforce.
+
+          \item Consider a system which is identical to the one considered in part (a), except with differing boundary conditions. Consider the following two (distinct) possibilities:
+            \begin{enumerate}[label=(\roman*)]  \label{chemosys}
+              \item{Homogeneous periodic boundary conditions along both directions.}
+              \item{Fixed (homogeneous) values $u=u_0$ and $v=v_0$ on the $x_1=0,x_1=L$ boundaries (Dirichlet boundary conditions) and no-flux boundary conditions on the $x_2=0,x_2=L$ boundaries  (for both $u$ and $v$).}
+            \end{enumerate}
+            Argue in each case if the Turing conditions,
+            \begin{equation}
+              F_u +G_v <0, \quad F_uG_v  -G_uF_v> 0,
+            \end{equation}
+            are necessary for pattern formation as defined in part (a).
+
+        \end{enumerate}
+      }
+      {
+        \begin{enumerate}[label=(\alph*)]
+          \item
+            The homogeneous equilibrium defined by $F(u,v) =0,\,G(u,v) = 0$ is unstable to small variations in density. This instability develops into an inhomogeneous pattern in the form of spots or stripes (this being a Cartesian grid). The linearised version of the main equations has solutions of the form
+            \begin{equation}
+              \sum_{i=0}^{n}\sum_{j=0}^{m}\e^{\lambda(k_s^{ij}) t}\cos\left(\frac{n_i\pi}{L_1}x_1\right)\cos\left(\frac{m_j\pi}{L_2}x_2\right),
+            \end{equation}
+            where
+            \begin{equation}
+              k_s^{ij} = \frac{n_i^2\pi^2}{L_1^2}+\frac{m_j^2\pi^2}{L_2^2}.
+            \end{equation}
+            The function $\lambda(k_s)$ dictates if the mode decays exponentially, $\lambda(k_s)<0$, or grows, $\lambda(k_s)\geq 0$. The growing modes form the pattern.
+
+            The first two conditions, $F_u +G_v <0$ and $F_uG_v  -G_uF_v> 0$, ensure that the $k_s^{00}=0$ mode, the homogeneous perturbation, always decays. The other two conditions $G_v + DF_u>0$ and $(G_v+ D F_u)^2 - 4 D (F_uG_v  -G_uF_v)>0$, ensure there is some finite set of wave modes, $k_s\in[k_s^{\min},k_s^{\max}]$, for which $\lambda(k_s^{ij})>0$, and hence a pattern can form.
+
+          \item
+            In the case of periodic boundary conditions both the $\sin(k_{1,2}x)$ and $\cos(k_{1,2}x)$ spatial functions are permissible solutions. This means the $n=m=0$ ($k_s=0$) homogeneous case is permissible and the two stated conditions are necessary. In the second case the fixed-value boundary conditions at $x_1=0,x_1=L$ means we can have no $n_1=0$ mode, thus no $k_s=0$ pattern.  This means the two conditions are unnecessary.
+
+        \end{enumerate}
+
+      }
+      %
+
+      %===========================================================================
+
+      %
+      \question{Enzyme-driven Turing patterns (Exam section A type)}
+      {
+        Consider the following reaction--diffusion model of hair growth in the \emph{Acetabularia} sea plant. The hair growth hormone $u$ and calcium concentration $v$ which interact to stimulate tip growth is represented by the following set of partial differential equations:
+        \begin{subequations}
+          \begin{align}
+            \pd{u}{t} &= \nabla^2 u + \gamma(a - u + u^2v),\\
+            \pd{v}{t} &= D\nabla^2 v + \gamma(b- u^2 v).
+          \end{align}
+        \end{subequations}
+        Here $D,\gamma,a$ and $b$ are positive constants and we impose no-flux boundary conditions. It is assumed spontaneous tip growth occurs due to a Turing instability of the system. We consider this system on an annular domain, with no-flux boundary conditions imposed.
+        \begin{enumerate}[label=(\alph*)]
+          \item{The homogeneous equilibria of the system are:
+              \begin{equation}
+                u_0 =a+b,\quad v_0 = u_0-a.
+              \end{equation}
+              The Turing conditions for pattern formation are
+              \begin{align}
+                & F_u +G_v <0, \quad F_uG_v  -G_uF_v> 0,\nonumber \\
+                & G_v + DF_u>0, \label{turingconditions4}
+              \end{align}
+              and
+              \begin{align*}
+                (G_v+ D F_u)^2 - 4 D (F_uG_v  -G_uF_v) >0,
+              \end{align*}
+              where we have used the notation
+              \begin{align*}
+                F_{u} &= \pd{F}{u}\bigg\vert_{u=u_0,v=v_0},& F_{v} &= \pd{F}{v}\bigg\vert_{u=u_0,v=v_0},\\
+                G_{u} &= \pd{G}{u}\bigg\vert_{u=u_0,v=v_0},& G_{v} &= \pd{G}{v}\bigg\vert_{u=u_0,v=v_0},
+              \end{align*}
+              with $(u_0,v_0)$ a homogeneous equilibrium of the system. In this case we have
+              \begin{align*}
+                F_u &=2u_0v_0 -1 = 1- \frac{2a}{u_0},& F_v &= u_0^2,\\
+                G_u&=-2u_0v_0 = -\frac{2(u_0-a)}{u_0},& G_v &= -u_0^2.
+              \end{align*}
+
+              Find conditions on $a$ such that the first three Turing conditions, \cref{turingconditions4}, are satisfied.
+            }
+          \item{In addition, the fourth Turing condition can be shown to yield the following pair of constraints:
+              \begin{equation}
+                a< \frac{u_0}{2}\left(1-\frac{2u_0}{\sqrt{D}} -\frac{u_0^2}{D}\right) \quad \text{or} \quad a> \frac{u_0}{2}\left(1+\frac{2u_0}{\sqrt{D}} -\frac{u_0^2}{D}\right).
+              \end{equation}
+
+              Assume $D>1$. Argue that if $a$ satisfies the following two inequalities,
+              \begin{equation}
+                a<  \frac{u_0}{2}\left(1-\frac{2u_0}{\sqrt{D}} -\frac{u_0^2}{D}\right) \quad \text{and} \quad a>  \frac{u_0(1-u_0^2)}{2},
+              \end{equation}
+              then all four Turing  conditions are satisfied.
+            }
+        \end{enumerate}
+      }
+      {
+        \begin{enumerate}[label=(\alph*)]
+          \item{
+              The first condition gives
+              \begin{equation}
+                \label{acon}
+                1-\frac{2a}{u_0} - u_0^2<0 \implies a> \frac{u_0(1-u_0^2)}{2}.
+              \end{equation}
+
+              The second condition is trivially satisfied,
+              \begin{equation}
+                F_uG_v -F_vG_u = u_0^2>0,
+              \end{equation}
+              so no condition on $a$.
+
+              The third condition gives
+              \begin{equation}
+                \label{acon3}
+                D(1-\frac{2a}{u_0}) -u_0^2\implies a<\frac{u_0}{2}\left(1-\frac{u_0^2}{D}\right).
+              \end{equation}
+            }
+          \item{
+              As
+              \begin{equation}
+                \frac{u_0}{2}\left(1-\frac{2u_0}{\sqrt{D}} -\frac{u_0^2}{D}\right)<  \frac{u_0}{2}\left(1-\frac{u_0^2}{D}\right),
+              \end{equation}
+              we see that \cref{acon3} is satisfied if
+              \begin{equation}
+                a<  \frac{u_0}{2}\left(1-\frac{2u_0}{\sqrt{D}} -\frac{u_0^2}{D}\right).
+              \end{equation}
+              Next,
+              \begin{equation}
+                \frac{u_0}{2}\left(1+\frac{2u_0}{\sqrt{D}} -\frac{u_0^2}{D}\right) > \frac{u_0}{2}\left(1-u_0^2\right),
+              \end{equation}
+              so satisfying the other condition 4 inequality,
+              \begin{equation}
+                a> \frac{u_0}{2}\left(1+\frac{2u_0}{\sqrt{D}} -\frac{u_0^2}{D}\right),
+              \end{equation}
+              ensures \cref{acon} is satisfied. But we must check \emph{each} condition 4 inequality satisfies \emph{both} conditions 1 and 3.
+
+              We also note that
+              \begin{equation}
+                \frac{u_0}{2}\left(1+\frac{2u_0}{\sqrt{D}} -\frac{u_0^2}{D}\right) >   \frac{u_0}{2}\left(1-\frac{u_0^2}{D}\right)> \frac{u_0}{2}\left(1-\frac{2u_0}{\sqrt{D}} -\frac{u_0^2}{D}\right).
+              \end{equation}
+              So it is not possible to satisfy
+              \begin{equation}
+                a>   \frac{u_0}{2}\left(1+\frac{2u_0}{\sqrt{D}} -\frac{u_0^2}{D}\right).
+              \end{equation}
+              and
+              \begin{equation}
+                a<\frac{u_0}{2}\left(1-\frac{u_0^2}{D}\right).
+              \end{equation}
+              That is to say one of the possible cases for condition 4 holding would fail to also satisfy condition 3. We are left with only one possibly viable inequality to satisfy condition 4,
+              \begin{equation}
+                a< \frac{u_0}{2}\left(1-\frac{2u_0}{\sqrt{D}} -\frac{u_0^2}{D}\right),
+              \end{equation}
+              which we know from above satisfies condition 3. We need to check it can satisfy condition 1.
+
+              Indeed we can see it is possible that
+              \begin{equation}
+                \frac{u_0}{2}\left(1-u_0^2\right) <  \frac{u_0}{2}\left(1-\frac{2u_0}{\sqrt{D}} -\frac{u_0^2}{D}\right).
+              \end{equation}
+              in the limit $D\to \infty$.
+            }
+        \end{enumerate}
+
+      }
+  \end{enumerate}
+  \end{document}

@@ -1,0 +1,104 @@
+\documentclass[a4paper,12pt]{article}
+\input{../common/preamble.tex}
+\begin{document} 
+%
+\heading{Pre-course revision}
+Welcome to Mathematical Biology III! In this course we will develop models to describe the behaviour in time and space of biological agents. So, among other things, we'll be modelling how animal populations grow and contract in time; we will look at models of disease spreading; and we will model the formation of spots and stripes on animal skins. Mostly this will be using ordinary and partial differential equations, but some other kinds of models will be discussed as well.
+
+This is a big ask! Biology is complicated and the class of equations we can actually solve is really quite small. But to get started on the best foot, we should remind ourselves of the sorts of problem you \emph{have} already learnt how to solve.
+
+Have a go at these problems and if you are unable to solve them, have a look back at your notes from Calculus I and Mathematical Methods II. For each question we suggest the name of the topics which are relevant.
+
+If you have questions about the course you can email us: \texttt{adam.k.townsend@durham.ac.uk} and \texttt{christopher.prior@durham.ac.uk}
+
+\section{Integration using partial fractions}
+%\begin{enumerate}[label=(\alph*)]
+    %\item 
+    With $x_0$ a given positive number, solve
+    \begin{equation*}
+        \fd{x}{t} = x(1-x), \quad x(0)=x_0.
+    \end{equation*}
+%\end{enumerate}
+
+\section{Plotting vector fields in 1D and 2D}
+Plotting 2D vector fields was covered in sections 1--3 of the first half of Methods II. 
+\begin{enumerate}[label=(\alph*)]
+    \item (1D) Plot $\fd{x}{t}$ against $x$ (and by that we mean plot $\fd{x}{t}$ on the $y$-axis) for
+    \begin{equation*}
+        \fd{x}{t} = x(1-x)(2-x).
+    \end{equation*}    
+    Here, $x$ is the size of a population and $t$ is time. Only by looking at your graph, for which values of $x$ is the population growing in time? What about decreasing?
+    %
+    \item (2D) Consider the system
+    \begin{align*}
+        \fd{x}{t} &= 1,\\
+        \fd{y}{t} &= 1.
+    \end{align*}
+    \begin{enumerate}[label=(\roman*)]
+        \item Plot the vector field $(\fd{x}{t},\fd{y}{t})$ on the $xy$-plane. Do this by, at a bunch of points $(x,y)$, drawing a little arrow representing the vector $(\fd{x}{t},\fd{y}{t})$.
+    
+        \item Now pick a starting point on your diagram, $(x_0,y_0)$, and draw a long line that follows the path dictated by the arrows you've drawn. Do this for a few more starting points. We are creating a \emph{phase plane} and we will look at these plots many times in the course as we consider the interaction of animal populations over time.
+        
+        \item Incidentally, just by looking at the equations, write down the solution for $x(t)$, $y(t)$.
+    \end{enumerate}
+    
+    \item (2D) Now do the same again -- i.e.\ draw the phase plane -- for the system
+    \begin{align*}
+        \fd{x}{t} &= x,\\
+        \fd{y}{t} &= y.
+    \end{align*}    
+    Again, also solve the equations directly.
+    
+    \item (2D) Finally, draw the phase plane for the system
+    \begin{align*}
+        \fd{x}{t} &= -y,\\
+        \fd{y}{t} &= x.
+    \end{align*}       
+    Also solve the system for $x(t)$ and $y(t)$. You will need to find a way to substitute the second equation into the first.
+\end{enumerate}
+
+\section{Solving constant coefficient linear ODEs}
+You want to be able to solve second order, constant coefficient ODEs of the form
+\begin{equation*}
+    \fdd{y}{t} + a\fd{y}{t} + b = 0,
+\end{equation*}
+recalling how you get different solutions depending on the roots of the auxiliary (or characteristic) equation. Three examples with different solutions are, where dashes imply differentiation with respect to time,
+\begin{enumerate}[label=(\alph*)]
+    \item $y''-6y'+8y=0$,
+    \item $y''-8y'+16y=0$,
+    \item $y''-6y'+13y=0$, $y(0)=0$, $y'(0)=10$.
+\end{enumerate}
+
+\section{Solving the heat equation in 1D}
+This technique, and the ideas behind it, are quite important so we will cover it again but you need to be very comfortable with it. 
+
+You should solve
+\begin{equation*}
+    \pd{u}{t} = \pdd{u}{x}, \qquad u(0)=0, \quad u(L)=0,
+\end{equation*}
+for $x\in[0,L]$ using separation of variables, i.e.\ writing $u=X(x)T(t)$.
+
+\section{Using the Fourier transform and delta function}
+Consider the Fourier transform of $f(x)$,
+\begin{equation*}
+    \mathcal{F}[f(x)](k) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \e^{-\i k x}f(x)\,\d x,
+\end{equation*}
+which is a function in $k$. (There are a bunch of similar definitions but let's use this one.) 
+
+\begin{enumerate}[label=(\alph*)]
+    \item Find the Fourier transform of  
+    \begin{equation*}
+    f(x) = \twopartdef{0}{x<0,}{\e^{-x}}{x\geq0.}
+    \end{equation*}
+    \item Recall the Dirac delta, $\delta(x)$, from Methods II. How would you describe it? (You don't need to give a rigorous definition.) Find the Fourier transform of $\delta(x)$.
+\end{enumerate}
+
+\section{Other topics to remind yourself of}
+\begin{enumerate}[label=(\alph*)]
+    \item Recall how to \textbf{resolve forces} in a Newtonian mechanics problem.
+    \item Be vaguely familiar with the main results of \textbf{Sturm--Liouville theory}: namely, know that every Sturm--Liouville operator has a sequence of eigenvalues with positive sign. You do not need to know how to prove this or any of the rigorous background, but we will use this result a few times to justify some computations.
+    \item We will (briefly) use the \textbf{Frobenius method} for non-constant coefficient ODEs. You will not need to remember all of the details here, but some review of what this was about would help.
+    
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,231 @@
+
+%Class
+	%\documentclass[a4paper,12pt]{article}
+
+%Packages
+	\usepackage{amsmath}					% Standard maths
+	\usepackage{amssymb}					% Standard maths
+	\usepackage{amsthm}						% Standard maths
+	\usepackage{thmtools, thm-restate}% Theorem styles
+	\usepackage{mathtools}
+	\usepackage[newzealand]{babel}% Date/time in British format (yes, I know it says NZ)
+	\usepackage{datetime}					% Date/time
+	\usepackage{multirow}					% For stacked subscripts
+	\usepackage{xcolor}						% For colour!
+	\usepackage[normalem]{ulem}		% For strikeout
+	\usepackage{isomath}
+	\usepackage{fancyhdr}					% For the headers
+	\usepackage{mfirstuc}					% For the headers
+	\usepackage[hmargin=1in,top=0.8in,bottom=1in]{geometry} % Page margins more reasonable
+	\usepackage{graphicx}					% For including graphics
+	%\usepackage{float}						% For something
+	\usepackage{enumitem}					% For numbering tweaks
+	\usepackage{pgfplots}
+	\usepackage[margin=15pt,font={footnotesize},labelfont=bf,format=hang]{caption}
+\usepackage[margin=15pt,font={footnotesize},labelfont=bf,format=hang]{subcaption}
+	\usepackage{url}
+	\usepackage[hidelinks]{hyperref}	% For hyperlinks
+	\usepackage{breakurl}
+	\usepackage{cleveref}
+	\usepackage[scaled=.92]{helvet}
+
+%MATHEMATICAL SHORTCUTS
+%Two and three-part definitions
+	\newcommand{\twopartdef}[4]
+	{	\left\{
+			\begin{array}{ll}
+				#1 & \mbox{if } #2 \\
+				#3 & \mbox{if } #4
+			\end{array}
+		\right.}
+%	\newcommand{\threepartdef}[6]
+%	{	\left\{
+%			\begin{array}{ll}
+%				#1 & \mbox{if } #2 \\
+%				#3 & \mbox{if } #4 \\
+%				#5 & \mbox{if } #6
+%			\end{array}
+%		\right.}
+%Blackboard bold	
+	\newcommand{\N}{{\mathbb N}} 
+	\newcommand{\R}{{\mathbb R}} 
+	\newcommand{\C}{{\mathbb C}} 
+	%Curly letters
+%	\newcommand{\E}{{\mathcal E}}	
+%	\newcommand{\F}{{\mathcal F}} 
+%	\newcommand{\Null}{{\mathcal N}} 
+%	\newcommand{\R}{\mathcal{R}} 
+%	\newcommand{\Z}{\mathcal{Z}} 
+%Uprights
+	\newcommand{\D}{{\mathrm D}}
+	\renewcommand{\d}{{\mathrm d}}
+%Easy Greeks
+%	\def\a{\alpha}
+%	\def\g{\gamma}
+%	\newcommand{\e}{{\varepsilon}}
+%	\newcommand{\la}{{\lambda}}  
+%	\newcommand{\om}{{\Omega}}
+	\renewcommand{\epsilon}{\varepsilon}
+	
+%Vector operators
+	\def \p {\partial}
+	\newcommand{\del}{{\nabla}}
+	\newcommand{\grad}{{\nabla}}
+    \newcommand{\vdel}{\boldsymbol{\nabla}}
+    \newcommand{\vgrad}{\boldsymbol{\nabla}}
+    \newcommand{\vnabla}{\boldsymbol{\nabla}}
+	\newcommand{\cross}{{\times}}
+	\newcommand{\Lap}{{\nabla^2}} 
+%Arrows
+%	\newcommand{\goesto}[1]{\xrightarrow[#1]{}}
+%hats
+%	\newcommand{\nhat}{\widehat{\v{n}}}
+%	\newcommand{\shat}{\widehat{\v{s}}}
+	\renewcommand{\hat}{\widehat}
+%Note to self
+%	\newcommand{\note}[1]{[\textbf{\textsl{\MakeUppercase{#1}}}]}
+	
+%Stress tensor
+%	\newcommand{\T}{\vg{\sigma}}
+
+% Vectors, quaternions etc.
+\renewcommand{\v}[1]{\mathbfit{#1}}      % Generic vector
+\newcommand{\vc}[1]{\bm{\mathcal{#1}}}      % vector mathcal
+\newcommand{\uv}[1]{\widehat{\mathbfit{#1}}}      % Generic unit vector
+\newcommand{\q}[1]{\mathsfbfit{#1}}        % Generic quaternion
+\renewcommand{\t}[1]{\mathsfbfit{#1}}	 % Generic tensor
+\newcommand{\m}[1]{\mathsfbfit{#1}}	 % Generic matrix
+\newcommand{\vu}[1]{\mathbf{#1}}         % Upright vector (for zero vector)
+\newcommand{\qu}[1]{\mathbf{#1}}       % Upright quaternion (for zero quaternion)
+\newcommand{\tu}[1]{\bm{\mathsf{#1}}}	 % Upright tensor (for zero tensor)
+
+%Real and imaginary
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+	
+%Non-dim numbers
+%	\renewcommand{\Re}{\operatorname{Re}}
+%	\newcommand{\Bi}{\operatorname{Bi}}
+%	\newcommand{\Fo}{\operatorname{Fo}}
+	
+%Misc
+\DeclareMathSymbol{\Delta}{\mathalpha}{operators}{1} % Keeps Delta upright
+\DeclareMathSymbol{\Gamma}{\mathalpha}{operators}{0} % Keeps Gamma upright
+	\newcommand{\cosec}{\operatorname{cosec}}
+	\newcommand{\cosech}{\operatorname{cosech}}
+	\newcommand{\sech}{\operatorname{sech}}
+	\newcommand{\tr}{\operatorname{tr}}
+	\newcommand{\erf}{\operatorname{erf}}
+	\newcommand{\order}{\mathcal{O}}
+%	\newcommand{\V}{\mathcal{V}} % 	CurlyV = (Bi V) / (1 + Bi)
+
+% Differentiating 
+\newcommand{\fd}[2]{\mathchoice{\frac{\d #1}{\d #2}}{\d #1/\d #2}{\d #1/\d #2}{\d #1/\d #2}}
+\newcommand{\fdd}[2]{\mathchoice{\frac{\d^2 #1}{\d #2^2}}{\d^2 #1/\d #2^2}{\d^2 #1/\d #2^2}{\d^2 #1/\d #2^2}}
+\newcommand{\fddd}[2]{\mathchoice{\frac{\d^3 #1}{\d #2^3}}{\d^3 #1/\d #2^3}{\d^3 #1/\d #2^3}{\d^3 #1/\d #2^3}}
+\newcommand{\fdddd}[2]{\mathchoice{\frac{\d^4 #1}{\d #2^4}}{\d^4 #1/\d #2^4}{\d^4 #1/\d #2^4}{\d^4 #1/\d #2^4}}
+\newcommand{\fdn}[3]{\mathchoice{\frac{\d^{#1} #2}{\d #3^{#1}}}{\d^{#1} #2/\d #3^{#1}}{\d^{#1} #2/\d #3^{#1}}{\d^{#1} #2/\d #3^{#1}}}
+\newcommand{\pd}[2]{\mathchoice{\frac{\p #1}{\p #2}}{\p #1/\p #2}{\p #1/\p #2}{\p #1/\p #2}}
+\newcommand{\pdd}[2]{\mathchoice{\frac{\p^2 #1}{\p #2^2}}{\p^2 #1/\p #2^2}{\p^2 #1/\p #2^2}{\p^2 #1/\p #2^2}}
+\newcommand{\pddmixed}[3]{\frac{\p^2 #1}{\p #2 \p #3}}
+\newcommand{\pddd}[2]{\frac{\p^3 #1}{\p #2^3}}
+\newcommand{\pdn}[3]{\mathchoice{\frac{\p^{#1} #2}{\p #3^{#1}}}{\p^{#1} #2/\p #3^{#1}}{\p^{#1} #2/\p #3^{#1}}{\p^{#1} #2/\p #3^{#1}}}
+	
+	% Misc
+\newcommand{\e}{\mathrm{e}}
+\renewcommand{\i}{\mathrm{i}}
+\newcommand{\dx}{\,\mathrm{d}x}
+\newcommand{\dy}{\,\mathrm{d}y}
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\Re}{\operatorname{Re}}
+\newcommand{\Four}{\mathcal{F}}
+
+\newcommand{\mat}[4]{\begin{pmatrix}#1 & #2 \\ #3 & #4 \end{pmatrix}}
+
+	%Column vectors
+	\makeatletter
+\newcommand\rcvector[2][\\]{\ensuremath{%
+  \global\def\rc@delim{#1}%
+    \negthinspace\begin{pmatrix}
+      \rc@vector #2,\relax\noexpand\@eolst%
+    \end{pmatrix}}}
+\def\rc@vector #1,#2\@eolst{%
+  \ifx\relax#2\relax
+    #1
+  \else
+    #1\rc@delim
+    \rc@vector #2\@eolst%
+  \fi}
+\makeatother
+
+\newcommand{\colvec}{\rcvector}
+\newcommand{\rowvec}{\rcvector}
+\renewcommand{\binom}{\rcvector}
+	
+	%Colours
+%	\newcommand{\orange}[1]{{\color{orange} #1 }}
+%	\newcommand{\blue}[1]{{\color{blue} #1 }}
+
+%Theorem styles
+%	\declaretheoremstyle[headpunct={\:\:\:}, shaded={bgcolor={rgb}{0.9,0.9,0.9}, margin=5pt}]{problem}
+%	\declaretheoremstyle[headpunct={\:\:\:}, shaded={rulecolor=black, rulewidth=0.4pt, bgcolor={rgb}{1,1,1}, margin=5pt}]{definition}
+%	\declaretheoremstyle[headpunct={\:\:\:}, spaceabove=15pt, notefont=\bf, notebraces={(}{)}]{theorem}
+%	\declaretheoremstyle[headpunct={\:\:\:}, numbered=no, spaceabove=15pt, qed={\checkmark}]{solution}
+%	
+%	\declaretheorem[style=definition,numberwithin=section]{definition}
+%	\declaretheorem[numberlike=definition, style=theorem]{theorem}
+%	\declaretheorem[numberlike=definition, style=theorem]{lemma}
+%	\declaretheorem[numberlike=definition,style=problem]{problem}
+%	\declaretheorem[numberlike=definition, style=theorem]{proposition}
+%	\declaretheorem[numberlike=definition, style=theorem]{corollary}
+%	\declaretheorem[numberlike=definition, style=theorem]{remark}
+%	\declaretheorem[numberlike=definition, style=theorem]{example}
+%	\declaretheorem[numberlike=definition, style=theorem]{notation}
+%	\declaretheorem[style=solution]{solution}
+
+%Depth of display breaks to allow	
+	\allowdisplaybreaks[1]
+
+%How deep do we want the Table of Contents to go?	
+%	\setcounter{tocdepth}{1}
+
+%Sections
+\makeatletter
+\renewcommand{\section}{\@startsection
+{section}%                   % the name
+{1}%                         % the level
+{0mm}%                       % the indent
+{-\baselineskip}%            % the before skip
+{0.5\baselineskip}%          % the after skip
+{\normalfont\bfseries}} % the style
+\makeatother
+
+% Wavy underline
+\makeatletter
+\font\sixly=lasyb10 scaled 1200
+\def\tinners{\bgroup \markoverwith{\lower8.5\p@\hbox{\sixly \char58}}\ULon}
+\makeatother
+\newcommand{\answer}[1]{\tinners{\; #1 \;}}
+
+%Setting the footnotes to use *,**,+ etc rather than 1,2,3	
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+%Italic quote environment
+%\newenvironment{quoteitalic}{\begin{quote}\itshape}{\end{quote}}
+
+%Heading
+\newcommand{\heading}[1]{
+\setlength{\parindent}{0pt}
+\textbf{MATH3171 (Mathematical Biology III)}
+
+\textbf{YEAR 2026--27}%, MICHAELMAS TERM}
+\setlength{\parskip}{3ex}
+
+\textbf{\MakeUppercase{#1}}
+%
+\setlength{\parskip}{2ex}
+
+}
+
+%========================================================================================================================
+%DOCUMENT BEGINS HERE!

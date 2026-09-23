@@ -1,0 +1,294 @@
+\documentclass[a4paper,12pt]{article}
+\input{../common/preamble.tex}
+\usepackage{pgfplots}
+\usepackage[export]{adjustbox}
+\newcommand{\xmas}[1]{%
+  \includegraphics[width=1.5em,valign=c]{images/#1}%
+}
+\setbool{show_question}{true}
+\setbool{show_solution}{false}
+\setbool{show_commentary}{false}
+\begin{document}
+%
+\heading{Michaelmas}{Problem sheet 4\solutioninheading}
+%
+%
+\ifbool{show_solution}{}{
+  This problem sheet is due in by \textbf{5pm} on \textbf{Wednesday 10 December 2025}. You may submit it on paper to my office (\textsc{mcs}\,3008) or electronically on Gradescope.
+
+  \textbf{Topics covered}: Chapter 6.
+
+  This whole problem sheet concerns the version of the spatial predator--prey system for two populations, $u(x,t)$ and $v(x,t)$, that we saw in class:
+  \begin{subequations}
+    \begin{align}
+      \pd{u}{t} &= u(1-u-v), \label{u-eq} \tag{\xmas{santa}}\\
+      \pd{v}{t} &= \pdd{v}{x} + \alpha v(u-\beta),
+      \tag{\xmas{christmas-tree}}
+    \end{align}
+  \end{subequations}
+  where the constants $\alpha,\beta > 0$.
+
+  In class we stated that the homogeneous system has three equilibria,
+  \begin{itemize}
+    \item $(0,0)$, a saddle point,
+    \item $(1,0)$, a saddle point,
+    \item $(\beta, 1-\beta)$, a stable node when $4\alpha < \beta/(1-\beta)$, and a stable spiral for $4\alpha > \beta/(1-\beta)$,
+  \end{itemize}
+  and that this suggests possible trajectories between our equilibria:
+  \begin{center}
+    from $(0,0)$ to $(\beta,1-\beta)$ \qquad and \qquad
+    from $(1,0)$ to $(\beta,1-\beta)$.
+  \end{center}
+}
+
+\begin{enumerate}[leftmargin=0.6cm]
+    % Q1
+    \question{}{ % Question
+      \begin{enumerate}
+        \item Draw a phase plane of the homogeneous system: plot $v$ against $u$, marking on the equilibria, nullclines, and some sample trajectories.
+        \item Recall that $(0,0)$ is a saddle point. Look at trajectories leaving $(0,0)$. What does this suggest about the existence of a trajectory from $(0,0)$ to $(\beta,1-\beta)$?
+      \end{enumerate}
+    }
+    { % Solution
+      \begin{enumerate}
+        \item The homogeneous system is
+          \begin{subequations}
+            \begin{align}
+              \fd{u}{t} &= u(1-u-v),\\
+              \fd{v}{t} &= \alpha v (u-\beta),
+            \end{align}
+          \end{subequations}
+          with nullclines
+          \begin{subequations}
+            \begin{align}
+              \fd{u}{t} = 0 &\implies u = 0, \quad v = 1 - u\\
+              \fd{v}{t} = 0 &\implies u = \beta, \quad v = 0.
+            \end{align}
+          \end{subequations}
+          The phase portrait looks like:
+          \begin{center}
+            \hspace{-2cm}
+            \input{images/travelling-wave-predators-traj-1.pgf}
+            \input{images/travelling-wave-predators-traj-2.pgf}
+          \end{center}
+          where the case with $(\beta,1-\beta)$ as a stable spiral is on the left, and the case with $(\beta,1-\beta)$ as a stable node is on the right. Note on the right that the trajectory from $(1,0)$ to $(\beta,1-\beta)$ does not go directly along the nullcline: if you zoom in, you can see it is slightly to the right (which makes sense, given that trajectories cross the nullcline vertically).
+          %
+          \commentary{Drawing the nullclines was done fine, but the trajectories in general were drawn very badly. We covered this extensively in Problems Class 2: if you are not showing up to problems classes, consider this your warning! Common errors leading to lost marks included:
+            \begin{enumerate}[topsep=0pt,itemsep=0pt]
+              \item Not drawing trajectories as continuous lines. This is not like drawing a vector field in AMV or a velocity field in Fluids, where you just draw little arrows to represent the direction/magnitude at some points: trajectories are paths and they have to start somewhere and end either at an equilibrium, or go off to infinity.
+              \item{Not having the trajectory curves cross the nullclines either vertically or horizontally. This is \emph{crucial} to getting the right shape and you will lose marks in an exam if you don't draw these accurately.}
+              \item{Having trajectory curves change either vertical or horizontal direction away from a nullcline. This is not allowed; that is the point of the nullclines: the locations where they change direction.
+                }
+              \item Not drawing a diagram that is big enough to contain all the detail you need. Go big or go home! In some cases, this led people to drawing trajectories which cross, which, you will remember from Problems Class 2, is not allowed.
+              \item{Not observing there are two possibilities. The question gives you a clear steer on this by highlighting the two: that means two diagrams. The local structure of the linear system (node or spiral) has to dictate how you draw the curves near the equilibrium. }
+          \end{enumerate}}
+          %
+        \item Since $(0,0)$ is a saddle point, there is only one with trajectory leaving it with $u>0$ and we can see that it corresponds to the horizontal nullcline, i.e.\ trajectories leave $(0,0)$ and go to $(1,0)$. Therefore, there is no direct trajectory from $(0,0)$ to $(\beta,1-\beta)$.
+          %
+          \commentary{There were quite a lot of misunderstandings about trajectories. A common error was saying that because you had seen the trajectories spiral in that a path exists. But, there are a couple of issues. First a travelling wave, the way we define it in class, has to go from an equilibrium to an equilibrium. If you are at $(0,0)$ the only way out is along the saddle arc, which is along $v=0$. Since this is a nullcline, $\fd{v}{t}=0$ always, and so the trajectory will end at $(1,0)$. It is fine to observe that in the sector between $(0,0)$ and $(\beta,1-\beta)$ the trajectories have to head downwards, so you can't go towards $(\beta,1-\beta)$ anyway. But then you have to explain why the trajectories can't leave the $u$-axis after the line $u=\beta$.}
+      \end{enumerate}
+    }
+
+    % Q2
+    \question{}{ % Question
+      We now look for travelling wave solutions to the full system from $(1,0)$ to $(\beta,1-\beta)$. We place the stable equilibrium at $x=-\infty$ and the unstable equilibrium at $x=\infty$, and look for rightwards-travelling waves of the form $z=x-ct$, with $c>0$.
+      \begin{enumerate}
+        \item If we instead placed the stable equilibrium at $x=\infty$ and the unstable equilibrium at $x=-\infty$, what form of $z$ would we use?
+        \item Show that, with $z=x-ct$ and $c>0$, and by introducing $w=\fd{v}{z}$, we arrive at the three-dimensional system,
+          \begin{align}
+            \fd{u}{z} &= \frac{u}{c}(u+v-1), \tag{\xmas{reindeer}}\\
+            \fd{v}{z} &= w, \tag{\xmas{snowflake}}\\
+            \fd{w}{z} &= \alpha v(\beta - u) - cw, \tag{\xmas{bauble}}
+          \end{align}
+          and write down the boundary conditions as $z \to \pm \infty$.
+      \end{enumerate}
+    }
+    { % Solution
+      \begin{enumerate}
+        \item If the stable equilibrium is at $x=\infty$, we would expect this region to expand and therefore the wave to travel \emph{leftwards}, i.e.\ $z=x+ct$ with $c>0$.
+          %
+          \commentary{The main error was switching $x$ to $-x$. The locations of the particular equilibria are fixed in the question, so you can't swap: it has to be $c$ which changes sign.}
+          %
+        \item We look for solutions in $z$ where
+          \begin{equation}
+            u(x,t) = u(z), \quad v(x,t) = v(z), \quad z = x-ct.
+          \end{equation}
+
+          Substituting $z$ into (\xmas{santa}\xmas{christmas-tree}), we obtain
+          \begin{subequations}
+            \begin{align}
+              -c\fd{u}{z} &= u(1-u-v),\\
+              -c\fd{v}{z} &= \fdd{v}{z} + \alpha v (u-\beta).
+            \end{align}
+          \end{subequations}
+          Introducing $w = \fd{v}{z}$ and rearranging, we arrive at the three-dimensional system
+          \begin{subequations}
+            \begin{align}
+              \fd{u}{z} &= \frac{u}{c}(u+v-1),\\
+              \fd{v}{z} &= w,\\
+              \fd{w}{z} &= \alpha v(\beta - u) - cw.
+            \end{align}
+          \end{subequations}
+          The boundary conditions are
+          \begin{align}
+            \label{trav-wave-interesting}
+            &(u,v,w) \to (\beta,1-\beta,0) \text{ as } z \to -\infty, \\
+            &(u,v,w) \to (1,0,0) \text{ as } z \to \infty.
+          \end{align}
+          %(We have that $w$ is 0 because these two boundary conditions are equilibria, i.e.\ when time derivatives are zero, and $w=\fd{v}{t}$.)
+          %
+          \commentary{Two main errors:
+        \begin{enumerate}[itemsep=0pt,topsep=0pt]
+        \item Putting the stable equilibrium at $z\rightarrow \infty$: the movement should be away from that as it slowly takes over.
+        \item Only giving one boundary condition on $u$. You need to also give a boundary condition on $w$.
+        \end{enumerate}}
+      \end{enumerate}
+
+    }
+
+    % Q3
+    \question{}{ % Questoon
+      We are now going to perform a linear stability analysis on the equilibrium at $(u,v,w)=(1,0,0)$.
+      \begin{enumerate}
+        \item Write down the $3\times 3$ Jacobian of the system (\xmas{reindeer}\xmas{snowflake}\xmas{bauble}).
+        \item Find the eigenvalues evaluated at $(1,0,0)$.
+        \item Make an argument for why we cannot have complex eigenvalues and thus derive a constraint on the squared wavespeed, $c^2$.\label{c-constraint}
+      \end{enumerate}
+    }
+    { % Solution
+      \begin{enumerate}
+        \item The Jacobian of the system (\xmas{reindeer}\xmas{snowflake}\xmas{bauble}) is
+          \begin{align}
+            \m{J} =
+            \begin{pmatrix}
+              (2u+v-1)/c & u/c & 0 \\
+              0 & 0 & 1 \\
+              -\alpha v & \alpha(\beta-u) & -c
+            \end{pmatrix}.
+          \end{align}
+          %
+        \item The Jacobian, evaluated at $(1,0,0)$ gives us
+          \begin{align}
+            \m{J} =
+            \begin{pmatrix}
+              1/c & 1/c & 0 \\
+              0 & 0 & 1 \\
+              0 & \alpha(\beta-1) & -c
+            \end{pmatrix}.
+          \end{align}
+          This matrix leads to the eigenvalue equation
+          \begin{equation}
+            (\lambda-1/c)[\lambda(c+\lambda)-\alpha(\beta-1)] = 0,
+          \end{equation}
+          and hence the eigenvalues are
+          \begin{equation}
+            \lambda = \frac{1}{c}, \quad \lambda = \frac{1}{2}\left( -c \pm \sqrt{c^2 + 4\alpha(\beta-1)} \right).
+          \end{equation}
+          %
+          \commentary{Some small errors in the matrix calculation; otherwise this was done well.}
+          %
+        \item The first eigenvalue is positive so we expect an unstable solution. But what type of unstable solution? From the second expression, we see that the solution will be oscillatory (a spiral) if $c^2 < 4\alpha(1-\beta)$. Since $v$ cannot be less than zero, these oscillatory solutions can be discarded and this gives us a constraint on the wavespeed, just like it did with the FK equation. Namely, the permissible wave speeds satisfy
+          \begin{equation}
+            c^2 \geq 4\alpha(1-\beta).
+          \end{equation}
+          %
+          \commentary{Quite a few people missed the key point here. A travelling wave is really just a solution in the form $u(x-ct)$, with the linear coupling of the two independent variables. Its name comes from the wave equation,
+    \begin{equation}
+    	\pdd{u}{t} = c \pdd{u}{x},
+    \end{equation}
+    where any $f(x-ct)$ solves the system, whatever the shape of $f$. So there are no issues with the oscillatory/spiral shape in principle (mathematically). But on \emph{physical} grounds, spirals imply a negative population of $v$ as the spiral is around $(1,0,0)$ (so you should say that $v$ is the problem). This was the same argument we used in class for the FK equation.}
+      \end{enumerate}
+
+    }
+
+    % Q4
+    \question{}{ % Question
+      We now look at the stability of the other equilibrium, $(\beta,1-\beta,0)$.
+      \begin{enumerate}
+        \item Evaluate the Jacobian at this equilibrium and show that the resulting eigenvalue equation is
+          \begin{equation}
+            \lambda^3 + \lambda^2\left(c-\frac{\beta}{c}\right) - \beta \lambda + \frac{\beta}{c}\alpha(1-\beta) = 0. \tag{\xmas{candle}}
+            \label{candle}
+          \end{equation}
+        \item This is a positive cubic polynomial, so we might expect there to be a local minimum and maximum. Sketch the polynomial and show that the local minimum and maximum are at
+          \begin{equation}
+            \lambda_{\text{max}},\lambda_{\text{min}} = -\frac{1}{3}\left[c - \frac{\beta}{c} \pm \sqrt{\left( c- \frac{\beta}{c} \right)^2 + \xmas{snowman}} \right],
+            \tag{\xmas{gingerbread-man}}
+          \end{equation}
+          where you should state the value of \xmas{snowman}. (Just to reiterate: these are \emph{not} necessarily eigenvalues, just the local maximum and minimum of the eigenvalue equation.)
+        \item See that these values of the local maximum and minimum of the eigenvalue equation do not depend on the parameter $\alpha$. This suggests that increasing $\alpha$ just corresponds to shifting the cubic upwards. Convince yourself that this is the case. Are you convinced?
+        \item Consider \cref{candle}, then, with $\alpha=0$ (its lowest possible value), and find the three real eigenvalues which satisfy this equation.
+        \item Therefore we have that when $\alpha=0$, there are three real eigenvalues. As we increase $\alpha$, the cubic graph shifts upwards until $\alpha$ reaches some critical value $\alpha_c$, when the local minimum of the cubic goes above the $x$-axis, after which there is one real eigenvalue and two complex eigenvalues. In the squirrel (FK) problem, we disallowed complex eigenvalues. Should we also disallow them here?
+      \end{enumerate}
+      We haven't given names to types of stability in three dimensions; suffice to say that if $\alpha \leq \alpha_c$, we expect $(u(z),v(z))$ to vary monotonically with $z$, going from $(\beta, 1-\beta)$ to $(1,0)$ as $z$ increases. And if $\alpha > \alpha_c$, we expect the solution to oscillate as $z$ increases away from the equilibrium at $(\beta,1-\beta)$. The solutions look like \cref{fig:sols}.
+
+      As for the wavespeed, this equilibrium puts no constraints on it. Coupled with the rule that waves travel at their slowest possible value, $c^2$ turns out to be equal to the value you specified in question (\ref{c-constraint}).
+    }
+    { % Solution
+      \begin{enumerate}
+        \item The Jacobian, evaluated at $(\beta,1-\beta,0)$ is
+          \begin{align}
+            \m{J} =
+            \begin{pmatrix}
+              \beta/c & \beta/c & 0 \\
+              0 & 0 & 1 \\
+              \alpha(\beta-1) & 0 & -c
+            \end{pmatrix},
+          \end{align}
+          which has eigenvalue equation
+          \begin{equation}
+            \label{main}
+            \lambda^3 + \lambda^2\left(c-\frac{\beta}{c}\right) - \beta \lambda + \frac{\beta}{c}\alpha(1-\beta) = 0.
+          \end{equation}
+          %
+          \commentary{This was done fine.}
+          %
+        \item
+          The cubic looks like
+          \begin{center}
+            \input{images/eigenvalue-cubic.pgf}
+          \end{center}
+          for three different values of $\alpha$. (You do not need to find the points where it crosses the $x$-axis at this stage.)
+
+          Differentiating and setting to zero, we find
+          \begin{equation}
+            3\lambda^2+2\lambda\left(c-\frac{\beta}{c}\right)-\beta=0,
+          \end{equation}
+          and solving the quadratic we find
+          \begin{equation}
+            \lambda_{\text{max}},\lambda_{\text{min}} = -\frac{1}{3}\left[c - \frac{\beta}{c} \pm \sqrt{\left( c- \frac{\beta}{c} \right)^2 + 3\beta} \right].
+          \end{equation}
+          %
+          \commentary{This was also done fine. Big up to those who drew snowfolk.}
+          %
+        \item I am convinced. Looking at \cref{main}, changing $\alpha$ is like doing `$f(x)+a$', translating the function vertically. (See picture above.)
+          %
+          \commentary{Many of you seemed convinced. Good for you: back yourselves!}
+          %
+        \item Equation (\xmas{candle}) with $\alpha=0$ has solutions $\lambda = 0$ and
+          \begin{align}
+            \lambda^2 + \lambda\left(c-\frac{\beta}{c}\right)-\beta &=0 \\
+            \implies (\lambda+c)\left(\lambda-\frac{\beta}{c}\right) &= 0 \implies \lambda = -c, \frac{\beta}{c}.
+          \end{align} The eigenvalues are therefore $\lambda = 0$, $-c$, $\beta/c$.
+          %
+          \commentary{The majority of you used the quadratic formula, which does simplify to these solutions. But you should always have a quick look as to whether you can factorise clearly: in this case all you need is $(a-b)^2 + 4ab = (a+b)^2$. The solutions from the quadratic equation do not simplify obviously and the clarity of the result is important for interpretation.}
+          %
+        \item Previously, we discarded these solutions on the grounds that they would yield negative values of a population size. In those instances, however, we were dealing with equilibria where one population size was zero. Here, we have $(\beta,1-\beta)$, so the solution may safely oscillate without ever becoming negative. Thus, we can permit oscillatory wavefronts. While this is a fundamental difference with the FK equation where oscillations were not possible, like the FK equation the wave speed is given by the minimum possible value, namely, $c^2 = 4\alpha(1-\beta)$.
+          %
+          \commentary{Here the issues were similar to the previous question about validity of travelling waves. The issue in the previous case was forbidding negative $v$; but that is not an issue here.}
+      \end{enumerate}
+
+    }
+\end{enumerate}
+
+\ifbool{show_solution}{}{
+  \begin{figure}
+    \centering
+    \input{images/travelling-wave-predators-solution-1.pgf}\qquad
+    \input{images/travelling-wave-predators-solution-2.pgf}
+    \caption{\textbf{Left:} Monotonic approach of $(u, v)$ to $(\beta, 1-\beta)$ when $\alpha \leq \alpha_c$. \\ \textbf{Right:} Oscillatory approach to the steady state $(\beta, 1-\beta)$, when $\alpha>\alpha_c$.}
+    \label{fig:sols}
+  \end{figure}
+}
+
+\end{document}

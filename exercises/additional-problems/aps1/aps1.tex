@@ -1,0 +1,713 @@
+\documentclass[a4paper, 12pt]{article}
+\input{../common/preamble.tex}
+\setbool{show_question}{true}
+\setbool{show_solution}{false}
+\begin{document}
+%
+\heading{Michaelmas}{Additional problem sheet 1\solutioninheading}
+\ifbool{show_question}{\textbf{Topics covered}: Chapters 1--2.}{}
+
+\begin{enumerate}[label={\bf \arabic{*}.\;}, ref={\arabic{*}},itemsep=3ex, left=0ex]
+
+    \question{Practice for solving ODEs}
+    {
+      \begin{enumerate}[label=(\alph{*})]
+        \item Solve
+          \begin{equation}
+            \fd{y}{x}= \frac{xy^{3}}{\sqrt{1+x^{2}}},
+          \end{equation}
+          subject to $y(0) = y_{0}$.
+
+        \item Solve
+          \begin{equation}
+            x\fd{y}{x}= y(\log x-\log y),
+          \end{equation}
+          subject to the initial condition $y(1)= A$.
+
+        \item Solve
+          \begin{equation}
+            \fd{y}{x}= \frac{y^{2}}{x^{2}+3x+2}.
+          \end{equation}
+      \end{enumerate}
+    }
+    {
+      \begin{enumerate}[label=(\alph{*})]
+        \item This equation can be separated,
+          \begin{equation}
+            \int \frac{1}{y^{3}}\,\d y = \int \frac{x}{\sqrt{1+x^{2}}}\,\d x.
+          \end{equation}
+          Integrating both sides we obtain
+          \begin{equation}
+            -\frac{1}{2y^{2}}= \int \frac{x}{\sqrt{1+x^{2}}}\, \d x + C.
+          \end{equation}
+          To calculate the $x$-integral we substitute $u=1+x^{2}$, $\d x = \d u/2x$ to obtain
+          \begin{equation}\int \frac{x}{\sqrt{1+x^{2}}}\,\d x =
+            \int\frac{1}{2\sqrt{u}}\,\d{u}= \sqrt{u}= \sqrt{1+x^{2}}
+          \end{equation} so
+          \begin{equation}
+            -\frac{1}{2y^{2}}=\sqrt{1+x^{2}}+ C.
+          \end{equation}
+          It's best to apply the boundary condition here, so $y(0)= y_{0}$ implies
+          \begin{equation}
+            C = -\left(\frac{1}{2y_{0}^{2}}+ 1\right) = -\frac{1+2y_{0}^{2}}{2y_{0}^{2}}.
+          \end{equation}
+          Thus our final solution is the beautiful
+          \begin{equation}
+            y = \frac{1}{\sqrt{2\frac{1+2y_{0}^{2}}{2 y_{0}^{2}} - 2\sqrt{(1+x^{2})}}}.
+          \end{equation}
+
+        \item A common trick when there are logarithms present is to write $y = \e^{v(x)}$. Then our equation can be written as
+          \begin{equation}
+            x\fd{v}{x}= \log(x) - v,
+          \end{equation}
+          which is now a first order ODE where we can use an integrating factor. Writing the ODE as
+          \begin{equation}
+            \label{oureq}
+            \fd{v}{x}+\frac{1}{x}v = \frac{\log(x)}{x},
+          \end{equation}
+          the integrating factor is $\e^{\int(1/x)\dx}= x$. Therefore,
+          \begin{equation}
+            \fd{}{x}[xv] = \log(x)
+          \end{equation}
+          and
+          \begin{equation}
+            v = \frac{1}{x}[x \log x - x + C] = \log x - 1 + C/x.
+          \end{equation}
+          Going back to $y$, recalling $y=\e^{v}$, we therefore have
+          \begin{equation}
+            y = x\e^{C/x-1}
+          \end{equation}
+          and the boundary condition implies $C = \log(A)+1$.
+
+        \item We can separate variables in this case,
+          \begin{equation}
+            \int\frac{1}{y^{2}}\,\d y =\int\frac{1}{x^{2}+3x +2}\,\d x + \frac{C}{\mu}.
+          \end{equation}
+          To perform the $x$-integral we need to use partial fractions! We factorise the quadratic,
+          \begin{equation}
+            x^{2} +3x +2 = (x+2)(x+1).
+          \end{equation}
+          and then separate the fraction,
+          \begin{equation}
+            \frac{1}{x^{2}+3x +2}= \frac{A}{x+2}+ \frac{B}{x+1}\implies A(x+1) + B(x+2) = 1,
+          \end{equation}
+          from which we can ascertain that $A=-1$ and $B=1$. Together then, we have
+          \begin{equation}
+            -\frac{1}{y}= -\log(x+2) + \log(x+1) +C
+            \implies y = \frac{1}{\log\left(\frac{x+2}{x+1}\right) + C}.
+          \end{equation}
+      \end{enumerate}
+    }
+    %
+
+    %===========================================================================
+
+    %
+    \question{1D stability analysis}
+    {
+      Consider the following 1D population models. In each case, find the equilibria and by drawing a phase plot, determine the stability of the equilibria:
+      \begin{enumerate}[label=(\alph{*})]
+        \item $\displaystyle \fd{x}{t}= x(x-1)$,
+        \item $\displaystyle \fd{x}{t}= \sin(x)$,
+        \item $\displaystyle \fd{x}{t}= \frac{r x}{x+K}$, where $K,r>0$.
+      \end{enumerate}
+      Now, by letting $x=x_{0}+\varepsilon x_{1}$, perform a formal linear stability analysis on the above models and confirm your earlier findings. You can either use the Taylor series result
+      \begin{equation}
+        \fd{x}{t}= f(x) \implies \fd{x_1}{t}= x_{1}f'(x_{0})
+      \end{equation}
+      as seen in class, or you can derive the expansion yourself.
+    }
+    {
+      \begin{enumerate}[label=(\alph*)]
+        \item The equilibria are $x=0$ and $x=1$. The plot is
+
+          \begin{center}
+            \input{images/1d-phase-plots-1.pgf}
+          \end{center}
+
+          and $x=0$ is stable, while $x=1$ is unstable.
+
+          Epsilon-style analysis: Let $x=x_0+\ep x_1$. For this first question we will derive the expansion ourselves. Then the governing equation becomes
+          \begin{equation}
+            \ep \fd{x_1}{t} = (x_0+\ep x_1)(x_0 + \ep x_1 - 1).
+          \end{equation}
+          Looking at each order,
+          \begin{align}
+            [1] && 0 &= x_0(x_0-1),\\
+            [\ep] && \fd{x_1}{t} &= x_1(2x_0-1).
+          \end{align}
+          This final $\mathcal{O}(\ep)$ equation is the result from class mentioned on the question sheet. Evaluating this equation at each equilibrium:
+          \begin{align}
+            x_0 = 0: && \fd{x_1}{t} & = -x_1 \hspace{-1cm} & \implies x_1 &=A\e^{-t} \implies \text{stable},\\
+            x_0 = 1: && \fd{x_1}{t} & = x_1 \hspace{-1cm} & \implies x_1 &=A\e^{t} \implies \text{unstable},
+          \end{align}
+          which confirms what we found earlier.
+
+        \item The equilibria are $x=0,\pi,2\pi,3\pi\dots$. The plot is
+
+          \begin{center}
+            \input{images/1d-phase-plots-2.pgf}
+          \end{center}
+
+          and we can see that $x=0$ is unstable, $x=\pi$ is stable, $x=2\pi$ is unstable, and so on.
+
+          Epsilon-style analysis: you should get
+          \begin{equation}
+            \fd{x_1}{t} = x_1\cos(x_0).
+          \end{equation}
+          Evaluating this equation at each equilibrium:
+          \begin{align}
+            x_0 = 0: && \fd{x_1}{t} & = x_1 \hspace{-1cm} & \implies x_1 &=A\e^{t} \implies \text{unstable},\\
+            x_0 = \pi: && \fd{x_1}{t} & = -x_1 \hspace{-1cm} & \implies x_1 &=A\e^{-t} \implies \text{stable},
+          \end{align}
+          and so on, matching what we had before.
+
+        \item The only equilibrium is $x=0$. The plot is
+
+          \begin{center}
+            \input{images/1d-phase-plots-3.pgf}
+          \end{center}
+
+          and we can see that $x$ is unstable. You can get away without the plot here by noticing that, in fact, $\fd{x}{t}>0$ always!
+
+          Epsilon-style analysis: you should get
+          \begin{equation}
+            \fd{x_1}{t} = \frac{K r x_1}{(K+x_0)^2}.
+          \end{equation}
+          Evaluating this equation at the equilibrium:
+          \begin{align}
+            x_0 = 0: && \fd{x_1}{t} & = \frac{r}{K} x_1 \hspace{-1cm} & \implies x_1 &=A\e^{rt/K} \implies \text{unstable},
+          \end{align}
+          matching what we had before.
+
+      \end{enumerate}
+
+    }
+    %
+
+    %===========================================================================
+
+    %
+    \question{And fine-Allee\dots (Exam section B style)}
+    {
+      Consider this version of the Allee equation describing growth of a bacterial population $x(t)$:
+      \begin{equation}
+        \label{modlog}
+        \fd{x}{t}= r x(K-x)(x-M),
+      \end{equation}
+      where $r,K,M>0$.
+
+      \begin{enumerate}[label=(\alph{*})]
+        \item Find the equilibria of this system.
+        \item Draw a phase plot for this model and determine the stability of each equilibrium, specifying how this depends on the relative size of $K$ and $M$. \label{drawit}
+        \item
+          \begin{enumerate}[label=(\roman{*})]
+            \item Solve \cref{modlog} to show that the general solution $x(t)$ in the case $K=1$ and $M=2$ is
+              \begin{equation}
+                x(t) = 1 \pm \frac{\sqrt{A\e^{2rt}(A\e^{2rt}-1)}}{1-A\e^{2rt}}
+              \end{equation} for a constant $A$.
+            \item By letting $t\to\infty$, confirm that the stable equilibria you determined before are indeed reached at infinite time.
+            \item For which values of $A$ is there a singularity in the solution $x(t)$ for $t>0$?
+          \end{enumerate}
+
+        \item Consider again the case $K=1$, $M=2$. Rewrite \cref{modlog} in the form
+          \begin{equation}
+            \fd{x}{t}= a_0 x + a_1 x^2 + a_2 x^3,
+          \end{equation}
+          for some $a_0, a_1, a_2$. Now perform a formal linear stability analysis around each equilibrium $x_0$ by writing $x = x_0 + \varepsilon x_{1}$, and thus by finding the linearised solution $x_{1}(t)$, confirm the stability you found in part \ref{drawit}.
+      \end{enumerate}
+    }
+    {
+      The Allee equation in this form is
+      \begin{equation}
+        \label{modlog}
+        \fd{x}{t} = r x(K-x)(x-M).
+      \end{equation}
+      \begin{enumerate}[label=(\alph*)]
+
+        \item The equilibria are $x=0$, $x=K$ and $x=M$.
+
+        \item The phase plot looks like one of these:
+
+          \begin{center}
+            \scalebox{0.95}{\input{images/allee-phase-1.pgf}}
+            \scalebox{0.95}{\input{images/allee-phase-2.pgf}}
+          \end{center}
+
+          and we can see that, so long as $K \neq M$,
+          \begin{itemize}
+            \item $x=0$ is stable,
+            \item $x=\min(K,M)$ is unstable,
+            \item $x=\max(K,M)$ is stable.
+          \end{itemize}
+
+          There is an interesting question about what happens when $K=M$. Then the plot looks like
+
+          \begin{center}
+            \input{images/allee-phase-3.pgf}
+          \end{center}
+
+          and while $x=0$ remains stable, $x=K=M$ is only stable if we move to the right, while it is unstable if we move to the left. Such a point is called a \emph{saddle point}, and we'll look at these later in the course.
+
+          %    \item
+          %    We can write this in the form
+          %    \begin{equation}
+          %      \fd{x}{t} = g(x)x, \qquad g(x) = a_0 + a_1 x + a_2 x^2,
+          %    \end{equation}
+          %    where $a_0 = -rKM$, $a_1 = r(K+M)$ and $a_2 = -r$.
+          %
+          %    As indicated in eq.~(14), this is a growth/decay model of the bacteria $x$ with a varying growth parameter $g(x)$. The function $g(x)$ is a quadratic with negative $x^2$ component.  Assuming $K>0$, $M>0$, $M>K$, we get growth when $K<x<M$ and decay otherwise. We might expect the solutions to decay to $x=0$ if $x<M$ and to tend to $M$ if $x>K$.  This suggests it is well-posed as it should not get below $x=0$ starting from positive $x$, nor will it grow without bound.
+
+        \item
+          \begin{enumerate}
+            \item
+              \Cref{modlog} is separable so
+              \begin{equation}
+                \int \frac{1}{x(1-x)(x-2)}\d x = rt + c,
+              \end{equation}
+              with $c$ a constant of integration. For the integral we use partial fractions
+              \begin{align}
+                \frac{B}{x} + \frac{C}{1-x} + \frac{D}{x-2} &=  \frac{B(1-x)(x-2) + Cx(x-2) + Dx(1-x)}{x(1-x)(x-2)} \\ &= \frac{1}{x(1-x)(x-2)}.
+              \end{align}
+              Letting $x=0$ gives $B = -1/2$, $x=1$ gives $C=-1$ and $x=2$ gives $D=-1/2$. Thus
+              \begin{align}
+                \int \frac{1}{x(1-x)(x-2)}\,\d x  &= -\int\frac{1}{2x}\,\d x +\int\frac{1}{x-1}\,\d x - \int\frac{1}{2(x-2)}\,\d x \\
+                & = -\frac{1}{2}\log(x) + \log(x-1)-\frac{1}{2}\log(x-2),\\
+                & = \log\left(\frac{x-1}{\sqrt{(x-2)x}}\right),
+              \end{align}
+              so
+              \begin{equation}
+                \frac{x-1}{\sqrt{(x-2)x}} = A\e^{rt} \implies \frac{(x-1)^2}{(x-2)x} = A\e^{2rt}.
+              \end{equation}
+              We can write this as a quadratic,
+              \begin{equation}
+                x^2(1-A\e ^{2rt}) -2(1-A\e ^{2rt})x + 1 =0,
+              \end{equation}
+              eventually giving us
+              \begin{equation}
+                x(t) = 1 \pm \frac{\sqrt{A\e ^{2rt}(A\e ^{2rt}-1)}}{1-A\e ^{2rt}}.
+              \end{equation}
+
+            \item First just note that our stable equilibria, given $1 = K < M=2$, are $x=0$ and $x=2$.
+
+              Now, as $t\to\infty$, $x(t)$ behaves like
+              \begin{equation}
+                x(t\to\infty) \sim 1 \pm \frac{\sqrt{(A\e^{2rt})^2}}{-A\e^{2rt}} \sim 1 \pm (-1) = 0\text{ and }2,
+              \end{equation}
+              our stable equilibria.
+
+            \item We have a singularity when
+              \begin{equation}
+                1-A\e^{2rt} = 0 \implies A = \frac{1}{\e^{2rt}}.
+              \end{equation}
+              Given $t>0$, the possible values for $A$ are therefore $0<A<1$.
+          \end{enumerate}
+          %      If $A<0$ (required for real solutions for all time) then in the limit $t \to \infty$, the two possible solutions tend to $0$ and $2$, suggesting they are stable equilibria and the $x=1$ equilibrium is unstable.
+          %
+          %      If $A>0$, we have a singularity in $x$, although if $A>1$, then this singularity only occurs for $t<0$. The same limiting behaviour occurs as for $A<0$, although the positive root is negative for all time.
+          %}
+        \item If $x\approx x_0 + \epsilon x_1$ then we can expand
+          \begin{equation}
+            \fd{x}{t} = a_0x + a_1 x^2 + a_2 x^3,
+          \end{equation}
+          as suggested in the question, to find that to linear order,
+          \begin{equation}
+            \fd{x_1}{t}= a_0x_1 +2a_1x_0x_1 + 3a_2x_0^2x_1 = (a_0 +2a_1x_0 + 3a_2x_0^2)x_1.
+          \end{equation}
+          With $K=1$ and $M=2$, we have that $a_0 = -2r$, $a_1 = 3r$, $a_2 = -r$.
+
+          Equilibrium 1: $x_0=0$
+          \begin{equation}
+            \fd{x_1}{t}=a_0 x_1 \implies x_1 = \e ^{a_0 t}
+          \end{equation}
+          but $a_0<0$ here, so the solution is stable.
+
+          Equilibrium 2: $x_0=1$
+          \begin{equation}
+            \fd{x_1}{t}= (a_0 +2a_1 + 3a_2)x_1,
+          \end{equation}
+          and $a_0 +2a_1 + 3a_2= r>0$, so the solution is unstable.
+
+          Equilibrium 3: $x_0=2$
+          \begin{equation}
+            \fd{x_1}{t}= (a_0 +4a_1 + 12a_2)x_1,
+          \end{equation}
+          and $a_0 +4a_1 + 12a_2 = -2r<0$, so the solution is stable.
+
+          This confirms our conclusions from part (b).
+
+      \end{enumerate}
+      We should emphasise here that this formal `epsilon-style' linear stability analysis is not better or `more correct' than the graphical phase plot method we started with. Rather, it is a more general tool which we are just practising, since we can use it for equations which aren't exclusively of the form $\fd{x}{t}=f(x)$. If in an exam you are asked to do a 1D stability analysis of an equation of the form $\fd{x}{t}=f(x)$, which nearly all population models are, graphical is nearly always the best way to go.
+
+    }
+    %
+
+    %===========================================================================
+
+    %
+    \question{Time-averaged behaviour of Lotka--Volterra}
+    {
+      Consider the normalised Lotka--Volterra equations,
+      \begin{subequations}
+        \begin{align}
+          \fd{x}{t}&= x - x y, \\
+          \fd{y}{t}&= \gamma(-y + x y).
+        \end{align}
+      \end{subequations}
+      Let $T$ denote one period of the solution cycle, starting at some time $t_{0}$.
+      \begin{enumerate}[label=(\alph{*})]
+        \item Show that
+          \begin{equation}
+            \int_{t_0}^{t_0+T}\frac{1}{x}\fd{x}{t}\,\d{t} =
+            \int_{t_0}^{t_0+T}(1-y)\,\d{t}.
+          \end{equation}
+
+        \item Using the solution periodicity, show that
+          \begin{equation}
+            \label{Tiden1}
+            T = \int_{t_0}^{t_0+T}y\,\d{t}.
+          \end{equation}
+
+        \item The time average, $\bar{f}$, of a function $f$ over a period $t \in [t_{0},t_{0}+T]$ is given by
+          \begin{equation}
+            \bar{f}= \frac{1}{T}\int_{t_0}^{t_0+T}f \,\d{t}.
+          \end{equation}
+          Use this definition to show that
+          \begin{equation}
+            \bar{x}= 1 \quad \text{and}\quad \bar{y}= 1.
+          \end{equation}
+      \end{enumerate}
+    }
+    {
+      \begin{enumerate}[label=(\alph*)]
+        \item Substituting in the expression for $\fd{x}{t}$,
+          \begin{equation}
+            \int_{t_0}^{t_0+T}\frac{1}{x}\fd{x}{t}\,\d{t} = \int_{t_0}^{t_0+T}\frac{1}{x}(x - x y)\,\d{t} = \int_{t_0}^{t_0+T}(1 - y)\,\d{t}.
+          \end{equation}
+
+        \item We have
+          \begin{equation}
+            \int_{t_0}^{t_0+T}(1 - y)\,\d{t} = T - \int_{t_0}^{t_0+T}y \,\d t.
+          \end{equation}
+          As
+          \begin{equation}
+            \label{periodvanish}
+            \int_{t_0}^{t_0+T}\frac{1}{x}\fd{x}{t}\,\d{t} = \log(x(t_0+T))-\log(x(t_0)) = 0,
+          \end{equation}
+          owing to the periodicity of $x(t)$, the identity derived in part (a) then tells us
+          \begin{equation}
+            \label{Tiden1}
+            T - \int_{t_0}^{t_0+T}y\,\d t = 0 \implies T =  \int_{t_0}^{t_0+T}y\,\d{t},
+          \end{equation}
+          as required.
+
+        \item Using the definition,
+          \begin{equation}
+            \label{meandefs}
+            \bar{x} = \frac{1}{T}\int_{t_0}^{t_0+T}x\,\d{t}\quad\text{and}\quad\bar{y} = \frac{1}{T}\int_{t_0}^{t_0+T}y\,\d{t}.
+          \end{equation}
+          We repeat steps (a) and (b) for $\fd{y}{t}$:
+          \begin{equation}
+            \int_{t_0}^{t_0+T}\frac{1}{y}\fd{y}{t}\d{t} = \gamma\int_{t_0}^{t_0+T}(x-1)\,\d{t}
+          \end{equation}
+          and integrating it is clear we have
+          \begin{equation}
+            \int_{t_0}^{t_0+T}(x-1)\,\d{t}= \int_{t_0}^{t_0+T}x\,\d{t} -T.
+          \end{equation}
+          A similar argument to \cref{periodvanish} shows
+          \begin{equation}
+            \label{Tiden2}
+            T = \int_{t_0}^{t_0+T}x\d{t}.
+          \end{equation}
+          Now, inserting \cref{Tiden1,Tiden2} into \cref{meandefs}, we obtain
+          \begin{equation}
+            \bar{x} = \bar{y} =1,
+          \end{equation}
+          as required. Note further that the mean is the same as one of the equilibria of the system.
+
+      \end{enumerate}
+
+    }
+    %
+
+    %===========================================================================
+
+    %
+    \question{2D stability analysis}
+    {
+      Find the permissible equilibria of the following systems, and perform a linear stability analysis to determine whether they are asymptotically stable, unstable or degenerate.
+      \begin{enumerate}[label=(\alph{*})]
+        \item This is at the easy end of the type of stability analysis you might encounter in an exam (but we have to start somewhere, right?):
+          \begin{subequations}
+            \begin{align}
+              &\fd{x}{t}= -x -2y, \\
+              &\fd{y}{t}= 4x-5y.
+            \end{align}
+          \end{subequations}
+
+        \item Try this for both $\pm$ cases:
+          \begin{subequations}
+            \begin{align}
+              &\fd{x}{t}= x y \pm y^{3}, \\
+              &\fd{y}{t}= x \pm y^{3}.
+            \end{align}
+          \end{subequations}%
+
+        \item This is mathematically more challenging, and hence more like a standalone Section A exam question. But its biological relevance is perhaps less obvious:
+          \begin{subequations}
+            \begin{align}
+              &\fd{x}{t}= -\sin(x^{2}+y^{2}), \\
+              &\fd{y}{t}= x - y.
+            \end{align}
+          \end{subequations}
+      \end{enumerate}
+    }
+    {
+      The following solutions find the eigenvalues of the Jacobian explicitly, then use them to determine the stability of the equilibria. You can, of course, also use the trace/determinant method from chapter 3, which may well be quicker. It's up to you!
+
+      \begin{enumerate}[label=(\alph*)]
+        \item
+          The system is
+          \begin{align}
+            &\fd{x}{t} = -x -2y,\\
+            &\fd{y}{t} = 4x-5y.
+          \end{align}
+
+          The equilibrium is given by
+          \begin{equation}
+            x +2y = 0, \quad 4x-5y=0.
+          \end{equation}
+          There is only one possible solution: $x=y=0$. Since this equation is already linear we find the stability matrix $\m{J}$ is
+          \begin{equation}
+            \m{J} = \mat{-1}{-2}{4}{-5}.
+          \end{equation}
+          $\det(\m{J}-\lambda\m{I})=0$ gives $(-1-\lambda)(-5-\lambda)+8=0$, for which the solutions are
+          \begin{equation}
+            \lambda = -3 \pm 2\i .
+          \end{equation}
+          Crucially the real part of $\lambda$ is negative in both cases, so the equilibrium is stable.
+
+        \item The system is
+          \begin{align}
+            &\fd{x}{t} = x y \pm y^3,\\
+            &\fd{y}{t} = x \pm y^3.
+          \end{align}
+
+          For the positive case the equilibria are found by solving
+          \begin{equation}
+            xy=- y^3,\quad x=-y^3.
+          \end{equation}
+          So clearly $(x,y)=(0,0)$ is an equilibrium. Also we can obtain $y^2 = y^3$ so $y=1$, but $x=-1$, so this solution is not valid. There are no other real solutions. The stability matrix is
+          \begin{equation}
+            \m{J} = \mat{y_0}{x_0 + 3y_0^2}{1}{3y_0^2}
+          \end{equation}
+          where $x_0$ and $y_0$ are the equilibrium values. In this case we only consider $x_0=0$ and $y_0=0$ so
+          \begin{equation}
+            \m{J} = \mat{0}{0}{1}{0}.
+          \end{equation}
+          Pretty dull! This leads to the eigen-equation $\lambda^2=0$ so the equilibrium is degenerate.
+
+          The second case is a bit more interesting. In addition to the $(0,0)$ equilibrium there is an equilibrium satisfying $y^2 = y^3$ so $y=1$ and $x=1$. The stability matrix is
+          \begin{equation}
+            \m{J} = \mat{y_0}{x_0 - 3y_0^2}{1}{-3y_0^2}.
+          \end{equation}
+          As for the previous case the $(0,0)$ equilibrium is degenerate. The $(1,1)$ equilibrium gives
+          \begin{equation}
+            \m{J} = \mat{1}{-2}{1}{-3}.
+          \end{equation}
+          So $\det(\m{J} - \lambda\m{I})= \lambda^2 +2\lambda -1$ and
+          \begin{equation}
+            \lambda = -1 \pm \sqrt{2}.
+          \end{equation}
+          Both eigenvalues are real and one is positive, so this equilibrium is unstable.
+
+        \item
+          The system is
+          \begin{align}
+            &\fd{x}{t} = -\sin(x^2+y^2),\\
+            &\fd{y}{t} = x - y .
+          \end{align}
+
+          The equilibria are when
+          \begin{equation}
+            x^2 + y^2 = n\pi,\quad x=y
+          \end{equation}
+          so the valid solutions are $x = y = \sqrt{n\pi/2}$. The stability matrix is
+          \begin{equation}
+            \m{J} = \mat{-2\cos(x_0^2+y_0^2)x_0}{-2\cos(x_0^2+y_0^2)y_0}{1}{-1}.
+          \end{equation}
+          We now evaluate this at the equilibria for which $x^2 + y^2 = n\pi$, for which $\cos(n\pi) = \pm 1$ depending on whether $n$ is odd ($-1$) or even ($+1$).
+
+          In the $n$ even case,
+          \begin{equation}
+            \m{J} = \mat{-\sqrt{2n\pi}}{-\sqrt{2n\pi}}{1}{-1}
+          \end{equation}
+          and $\det(\m{J}- \lambda\m{I})=0$ gives
+          \begin{equation}
+            \lambda^2 + (1+\sqrt{2n\pi})\lambda +2\sqrt{2n\pi}=0.
+          \end{equation}
+          Therefore (horrible, isn't it?),
+          \begin{equation}
+            \lambda = \frac{1}{2}\left[-(1+\sqrt{2 n \pi}) \pm \sqrt{(1+\sqrt{2 n \pi})^2 -8\sqrt{2n\pi}}\right].
+          \end{equation}
+          As $-(1+\sqrt{2 n \pi}) <0$ and the root is either $<(1+\sqrt{2 n \pi})$ in magnitude or imaginary (for $n>0$), the eigenvalues always have a negative real part. Thus the equilibria are asymptotically stable for all even $n>0$.
+
+          For $n=0$, the eigenvalues are $\lambda=0$ and $-1$, leaving us in the degenerate case.
+
+          For the $n$ odd case, $\det(\m{J}- \lambda\m{I})=0$ gives
+          \begin{equation}
+            \lambda^2 + (1-\sqrt{2n\pi})\lambda -2\sqrt{2n\pi}=0.
+          \end{equation}
+          Therefore,
+          \begin{equation}
+            \lambda = \frac{1}{2}\left[-(1-\sqrt{2 n \pi}) \pm \sqrt{(1-\sqrt{2 n \pi})^2+ 8\sqrt{2n\pi}}\right].
+          \end{equation}
+          There will therefore always be a positive eigenvalue (noting that $n>0$ for these odd modes) and the equilibria are asymptotically unstable.
+
+      \end{enumerate}
+
+    }
+    %
+
+    %===========================================================================
+
+    %
+    \question{Proof of periodicity of the solutions to Lotka--Volterra}
+    {
+      We have shown in our notes that
+      \begin{equation}
+        \label{lotvolsurface}
+        \log y - y + \gamma(\log x - x) = C,
+      \end{equation}
+      for some fixed constant $C$. The value of $C$ is, of course, set by initial conditions $(x_{0},y_{0})$. We can therefore think about it as a function of all permissible initial condition pairs, $C = C(x_{0},y_{0})$, $x_{0}>0$, $y_{0}>0$.
+      \begin{enumerate}[label=(\alph{*})]
+        \item Show that the function $C(x_{0},y_{0})$ has only one extremum, and find its coordinates. Further show that it is a (global) maximum.
+        \item {}[\emph{Hard!}] Explain why this (and the differentiability of $C$ on $x_{0}>0,y_{0}>0$) guarantees that the phase curves must be closed. (Hint: they are curves on a surface of the function $C$ of fixed value.)
+      \end{enumerate}
+    }
+    {
+      Our function $C$ is
+      \begin{equation}
+        \label{lotvolsurface}
+        C(x_0,y_0) = \log(y_0) - y_0 + \gamma(\log(x_0) -x_0).
+      \end{equation}
+      For the sake of notational simplicity we set $x =x_0$ and $y = y_0$.
+
+      \begin{figure}
+        \centering
+        \includegraphics[width=10cm]{images/lotvolsurface.png}
+        \caption{\label{lvsur}The function $f$ given by (\ref{lotvolsurface}). Solutions are curves on this surface of constant $C$, i.e. the intersection of the plane $C=\mathrm{const.}$ and the surface $f(x,y)$. Here we see clearly their intersection will always be a closed curve, hence periodic solutions.}
+      \end{figure}
+
+      \begin{enumerate}[label=(\alph*)]
+        \item We take partial derivatives to first and second order:
+          \begin{align}
+            &\pd{C}{x}=\gamma\left(\frac{1}{x} - 1\right),\quad   \pd{C}{y}  = \frac{1}{y} - 1,\\
+            &\pdd{C}{x} = -\gamma\frac{1}{x^2},\quad  \pdd{C}{y} = -\frac{1}{y^2},\quad \pddmixed{C}{x}{y} = 0.
+          \end{align}
+          The potential critical points in the surface are at $\pd{C}{x} =\pd{C}{y}=0$ so there is only one possibility, $x=y=1$. The sign of the function
+          \begin{equation}
+            D = \pdd{C}{y}\pdd{C}{x} - \pddmixed{C}{x}{y}
+          \end{equation}
+          tells us what kind of critical point we have when $x$ and $y$ take on their critical values:
+          \begin{itemize}
+            \item $D>0$ and $\pdd{C}{x}<0$: $(x_0,y_0)$ is a maximum,
+            \item $D>0$ and $\pdd{C}{x}>0$: $(x_0,y_0)$ is a minimum,
+            \item $D<0$: $(x_0,y_0)$ is a saddle point,
+            \item $D=0$: indeterminate because $\pd{C}{x}$ and $\pd{C}{y}$ are not linearly independent.
+          \end{itemize}
+          In our case, $D>0$ and $\pdd{C}{x}<0$ so we have a maximum. As it is the only critical point is a global maximum.
+
+        \item We can think of $C$ as a surface function on the domain $x_0\in[0,\infty]$ and $y_0\in[0,\infty]$ (it is shown in \cref{lvsur} for $\gamma=1$). The solutions $x(t),y(t)$ are curves $\gamma(t)$ on this surface for which $z = C(x_0,y_0)$ is constant: the `height' must be constant. For a given constant $C_0$, a curve (parametrised for a sufficient time period) will be the intersection of the plane $z=C_0$ and the surface of $z = C(x_0,y_0)$. Since the surface has a single global maximum, it looks like a hill, and the intersection of the plane and surface will be a closed curve. A closed curve implies periodicity, but we first must determine that the curve is transversed with a consistent orientation (in a consistent direction around the curve).
+
+          Again dropping back to losing the subscript 0s, we consider the curve as a function of $x$ by solving \cref{lotvolsurface} for $y$ given a value of $C$ and $x$. This gives us a parametrisation for our closed curve $(x,y(x))$. We also remind ourselves that the equations take the form%
+          \begin{subequations}%
+            \begin{align}%
+              \fd{x}{t} &= x(1-y),\\
+              \fd{y}{t}&=\gamma y (x-1).
+            \end{align}
+          \end{subequations}
+          There are two points at  which $\fd{x}{t}=0$, for which we have $y=1$. If $\fd{x}{t}$ changes from increasing to decreasing about $\fd{x}{t}=0$ then $y$ must be increasing from $y<1$ to $y>1$, and if  $\fd{x}{t}$ changes from decreasing to increasing about $\fd{x}{t}$, then $y$ must be decreasing from $y>1$ to $y<1$. This gives the curve the same orientation at the two extremes of the curve in the $x$ direction.
+
+          A similar argument for points at which $\fd{y}{t}=0$ (and hence $x=1$) shows the curve is similarly well oriented at both extremes in $y$.
+
+          In between these points we can consider four quadrants, each with varying signs of $\fd{y}{t}$ and $\fd{x}{t}$. For example, let's consider the quadrant $\fd{y}{t}>0$ and $\fd{x}{t}>0$. If we consider travelling in an anti-clockwise direction we enter this section at a point where $\fd{y}{t}=0$ and for which the derivative $\fd{y}{t}$ has changed from decreasing to increasing. In this case $x$ must have increased above $1$ and must stay above $1$ until it reaches the next point where $\fd{y}{t}=0$. Thus the orientation remains consistent on the quadrant $\fd{y}{t}>0$ and $\fd{x}{t}>0$. A similar argument can be applied on all four quadrants to show that the curve $(x,y(x))$ is consistently oriented, and hence the solutions must be periodic. It is easy to see the same argument would apply if the orientation were reversed.
+
+      \end{enumerate}
+    }
+    %
+
+    %===========================================================================
+
+    %
+    \question{Variations on Lotka--Volterra (Exam 2021 \& 2022)}
+    {
+      \label{graphs-q}
+      The graphs on page \pageref{graphs} plot the populations and phase portraits of two species, $x(t)$ and $y(t)$, over time, $t$. Each graph in column \textbf{(G)} has the same initial condition and corresponds to one of the phase portraits in column \textbf{(P)}, and to one of the nondimensionalised models in column \textbf{(M)}. In the models, the constants $\beta,\gamma,\delta>0$ wherever they appear, although they are not necessarily equal between graphs. The rows are numbered \textbf{(1)--(4)}.
+
+      Giving a good reason in each case, match the graphs to the phase portraits and the models. You should not need to find stability: you should be able to connect them by thinking about the models and their meaning alone.
+
+      For example, you could say that \textbf{(G1)} = \textbf{(P2)} = \textbf{(M1)}, if indeed this were correct.
+    }
+    {
+      The matchings (with some example reasonings) are:
+
+      \begin{tabular}{lp{11.5cm}}
+        \textbf{(G1)--(P4)--(M3)} & Logistic. Between \textbf{(M3)} and \textbf{(M4)}, \textbf{(M3)} is the only one that allows $y$ to be more than 1, given the initial conditions. For $y>1$, in \textbf{(P4)}, $\fd{y}{t}>0$ in places. This is only possible in \textbf{(M3)} because in \textbf{(M4)}, $\fd{y}{t}<0$ for $y>1$. \\
+        \textbf{(G2)--(P3)--(M1)} & Traditional Lotka--Volterra; periodic. \\
+        \textbf{(G3)--(P2)--(M4)} & Logistic. Process of elimination. \\
+        \textbf{(G4)--(P1)--(M2)} & $\fd{y}{t}$ is always negative. Exponential growth of $x$ once $y$ has decayed exponentially. No equilibrium.
+      \end{tabular}
+    }
+\end{enumerate}
+
+\ifbool{show_question}{
+\newpage
+\begin{center}
+  \label{graphs}
+  \textbf{Graphs, phase portraits and models for question \ref{graphs-q}}
+\end{center}
+\vspace{5mm}
+
+\begin{tabular}{p{0.4cm}p{5cm}p{4.7cm}p{4cm}}
+  & \hspace{2.5cm} \textbf{(G)}
+  & \hspace{2.5cm} \textbf{(P)}
+  & \hspace{1.5cm} \textbf{(M)}\vspace{5mm}\\
+  \vspace{-3.2cm}\textbf{(1)} &
+  \includegraphics[scale=0.9]{images/graph3a.pdf} &
+  \includegraphics[scale=0.9]{images/graph2b.pdf} &
+  \vspace{-3.8cm}$
+  \begin{cases}
+    \displaystyle\fd{x}{t} = x-xy \vspace{3mm} \\
+    \displaystyle\fd{y}{t} = \gamma(-y + xy)
+  \end{cases}$
+  \\
+  \vspace{-3.2cm}\textbf{(2)} &
+  \includegraphics[scale=0.9]{images/graph1a.pdf} &
+  \includegraphics[scale=0.9]{images/graph4b.pdf} &
+  \vspace{-3.8cm}$
+  \begin{cases}
+    \displaystyle\fd{x}{t} = x-xy \vspace{3mm} \\
+    \displaystyle\fd{y}{t} = \gamma(-y - xy)
+  \end{cases}$
+  \\
+  \vspace{-3.2cm}\textbf{(3)} &
+  \includegraphics[scale=0.9]{images/graph4a.pdf} &
+  \includegraphics[scale=0.9]{images/graph1b.pdf} &
+  \vspace{-3.8cm}$
+  \begin{cases}
+    \displaystyle\fd{x}{t} = x(1-x) - \gamma xy \vspace{3mm} \\
+    \displaystyle\fd{y}{t} = \delta y(1-y) + \beta x y
+  \end{cases}$
+  \\
+  \vspace{-3.2cm}\textbf{(4)} &
+  \includegraphics[scale=0.9]{images/graph2a.pdf} &
+  \includegraphics[scale=0.9]{images/graph3b.pdf} &
+  \vspace{-3.8cm}$
+  \begin{cases}
+    \displaystyle\fd{x}{t} = x(1-x) - \gamma xy \vspace{3mm} \\
+    \displaystyle\fd{y}{t} = \delta y(1-y) - \beta x y
+  \end{cases}$
+\end{tabular}
+}{}
+\end{document}

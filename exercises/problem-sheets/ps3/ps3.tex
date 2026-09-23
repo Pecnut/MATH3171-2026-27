@@ -1,0 +1,407 @@
+\documentclass[a4paper,12pt]{article}
+\input{../common/preamble.tex}
+\usepackage{booktabs}
+\setbool{show_question}{true}
+\setbool{show_solution}{false}
+\setbool{show_commentary}{false}
+\begin{document}
+%
+\heading{Michaelmas}{Problem sheet 3\solutioninheading}
+%
+%
+\ifbool{show_solution}{}{
+  This problem sheet is due in by \textbf{5pm} on \textbf{Wednesday 26 November 2025}. You may submit it on paper to my office (\textsc{mcs}\,3008) or electronically on Gradescope.
+
+  \textbf{Topics covered}: Chapters 4--5.
+}
+
+\begin{enumerate}
+    % Q1
+    \question{}{
+      % Question
+      \textbf{Bifurcation investigation} \quad Consider this version of the nondimensionalised Rosenzweig--MacArthur predator--prey model,
+      \begin{subequations}
+        \begin{align}
+          \fd{u}{t} &= u\left(1-\frac{u}{k}\right)-\frac{auv}{1+u},\\
+          \fd{v}{t} &= -bv + \frac{auv}{1+u},
+        \end{align}
+      \end{subequations}
+      where $a$, $b$ and $k$ are positive constants.
+      \begin{enumerate}[label=(\alph*)]
+        \item Provide a biological interpretation of the interaction term between the two species. Can you summarise it in three words?
+        \item Show that there are two equilibria of the system, $(u_0,v_0) = (0,0)$ and $(k,0)$, which are always permissible; and that there is a further, $(u^*,v^*)$, which is permissible under conditions you should state.
+        \item From now on, let $a=2$ and $b=1$. What does this make the value of the coexistence equilibrium, $(u^*,v^*)$, and what are the new conditions for it to be permissible?
+        \item Determine the conditions under which each of the three equilibria is stable or unstable. In particular, you should show that the Jacobian of the system, evaluated at the coexistence equilibrium, is
+          \begin{equation}
+            \m{J}(u^*,v^*) =
+            \begin{pmatrix}\frac{k-3}{2k} & -1 \\[2mm] \frac{k-1}{2k} & 0
+            \end{pmatrix};
+          \end{equation}
+          and you will find that using the determinant and trace is the best strategy for evaluating the conditions for this equilibrium's stability.
+        \item Now consider how each of the equilibria, $(u_0,v_0)$, depend on $k$. Ignoring the complete extinction equilibrium, draw a bifurcation diagram of $u_0$ against $k$; and another of $v_0$ against $k$. You should remember to indicate where each of the remaining two equilibria is stable/unstable using solid/dotted lines.
+        \item Finally, indicate the point on each bifurcation diagram where a Hopf bifurcation occurs.
+      \end{enumerate}
+    }
+    { % Solution
+      \begin{enumerate}
+        \item %(a)
+          For small $u$, the interaction term behaves like $auv$, i.e.\ like standard Lotka--Volterra predator--prey. For large $u$, the interaction term behaves like $av$, i.e.\ like prey consumption rate is only dependent on the predator population, rather than the opportunities for consumption between predator and prey. Just like in the spruce budworm model, this is saying that the \emph{predators get full}.
+          %
+          \commentary{
+            The errors/mark losses made here fell into two classes:
+            \begin{itemize}[topsep=1ex,itemsep=0pt]
+              \item Not being precise enough about the behaviour mathematically -- the crucial point is that the limiting behaviour is very different from the standard $uv$ term as $u$ gets very large.
+              \item Not offering a rough interpretation (saturation).
+            \end{itemize}
+            When we ask you to describe terms we are always looking for mathematical descriptions, often what it does for small $u$ and large $u$. When it comes to interpretations, it's normally best to compare to the standard Lotka--Volterra-type $uv$ in which the interaction is linearly dependent on population size: this implies the predators can always eat/out compete a certain percentage of the population no matter how big it is!
+          }
+
+        \item %(b)
+          Looking for equilibria, we say
+          \begin{subequations}
+            \begin{align}
+              0 &= u\left(1-\frac{u}{k}\right)-\frac{auv}{1+u}, \label{null1}\\
+              0 &= -bv + \frac{auv}{1+u}. \label{null2}
+            \end{align}
+          \end{subequations}
+          Looking first at \cref{null2}, we have
+          \begin{equation}
+            0 = v\left(-b+\frac{au}{1+u}\right) \implies v=0, \quad b=\frac{au}{1+u}.
+          \end{equation}
+          Plugging the first solution, $v=0$, into \cref{null1}, we get $u=0$ or $u=k$, so we have found $(0,0)$ and $(k,0)$.
+
+          The second solution rearranges to
+          \begin{equation}
+            u = \frac{b}{a-b}.
+          \end{equation}
+          Rearranging \cref{null1} for $v$ and substituting this solution for $u$ in, we get
+          \begin{equation}
+            v = \frac{1+u}{a}\left[1-\frac{u}{k}\right] = \cdots = \frac{k(a-b)-b}{k(a-b)^2},
+          \end{equation}
+          and so our final equilibrium is
+          \begin{equation}
+            (u^*,v^*) = \left( \frac{b}{a-b}, \frac{k(a-b)-b}{k(a-b)^2} \right).
+          \end{equation}
+          This is permissible if $a>b$ and $k(a-b)\geq b$.
+          %
+          \commentary{
+            Up to a few errors this was fine; nothing obviously systematic.
+          }
+
+        \item %(c)
+          If $a=2$ and $b=1$ then
+          \begin{equation}
+            (u^*,v^*) = \left( 1, \frac{k-1}{k} \right),
+          \end{equation}
+          and this is permissible if $k\geq 1$.
+          %
+          \commentary{
+            Generally fine!
+          }
+
+        \item %(d)
+          Under this choice for $a$ and $b$, the Jacobian is
+          \begin{equation}
+            \m{J} =
+            \begin{pmatrix}1-\frac{2u}{k}-\frac{2v}{(1+u)^2} & -\frac{2u}{1+u} \\[2mm] \frac{2v}{(1+u)^2} & -1+\frac{2u}{1+u}
+            \end{pmatrix}.
+          \end{equation}
+          Evaluated at each equilibrium, we have:
+          \begin{itemize}
+            \item at $(0,0)$:
+              \begin{equation}
+                \m{J}(0,0) =
+                \begin{pmatrix}1 & 0 \\ 0 & -1
+                \end{pmatrix} \implies \lambda = 1, -1.
+              \end{equation}
+              So this is unstable (a saddle point).
+            \item at $(k,0)$:
+              \begin{equation}
+                \m{J}(k,0) =
+                \begin{pmatrix}-1 & -\frac{2k}{1+k} \\[2mm] 0 & -1+\frac{2k}{1+k}
+                \end{pmatrix} \implies \lambda = -1, \, -1+\frac{2k}{1+k}.
+              \end{equation}
+              This is unstable if the second eigenvalue is positive, i.e.\ if
+              \begin{equation}
+                -1+\frac{2k}{1+k} > 0 \implies k>1.
+              \end{equation}
+              So it is stable for $0<k<1$ (recall $k$ is a positive constant), and unstable for $k>1$.
+            \item at $(u^*,v^*)=(1,(k-1)/k)$:
+              \begin{equation}
+                \m{J}(u^*,v^*) =
+                \begin{pmatrix}1-\frac{2}{k}-\frac{1}{2}\left(\frac{k-1}{k}\right) & -1 \\[2mm] \frac{1}{2}\left(\frac{k-1}{k}\right) & 0
+                \end{pmatrix} =
+                \begin{pmatrix}\frac{k-3}{2k} & -1 \\[2mm] \frac{k-1}{2k} & 0
+                \end{pmatrix}.
+              \end{equation}
+              Following the hint, we have
+              \begin{equation}
+                \det\m{J} = \frac{k-1}{2k}, \qquad \tr\m{J}=\frac{k-3}{2k}, \qquad  (\tr\m{J})^2-4\det\m{J} = \frac{-7k^2+2k+9}{4k^2}.
+              \end{equation}
+              Now we can see the determinant and trace change signs at $k=1$ and $k=3$, so let's think about the regions either side and between these points:
+              \begin{itemize}
+                \item If $0<k<1$: the equilibrium is not permissible.
+
+                \item If $1<k<3$: $\det\m{J}>0$, $\tr\m{J}<0$, so the equilibrium is stable.
+
+                \item If $k>3$: $\det\m{J}>0$, $\tr\m{J}>0$, so the equilibrium is unstable.
+              \end{itemize}
+          \end{itemize}
+          We can put this information all together:
+          \begin{center}
+            \begin{tabular}{cclll}
+              \toprule
+              $u_0$ & $v_0$ & permissible? & stable? & unstable?\\
+              \midrule
+              $0$ & $0$ & always & --- & always \\
+              $k$ & $0$ & always & $0<k<1$ & $k>1$\\
+              $1$ & $\frac{k-1}{k}$ & $k>1$ & $1<k<3$ & $k>3$ \\
+              \bottomrule
+            \end{tabular}
+          \end{center}
+          %
+          \commentary{
+            Everyone knows what to do with stability analysis now. There were two common errors:
+        \begin{itemize}[itemsep=0pt,topsep=1ex]
+            \item{Assuming $k<1$ from the previous result applied to the $(k,0)$ equilibrium, but it was only for coexistence. Take care and review your answers, the clue here is that $(k,0)$ is clearly sensible if $k\geq 0$.}
+            \item{A lot of people looked at the discriminant of the quadratic for $\lambda$ for stability finding, essentially when they switched from node-like behaviour to spiral behaviour. This is \emph{not} important just for the sake of stability. Just look at $\tr\m{J}$ and $\det\m{J}$, in which case the answer is very simple.}
+        \end{itemize}
+        There is an important principle here: \emph{never do more than is needed} in an exam. You only have a finite amount of time, so just answer what is asked and no more. If it says \emph{classify} the equilibria, you need to know if you have complex behaviour or not; if it asks for stability you don't.
+          }
+
+        \item %(e)
+          Look again at the table above. Ignoring the complete extinction equilibrium, we have
+          \begin{equation}
+            (u_0,v_0) = (k,0) \quad\text{and}\quad \left(1,\frac{k-1}{k}\right).
+          \end{equation}
+          So for the $u_0$ bifurcation diagram we have:
+          \begin{itemize}
+            \item $u_0=k$, permissible for all $k$ and stable for $0<k<1$, unstable otherwise,
+            \item $u_0=1$, permissible only for $k>1$, stable for $1<k<3$, unstable otherwise.
+          \end{itemize}
+          And for the $v_0$ bifurcation diagram we have:
+          \begin{itemize}
+            \item $v_0=0$, permissible for all $k$ and stable for $0<k<1$, unstable otherwise,
+            \item $v_0=(k-1)/k$, permissible only for $k>1$, stable for $1<k<3$, unstable otherwise.
+          \end{itemize}
+          These look on the graph like:
+          \begin{center}
+            \hspace{-1.7cm}
+            \input{images/bifurcation-u-1.pgf}
+            \input{images/bifurcation-v-1.pgf}
+          \end{center}
+          %
+          \commentary{
+            This was a mixed bag. I think some people weren't clear on what a bifurcation diagram is, in which case, just make sure you understand what is above. Common mistakes included drawing the wrong stability on the lines (remember stable equilibria get solid lines; unstable equilibria get dashed lines), drawing impermissible equilibria ($u_0=1$ is only permissible for $k=1$ so don't draw anything for $k<1$) and just missing equilibria (some people missed the line for $v_0=0$).
+            }
+
+        \item %(f)
+          The Hopf bifurcation is the point where a stable spiral becomes an unstable spiral (or the other way round).
+
+          Looking at the graph, there are two bifurcations where stability changes: one at $k=1$ and $k=3$.
+
+          At $k=1$, $(\tr\m{J})^2-4\det\m{J} = 1 > 0$, so the bifurcation there is a transition between nodes, not spirals (look at the tr/det table in the notes).
+
+          At $k=3$, $(\tr\m{J})^2-4\det\m{J} = -4/3 < 0$, so this is the bifurcation between spirals. Hence this is the Hopf bifurcation and we can mark it on our diagrams:
+          \begin{center}
+            \hspace{-1.7cm}
+            \input{images/bifurcation-u-2.pgf}
+            \input{images/bifurcation-v-2.pgf}
+          \end{center}
+          %
+          \commentary{
+            A lot of people said $k=1$ was the location of a Hopf bifurcation. But a Hopf bifurcation is when the solution changes between a stable \emph{spiral} and an unstable \emph{spiral}: i.e.\ it's at $k=3$. (So now the discriminant matters!)
+          }
+
+      \end{enumerate}
+
+    }
+
+    % Q1
+    %    \item \textbf{Diffusion with a source term} \quad %
+    %    In class, we solved the 1D diffusion equation for a population density $u(x,t)$ on a bounded domain $x \in [0,L]$. Now consider the diffusion equation on the same domain, but with an additional source term which represents exponential growth of the population, equal to $\beta u$. The population is constrained to be zero at the boundaries, and the initial condition is a Dirac delta function at $x=L/2$.
+    %    \begin{enumerate}
+    %    \item Why could the initial condition not be a Dirac delta function at $x=0$?
+    %  \item    Solve this problem for $u(x,t)$, using the separation of variables method. You should present your final answer as a summation, with all constants reasonably evaluated.
+    %
+    %    \item Give a sketch of $u(x,t)$ for a few different $t$.
+    %     \end{enumerate}
+    % \hfill (5 marks)
+
+    %
+    %\newpage
+    % Q2
+    \newpage
+    \question{}
+    { % Question
+      \textbf{Bacterial equilibrium} \quad %
+      Consider a species of bacteria represented by its density (number per unit length) $u(x,t)$ and constrained to a long thin tube of length $L$, which we will represent as a 1D domain, $x \in [0,L]$.
+
+      The bacteria move subject to diffusion alone, i.e.\ with no advection ($v=0$). This diffusion is determined by Fick's law, and competition for oxygen within the tube ensures the bacteria die at a rate which is proportional to the bacteria density $u(x,t)$, with a constant of proportionality $\lambda$.
+
+      At one end of the tube, $x=0$, there is some chemical which kills the bacteria instantaneously. At the other end, $x=L$, the bacteria are flowing in with a density gradient $\mu$.
+      \begin{enumerate}
+        \item{Explain why the bacteria should be modelled as
+            \begin{equation}
+              \pd{u}{t} = D\pdd{u}{x}-\lambda u,
+            \end{equation}
+            and state the boundary conditions. You should start from the general advection--diffusion equation.
+            %\hfill (4 marks)
+          }
+        \item Show that the equilibrium of the system, $u(x)$, in the case $\lambda=1$ is given by
+          \begin{equation}
+            u(x) = \frac{\mu\alpha \sinh(x/\alpha)}{\cosh\beta},
+          \end{equation}
+          where you should replace $\alpha$ and $\beta$ with appropriate constants.
+
+        \item Hence show that the centre of mass of the distribution $u$, which is defined as
+          \begin{equation}
+            C_m = \frac{\int_{0}^{L}x u(x) \, \d{x}}{\int_{0}^{L}u(x) \, \d{x}},
+          \end{equation}
+          is given by
+          \begin{equation}
+            C_m = \frac{\gamma \cosh\beta - \alpha \sinh\beta}{\cosh\beta-\delta},
+          \end{equation}
+          where you should replace $\alpha$, $\beta$, $\gamma$ and $\delta$ with appropriate constants.
+          %\strut\hfill(6 marks)
+
+        \item{What happens to the centre of mass as the domain size gets significantly larger than the diffusion coefficient?
+            %\hfill (2 marks)
+          }
+      \end{enumerate}
+    }
+    { % Solution
+      \begin{enumerate}
+        \item % (a)
+          We start with the advection--diffusion equation, which in one dimension is
+          \begin{equation}
+            \pd{u}{t} = -\pd{}{x}[uv] - \pd{J}{x} + f
+          \end{equation}
+          where $J$ is the flux, $f$ a source and $v$ the bulk velocity.
+          \begin{itemize}
+            \item The question states $v=0$.
+            \item Fick's law in one dimension is $J = -D\pd{u}{x}$, with $D$ the diffusion constant.
+            \item Finally, the bacteria death mentioned in the text is clearly a source term $-\lambda u$ (or a sink as it is sometimes called when negative).
+          \end{itemize}
+          Put together, this gives the required equation.
+
+          The boundary conditions will be at $x=0$ and $x=L$. We put the `death' condition at $x=0$ which requires the population is zero at this point, $u(0,t)=0$. The density gradient condition requires that $\pd{u}{x}(L,t)=\mu$.
+
+          %An important note: if instead we had chosen $u(L,t)=0$ then the second boundary condition would have to be $\pd{u}{x}(0,t)=-\mu$.
+          This is the correct sign on $\mu$ because Fick's law states that density flows from higher to lower density. At $x=L$, we want the bacteria to come in (move to the left), so we want more concentration on the right, i.e.\ a positive gradient.
+          %At $x=L$, a positive gradient would achieve this; at $x=0$ the outward normal is reversed so you need a negative gradient $-\mu$ for the population to flow in.
+          %
+          \commentary{
+            A good number of marks were lost here, almost always for the same reason. Basically you have to start with the \emph{general} advection diffusion model, which in 1D is 
+    \begin{equation}
+    \pd{u}{t} = -\pd{}{x}[uv] - \pd{J}{x} + f.
+    \end{equation}
+    We derived this in class from only assuming mass conservation. In the derivation $J$ is the spreading out (or inward flow) of the density from a volume element of the domain (a line element in 1D). That's basically what diffusion is: spreading.
+
+    Many of you started with 
+    \begin{equation}
+    \pd{u}{t} = -\pd{}{x}[uv] +D\pdd{u}{x} + f,
+    \end{equation}
+    which implicitly assumed Fickian diffusion. That is quite common, but as we saw in \S5.5, there are plenty of models that are nonlinear, with diffusion $D(u)$ having a dependence on $u$. The point is you have to make a choice as to what $J$ is.
+
+    Some also assumed 
+    \begin{equation}
+    \pd{u}{t} = -v\pd{}{x}[u] +D\pdd{u}{x} + f,
+    \end{equation}
+    which assumes constant $v$. Again, that is fine but you have to make that assumption first.
+    
+    Some of you also got the boundary condition wrong at $x=L$, saying $-\mu$ instead of $\mu$. I suspect most of you didn't think about it too much and got it right by default, but if the problem were set up reflected, you would need $-\mu$.
+          }
+
+
+        \item % (b)
+          The equilibrium requires that
+          \begin{equation}
+            D\fdd{u}{x}- u = 0.
+          \end{equation}
+          We either write down the auxiliary equation in $m$, or just go straight for exponential solutions, $u = \e^{mx}$, giving us
+          \begin{equation}
+            Dm^2 - 1 = 0 \implies m = \pm\frac{1}{\sqrt{D}}.
+          \end{equation}
+          So the general solution is
+          \begin{equation}
+            u(x) = \widetilde{A} \e^{-{x}/{\sqrt{D}}} + \widetilde{B} \e^{{x}/{\sqrt{D}}},
+          \end{equation}
+          although the solution in the question suggests we should write it in terms of hyperbolic trig functions,
+          \begin{equation}
+            u(x) = A \cosh\left(\frac{x}{\sqrt{D}}\right) + B \sinh\left(\frac{x}{\sqrt{D}}\right).
+          \end{equation}
+          The first boundary condition at $x=0$ requires $A=0$ so
+          \begin{equation}
+            u(x) =B\sinh\left(\frac{x}{\sqrt{D}}\right).
+          \end{equation}
+          The $x$-derivative is
+          \begin{equation}
+            \fd{u}{x} = \frac{B}{\sqrt{D}}\cosh\left(\frac{x}{\sqrt{D}}\right),
+          \end{equation}
+          and the second boundary condition reads
+          \begin{equation}
+            \frac{B}{\sqrt{D}}\cosh\left(\frac{L}{\sqrt{D}}\right) = \mu \implies B = \frac{\sqrt D \mu}{\cosh(L/\sqrt{D})}.
+          \end{equation}
+          So the final solution is
+          \begin{equation}
+            u(x) =\frac{\sqrt{D}\mu\sinh(x/\sqrt{D})}{\cosh(L/\sqrt{D})},
+          \end{equation}
+          i.e.
+          \begin{equation}
+            \alpha = \sqrt{D}, \quad \beta = \frac{L}{\sqrt{D}}.
+          \end{equation}
+          %
+          \commentary{
+            Done mostly fine. Some of you got the right answer for $u$ but didn't quite get it into the correct form, and hence wrote down the wrong values of $\alpha$ and $\beta$. Be careful!
+          }
+
+        \item % (c)
+          To find the centre of mass we must integrate,
+          \begin{equation}
+            \int_{0}^{L}x u(x) \, \d{x} = \frac{\sqrt{D}\mu}{\cosh(L/\sqrt{D})}\int_{0}^{L}x \sinh\left(\frac{x}{\sqrt{D}}\right) \d{x}.
+          \end{equation}
+          We use integration by parts to get
+          \begin{align}
+            \int_{0}^{L}x \sinh\left(\frac{x}{\sqrt{D}}\right)\d{x} &= \sqrt{D}\left[x\cosh\left(\frac{x}{\sqrt{D}}\right)\right]_0^{L} -\sqrt{D}\int_{0}^{L} \cosh\left(\frac{x}{\sqrt{D}}\right)\d{x}\\
+            &= \sqrt{D}L\cosh\left(\frac{L}{\sqrt{D}}\right) - D\left[ \sinh\left(\frac{x}{\sqrt{D}}\right)\right]_0^{L}\\
+            & =  \sqrt{D}L\cosh\left(\frac{L}{\sqrt{D}}\right) -  D \sinh\left(\frac{L}{\sqrt{D}}\right).
+          \end{align}
+          The centre of mass, $C_m$, is given by
+          \begin{equation}
+            C_m = \frac{\int_{0}^{L}x u(x) \, \d{x}}{\int_{0}^{L}u(x) \, \d{x}},
+          \end{equation}
+          and
+          \begin{align}
+            \int_{0}^{L}u(x) \, \d{x} & = \frac{\sqrt{D}\mu}{\cosh(L/\sqrt{D})}\int_{0}^{L}\sinh\left(\frac{x}{\sqrt{D}}\right)\d{x} \\
+            & =
+            \frac{D\mu}{\cosh(L/\sqrt{D})}\left[\cosh\left(\frac{L}{\sqrt{D}}\right)-1\right].
+          \end{align}
+          So
+          \begin{equation}
+            C_m =  \frac{L\cosh(L/\sqrt{D}) -  \sqrt{D}\sinh(L/\sqrt{D})}{\cosh(L/\sqrt{D})-1},
+          \end{equation}
+          i.e.
+          \begin{equation}
+            \alpha = \sqrt{D}, \quad \beta = \frac{L}{\sqrt{D}}, \quad \gamma = L, \quad \delta = 1.
+          \end{equation}
+          %
+          \commentary{
+            Mostly this was done fine, with just a few integration errors.
+          }
+
+
+        \item %(d)
+          In this limit $L/\sqrt{D}\gg1$. Hence $\sinh(L/\sqrt{D})\approx \cosh(L/\sqrt{D})$ and $\cosh(L/\sqrt{D})\gg1$ so $C_m \approx L$ and the whole distribution gets squashed against the boundary at $x=L$.
+
+          %If you set the boundary conditions the other way round, you will find $C_m \approx \sqrt{D} \ll L$, i.e.\ the distribution is squashed close to the boundary at $x=0$.
+          %
+          \commentary{
+            A subtle point here is that we don't need $L\rightarrow \infty$: it could be that $D$ is very small and $L$ is order $1$. Then the result of the centre of mass tending to $L$ not $\infty$ matters. For those of you who put $C_m \to L-\sqrt{D}$ not $L$, it's important for the interpretation that the mass of bacteria end up at the source of inflow at $x=L$. The final thing that some people didn't do was to actually interpret the result $C_m\rightarrow L$. Make sure you answer the question!
+          }
+      \end{enumerate}
+
+    }
+\end{enumerate}
+
+\end{document}

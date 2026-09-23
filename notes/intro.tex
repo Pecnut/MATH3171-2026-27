@@ -1,0 +1,176 @@
+% !TEX TS-program = XeLaTeX
+\documentclass[main.tex]{subfiles}
+\begin{document}
+
+\setcounter{chapter}{-1}
+\chapter{Introduction}
+Welcome to Mathematical Biology III.
+
+Throughout the year, we will be developing a series of models for populations of biological agents. At first, we will have a population that simply interacts with itself, reproducing and dying (such is life!). We'll quickly make the population compete with itself, and then we'll develop systems of two different populations: a predator and a prey.  
+
+In the second half of Michaelmas, we will let the populations interact meaningfully in space. This will lead to pursuit solutions: predators chasing prey across space... and time!
+
+A key question throughout our journey will be investigating the long-term behaviour of these models. Given a set of starting conditions, where will we end up? To this end we will spend a considerable amount of time looking at the \emph{equilibria} of these models. Then we will assess the \emph{stability} of these equilibria. Are the predator and prey locked in a delicate balance? Will small changes cause massive upsets? Or can we perturb the system without too much worry? To answer these questions, we will repeatedly perform a \emph{linear stability analysis} on our increasingly complex models. To help us in this task, we will bring in a series of more advanced mathematical tools.
+
+This branch of mathematical modelling gained great public relevance during the peak of the Covid-19 pandemic. At the beginning of 2020, governments the world over looked to scientists and mathematicians to understand how the invisible threat of disease would spread. Science was asked to inform policy, and to do so quickly. How quickly will coronavirus infect the population? Will it burn out or will it continue until everyone is infected? \emph{Is there an equilibrium of this system?} Much talk was made of $R_0$: the reproducibility number of the virus. The general public were reminded of the power of exponential growth.
+
+The focus of this course is not on epidemiology, but instead on the development of population models, and more generally quantitative models capturing the dynamics of biological systems. We will spend most of our time learning from instructive classical models in population ecology. But disease modelling works in a very similar way: populations are divided into smaller populations: typically those susceptible, infected, and recovering from the disease. These three smaller populations then all interact with each other, and we can again ask the same questions of stability and long-term behaviour.
+
+As part of the problems classes, we will see some simple disease models in order to gain an understanding of how the population modelling techniques we are developing were used to predict the course of the coronavirus spread and instruct national and global policy. We will also put ourselves in the shoes of those doing this sort of modelling -- what will be the limitations of our models? We will encounter the challenges and dangers of applying mathematical modelling to one of the most dynamic biological systems of all -- people.
+
+I think you will enjoy this course.
+
+%\section*{Course outline}
+%The outline of the course, and how each chapter fits into the global picture, is depicted on the flowchart overleaf. A core model we will be developing is the \emph{Lotka--Volterra} model. In this model, two populations (a predator and a prey) interact with each other. As we progress down the central path (purple on the flowchart), we will increase the complexity of this model. 
+%
+%The increasing complexity of the model is summarised in the key equations on \cpageref{fig:key-equations}. This page should act as a helpful reminder as we make our way through the course.
+
+\vspace{1cm}
+\begin{extra-reading}
+These notes are designed to be sufficient for the course, but sources and references will be given at the end of every chapter. The main reference for the course is \textsc{Murray}, J.~D., 2002 \emph{Mathematical Biology}, 3rd edn, volumes I and II.
+\end{extra-reading}
+
+%\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=0.5cm, aspect=1.5, text centered, draw=black, node distance=3cm, fill=yellow!20]
+%\tikzstyle{block} = [rectangle, draw=adam-purple, fill=white, line width=1.5pt,
+%    text width=8em, text centered, rounded corners, minimum height=4em]
+%\tikzstyle{block-main} = [rectangle, draw=adam-purple, fill=question-purple, line width=1.5pt,
+%    text width=8em, text centered, rounded corners, minimum height=4em]
+%\tikzstyle{line} = [draw, -latex', thick,->,>=stealth]
+%
+%\begin{figure}
+%\centering    
+%\textsf{\Large Course outline}
+%
+%\vspace{1.5cm}
+%
+%\begin{tikzpicture}[node distance=1cm and 1cm,auto]
+%    % Place nodes
+%    \node [block-main] (c1) {\flowchart{chap:growth}};
+%    \node [block-main, below=of c1] (c3) {\flowchart{chap:pendulum}};
+%   % \node [block, left=of c3,yshift=1.5cm] (c2) {\flowchart{chap:pendulum}};
+%    \node [block-main, below=of c3] (c4) {\flowchart{complotvol}};
+%    \node [block, below left=of c4] (c5) {\flowchart{switching}};
+%    \node [block, below right=of c3] (c6) {\flowchart{chap:diffusion}};
+%    %\node [block, below=of c6] (c7) {};
+%    %\node [block, below=of c6] (c7) {\flowchart{chap:fundamental-solution}};
+%    %\node [block, below=of c7] (c8) {\flowchart{chap:finite-diffusion}};
+%    \node [block-main, below=of c4] (c9) {\flowchart{chap:travelling-waves}};
+%    %\node [block, below left=of c9] (c10) {\flowchart{chap:linear-stability-pdes}};
+%    %\node [block-main, below=of c9] (c11) {\flowchart{chap:stability-sclv}};
+%    %\node [block, below left=of c9] (c10) {\flowchart{chap:linear-stability-pdes}};
+%    \node [block-main, below=of c9] (c11) {\flowchart{chap:linear-stability-pdes}};    
+%    
+%    \path [line] (c1) -- (c3);
+%    %\path [line] (c2) -- (c3);
+%    \path [line] (c3) -- (c4);
+%    \path [line] (c4) -- (c5);
+%    \path [line] (c4) -- (c9);
+%    %\path [line] (c6) -- (c7);
+%    %\path [line] (c7) -- (c8);
+%    %\path [line] (c8) -- (c9);
+%    \path [line] (c6) -- (c9);
+%    %\path [line] (c10) -- (c11);
+%    \path [line] (c9) -- (c11);
+%    
+%\end{tikzpicture}
+%  %\caption*{Outline of the course}
+%  \label{fig:course-flowchart}
+%\end{figure}
+
+\begin{figure}
+\begin{center} 
+\textsf{\Large Key equations}
+\end{center}
+\vspace{0.3cm}
+Many of the biological models we will consider in this course, for two population densities $u(\v{x},t)$ and $v(\v{x},t)$ evolving in space, $\v{x}$, and time, $t$, will be of the form
+\begin{align*}
+	\pd{u}{t} &= D_1 \Lap u + f(u,v),\\
+	\pd{v}{t} &= D_2 \Lap v + g(u,v).
+\end{align*}
+If the constants $D_1$ and $D_2$ are zero, then this reduces to a pair of ODEs. Some of these models are famous and have names! Those we will see together are listed here.
+
+\paragraph{Lotka--Volterra (dimensionless)}
+\begin{subequations}
+\begin{align}
+\fd{u}{t} &= u - uv, \tag{\ref*{reducedlotvol}a}\\
+\fd{v}{t} &= \gamma(-v +uv).\tag{\ref*{reducedlotvol}b}
+\end{align}
+\end{subequations}
+
+\paragraph{Competitive Lotka--Volterra}
+\begin{subequations}
+\begin{align}
+\fd{u}{t} &= u\left(1-u - \gamma_1 v\right), 
+\tag{\ref*{lotvolcomp2scaled}a} \\
+\fd{v}{t} &= \beta v \left(1-v - \gamma_2 u\right).
+\tag{\ref*{lotvolcomp2scaled}b}
+\end{align}
+\end{subequations}
+
+\paragraph{Schnakenberg enzyme reaction system}
+\begin{subequations}
+\begin{align}
+\fd{u}{t} &= a - u +u^2v, \tag{\ref*{limcyc}a}\\
+\fd{v}{t} &= b - u^2v.\tag{\ref*{limcyc}b}
+\end{align}
+\end{subequations}
+
+\paragraph{Advection--diffusion equation}
+\begin{equation}
+\pd{c}{t} = -\vgrad\cdot(c\v{v})  + D\nabla^2 c.
+\tag{\ref*{adv-diff-ndim}}
+\end{equation}
+
+\paragraph{Spatial Lotka--Volterra}
+\begin{subequations}
+\begin{align}
+\pd{u}{t} &= D_1 \nabla^2 u + u- uv, \tag{\ref*{spatial-lotka-volterra}a}\\
+ \pd{v}{t} &=  D_2 \nabla^2 v +\gamma(-v+ uv). \tag{\ref*{spatial-lotka-volterra}b}
+\end{align}
+\end{subequations}
+
+\paragraph{Spatial competitive Lotka--Volterra}
+\begin{subequations}
+\begin{align}
+\pd{u}{t} &= \nabla^2 u +u(1-u-\gamma_1v), \tag{\ref*{scaledlotvolpursuit}a}\\
+\pd{v}{t} &= \kappa\nabla^2 v + \beta v(1-v-\gamma_2u). \tag{\ref*{scaledlotvolpursuit}b}
+\end{align}
+\end{subequations}
+
+\label{fig:key-equations}
+\end{figure}
+
+\newpage
+\begin{center} 
+\textsf{\Large Linear stability theory overview}
+\end{center}
+
+
+The table below is an overview of the key aspects of a linear stability analysis. Given a class of models, what equations do equilibria satisfy, and how can we tell if these equilibria are linearly stable?
+\begin{center}\label{tr-det-table}
+\small
+\hspace*{-3mm}
+\begin{tabular}{l|cccc}
+	\toprule
+	System & Equation & Equilibria & Stability condition \\
+	\midrule
+	Scalar ODE   & $\displaystyle\fd{u}{t} = f(u)$ & $0=f(u_0)$ & $f'(u_0)<0$ \\[4mm]
+ 	ODE system   & $\displaystyle\fd{\v{u}}{t} = \v{f}(\v{u})$ & $\vu{0}=\v{f}(\v{u}_0)$ & $\Re(\lambda)<0$ $\forall$ eigenvalues $\lambda$ of $\m{J}(\v{u}_0)$ \\[4mm]
+  	Scalar map   & $u_{n} = f(u_{n-1})$ & $u^*=f(u^*)$ & $|f'(u^*)|<1$ \\[4mm]
+        Map systems  & $\v{u}_{n} = \v{f}(\v{u}_{n-1})$ & $\v{u}^*=\v{f}(\v{u}^*)$ & $|\lambda|<1$ $\forall$ eigenvalues $\lambda$ of $\m{J}(\v{u^*})$ \\[4mm]
+        Scalar PDE$^*$   & $\displaystyle\pd{u}{t} = \vnabla\cdot(D \vnabla u) + f(u)$ & $0 = f(u_0)$ & $\lambda = -\rho D + f'(u_0) < 0$ $\forall\rho$ \\[4mm]
+        PDE system$^*$  & $\displaystyle\pd{\v{u}}{t} = \vnabla\cdot(\m{D} \vnabla \v{u}) + \v{f}(\v{u})$ & $\vu{0}=f(u_0)$ &$\Re(\lambda)<0$ $\forall$ eigenvalues $\lambda$ of $\m{J}-\rho\m{D}$  \\[4mm]
+	\bottomrule
+\end{tabular}
+\end{center}
+
+$^*$Note that the PDE stability above is only stability of \emph{spatially homogeneous} equilibria. The values of $\rho$ are always determined by the equation
+$$
+\nabla^2 w(\v{x}) = -\rho w(\v{x}),
+$$
+and there are always countably many of these (so sometimes we use $w_k(\v{x})$ and $\rho_k$ to make this clear). Importantly the equilibria and the $w(\v{x})$ \emph{must satisfy the boundary conditions!}
+\end{document}
+
+\end{document}
+
+

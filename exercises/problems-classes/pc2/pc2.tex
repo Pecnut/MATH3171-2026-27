@@ -1,0 +1,212 @@
+\documentclass[a4paper,12pt]{article}
+\input{../common/preamble.tex}
+\usepackage{multicol}
+\setbool{show_question}{true}
+\setbool{show_solution}{true}
+\begin{document}
+%
+\heading{Michaelmas}{Problems class 2\solutioninheading}
+
+\ifbool{show_solution}{}{
+  In this problems class we are going to practise drawing and interpreting graphs: phase portraits for two-dimensional systems and bifurcation diagrams. Phase portraits allow us to see the long-term behaviour of our systems for all possible initial conditions; whereas bifurcation diagrams tell us about the existence/stability of equilibria for different parameter values.
+}
+
+\begin{enumerate}[label={\bf \arabic{*}.\;}, ref={\arabic{*}},itemsep=3ex, left=0ex]
+
+    % Q1
+    \question{Phase portrait recipe}
+    { % Question
+      Linear stability analysis is an algebraic method to determine the stability of a system's equilibria. Phase portraits are a graphical method which can often also imply the same stability. Think of them as complementary tools. A recipe for drawing a phase portrait is:
+      \begin{enumerate}[label=(\roman*)]
+        \item Compute and draw equilibria, indicating stability from a linear stability analysis if you have done one.
+        \item Draw nullclines ($\dot{x} = 0$, $\dot{y} = 0$):
+          \begin{itemize}
+            \item Trajectories along $\dot{x}=0$ will be vertical,
+            \item Trajectories along $\dot{y}=0$ will be horizontal.
+          \end{itemize}
+          Equilibria will be where $\dot{x}=0$ and $\dot{y}=0$ nullclines intersect.
+        \item Test the regions between the nullclines for $\dot{x}, \dot{y} \gtrless 0$.
+        \item Infer direction of trajectories and join up.
+      \end{enumerate}
+
+      Trajectories in a phase portrait do not intersect: can you explain why?
+    }
+    { % Solution
+      Trajectories in a phase portrait do not intersect, because where they intersect, the trajectory (i.e.\ value of $(\dot{x},\dot{y})$) should be unique in a deterministic (i.e.\ non-random) system.
+    }
+
+    % Q2
+    \question{Trajectory drawing practice}
+    { % Question
+      Consider the half-completed phase portrait below for the system $(x,y)$. Identify the equilibria and complete the testing of the regions. Then draw in the trajectories and infer the stability of the equilibria.
+      \begin{center}
+        \includegraphics[scale=1.2]{images/nullclines-exercise}
+      \end{center}
+    }
+    { % Solution
+      \begin{center}
+        \includegraphics[width=13cm]{images/nullclines-exercise-sol2.pdf}
+      \end{center}
+    }
+    %\newpage
+    %Q3
+    \question{Bifurcation investigation (Exam 2023)}
+    {
+    \begin{multicols}{2}
+    	Consider the bifurcation diagram on the right, which shows how the equilibria $x_0$ of a single-species population model depend on a single parameter, $k$:
+
+    \begin{enumerate}
+        \item Write down all the equilibria, $x_0$, shown on the graph.
+	    \item Hence write down a model for a population $x(t)$ in the form
+	\[ \fd{x}{t}=f(x,k) \]
+	which would produce this bifurcation diagram. 
+    \end{enumerate}
+    
+    	\begin{center}
+        \vspace{3mm}
+		\includegraphics{images/bifurcation.pdf}
+	\end{center}
+    
+    \end{multicols}
+	}
+	{
+	    For each value of $k$, there are three values of $x_0$:
+    \begin{equation*}  
+        x_0 = 0, \quad k, \quad \text{and } 1.
+    \end{equation*}
+    This suggests an equation of the form
+    \begin{equation*}
+        \fd{x}{t} = -x(x-k)(x-1),
+    \end{equation*}
+    i.e.\ the Allee model seen in class. 
+    Drawing the portrait confirms the stability.
+
+	}
+
+
+    % Q4
+    \question{Competitive Lotka--Volterra}
+    { % Question
+      Recall from last week's lectures that the competitive Lotka--Volterra system, in nondimensional form, looks like
+      \begin{align}
+        \fd{x}{t} &= x(1-x-\gamma_1 y),\\
+        \fd{y}{t} &= \beta y (1-y-\gamma_2 x),
+      \end{align}
+      with $\beta,\gamma_1, \gamma_2 > 0$.
+
+      Drawing on the nullclines and equilibria for the $\gamma_1>1$, $\gamma_2>1$ gives us
+      %
+      \begin{center}
+        \input{images/comp-lv-phase-4.pgf}
+      \end{center}
+      %
+      \begin{enumerate}[label=(\alph*)]
+        \item Why is there no equilibrium where nullclines intersect at $(0,1/\gamma_1)$?
+        \item Test the regions between the nullclines for $\dot{x},\dot{y} \gtrless 0$.
+        \item Complete the phase portrait: infer the trajectories and further infer the stability of the equilibria, which you should colour in accordingly.
+      \end{enumerate}
+      You can compare your trajectories to those in the completed diagram in the course notes or on last week's handout.
+    }
+    { % Solution
+      \begin{enumerate}[label=(\alph*)]
+        \item Equilibria only exist where $\dot{x}=0$ and $\dot{y}=0$ lines intersect.
+        \item Completed diagram looks like:
+      \end{enumerate}
+      \begin{center}
+        \input{images/comp-lv-phase-traj-4.pgf}
+      \end{center}
+    }
+
+    %\section{SIR model}
+    %In problems class 1, you might have got far enough to see the popular SIR disease model:
+    %\begin{align}
+    %  \fd{S}{t} &= - \beta I S, \\
+    %  \fd{I}{t} &= \beta I S - \gamma I, \\
+    %  \fd{R}{t} &= \gamma I, \\
+    %  N &= S + I + R.
+    %\end{align}
+    %We're going to draw a phase portrait of $(S,I)$. But first, let's remember what this all means.
+    %\begin{enumerate}[label=(\alph*)]
+    %  \item What do all these terms represent? Which term is reduced by social distancing? In this model, $R$ is actually composed of two classes of patients: what are they? What is the assumption here about reinfection, and for which diseases is this correct?
+    %  \item Last time, we introduced the famous reproductive ratio $R_0$. What was the intuition behind $R_0$? And what was the definition of $R_0$ in terms of the parameters we've seen here?
+    %  \item Consider only the equations for $\dot{S}$ and $\dot{I}$ and draw a phase portrait for $(S,I)$.
+    %  \item Mark the total population, $N$, onto the $S$ axis. What can you say about the existence of one of your $\dot{I}$ nullclines to the left of $S=N$ in relation to the reproductive ratio $R_0$?
+    %  \item The main reason given for the lockdowns we've experienced over the last two years has been the potential pressure on the NHS, specifically the number of patients requiring hospitalisation at any given time.
+    %  \begin{enumerate}[label=(\roman*)]
+    %    \item In our model, what could represent the number of patients requiring hospitalisation at any one time?
+    %    \item At what value of $S$ is this number a maximum?
+    %    \item Divide two of our governing equations to find an expression for $\fd{I}{S}$. Assuming the approximation that the entire population is susceptible at the beginning of time and the initial infected population is zero, integrate this equation and show that the maximum number of infected patients is given by
+    %    \begin{equation}
+    %      I_{\text{max}} = N\left(1 - \frac{1+\log R_0}{R_0}\right).
+    %    \end{equation}
+    %  \end{enumerate}
+    %
+    %%  \item We found that we could solve this model for $S(t)$, with
+    %%  \begin{equation}
+    %%    S(t) = S(0)\e^{-R_0 R/N}.
+    %%  \end{equation}
+    %%  By substituting this into (4), rearranging (4) to make $I$ the subject, and substituting that into (3), show that if $S(0) = N$, then the final size of the epidemic is given by the solution to
+    %%  \begin{equation}
+    %%    0 = N - R - S(0)\e^{-R_0 R/N}.
+    %%  \end{equation}
+    %\end{enumerate}
+
+    % Q5
+    \question{Problem sheet 1: variations}
+    { % Question
+      Consider this altered system from problem sheet 1:
+      \begin{align}
+        \fd{x}{t} = x - 2y + 10,\\
+        \fd{y}{t} = 2x+2y+4.
+      \end{align}
+      Draw a phase portrait for this system and, from the phase portrait alone, infer the stability of any equilibria.
+    }
+    { % Solution
+      The nullclines for $\dot{x}$ and $\dot{y}$ are
+      \begin{equation}
+        y = \frac{x+10}{2} \quad \text{and} \quad y = -x-2,
+      \end{equation}
+      and the phase plane looks like
+      \begin{center}
+        \includegraphics[width=13cm]{images/nullclines-ps1.pdf}
+      \end{center}
+    }
+
+    %\section{SIR with temporary immunity}
+    %So far, we have assumed that immunity is permanent (how has this been encoded into our model?) What if immunity is only temporary? This is a concern about Covid-19.
+    %\begin{enumerate}[label=(\alph*)]
+    %  \item Introduce a new term to our equations which represents the `movement' of the population from the immune section, $R$, to the susceptible section, $S$.
+    %  \item Show that there are two equilibria of this new model, with one of them given by
+    %  \begin{equation}
+    %    S = \frac{\gamma}{\beta}, \quad I = \frac{N-\frac{\gamma}{\beta}}{1 + \frac{\gamma}{\delta}}, \quad R = \frac{N-\frac{\gamma}{\beta}}{1 + \frac{\delta}{\gamma}},
+    %  \end{equation}
+    %  where $\delta$ is the factor on your $R$ terms in the governing equations. Is this different to our original SIR model, and if so, how?
+    %  \item By using the equation for $N$ to eliminate $R$ from your expression for $\fd{S}{t}$, write down two equations governing this system.
+    %  \item By writing down the Jacobian of this reduced system where appropriate, perform a linear stability analysis on the equilibria you have found, and state under what conditions each equilibria is asymptotically stable/unstable/degenerate. (Hint: you may find the rules about determinants and traces useful.)
+    %  \item How might you explain this to the general public? (Assuming you are able to crop your slides to the correct aspect ratio.)
+    %\end{enumerate}
+
+    %\section{SIR with natural birth and death}
+    %We now return to our original SIR model, but add in natural birth and death. We haven't added this in so far (why might that be OK?) but don't forget that these terms also represent immigration and emigration: a rush of Londoners travelling to their second homes in Cornwall, for example.
+    %\begin{enumerate}[label=(\alph*)]
+    %  \item Add new terms to the original SIR system to model this new situation. (Be careful: natural death affects everybody!)
+    %  \item In order to have a constant population ($\fd{N}{t} = 0$), what must we assume about the birth and death rates?
+    %  \item Find the equilibria of this new model, and compare these to the models we have found so far.
+    %  \item By considering the sub-system consisting of the equations for $\fd{S}{t}$ and $\fd{I}{t}$, once again write down the Jacobian and perform a linear stability analysis on these equilibria. What is $R_0$ in this new model?
+    %\end{enumerate}
+    %
+    %\section{SEIR models}
+    %For many diseases, there is an incubation period where the individual is infect\emph{ed} but not yet infect\emph{ious}.
+    %\begin{enumerate}[label=(\alph*)]
+    %  \item Keeping the natural birth and death terms from your previous model, add in a new class $E$ for the `exposed' population, so that the population goes through the process in the order
+    %  \[ S \to E \to I \to R.\]
+    %  \item Show that in this model, the basic reproduction number $R_0$ is given by
+    %  \begin{equation}
+    %    R_0 = \frac{\alpha\beta}{(\mu+\alpha)(\mu+\gamma)},
+    %  \end{equation}
+    %  where $\mu$ is the birth/death rate, $\alpha$ is your $E$ rate, $\beta$ is your $SI$ rate, and $\gamma$ is your $I$ rate.
+    %\end{enumerate}
+    %%Next time... vaccines.
+
+\end{enumerate}
+\end{document}

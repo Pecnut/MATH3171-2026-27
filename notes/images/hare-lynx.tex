@@ -1,0 +1,33 @@
+\begin{tikzpicture}
+\begin{axis}[height=6cm,width=8cm,
+%xmin=1800,
+%xmax=2022,
+%ymin=1,ymax=12,
+domain=1900:1920,
+%restrict y to domain=1:12,
+axis on top,
+xlabel={year},
+ylabel near ticks,
+ylabel={pelts (thousands)},
+/pgf/number format/.cd,
+        use comma,
+        1000 sep={}
+]
+
+\addplot [blue, only marks,mark=*, mark size=2.3, mark options={solid,draw=black}]%
+table[y index=1]{images/hare-lynx/pelts};
+\addlegendentry{hares}
+
+\addplot [orange, only marks,mark=triangle*, mark size=2.3, mark options={solid,draw=black}]%
+table[y index=2]{images/hare-lynx/pelts};
+\addlegendentry{lynxes}
+
+\addplot [blue, ultra thick]%
+table[y index=1]{images/hare-lynx/modelhares2.txt};
+
+\addplot [orange, ultra thick]%
+table[y index=1]{images/hare-lynx/modellynx2.txt};
+
+
+\end{axis}
+\end{tikzpicture}%\caption*{World population}

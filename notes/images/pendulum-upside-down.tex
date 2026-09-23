@@ -1,0 +1,16 @@
+\tikzset{every picture/.style={thick}}
+\begin{tikzpicture}
+    \node (pivot) at (0,0) {};
+    \fill[black] (-0.2,-0.2) rectangle (0.2,0.2);
+    
+    \node (pivotvertical) at (0,-1.5) {};
+    \draw[dashed] (pivot) -- (pivotvertical);
+    %\node (anglelabel) at (0.25,-1) {};
+    
+    \draw ([shift=(-90:1cm)]0,0) arc (-90:90.5:1cm);
+    
+    \node (bead) at (0,4.47) {};
+    \fill[black] (bead) circle (0.2);
+        
+    \draw (pivot) -- (bead);
+\end{tikzpicture}

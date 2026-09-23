@@ -1,0 +1,80 @@
+\documentclass[a4paper,10pt]{article}
+\input{../common/preamble.tex}
+\begin{document} 
+%
+\setlength{\parindent}{0pt}
+\textbf{VISUALPDE POST-EXAM WORKSHOP}
+
+\textbf{Wednesday 7 June 2023}
+\setlength{\parskip}{3ex}
+
+\textbf{SOME THINGS YOU MIGHT LIKE TO DO}
+%
+\setlength{\parskip}{2ex}
+
+\section{Load up VisualPDE.com, click around, and play}
+Grab a device and go to \texttt{visualpde.com}. Feel free to just go nuts. Is it obvious how to interact with the website? Do the buttons do what you think they would do? Some potential activities are written below but really we just want you to explore.
+
+\section{The heat equation}
+Head to \textbf{Basic PDEs $\to$ Get started with the heat equation}. The heat equation, or diffusion equation, for a function $T(x,t)$ and constant $D$ is
+\[\pd{T}{t} = D \nabla^2 T.\]
+\begin{enumerate}[label=(\alph*)]
+    \item What can you say to the person sitting next to you about this equation? If you started with some heat somewhere in the domain, \emph{intuitively}, what do solutions look like? What happens if you change $D$?
+    \item What do you expect solutions to look like if the domain is a line, $0<x<L$? What about if it's a square, $0<x<L$ and $0<y<L$?
+    \item The solutions to PDEs depend on boundary conditions. Intuitively or mathematically, what sorts of boundary conditions might you expect to see along with this equation? 
+	\item Follow the tutorial on VisualPDE.com and see if your intuition has improved after you have played with it! What's clear? What's not clear? Follow your nose.
+\end{enumerate}
+Tell us: is it obvious how to change the boundary conditions? Is there a way we could make the tools clearer?
+
+\section{The heat equation continued}
+Suppose we wanted to add in an extra term,
+\[\pd{T}{t} = \nabla^2 T + T(1-T).\]
+As you can see, our systems change over time. When we look for long-term behaviour, we often see if there are values of $T$ for which nothing changes -- called equilibria or steady states. Sometimes the long-term behaviour is that the system will end up at one of these (think of a ball rolling down a hill until it settles at the bottom).
+\begin{enumerate}[label=(\alph*)]
+    \item Keep the heat equation simulation open. What's the long-term behaviour of the heat equation for different boundary conditions?
+    \item Change the heat equation to our new equation above.
+    \item We can look for equilibria of our system by considering when \emph{all derivatives} in the equation are set to zero. What are the two equilibria of the new system? Sometimes equilibria are stable (the system will settle to them over time) and sometimes equilibria are unstable (they're precariously balanced and any disturbance will move the system away). By playing with the simulation, which equilibrium is stable and which is unstable? You may want to expose the \textbf{colour bar} to help with this.
+    \item Change the equation so that there are equilibria at $T=0$ and $T=1/2$. See what happens.
+\end{enumerate}
+
+\section{Find an example related to a course you took this year}
+What's good/bad about it? Does it help any of the maths click?
+
+\section{Find a tutorial on a system that's new to you}
+Does the tutorial give you a sense of what's going on? Are you able to change the system or change the parameters to learn something?
+
+\section{Could you teach someone some maths with the Visual Stories?}
+Do you think we could teach the behaviour of PDEs without actually using any equations? See what we've tried in \textbf{Visual stories} and see if you can think of more topics we could add.
+
+\section{Try literally every button and every option}
+What do they all do? Can you break everything?
+
+\section{Have some fun}
+\begin{enumerate}[label=(\alph*)]
+    \item Change the colour scale
+    \item Turn your friend into a PDE pattern
+    \begin{enumerate}[label=(\roman*)]
+        \item Head to \textbf{Art of PDEs $\to$ Turing on Turing}.
+        \item Load the simulation and see if you can upload or take a photo of your friend: use that to form a pattern on their face.
+        \item Can you intuit what is happening mathematically?
+    \end{enumerate}
+    \item See rats chase cheese in mazes
+    \begin{enumerate}[label=(\roman*)]
+        \item Head to \textbf{Art of PDEs $\to$ A-maze-ing PDEs}.
+        \item This is a simulation of a chemotaxis-like system which tries to solve a maze by gobbling up all the food as it goes. Click to set the rats free.
+        \item What is chemotaxis? Can you figure out how this works?
+    \end{enumerate}
+    \item Share a picture by saving it and uploading it to Instagram
+\end{enumerate}
+
+\section{Enjoy the pretty patterns of the Gray--Scott model}
+Head to \textbf{Nonlinear physics $\to$ The Gray–Scott model}. The Gray--Scott model represents two species, $u$ and $v$, which diffuse, interact, and grow/decay.
+\begin{enumerate}[label=(\alph*)]
+    \item Take a look at the equations. Just by looking at them, which bits of the equations correspond to (i) diffusion, (ii) interaction, (iii) exponential growth/decay?
+    \item The parameters $a$ and $b$ control the type of behaviour you see from the system. Load the interactive simulation, change $a$ and $b$, and see if you can recover some of the different behaviours listed in the table.
+    \item Are you plotting $u$ or $v$? Can you switch between them?
+\end{enumerate}
+
+\textbf{We look forward to reading your {\href{https://forms.gle/CYzoiCzZsYKsDh778}{feedback}}: \uline{https://tinyurl.com/visualpdefeedback}}
+
+\end{document}

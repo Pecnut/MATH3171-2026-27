@@ -1,0 +1,315 @@
+\documentclass[a4paper,12pt]{article}
+\input{../common/preamble.tex}
+\newcommand{\xh}{\hat{x}}
+\renewcommand{\th}{\hat{t}}
+\setbool{show_question}{true}
+\setbool{show_solution}{false}
+\setbool{show_commentary}{false}
+
+\begin{document}
+%
+\heading{Michaelmas}{Problem sheet 1\solutioninheading}
+%
+\ifbool{show_solution}{}{
+  This problem sheet is due in by \textbf{5pm} on \textbf{Wednesday 29 October 2025}. You may submit it on paper to my office (\textsc{mcs}\,3008) or electronically on Gradescope. There is a discretionary mark available for neat and legible solutions.
+
+  \textbf{Topics covered}: Chapters 1--2.
+}
+\begin{enumerate}
+    % Q1
+    \question{Gompertz model}
+    { % Question
+      Consider the following growth model for a population $x(t)$. Known as the Gompertz model, it is given by
+      \begin{equation}
+        \fd{x}{t} = a x \log\left(\frac{K}{x}\right),
+      \end{equation}
+      where $a$ and $K$ are positive constants.
+      \begin{enumerate}
+        \item Plot the phase space of this model and use this plot to determine the stability of any equilibria you find.
+        \item Consider now the biological interpretation of this model. What do the terms in the equation represent? And how might you interpret how this model differs from the logistic model?
+          You only need to write a sentence or two.
+      \end{enumerate}
+    }
+    { % Solution
+      \begin{enumerate}
+        \item The phase diagram looks like
+
+          \begin{center}
+            \input{images/gompertz.pgf}
+          \end{center}
+
+          and so we have equilibria:
+          \begin{itemize}
+            \item $x=0$, unstable,
+            \item $x=K$, stable.
+          \end{itemize}
+          (You might argue that you can't evaluate $\fd{x}{t}$ at $x=0$ because of the $\log(K/x)$ term. But as the graph illustrates, $\lim_{x\to 0}\log(K/x)=0$, and for the purposes of biological population modelling, this is enough.)
+          \begin{commentary}
+          	The main error was not recognising the function tends to zero in the limit $x \rightarrow 0$.
+	
+			I appreciate the model is a little mathematically fiddly, since the growth rate is not really defined at $x=0$. Indeed, as said above, it only tends to zero at this point, so is this really an equilibrium? One could argue you should really have a composite function with the supplementary rule $\fd{x}{t}=0$ at $x=0$. It's not really an issue here as the equilibrium is unstable (more accurately, you will never tend towards it) so it wasn't worth worrying about this time. But if it had been stable, you might have had to think a little more. Nonetheless, you would be unlikely to have a model like that in this course.
+          \end{commentary}
+
+        \item This is very similar to the logistic model. It's Kolmogorov, so populations can't grow out of nothing (from $x=0$). We once again have a carrying capacity $x=K$ and the parameter $a$ again really just scales time. The difference is that the phase space is no longer symmetric: the Gompertz model shuts down growth more rapidly as $x$ approaches the carrying capacity.
+        \begin{commentary}
+        A number of students confused $a$, which really just sets the timescale, with the `growth rate', which is the entire function $\fd{x}{t}$. Also a good number of students weren't explicit about what $K$ is: it is the carrying capacity, a stable equilibrium of the system. It is \emph{not} the maximum value: $x$ can take on any value, dependent on the initial condition $x(0)$. This was a case where I knew what you meant, but you needed to be precise. Finally, not enough students made a \emph{direct} comparison between the two models: don't forget to answer the whole question!  
+		\end{commentary}
+      \end{enumerate}
+
+    }
+
+    % Q2
+    \question{Harvesting}
+    { % Question
+      The logistic model for the evolution of a prey species with density $x(t)$ can be adapted to form
+      \begin{equation}
+        \fd{x}{t} = Rx\left(1-\frac{x}{K}\right) - P,
+        \label{adapted-log}
+      \end{equation}
+      where $R$, $K$ and $P$ are positive constants.
+      \begin{enumerate}
+        \item Provide a brief biological interpretation of this model.
+        \item There is a biological problem with this model at $x=0$. What is it?
+      \end{enumerate}
+      To fix this problem, consider now the more involved model,
+      \begin{equation}
+        \fd{x}{t} = Rx\left(1-\frac{x}{K}\right) - P\left( 1 - \exp\left[-\frac{x^2}{\alpha^2 A^2}\right] \right),
+        \label{new-model}
+      \end{equation}
+      where $R$, $K$, $P$, $A$ and $\alpha$ are positive constants.
+      %
+      \begin{enumerate}[resume]
+        \item The units of $x$ are density, the units of $t$ are time, and $\alpha$ is just a number. By considering the new model, \cref{new-model}, what, therefore, do the units of $R$, $K$, $P$ and $A$ have to be?
+
+        \item By writing
+          \begin{equation}
+            x = \hat{x}X, \quad t = \hat{t}T,
+          \end{equation}
+          where $\hat{x}$ and $\hat{t}$ are nondimensional, show that \cref{new-model} can be written as
+          \begin{equation}
+            \fd{\hat{x}}{\hat{t}} = r\hat{x}\left(1-\frac{\hat{x}}{q}\right) - \left(1-\exp\left[-\frac{\hat{x}^2}{\alpha^2}\right]\right),
+          \end{equation}
+          where you should give the values of $X$, $T$, $r$ and $q$ in terms of the original parameters.
+
+        \item Assume now that $\alpha \ll q$. Sketch the phase space of the nondimensionalised model and show that the problem with original model in \cref{adapted-log} has been solved. It may help to first sketch the phase space of just the exponential term,
+          \begin{equation}
+            \fd{\hat{x}}{\hat{t}} = \exp\left[-\frac{\hat{x}^2}{\alpha^2}\right],
+          \end{equation}
+          marking $\alpha$ roughly on the $x$-axis.
+
+        \item \emph{Optional:} Continue to assume that $\alpha \ll q$. Demonstrate that in order for there to be three nonzero equilibria, we must have $rq>4$.
+
+          (Hint: if you can only spot two possible nonzero equilibria, quickly calculate the slope of the phase space plot at $x=0$ and see what that implies\dots)
+
+      \end{enumerate}
+    }
+    { % Solution
+      \begin{enumerate}
+        \item This is a logistic model -- with carrying capacity $K$ and time scaling $R$ -- but with an additional constant death rate $P$. The $P$ makes this a simple \emph{harvesting} model: imagine something like a fishing quota, where a fixed number of fish are removed every week. Obviously this model requires a sufficient number of the population to exist, though, in order for $x$ not to become negative. We will see this model again later in the course.
+        \begin{commentary}
+        The main error was that $P$ can not really be a predator term: it is still there even if $x=0$ and predation should depend on size. It is more like some constant removal, like a farmer selling a fixed amount of livestock each year. Ultimately, it's a bad model and $P$ appearing like this is a problem. It can occasionally be used as a nice simple mathematical model if we only apply it when $x$ is not too small, but we should try to improve it.
+        
+        Other issues: again $K$ was not often precisely enough defined. The logistic term was sometimes described as linear, when it is quadratic. This seems to be because ChatGPT describes the `growth rate per capita', which would indeed be linear: be careful!
+        \end{commentary}
+        
+        \item At $x=0$, $\fd{x}{t}$ is negative and this is nonsense.
+        \begin{commentary}
+        This was almost uniformly answered correctly. :-)
+        \end{commentary}
+        
+        
+        \item The key here is to see that the left-hand side has units $\text{density}/\text{time}$ and so the right-hand side needs to match. Furthermore, you can't add two terms with different units, so anything added together needs to match units. For this to work:
+          \begin{itemize}
+            \item $R$ needs units of $1/\text{time}$,
+            \item $K$ needs units of density,
+            \item $P$ needs units of $\text{density}/\text{time}$,
+            \item $A$ needs units of density.
+          \end{itemize}
+          \begin{commentary}
+          A number of people said that density had units $\text{kg}/\text{m}^3$, but we're talking about \emph{population} density: the number of individuals per area, possible per volume if we're talking fish in the ocean. Best to just leave `density' as a base unit.
+          
+          A couple of silly common mistakes: (i) saying $A$ was density squared due to the $A^2$ term (you have to root the units), (ii)
+saying $K$ had units was the inverse of density: it's on the denominator which is why not.
+          \end{commentary}
+
+        \item Letting $x=X\xh$ and $t=T\th$, substituting this into our model we have
+          \begin{equation}
+            \frac{X}{T} \fd{\xh}{\th} = RX \xh \left( 1- \frac{X\xh}{K}\right) - P\left( 1 - \exp\left[-\frac{X^2\xh^2}{\alpha A^2}\right] \right).
+          \end{equation}
+          Fixing the left-hand side first, we multiply through to get
+          \begin{equation}
+            \fd{\xh}{\th} = RT \xh \left( 1- \frac{X\xh}{K}\right) - \underbrace{\frac{PT}{X}}_{[2]} \bigg( 1 - \exp\underbrace{\left[-\frac{X^2\xh^2}{\alpha A^2}\right]}_{[1]} \bigg).
+          \end{equation}
+          Keeping our eye on the prize, we tackle term [1] first to set $X=A$.
+
+          Then we look at term [2], and set $T=A/P$. This gives us
+          \begin{equation}
+            \fd{\xh}{\th} = \frac{RA}{P}\xh\left(1-\frac{A}{K}\xh\right) - \left(1-\exp\left[-\frac{\xh^2}{\alpha}\right]\right),
+          \end{equation}
+          and so we can directly say $r=RA/P$ and $q=K/A$, giving us the nondimensionalised equation.
+
+          In conclusion,
+          \begin{equation}
+            X=A, \quad T=\frac{A}{P}, \quad r=\frac{RA}{P}, \quad q=\frac{K}{A}.
+          \end{equation}
+          
+          \begin{commentary}
+          The most common small error was to not answer the question directly: you had to write $X$, $T$, $r$ and $q$ explicitly in terms of $A$, $P$, $R$ and $K$. It helps if you summarise at the end, like we've done here. But this was mostly done very well; it's clear you got what to do.
+          \end{commentary}
+
+          %
+          %
+        \item The equation we're trying to sketch is
+          \begin{equation}
+            \fd{\hat{x}}{\hat{t}} = \underbrace{r\hat{x}\left(1-\frac{\hat{x}}{q}\right) - \bigg(1}_{\text{(i)}} \underbrace{-\exp\left[-\frac{\hat{x}^2}{\alpha}\right]}_{\text{(ii)}}\bigg),
+          \end{equation}
+
+		  This is the sum of two bits:
+		  \begin{enumerate}[label=(\roman*)]
+		  \item A logistic `unhappy quadratic', shifted down by 1. This was a problem because $\fd{\xh}{\th}=-1<0$ at $\xh=0$. (See below left.)
+		  \item The exponential term, which you might recognise as a Gaussian with standard deviation $\sqrt{\alpha}$. The standard deviation is proportional to what we might call the `width' of the Gaussian. (see below right.) Notice how, since $\alpha \ll 1$, it acts far away from the peak of the logistic. 
+		  \end{enumerate}
+		  Adding the two graphs together, then, we get
+          \begin{center}
+            \input{images/logistic.pgf}
+            \raisebox{3cm}{\;\;$\Large\boldsymbol{+}$}
+            \input{images/exponential-term.pgf}
+          \end{center}
+          which
+          \begin{center}
+          \raisebox{3cm}{$\Large\boldsymbol{=}\quad$}
+            \input{images/fixed.pgf}
+          \end{center}
+          So we can see the problem is fixed, since now $\xh=0$ is also an equilibrium.
+		  \begin{commentary}
+		  OK, so this was the question you struggled with most. The key point is the exponential decay is so rapid it essentially acts in a different bit of $\xh$ space from the quadratic, so the logistic `hill' is still there. Next we see the exponential term is net negative which is why the graph goes down. Finally you see the exponential at very very small $\xh$ is of value $1$ making the term zero, hence why $x=0$ is an equilibrium; then it rapidly looks like $1-\ep$. In an exam this would be tough-ish marks.
+		  
+		  A tip for everyone: you need to \emph{use sentences!} The question asked you to show that the problem in (b) has been fixed, so you should restate what the problem is, and explicitly state that it has been fixed (and how).
+		  \end{commentary}
+
+
+        \item Looking at the phase space, it's clear there are at least two nonzero equilibria if the top of the unhappy quadratic is positive. %The stationary points of the graph are where
+          %\begin{equation}
+          %  \fd{}{\xh}\left[\fd{\xh}{\th}\right] = r\left(1-\frac{2\xh}{q}\right) + \frac{2\xh}{\alpha} \exp\left[-\frac{\xh^2}{\alpha}\right] = 0.
+          %  \label{sp}
+          %\end{equation}
+		  %
+          
+          But you can also see there is another nonzero equilibrium near to $\sqrt{\alpha}$. You might not be able to see this in your own sketch, but mathematically we can see it has to be there because the slope of the phase space plot,
+          \begin{equation}
+            \fd{}{\xh}\left[\fd{\xh}{\th}\right] = r\left(1-\frac{2\xh}{q}\right)+\frac{2\xh}{\alpha}\exp\left[-\frac{\xh^2}{\alpha}\right],
+          \end{equation}
+          evaluated at $\xh=0$, equals $r>0$. So the slope at the origin is positive and since the function is continuous, we expect another equilibrium as the graph goes beneath the $\xh$-axis for increasing $\xh$.
+
+          Getting all three equilibria therefore requires that the top of the unhappy quadratic is positive. Since $\alpha\ll1$, the effect of the exponential is gone by the peak of the quadratic, so we can just say
+          \begin{equation}
+            0 = r\left(1-\frac{2\xh}{q}\right) \implies \hat{x}=q/2.
+          \end{equation}
+          At this value of $\xh$, we have $\fd{\xh}{\th} = rq/4-1$, as seen in the graph of the full model above. We need this to be positive, and so
+          \begin{equation}
+            \frac{rq}{4}-1>0 \implies rq>4.
+          \end{equation}
+		  \begin{commentary}
+		  Those who attempted this broadly did alright, but often weren't clear or confident in their intention. You have to take the reader on a journey so that they understand. I would be happy with the level of rigour demonstrated here. The main minor error was actually using the wrong notation for the derivative of the phase portrait: it is $\frac{\d}{\d\xh}\bigl[\frac{\d \xh}{\d \th}\bigr]$, not $\fdd{\xh}{\th}$.
+		  \end{commentary}          
+      \end{enumerate}
+
+    }
+
+    % Q3
+    \question{Interacting populations}
+    { % Question
+      The following equations represent a pair of interacting biological populations:
+      \begin{align}
+        \fd{x}{t} &= x -2y + 4,\\
+        \fd{y}{t} &= 2x + 2y -10.
+      \end{align}
+      \begin{enumerate}
+        \item{Discuss each term in the equations: what do they represent (growth? decay? interaction?). Are these meaningful equations? (`I do/don't think this is realistic because\dots')}
+        \item{Find the equilibrium of the system: state its permissibility and determine its stability. You do not need to do a formal $\epsilon$-style expansion; you can simply state a useful result from lectures to start you off. }
+        \item Take a look at table 3.1 in the online notes on Ultra. What name should we give to this equilibrium?
+      \end{enumerate}
+    }
+    { % Solution
+      \begin{enumerate}
+        \item
+          The first term of (7) is a growth term. Alone it would be
+          \begin{equation}
+            \fd{x}{t} = x
+          \end{equation}
+          which gives exponential growth. The same is true for the term $2y$ in (8). This is quite standard.
+
+          The second term in (7), $-2y$ will cause the population $x$ to decrease, presumably as the predator $y$ kills the prey. But this term has no dependence on the size of the population, $x$, unlike in Lotka--Volterra. This seems  unrealistic as it should be harder for the predator to act if the prey size $x$ is small (and vice versa if large). Similar analysis holds for the $2x$ term in (8).
+
+          Finally, the constant terms $4$ and $-10$ imply population-independent growth, maybe some kind of source or sink, like immigration or emigration.
+
+          Overall this is a bad model for a predator--prey  system.
+          
+          \begin{commentary}
+          A lot of marks were lost as people didn't explicitly describe what each term represented. When answering this kind of question, always list the terms (or mark them on an equation with colours/underbraces) and give a concise description of each term. 
+    
+    	  Also lots of people didn't comment on the fact the `interaction' terms are not really interactions: you can't have $y$ decreasing $x$ if there is no $x$, but this model does exactly that. 
+          \end{commentary}
+
+
+        \item
+            We need to solve the linear system
+            \begin{align}
+              x-2y +4 & = 0\\
+              2x +2y -10 & = 0.
+            \end{align}
+            Adding the equations we get
+            \begin{equation}
+              3x + -6 = 0 \implies x = 2
+            \end{equation}
+            which can then be used to get $y =3$. This is permissible.
+
+            The Jacobian of the system is
+            \begin{equation}
+              \t{J} =
+              \begin{pmatrix}
+                1 & -2 \\
+                2 & 2
+              \end{pmatrix},
+            \end{equation}
+            so we need to find its eigenvalues. We do so by solving
+            \begin{align}
+              \det(\t{J}-\lambda \t{I}) = 0 \implies (1-\lambda)(2-\lambda) + 4&= 0
+              \\  \implies \lambda^2-3\lambda +6  &= 0,
+            \end{align}
+            giving us
+            \begin{equation}
+              \lambda = \frac{1}{2}\left(3 \pm \i\sqrt{15}\right).
+            \end{equation}
+            So both solutions have positive real part and the system is an \textbf{unstable spiral}.
+            
+       \begin{commentary}
+          A number of people assumed it would look like actual Lotka--Volterra, but it doesn't. It's best not to assume it would; indeed the stability analysis makes it clear it's not. 
+    
+	      One could have been sharp and notice that if $x$ or $y$ are greater than their equilibrium values then $\fd{y}{t}$ is positive so you will see the instability.
+      \end{commentary}
+          
+      \end{enumerate}
+    }
+
+
+    %
+    %    % Q4
+    %    \item Consider the nonlinear ODE
+    %    \begin{equation}
+    %      \fddd{x}{t} + \fdd{x}{t} + B\left(\fd{x}{t}\right)^2 + A\tan(x) = 0,
+    %    \end{equation}
+    %    where $A$ and $B$ are constants.
+    %    \begin{enumerate}
+    %    \item{Find the equilibria of this equation.}
+    %    \item{By expanding the solution as $x = x_0 + \epsilon x_1$ and assuming exponential solutions, show that the auxiliary equation (in $\lambda$) of this system is given by
+    %    \begin{equation}
+    %      \lambda^3+\lambda^2 +A =0.
+    %    \label{eigenpoly}
+    %    \end{equation}
+    %    }
+    %    \item{Prove that if $A<0$, there is a root of (\ref{eigenpoly}) which is positive, and therefore assess the stability of the system's equilibria when $A<0$.}
+    %    \end{enumerate}
+\end{enumerate}
+
+\end{document}

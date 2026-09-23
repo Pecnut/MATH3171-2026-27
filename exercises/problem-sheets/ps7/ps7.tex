@@ -1,0 +1,158 @@
+\documentclass[a4paper,12pt]{article}
+\input{../common/preamble.tex}
+
+
+\begin{document} 
+ \newcommand{\sol}[1]{\\ \hrule\hfill \\ \textcolor{blue}{\textbf{SOLUTION:}} #1 \\ \hrule\hfill}\heading{Epiphany}{Problem sheet 7: Solutions}\setbool{show_commentary}{true}
+%\newcommand{\sol}[1]{}\heading{Epiphany}{Problem sheet 7}
+\renewcommand*{\thefootnote}{\arabic{footnote}}
+
+  This problem sheet is due in by \textbf{5pm} on \textbf{Wednesday 4 March 2026}. You may submit it on paper to my office (\textsc{mcs}\,3114) or electronically on Gradescope.
+
+\textbf{Topics covered}: Chapter 11
+\begin{enumerate}
+
+
+\item \textbf{Turing Analysis of the Brusselator}
+Consider the model,
+\begin{equation}
+\begin{aligned}
+    \pd{u}{t} &= a+u^2v-(b+1)u + \pdd{u}{x}\\
+    \pd{v}{t} &= bu-u^2v + D\pdd{v}{x},
+    \end{aligned}
+\end{equation}
+with $a,b$ positive constants, and with $u,v$ satisfying Neumann boundary conditions at $x=0,L$.
+\begin{enumerate}
+    \item Compute the homogeneous equilibrium. Show that we need
+    $$
+    b < a^2+1
+    $$
+    for this equilibrium to be stable to homogeneous perturbations (i.e.~in the absence of diffusion).
+    \sol{
+Equilibria satisfy the equations,
+$$
+a+u_0^2v_0-(b+1)u_0=0, \quad bu_0-u_0^2v_0=0.
+$$
+The second of these gives $v_0=b/u_0$. Substituting this into the first equation we have,
+$$
+a+bu_0-(b+1)u_0=a-u_0=0 \implies \boxed{u_0=a, \,\, v_0=\frac{b}{a}.}
+$$
+
+To assess stability, we compute the Jacobian which is given by,
+$$
+\m{J} = \begin{pmatrix}
+    2u_0v_0-(b+1) & u_0^2\\
+    b-2u_0v_0 & -u_0^2
+\end{pmatrix} = \begin{pmatrix}
+    b-1 & a^2\\
+    -b & -a^2.
+\end{pmatrix}
+$$
+We have that $\tr(\m{J}) = b-a^2-1$ and $\det(\m{J})=a^2>0$. Hence for stability we need a negative trace, so $b < a^2+1$.
+    } 
+    \commentary{Generally fine. Some algebraic steps should be done a bit more carefully (i.e.~arguing why $u_0=0$ is not a valid solution, since $a>0$ was missing). Importantly, you also need to show that $\det(\m{J})>0$!}  
+    \item The remaining two Turing conditions necessary for a pattern-forming instability are,
+    $$
+    G_v + DF_u>0, \quad (G_v + DF_u)^2-4D(F_uG_v-F_vG_u)>0.
+    $$
+    Evaluate these for the equilibrium found above. Use these inequalities to show that $$b>1, \quad D>\frac{a^2}{(\sqrt{b}-1)^2},$$ are the necessary condition for a Turing instability.
+    \sol{
+    Substituting in the terms of the Jacobian, the first inequality is
+    $$
+     D(b-1)>a^2 \implies D>\frac{a^2}{b-1},
+    $$
+    which, as $D>0$ and $a^2>0$, implies that we must have $b>1$. The second inequality is
+    $$
+    (D(b-1)-a^2)^2-4Da^2>0,
+    $$
+    which expands to
+    $$
+    D^2(b-1)^2-2D(b+1)a^2+a^4>0,
+    $$
+    which can be thought of as a quadratic inequality in $D$. Solving this via the quadratic equation (and picking the larger of the two roots), we then need,
+    $$
+    D > \frac{a^2}{(\sqrt{b}-1)^2}.
+    $$
+    This inequality is larger than the first one, and so is our desired condition on $D$. There are a few reasons we can use to discard the smaller root, the main one being that it will violate the first condition derived above.
+    }\commentary{Generally done well, but a few comments:
+    \begin{itemize}
+        \item Many students did not show that $b>1$, which was asked for (and is needed to arrive at the second inequality).
+        \item Several students automatically chose the positive root for $D$ but did not explain why. Remember, mathematics is about storytelling!
+        \item Both conditions should be analyzed to explain what is happening; several students skipped to just using the second condition (but then missed $b>1$) causing the explanation to be incomplete. It is important to use both conditions and see which is more restrictive on the range of $D$.
+    \end{itemize} }  
+    \item \emph{Optional} Take a look at the top of the page at \url{https://visualpde.com/mathematical-biology/brusselator} to test this instability condition. For $a=2$, $b=3$, what happens to the solution as $D$ decreases below this threshold? Try instead setting $b=3$, $D=8$, and decreasing $a$. What happens to the patterns as $a$ becomes very small? Why? \commentary{TODO}  
+\end{enumerate}
+\item{
+\textbf{Turing Analysis of a Type III Functional Response Predator-Prey Model} \quad 
+Consider the predator-prey model,
+\begin{equation}
+\begin{aligned}
+    \pd{u}{t} &= u(1-u) - \frac{avu^2}{1+bu^2} + \pdd{u}{x}\\
+    \pd{v}{t} &= -cv + \frac{avu^2}{1+bu^2}+ D\pdd{v}{x},
+    \end{aligned}
+\end{equation}
+where all parameters are positive, and we have chosen a timescale such that $D$ represents the ratio of diffusion parameters. We consider the spatial domain $x \in [0,L]$ with Neumann boundary conditions.
+\begin{enumerate}
+    \item Find the three biologically feasible spatially homogeneous equilibria of this model. Hint: First consider equilibria with $v_0=0$, and then any which satisfy $v_0 \neq 0$.
+    \sol{The equilibria satisfy:
+    \begin{equation}
+\begin{aligned}
+    0= u_0(1-u_0) - \frac{av_0(u_0)^2}{1+b(u_0)^2} \\
+    0= -cv_0 + \frac{av_0(u_0)^2}{1+b(u_0)^2}.
+    \end{aligned}
+\end{equation}
+If we set $v_0=0$, then either $u_0=0$ or $u_0=1$, so two of the equilibria are given by $(0,0)$ and $(1,0)$. 
+
+For the third equilibrium, we can divide the first equation by $u_0$ and solve for $v_0$ to find,
+$$
+v_0 = \frac{(1-u_0)(1+b(u_0)^2)}{au_0}.
+$$
+\textbf{Alternatively:} We can subtract the second equation from the first to find:
+$$
+u_0(1-u_0)-cv_0=0 \implies v_0 = \frac{u_0(1-u_0)}{c}.
+$$
+These expressions appear different but at the steady state we find below for $u_0$, turn out to give the same value for $v_0$.
+
+To find $u_0$, we could substitute either of these expressions into the second equation and rearrange, or we can instead recognize that since we assume $v_0 \neq 0$, we can divide the second equation by $v_0$ to find,
+$$
+-c + \frac{a(u_0)^2}{1+b(u_0)^2} = 0 \implies (a-cb)(u_0)^2-c =0 \implies u_0 = \sqrt{\frac{c}{a-cb}},
+$$
+where we have only considered the positive root as the negative solution is not biologically feasible. Additionally, we need $a > cb$ for this state to be feasible. We also need $u_0<1$ for $v_0$ to be positive, which implies $a-cb > c$ so $a > c(1+b)$, which is a stricter condition than the one found above.
+}\commentary{Almost no one had trouble computing the equilibria, though this was substantially easier to do if you wrote $v_0$ in terms of $u_0$ as above. However, very few students correctly explained when the third equilibrium was feasible, as is implied by the question asking about feasibility. Remember that this requires that both $u_0$ and $v_0$ are not negative.}  
+\item Which of these steady states does it make sense to consider for a diffusion-driven instability? Hint: Consider what an initial inhomogeneous perturbation would look like for each case, and determine if any of these are physically unrealistic.
+\sol{For any steady state with $v_0=0$, spatial oscillations would lead to non-physical values of $v_0$, and hence only the third equilibrium would make sense for a diffusion-driven instability.}\commentary{Many correct answers here, though a few misunderstandings about what this question is asking. This was intended to just be a short question assessing if you understood what Turing unstable solutions ``looked-like" in terms of their form in time and space. If you look at perturbations to $v_0=0$, these will be of the form of cosines, which then indicate negative population for some values of $x$.}  
+\item For the equilibrium which can in principle exhibit a diffusion-driven instability, compute the Jacobian matrix and show that we need
+$$
+1 < 2u_0 + 2\frac{1-u_0}{1+bu_0^2}
+$$
+for this equilibrium to be stable in the absence of diffusion. Hint: Do not plug in the values for the steady state, but instead write any instability conditions in terms of $u_0$ alone. Can you immediately spot simplifications of any terms in the Jacobian matrix?
+\sol{The Jacobian matrix is:
+$$
+\m{J}(u_0,v_0) = \begin{pmatrix}
+1-2u_0 - \frac{2av_0 u_0}{(1+b(u_0)^2)^2} & - \frac{a(u_0)^2}{1+b(u_0)^2}\\ \frac{2av_0 u_0}{(1+b(u_0)^2)^2} & -c + \frac{a(u_0)^2}{1+b(u_0)^2}
+\end{pmatrix}.
+$$
+While this looks quite grisly, we can see that the bottom-right component is exactly the equation we had for $u_0$, and hence must be $0$. Hence we actually have that $\det(\m{J})>0$ without computing any of the terms, as the  off-diagonal terms are negative and positive respectively. That is, 
+$$
+\m{J}(u_0,v_0) = \begin{pmatrix}
+1-2u_0 - \frac{2av_0 u_0}{(1+b(u_0)^2)^2} & - \frac{a(u_0)^2}{1+b(u_0)^2}\\ \frac{2av_0 u_0}{(1+b(u_0)^2)^2} & 0
+\end{pmatrix} \implies \det(\m{J}) =  \frac{2a^2(u_0)^3v_0}{(1+b(u_0)^2)^3}>0.
+$$
+
+To satisfy the condition $\tr(\m{J})<0$, we must have 
+$$
+1 < 2u_0 + \frac{2av_0 u_0}{(1+b(u_0)^2)^2} = 2u_0 + 2\frac{1-u_0}{1+bu_0^2},
+$$
+which must be satisfied alongside $a>c(b+1)$ (the permissibility requirement).
+}\commentary{Very few issues getting to the condition on the trace, but many students did not actually show that this was the right condition for stability. Remember that you need both $\tr(\m{J})<0$ and $\det(\m{J})>0$ to ensure stability!}  
+\item Can any equilibria for this system exhibit a Turing instability? Why or why not?
+\sol{As the other two equilibria are unphysical to consider Turing instabilities around (from part (b)), we only need to consider the third equilibrium analyzed above. In this case, as the bottom-right component of the Jacobian is zero, we immediately have that this system cannot exhibit a Turing instability. The requirements of the sign structure of the Jacobian are strict positive or negative values at the equilibrium. So a zero means that if the homogeneous equilibrium is stable in the absence of diffusion, it must remain stable even with diffusion.
+
+Hence, none of these equilibria can exhibit a Turing instability.
+
+\textbf{Alternatively:} As the $G_v$ element of the Jacobian is zero, it is impossible to satisfy the first and the third Turing condition as they would require $F_u=-1<0$ and $F_u=-1>0$.}\commentary{Generally good answers, though some confusion about what was meant to be shown. Telling a story here overall is the main point, so referring to part (b) and then disqualifying the third equilibrium (either by directly showing the conditions can't be satisfied, or stating something about the sign structure) was the ideal answer.}  
+\end{enumerate}
+}\end{enumerate}
+
+    
+\end{document}

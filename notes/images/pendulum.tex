@@ -1,0 +1,47 @@
+\tikzset{every picture/.style={thick}}
+\begin{tikzpicture}
+    \node (pivot) at (0,0) {};
+    \fill[black] (-0.2,-0.2) rectangle (0.2,0.2);
+    
+    \node (pivotvertical) at (0,-2.5) {};
+    \draw[dashed] (pivot) -- (pivotvertical);
+    \node (anglelabel) at (0.25,-1) {$\theta$};
+    
+    \draw ([shift=(-90:1.6cm)]0,0) arc (-90:-63.5:1.6cm);
+        
+    \node (bead) at (2,-4) {};
+    \node[anchor=west] (beadlabel) at (1.1,-2) {$\ell$};
+    
+    \draw (pivot) -- (bead);
+    
+    \node (beadT) at (1.5,-3.0) {};
+    \node[anchor=west,color=C2] at (1.6,-3.0) {$T$};
+    \draw[-{>[scale=2,length=4,width=4]},color=C2] (bead) -- (beadT);
+    
+    \node (beadWd) at (2,-5.12) {};
+    \node[anchor=north,color=C1] at (2,-5.12) {$mg$};
+    \draw[-{>[scale=2,length=4,width=4]},color=C1] (bead) -- (beadWd);    
+    
+    \node (beadWd) at (2.5,-5.0) {};
+    \node[anchor=west,color=C1] at (2.5,-5.0) {};
+    \draw[dashed] (bead) -- (beadWd);    
+    
+    \node (secondanglelabelpoint) at (1.9,-4.5) {};
+    \draw ([shift=(-90:0.6cm)]2,-4) arc (-90:-63.5:0.6cm);
+    \node[anchor=west] (secondanglelabel) at (2.8,-4) {};
+    \node[anchor=west] (secondanglelabeltwo) at (2.7,-4) {$\theta$};
+    \draw[] (secondanglelabelpoint) to[out=45,in=225] (secondanglelabel);   
+    
+    %\node (beadWl) at (1,-4.5) {};
+    %\node[anchor=east,color=C1] at (1,-4.5) {$mg\sin\theta$};
+    %\draw[-{>[scale=2,length=4,width=4]},color=C1] (bead) -- (beadWl);     
+    
+    \node (beadFr) at (1,-4.5) {};
+    \node[anchor=east,color=C0] at (1,-4.5) {$\text{friction}=\nu\ell\displaystyle\fd{\theta}{t}$};
+    %\draw[-{>[scale=2,length=4,width=4]}] (bead) -- (beadFr);   
+    \draw[-{>[scale=2,length=4,width=4]},color=C0] (bead) -- (beadFr);          
+    
+    \fill[black] (bead) circle (0.2);
+        
+    %\draw (pivot) -- (bead);
+\end{tikzpicture}

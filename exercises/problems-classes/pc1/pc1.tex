@@ -1,0 +1,283 @@
+\documentclass[a4paper,12pt]{article}
+\input{../common/preamble.tex}
+\setbool{show_question}{true}
+\setbool{show_solution}{false}
+\begin{document}
+%
+\heading{Michaelmas}{Problems class 1\solutioninheading}
+
+\begin{enumerate}[label={\bf \arabic{*}.\;}, ref={\arabic{*}},itemsep=3ex, left=0ex]
+
+    \question{A simple epidemic model}
+    { % Question
+      Consider a population which is either susceptible ($S$) or infected ($I$) with a disease.
+      \begin{enumerate}[label=(\alph*)]
+        \item We assume that the total population, $N$, is constant. Given the population is either susceptible or infected, write down a simple equation for $N$.
+        \item Infected people infect susceptible people by interacting with them. By considering how we represented interactions between greenflies and ladybirds, write down an equation for $\fd{I}{t}$ in terms of $I$ and $S$.
+        \item By substituting in $N$, eliminate $S$ from this equation and show that
+        \begin{equation}
+        	\fd{I}{t} = \beta I (N-I).
+        \end{equation}
+        Do you recognise this type of model from chapter 1?
+        \item Find the equilibria of this model for $I$, establish when they are permissible, and assess their stability. You can assess the stability either graphically, or by doing an algebraic linear stability analysis (with $\ep$ etc.)
+        \item What does this mean for the spread of the disease? 
+      \end{enumerate}
+    }
+    { % Solution
+      \begin{enumerate}[label=(\alph*)]
+        \item $N = S + I$
+        \item $\fd{I}{t} = \beta I S$, where $\beta > 0$.
+        \item $\fd{I}{t} = \beta I (N-I)$. This is a logistic model.
+        \item The equilibria are where $\fd{I}{t} = 0$, i.e.\ $I=0,N$ (no-one or everyone).
+
+          To assess their stability, we can use two methods.
+          \paragraph{Method I: Graphical analysis}
+          Graphical analysis of the phase plane is really convenient, but often it requires us to make assumptions about the signs of our constants which we have to be careful to be explicit about. This isn't something to catch you out! Look here, where we've plotted the phase plane ($\fd{I}{t}$ against $I$):
+
+          \begin{center}%
+            \input{images/logistic-growth-deriv.pgf}
+          \end{center}%
+
+          This is the shape of the graph assuming $\beta>0$ and $N>0$. These are part of our model choices, so that's OK. The graph allows us to see instantly that $0$ is unstable, and $N$ is stable.
+
+          \paragraph{Method II: Formal linear stability analysis}
+          Let $I = I_0 + \epsilon I_1$. Then
+          \begin{equation}
+            \epsilon\fd{I_1}{t} = \beta(I_0 + \epsilon I_1)(N - I_0 - \epsilon I_1).
+          \end{equation}
+
+          For $I_0 = 0$:
+          \begin{equation}
+            \epsilon\fd{I_1}{t} = \beta\epsilon I_1 N
+          \end{equation}
+          to order $\epsilon$, giving us
+          \begin{equation}
+            I_1 = A\e^{\beta N t}.
+          \end{equation}
+          Since $\beta N > 0$, this is unstable.
+
+          For $I_0 = N$:
+          \begin{equation}
+            \epsilon\fd{I_1}{t} = -\beta N \epsilon I_1
+          \end{equation}
+          to order $\epsilon$, which is asymptotically stable. Given that this is a logistic map, we sort of knew this anyway.
+
+          \item What this means for the disease is that it spreads without bound so long as $\beta > 0$.
+
+
+      \end{enumerate}
+
+    }
+
+    \question{A slightly less simple epidemic model}
+    { % Question
+      More realistic is to keep what we have so far, but also to allow a proportion of the infected population to recover, after which they become susceptible again. We continue to assume that $N$ is constant, so the same equation for $N$ from question 1 applies.
+      \begin{enumerate}[label=(\alph*)]
+        \item Write down a new equation for $\fd{I}{t}$ in terms of $I$ and $S$. Once again substitute in $N$ to remove $S$ from this equation, and show that
+        \begin{equation}
+        	\fd{I}{t} = I[\beta(N-I)-\gamma].
+        \end{equation}
+        \item Find the equilibria of this model for $I$, establish when they are permissible, and assess their stability. Show that the disease spreads if $R_0 > 1$, where $R_0$ is a ratio of terms you will find.
+        \item By considering the units of the terms in the definition of $R_0$, convince yourself that it is dimensionless.
+      \end{enumerate}
+      Congratulations! You have found our first definition of the famous $R_0$. This term is known as the basic reproductive ratio, and as we heard plenty of in the news during the peak of the pandemic crisis, can be interpreted as the average number of susceptible people that an infected person infects in a disease-free population of size $N$.
+    }
+    { % Solution
+      \begin{enumerate}[label=(\alph*)]
+        \item This time,
+          \begin{align}
+            \fd{I}{t} &= \beta I S - \gamma I\\
+            &= I(\beta(N-I) - \gamma),
+          \end{align}
+          where $\beta,\gamma > 0$.
+        \item The equilibria are where $\fd{I}{t} = 0$, i.e.\ $I = 0, N-\gamma/\beta$. The second equilibrium is permissible if $N-\gamma/\beta > 0$, i.e.\ $\beta N/\gamma > 1$.
+
+          To assess their stability, we once again have two methods.
+
+          \paragraph{Method I: Graphical analysis}
+          Once again we can plot the phase plane: $\fd{I}{t}$ v $I$. Let's be careful, because a priori either of these phase planes are possible, depending on whether $N-\gamma/\beta \gtrless 0$:
+
+          \begin{center}%
+            \scalebox{0.9}{\input{images/sis-phase-1.pgf}}\quad
+            \scalebox{0.9}{\input{images/sis-phase-2.pgf}}
+          \end{center}%
+
+          We can see:
+          \begin{itemize}
+            \item If $N-\gamma/\beta > 0$, then the graphical analysis says both equilibria are permissible; $I=0$ is unstable; and $I=N-\gamma/\beta$ is stable.
+            \item If $N-\gamma/\beta < 0$, then only the zero equilibrium is permissible, and the graphical analysis (which still works for negative populations, even if it is meaningless in the real-world context of the model) tells us $I=0$ is stable.
+          \end{itemize}
+          Introducing $R_0 = \beta N/\gamma$, this gives us:
+          \begin{itemize}
+            \item If $R_0 > 1$, there are two equilibria and the disease spreads (away from $I=0$).
+            \item If $R_0 < 1$, only the zero-infection equilibrium exists and the disease dies out.
+          \end{itemize}
+
+          \paragraph{Method II: Formal linear stability analysis}
+          \begin{equation}
+            \epsilon\fd{I_1}{t} = (I_0 + \epsilon I_1)\left[ \beta(N-I_0-\epsilon I_1) - \gamma \right].
+          \end{equation}
+
+          For $I_0 = 0$:
+          \begin{equation}
+            \epsilon\fd{I_1}{t} = \epsilon I_1[\beta N - \gamma]
+          \end{equation}
+          to order $\epsilon$, giving us
+          \begin{equation}
+            I_1 = A\e^{(\beta N - \gamma) t}.
+          \end{equation}
+          This is unstable if $\beta N - \gamma > 0$, i.e.\ $R_0 = \beta N/\gamma > 1$.
+
+          For $I_0 = N-\gamma/\beta$,
+          \begin{equation}
+            \epsilon \fd{I_1}{t} = -\epsilon I_1 [\beta N - \gamma]
+          \end{equation}
+          to order $\epsilon$, giving us
+          \begin{equation}
+            I_1 = A\e^{-(\beta N-\gamma)t}.
+          \end{equation}
+          If $R_0 > 1$ (also the condition for this equilibrium to be permissible), this is stable.
+
+          We can conclude that:
+          \begin{itemize}
+            \item If $R_0 > 1$, there are two equilibria and the disease spreads (away from $I=0$).
+            \item If $R_0 < 1$, only the zero-infection equilibrium exists and the disease dies out.
+          \end{itemize}
+
+        \item $R_0 = \beta N/\gamma$. Looking at our equation for $\fd{I}{t}$, which has units $1/T$ (for $T$ time), $\gamma$ must have units $1/T$ and $\beta$ units of inverse time and density (or size). Finally since $N$ is the total population size or density we see we have no units for $R_0$.
+      \end{enumerate}
+
+    }
+
+    \question{Quick sanity check}
+    { % Question
+      Take a look at the government slides from May 2020 in \cref{gov-slides}, where $R_0$ is represented by $R$. Given what we have just learnt about $R_0$, make a quick critique of these slides.
+
+      \begin{figure}
+        \centering
+        \includegraphics[width=0.48\textwidth]{images/r_plus}
+        \includegraphics[width=0.48\textwidth]{images/r_dial}
+        \caption{Government slides from coronavirus briefing, 10 May 2020}
+        \label{gov-slides}
+      \end{figure}
+    }
+    { % Solution
+      Some obvious things here: it makes no sense to add $R_0$ to the number of infections, and the dial on the right suggests that there is a maximum and minimum $R_0$.
+    }
+
+    \question{The SIR model}
+    { % Question
+      We now move to the popular SIR disease model. This model separates the recovered population into a new group, $R$, assuming that they have become immune and therefore are no longer susceptible. The total population remains constant.
+
+      \begin{enumerate}[label=(\alph*)]
+        \item Write down equations for $\fd{S}{t}$, $\fd{I}{t}$, $\fd{R}{t}$ and $N$.
+        \item So far, we haven't added birth and natural (non-epidemic) death to our model ($N$ has been constant). In what sort of situation might this be a reasonable choice?
+        \item Given your equation for $N$, confirm that in your model, the total population is constant (i.e.\ that $\fd{N}{t} = 0$).
+        \item Find all equilibria of the system. Is it/are they asymptotically stable? (Hint: pay close attention to our three possible cases at the end of section 2.2.)
+        \item By combining two of your equations, find $S$ as a function of $R$ and hence demonstrate that this model predicts some individuals will always avoid infection if $S(0)>0$.
+        \item Solutions for the infected population, $I$, either show monotonic decay or rise and have a peak infection value before decaying to the equilibrium $I=0$. Demonstrate that the criteria for the disease reaching a peak, i.e.\ that $I$ ever rises, is that
+          \begin{equation}
+            R_0>\frac{N}{S(0)}.
+          \end{equation}
+      \end{enumerate}
+    }
+    { % Solution
+      \begin{enumerate}[label=(\alph*)]
+        \item We have
+          \begin{align}
+            \fd{S}{t} &= - \beta I S, \\
+            \fd{I}{t} &= \beta I S - \gamma I,\\
+            \fd{R}{t} &= \gamma I, \\
+            N &= S + I + R.
+          \end{align}
+
+        \item This choice is reasonable if the epidemic moves quite quickly.
+
+        \item Adding the derivatives,
+          \begin{equation}
+            \fd{N}{t} = \fd{S}{t} + \fd{I}{t} + \fd{R}{t} = -\beta I S + \beta I S - \gamma I + \gamma I = 0.
+          \end{equation}
+
+        \item The equilibria ($\fd{S}{t} = \fd{I}{t} = \fd{R}{t} = 0$) only happen when $I=0$. In which case, $S = S_0$, frankly anything, and $R = N-S_0$. So we see there is a one-parameter family of equilibria, $(S_0,0,N-S_0)$, where  $S_0\in[0,N]$. It cannot be asymptotically stable as there is a nearby equilibrium always (it is a one-parameter family of equilibria). This is listed under the degenerate case in the notes.
+
+        \item We divide the rate equations for $S$ and $R$ to obtain
+          \begin{equation}
+            \fd{S}{R} = \frac{-\beta S}{\gamma}.
+          \end{equation}
+          The solution is clearly an exponential,
+          \begin{equation}
+            S(t) = S(0)\e ^{-(\beta/\gamma)R} = S(0)\e ^{-R_0 R/N} \geq  S(0)\e ^{-R_0}.
+          \end{equation}
+          Now, since $R_0$ is a positive constant, $S(t)$ is bounded from below. The smaller $R_0$, the larger this bound is as a fraction of the initial population (which makes sense since smaller $R_0$ means people are recovering relatively quickly compared to the rate of infection).
+        \item
+
+          Take the equation for $I$, which can be written as
+          \begin{equation}
+            \fd{I}{t} = I[\beta S - \gamma].
+          \end{equation}
+          Note that, since $S$ is monotonically decreasing, the maximum value this rate can take is at $t=0$. Thus for the solution to rise we would need
+          \begin{equation}
+            \beta S(0) - \gamma > 0,
+          \end{equation}
+          giving the required condition.
+
+      \end{enumerate}
+
+    }
+
+    %\section{Population dynamics SIR model}
+    %Consider the following dynamic system for the development of a disease developing in a population $N(t)$. The population is split into three compartments: susceptible individuals, $S(t)$, infected individuals, $I(t)$, and recovered individuals, $R(t)$:
+    %\begin{subequations}
+    %\begin{align}
+    %\fd{S}{t} &= -\frac{\beta I S}{N},\\
+    %\fd{I}{t} &= \frac{\beta I S}{N}-\alpha I,\\
+    %\fd{R}{t} &= \alpha I,\\
+    %N&=S + I + R.
+    %\end{align}
+    %\end{subequations}
+    %where $\alpha,\beta$ are positive real constants.
+    %\begin{enumerate}[label=(\alph*)]
+    %\item{Describe the interpretation of the terms on the right-hand side of the model.
+    %}\item{
+    %Demonstrate that the total population is constant.
+    %}\item{
+    %Find all equilibria of the system and assess if it/they are asymptotically stable.
+    %}
+    %\item{
+    %Describe the physical interpretation of the so-called basic reproduction number $R_0= \beta/\alpha$.
+    %}
+    %\item{
+    %Find $S$ as a function of $R$ and hence demonstrate that  this model predicts some individuals will always avoid infection if $S(0)>0$.
+    %}\item{
+    %Solutions for the infected population either show monotonic decay or rise and have a peak infection value before decaying to equilibrium $I=0$. Demonstrate that the criteria for the disease reaching a peak is that
+    %\begin{equation}
+    %R_0>N/S_0.
+    %\end{equation}
+    %}
+    %\end{enumerate}
+    %
+    %Consider now the following extension of the basic SIR model, which includes both birth and death. This makes it more appropriate for the long term development of a disease:
+    %\begin{subequations}
+    %\begin{align}
+    %\fd{S}{t} &=\mu(N-S) -\frac{\beta I S}{N},\\
+    %\fd{I}{t} &= \frac{\beta I S}{N}-\alpha (I+\mu),\\
+    %\fd{R}{t} &= \alpha I-\mu R,\\
+    %N&=S + I + R,
+    %\end{align}
+    %\end{subequations}
+    %where $\mu$ is the constant birth/death rate of the population.
+    %
+    %\begin{enumerate}[label=(\alph*),resume]
+    %\item{Show, by solving the system rather than by direct substitution, that the following $(S,I,R)$ are the equilibria of the system:
+    %\begin{equation}
+    %(N,0,0),\quad \left(\frac{N}{R_0},\frac{\mu N(R_0-1)}{\beta},\frac{\alpha N(R_0-1)}{\beta}\right),
+    %\end{equation}
+    %where $R_0 =\beta/(\alpha +\mu)$ is again the basic reproduction number. The second equilibrium is the endemic equilibrium in which the diseases persists in the population, like influenza and likely Covid-19.
+    %}\item{
+    %Perform a linear stability analysis of these equilibria to show that if $R_0>1$ then the disease is endemic, and if $R_0<1$ it dies out.
+    %}
+    %\end{enumerate}
+
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,48 @@
+<script>
+	window.MathJax = {
+		tex: {
+			tags: "ams",
+			mathStyle: "ISO",
+			macros: {
+				bm: ["{\\boldsymbol #1}", 1],
+				mathbfit: ["{\\boldsymbol #1}", 1],
+				mathsfbfit: ["\\mathbfsfit{#1}", 1],
+				uline: ["{\\underline{#1}}", 1],
+				tcboxmath: ["#1", 1],
+			},
+			packages: {
+				'[+]': ['html',
+					'siunitx', // Custom extension based on CLP's https://github.com/limefrogyank/siunitx-pcc/pull/29
+					'gensymb', 'color', 'html', 'cancel']
+			},
+		},
+		startup: {
+			ready: () => {
+				MathJax.startup.defaultReady();
+				MathJax.startup.promise.then(() => {
+					console.log('About to start numbering');
+					doNumbering();
+				});
+			}
+		},
+		loader: {
+			paths: {
+				custom: './pandoc/' // Defines the [custom] path below
+			},
+			load: ['[tex]/html',
+				'[custom]/siunitx.js', // Custom extension based on CLP's https://github.com/limefrogyank/siunitx-pcc/pull/29
+				'[tex]/gensymb',
+				'[tex]/color',
+				'[tex]/cancel']
+		},
+
+		options: {
+			menuOptions: {
+				settings: {
+					enrich: false // Can be enabled manually but off by default for performance
+				}
+			}
+		}
+
+	};
+</script>

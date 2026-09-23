@@ -1,0 +1,142 @@
+\documentclass[a4paper,12pt]{article}
+\input{../common/preamble.tex}
+
+
+\begin{document} 
+\newcommand{\sol}[1]{\\ \hrule\hfill \\ \textcolor{blue}{\textbf{SOLUTION:}} #1 \\ \hrule\hfill}\heading{Epiphany}{Problem sheet 8: Solutions}\setbool{show_commentary}{true}
+%\newcommand{\sol}[1]{}\heading{Epiphany}{Problem sheet 8}
+\renewcommand*{\thefootnote}{\arabic{footnote}}
+
+  This problem sheet is due in by \textbf{5pm} on \textbf{Wednesday 18 March 2026}. You may submit it on paper to my office (\textsc{mcs}\,3114) or electronically on Gradescope.
+
+\textbf{Topics covered}: Chapters 12-13
+
+
+\begin{enumerate}
+
+\item \textbf{Chemotaxis in a Petri dish} \quad 
+A chemotactic bacteria is kept in a circular Petri dish, and moves according to self-generated gradients of a chemoattractant. A model for this on the timescale neglecting bacterial growth or death is given by
+\begin{align*}
+        \pd{n}{t} &= D\nabla^2 n - \vnabla \cdot (g(n,c)\vnabla c),\\
+        \pd{c}{t} &= \nabla^2 c + f(n) - ac,
+\end{align*}
+where $a,D$ are positive parameters, and the solution is solved in the domain (using polar coordinates $(r,\theta)$) $0 \leq r \leq R$ and $0 \leq \theta < 2\pi$. We assume both species satisfy no-flux conditions on the domain boundary $r = R$.
+\begin{enumerate}
+    \item Give a biological interpretation to the parameters as well as the two arbitrary functions. 
+    \sol{
+        $D$ is a ratio of diffusion coefficients (cell population to chemoattractant), $a$ is a decay rate of the chemoattractant, $g$ is the response of the cell population to the chemoattractant, and $f$ is the production of $c$ by the cells. 
+}\commentary{Broadly done well. Note that $D, f, g, h$ all have some units of 1/time, which are `rates.' Similarly, note that the diffusion constant $D$ is partially non-dimensionalized in that the space variable has been scaled such that $c$ has a diffusion rate of 1. This isn't crucial, but is a slightly more nuanced understanding of how these terms can be interpreted.}  
+    \item Is the no-flux boundary condition on both species the same as Neumann boundary conditions? Clearly show why or why not.
+    \sol{
+    Yes. We have,
+    $$
+    \underbrace{D\pd{n}{r}-g(n,c)\pd{c}{r}=0, \quad \pd{c}{r}=0}_{\textrm{No-flux}} \iff \underbrace{D\pd{n}{r}=0, \quad \pd{c}{r}=0}_{\textrm{Neumann}},
+    $$
+    as the equivalence we want to show, with all quantities evaluated at the boundary $r=R$. The $\impliedby$ direction is direct, whereas the $\implies$ direction just requires noticing that the no-flux term on $c$ forces the no-flux term on $n$ to imply Neumann boundary conditions on $n$.
+    }\commentary{Quite a few conceptual errors here. It is important to just explain in words and a few symbols why one set of boundary conditions implies the other, and vice-versa. In general, no-flux conditions will not be the same, but in this case they are the same due to no-flux on $c$ simplifying the flux of $n$.}  
+    \item Find all spatially homogeneous equilibria of this model, and state any conditions necessary for these equilibria to be stable in the absence of transport terms. NB: perturbation growth rates with $\lambda=0$ in this model can be considered as stable, as corresponding perturbations will change the total mass of the system.
+    \sol{
+    Homogeneous steady states satisfy $f(n_0) - ac_0=0$, but we do not have a second equation and so this is true for any value of $n_0 \geq 0$. 
+
+    Linearizing about such a steady state we find the Jacobian,
+    $$
+    \m{J} = \begin{pmatrix}
+        0 & 0\\ f'(n_0) & -a
+    \end{pmatrix},
+    $$
+    and hence the growth rates of perturbations are $\lambda=0, -a$. Hence any such equilibrium is stable except for perturbations that change the total mass of cells.
+    }\commentary{Generally fine solutions. It can help to explain that there are infinitely-many equilibria given by some $n_0\geq 0$, and they are all stable in the sense that if you perturb only $c_0$, those perturbations will decay. Perturbations in $n_0$ will change its value, but they won't grow or decay.}  
+    \item Linearise the PDE system, and determine an equation for the growth rates of a perturbation, $\lambda_k$, in terms of spatial eigenvalues $\rho_k$ of the Laplacian (you do not need to solve for $\lambda_k$ but should have an explicit algebraic equation that it satisfies). 
+    \sol{
+Perturbations $(n_1,c_1)$ satisfy the linear system: 
+    \begin{align*}
+            \pd{n_1}{t} &= D\nabla^2 n_1 -  (g(n_0,c_0)\nabla^2 c_1),\\
+            \pd{c_1}{t} &= \nabla^2 c_1 + f'(n_0)n_1 - ac_1.
+    \end{align*}
+    Substituting in $(n_1,c_1) \propto \exp(\lambda_k t) w_k(r,\theta)$, and dividing out this factor, we find that the $\lambda$ are eigenvalues of the matrix:
+    $$
+    \m{M} = \begin{pmatrix}
+    -D\rho_k & g(n_0,c_0) \rho_k\\
+    f'(n^*)& -\rho_k - a 
+    \end{pmatrix},
+    $$
+    So that $\lambda_k$ satisfies the quadratic: 
+    $$
+    \lambda_k^2 +((D+1)\rho_k+a)\lambda_k +(D\rho_k^2+aD\rho_k-g(n_0,c_0)\rho_kf'(n_0)) = 0.
+    $$
+    Alternatively, these terms can be written as the trace and determinant of $\m{M}$.
+    }\commentary{This was done rather well by most people who attempted it. }  
+    \item (Optional) What equation and boundary conditions determine the spatial eigenvalues $\rho_k$? You do not need to solve this spatial eigenvalue problem, but should describe (in words or pictures) what kinds of functions satisfy it.
+    \sol{
+    The spatial eigenvalue problem reads:
+    $$
+    \nabla^2 w_k + \rho_k w_k = 0,
+    $$
+    which has solutions in terms of $\sin$ and $\cos$ in the $\theta$ direction, and Bessel functions in the $r$ direction. The radial component has to satisfy Neumann boundary conditions, which are used to determine the value of $\rho_k$.
+    }
+\end{enumerate}
+\item{
+\textbf{Colony Formation in an Ambush Predator-Prey System} \quad 
+Consider the following reaction-advection-diffusion system,
+\begin{equation}
+\begin{aligned}\label{ambush_model}
+    \pd{u}{t} &= u(1-u)-uv + \nabla^2{u} - \alpha \vnabla \cdot \left(u\vnabla v \right) \\
+    \pd{v}{t} &= -cv+uv +  D\nabla^2v,
+    \end{aligned}
+\end{equation}
+where all parameters are positive, and we have chosen a timescale such that $D$ represents the ratio of diffusion parameters. The term involving $\alpha$ represents movement of the prey species $u$ \emph{towards} the predator, so that it is attracted to the predator. This occurs in nature for many examples of \emph{ambush} predators, as noted in the lecture notes.
+
+\begin{enumerate}
+    \item Compute the homogeneous equilibrium where both species coexist, and determine any conditions necessary for its feasibility and stability. Can this Jacobian satisfy the Turing conditions if we only had reaction and diffusion (that is, if $\alpha=0$)?
+    \sol{For both species to exist we need $u_0\neq0$ and $v_0\neq 0$ so we have that an equilibrium must satisfy,
+    $$
+    1-u_0-v_0 = 0, \quad -c + u_0=0,
+    $$
+    hence $u_0=c$ and $v_0=1-c$ is our coexistence state.
+    
+    The Jacobian at this steady state is given by,
+    $$
+    \m{J} = \begin{pmatrix} 1-2u_0-v_0 & -u_0 \\ v_0 & -c + u_0    \end{pmatrix} = \begin{pmatrix} -c & -c \\ 1-c & 0    \end{pmatrix}.
+    $$
+    To have $v_0>0$ we need $c<1$. This is also exactly the condition we need for stability -- one way to quickly see this is to note that $\tr(\m{J}) = -c<0$ (which is always satisfied) and $\det(\m{J}) = c(1-c)>0$ if $c < 1$.
+    
+    As the Jacobian has a zero, it cannot satisfy the Turing conditions. Hence if there is any pattern formation in the system, we will require $\alpha\neq 0$.}\commentary{Remember that in the purely reaction-diffusion case, you have constraints on the Jacobian that can ever satisfy the Turing conditions (Section 11.3). These can be quoted directly.}  
+    \item In the lecture notes we derived the following two necessary conditions for diffusion-driven (Turing) instability in cross-diffusion systems:
+    $$
+        d_1G_v + d_4F_u > d_2G_u+d_3F_v, 
+    $$
+    $$(d_1G_v + d_4F_u-d_2G_u-d_3F_v)^2>4(d_1d_4-d_2d_3)(F_uG_v - F_vG_u).
+    $$
+    Write the functions $d_i$ for the system \eqref{ambush_model}, and hence find conditions for this system to admit Turing instabilities. Simplify these conditions to find that the parameters need to satisfy,
+        $$
+     \alpha >\frac{D}{1-c}+2\sqrt{\frac{D}{c(1-c)}}
+    $$
+    and briefly interpret how $\alpha$ and $D$ influence the system's ability to form patterns.
+    \sol{We have already computed the Jacobian evaluated at the steady state. If we linearize the system, using the notation from the lectures we find,
+    $$
+    d_1 = 1, \quad d_2 = -\alpha u_0 = -\alpha c, \quad d_3 = 0,\quad  d_4 = D.
+    $$
+    This leads to the following two conditions for instability:
+    $$
+         -Dc > -\alpha c(1-c), \quad  ( -Dc+\alpha c(1-c))^2>4Dc(1-c)
+    $$
+    Simplifying these we have,
+    $$
+         D < \alpha (1-c), \quad  ( \alpha (1-c)-D)^2>\frac{4D(1-c)}{c}
+    $$
+    We can divide the first inequality by $(1-c)$ and the second by $(1-c)^2$ to get,
+    $$
+         \frac{D}{1-c} < \alpha , \quad  \left ( \alpha-\frac{D}{1-c} \right)^2>\frac{4D}{c(1-c)}.
+    $$
+    The first inequality can be thought of as requiring us to take the positive branch of the square root in the second. Doing this we can solve for $\alpha$ as,
+    $$
+     \alpha >\frac{D}{1-c}+2\sqrt{\frac{D}{c(1-c)}}
+    $$
+    We see that, for fixed $D$ and $c$, $\alpha$ can always be increased to lead to a spatial instability. In contrast, for fixed $\alpha$ and $c$, $D$ cannot be increased above a threshold before the system loses the ability to pattern, though decreasing it can always allow for pattern formation if $\alpha$ is nonzero.
+    }\commentary{Generally fine. It can help to explain any algebra you do, e.g. why you take the positive branch when solving the quadratic in $D$. Clear written explanations are very valuable for understanding your thinking.}  
+\end{enumerate}
+}
+\end{enumerate}
+
+    
+\end{document}

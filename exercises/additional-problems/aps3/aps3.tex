@@ -1,0 +1,525 @@
+\documentclass[a4paper, 12pt]{article}
+\input{../common/preamble.tex}
+\setbool{show_question}{true}
+\setbool{show_solution}{false}
+\begin{document}
+%
+\heading{Michaelmas}{Additional problem sheet 3\solutioninheading}
+\ifbool{show_question}{\textbf{Topics covered}: Chapters 6--7.}{}
+
+\begin{enumerate}[label={\bf \arabic{*}.\;}, ref={\arabic{*}},itemsep=3ex, left=0ex]
+
+    \question{Travelling waves (Exam section A type)}
+    {
+      Consider the viscous Berger equation for a scalar density $u$:
+      \begin{equation}
+        \label{viscberg}
+        \pd{u}{t} + u\pd{u}{x} - \nu \pdd{u}{x}=0,
+      \end{equation}
+      where $\nu$ is a positive constant.
+      \begin{enumerate}[label=(\alph*)]
+        \item
+          Assume a travelling wave solution $u(x,t) =v(z)$, where $z=x-ct$ and $c$ is a constant wavespeed. Show that \cref{viscberg} reduces to
+          \begin{equation}
+            -cv' + vv' -\nu v'' =0,
+          \end{equation}
+          where $v'=\fd{v}{z}$.
+
+        \item
+          Show that this implies
+          \begin{equation}
+            \label{foode}
+            v' = \frac{1}{2\nu}\left(v^2-2cv -2B\right),
+          \end{equation}
+          where $B$ is a constant of integration.
+
+        \item The right-hand side of \cref{foode} can be written as
+          \begin{equation}
+            \frac{1}{2\nu}(v-v_1)(v-v_2), \quad \text{where } v_1 =c-\sqrt{c^2+2B},\quad v_2 = c +\sqrt{c^2 + 2B}
+          \end{equation}
+          (assuming $c^2>2B$). Integrate \cref{foode} to show
+          \begin{equation}
+            v(x) = \frac{v_2 - v_1\e ^{K(z)}}{1-\e ^{K(z)}},\quad K(z) = (v_2-v_1)\left( \frac{z}{2v}+C\right).
+          \end{equation}
+          with $C$ a constant of integration.
+
+      \end{enumerate}
+    }
+    {
+      \begin{enumerate}[label=(\alph*)]
+        \item{
+            As
+            \begin{equation}
+              \pd{u}{x} = \pd{v}{z}\fd{z}{x}=v', \qquad
+              \pdd{u}{x} = \pd{}{x}(v') = v'', \qquad
+              \pd{u}{t} = \pd{v}{z}\fd{z}{t}= -cv',
+            \end{equation}
+            where $v'=\fd{v}{z}$, we have
+            \begin{equation}
+              -cv' + vv' -\nu v'' =0
+            \end{equation}
+            as required.
+          }
+        \item{
+            On integrating we have
+            \begin{equation}
+              -cv + \frac{1}{2}v^2 -\nu v' =B,
+            \end{equation}
+            which can be rearranged to give the required equation.
+          }
+        \item{
+            Separating variables, we have
+            \begin{equation}
+              \int\frac{1}{(v-v_1)(v-v_2)}\,\d{v} = \frac{z}{2\nu} + C,
+            \end{equation}
+            with $C$ a constant of integration.
+            Using partial fractions, we can write the $v$ integral as
+            \begin{align}
+              \int\frac{1}{(v-v_1)(v-v_2)} \,\d{v} &= \frac{1}{v_2-v_1}\int\left(\frac{-1}{v-v_1} + \frac{1}{v-v_2}\right)\d{v} \\
+              & = \frac{1}{v_2-v_1}\log\left(\frac{v-v_2}{v-v_1}\right).
+            \end{align}
+            Substituting this in and cross multiplying gives us
+            \begin{equation}
+              \log\left(\frac{v-v_2}{v-v_1}\right) = (v_2-v_1)\left( \frac{z}{2v}+C\right) = K(z).
+            \end{equation}
+            Rearranging gives the required form.
+          }
+      \end{enumerate}
+
+    }
+    %
+
+    %===========================================================================
+
+    %
+    \question{Travelling waves (Exam section A, 2017)}
+    {
+      The Korteweg--de Vries (KdV) equation,
+      \begin{equation}
+        \pd{u}{t} + 6 u\pd{u}{x} + \pddd{u}{x}=0,
+      \end{equation}
+      has, in recent years, been used as a model for the vibration of biopolymers.
+      \begin{enumerate}[label=(\alph*)]
+        \item If we seek a travelling wave solution $u = v(z)$, $z= x-ct$, show that the KdV equation reduces to
+          \begin{equation}
+            \label{kdvo}
+            -c \fd{v}{z}  + 6 v\fd{v}{z} + \fddd{v}{z} =0 .
+          \end{equation}
+
+        \item Writing $\fd{v}{z} = v'$, deduce that
+          \begin{equation}
+            \frac{(v')^2}{2} = -v^3 + \frac{c}{2}v^2 + Av + B,
+          \end{equation}
+          where $A$ and $B$ are constants of integration.
+
+        \item Assume that $v,v', v''\to 0$ at the same $z$ value.  Use this assumption to show that
+          \begin{equation}
+            u(x,t) = \frac{c}{2}\sech^2\left[\pm \frac{\sqrt{c}}{2}(x-ct + D) \right],
+          \end{equation}
+          where $D$ is a constant of integration. You are advised to use the substitutions $v= \frac{1}{2}c\sech^2(\theta)$  and $v\sqrt{c-2v} =\frac{1}{2}c^{3/2}\sech^2(\theta)\tanh(\theta)$ to integrate.
+
+      \end{enumerate}
+    }
+    {
+      \begin{enumerate}[label=(\alph*)]
+        \item{
+            Given $u=v$, $z=x-ct$, we note by the chain rule that
+            \begin{subequations}
+              \begin{align}
+                \pd{u}{x} &= \fd{v}{z}\fd{z}{x} = \fd{v}{z},\\
+                \pdd{u}{x} &= \fd{}{z}\left[\fd{v}{z}\right]\fd{z}{x} = \fdd{v}{z},\\
+                \pddd{u}{x} &= \fd{}{z}\left[\fdd{v}{z}\right]\fd{z}{x} = \fddd{v}{z},\\
+                \pd{u}{t} &= \pd{v}{t} = \fd{v}{z}\fd{z}{t} = -c\fd{v}{z}.
+              \end{align}
+            \end{subequations}
+            Substituting these forms into the original equation gives the required result.
+          }
+        \item{
+            First we integrate to obtain
+            \begin{equation}
+              -cv + 3v^2 + v''= A.
+            \end{equation}
+            Next we multiply through by $v'$ and integrate $\d z$ to obtain
+            \begin{equation}
+              -\frac{cv^2}{2} +v^3 + \frac{(v')^2}{2}= Av + B,
+            \end{equation}
+            which gives the required result. (If this technique didn't seem obvious to you, you can think about it as spotting a product rule in action in $3v^2+v''$. Of course, you could also work backwards from the answer to spot this trick.)
+          }
+        \item{
+            We're given that $v(z^*)=v'(z^*)=v''(z^*)=0$ for some magical $z^*$. Evaluating
+            \begin{equation}
+              \frac{(v')^2}{2} = -v^3 + \frac{c}{2}v^2 + Av + B
+            \end{equation}
+            at $z=z^*$ leaves us with just $B=0$, and evaluating the derivative of this equation at $z^*$ tells us that $A=0$ (note that you don't actually have to do the differentiation to spot this). We are therefore left with
+            \begin{equation}
+              -\frac{cv^2}{2} +v^3 + \frac{(v')^2}{2}= 0.
+            \end{equation}
+            Rearranging and integrating, we have
+            \begin{equation}
+              \label{kdint}
+              \pm\int\frac{1}{v\sqrt{c-2v}}\,\d v = z+D.
+            \end{equation}
+            Using the suggested substitution, we have
+            \begin{align}
+              \fd{v}{\theta} = -
+              v\sqrt{c-2v} = \frac{c^{3/2}}{2}\mathrm{sech}^2(\theta)\mathrm{tanh}(\theta).
+            \end{align}
+            Substituting this into the LHS \cref{kdint} gives
+            \begin{equation}
+              \pm \frac{2}{\sqrt{c}}\theta = z +D,
+            \end{equation}
+            hence
+            \begin{equation}
+              v(s) = \frac{c}{2}\mathrm{sech}^2\left[\pm \frac{\sqrt{c}}{2}(z + D)\right],
+            \end{equation}
+            and substituting in $z=x-ct$ gives the required result.
+          }
+      \end{enumerate}
+
+    }
+    %
+
+    %===========================================================================
+
+    %
+    \question{Chemotaxis-based problem, feat.\ travelling waves (Exam section B type)}
+    {
+      Consider the following system of diffusive equations based on a model for bacterial chemotaxis:
+      \begin{align}
+        \pd{u}{t} &= D\pdd{u}{x} - \pd{}{x}\left(u\pd{v}{x}\right),\\
+        \pd{v}{t} &= -k u.
+      \end{align}
+      The bacteria $u(x,t)$ increase their population due to the presence of a (chemical) food source $v(x,t)$. The bacteria move via diffusion, the first term of the first equation, and chemotaxis, represented by the second term.  The parameters $D$ and $k$ are assumed constant.
+
+      We seek travelling wave solutions with the variables $x,t$ related via $z=x-ct$, depending on the spatial gradient of $v$.
+      \begin{enumerate}[label=(\alph*)]
+        \item If we assume that when $u\to 0$, $\fd{u}{z}\to 0$ and $u(0)=1$, show that $u(x,t)$ takes the form
+          \begin{equation}
+            u(x,t) = \frac{c^2}{k-(k-c^2)\e ^{c(x-ct)/D}}.
+          \end{equation}
+
+        \item Assuming both $k$ and  $c$ are positive constants, under  what circumstances is this model physically valid? Describe the shape of the solution for fixed $t$ as function of $x$.
+
+        \item What happens to this distribution as a function of time and what does this suggest about the eventual behaviour of the function $v(x,t)$ as $t\to \infty$?
+
+        \item What happens to the distribution, again at fixed $t$, in the limit $D\to 0$?  What is the physical significance of this limit?
+      \end{enumerate}
+    }
+    {
+      \begin{enumerate}[label=(\alph*)]
+        \item{The equations reduce to:
+            \begin{align}
+              -c\fd{u}{z} &=D\fdd{u}{z} - \fd{}{z}\left(u\fd{v}{z}\right),\\
+              \fd{v}{z} &= \frac{ku}{c}.
+            \end{align}
+            Hence
+            \begin{subequations}
+              \begin{align}
+                -c\fd{u}{z} &=D\fdd{u}{z} -  \frac{k}{c}\fd{}{z}[u^2] \\
+                \implies \fdd{u}{z} &= \frac{k}{cD}\fd{}{z}[u^2] - \frac{c}{D}\fd{u}{z}
+              \end{align}
+              and integrating,
+              \begin{equation}
+                \fd{u}{z} = \frac{k}{cD}u^2-\frac{c}{D}u +A,
+              \end{equation}
+            \end{subequations}
+            where $A$ is a constant of integration. We have that $A=0$ from the suggested condition $u\to 0$, $\fd{u}{z}\to 0$. Thus the equation is separable and
+            \begin{equation}
+              \frac{Dc}{k}\int \frac{1}{u(u-\frac{c^2}{k})}\,\d{u} = z + A_2.
+            \end{equation}
+            Using partial fractions, we see
+            \begin{align}
+              \int \frac{1}{u(u-\frac{c^2}{k})}\,\d{u} &= \frac{k}{c^2}\int\left(\frac{-1}{u}+\frac{1}{(u-\frac{c^2}{k})}\right) \d{u}\\
+              & = \frac{k}{c^2}\left[-\log(u) + \log\left(u-\frac{c^2}{k}\right)\right] \\
+              & = \frac{k}{c^2}\log\left(\frac{u-\frac{c^2}{k}}{u}\right).
+            \end{align}
+            Therefore
+            \begin{equation}
+              \frac{D}{c}\log\left(\frac{u-\frac{c^2}{k}}{u}\right) = z+A_2\implies\frac{u-\frac{c^2}{k}}{u} =  B\e ^{c z/D}
+            \end{equation}
+            and
+            \begin{equation}
+              u =\frac{c^2}{k}\frac{1}{1-B\e ^{cz/D}}.
+            \end{equation}
+            Applying $u(0)=1$, we have
+            \begin{equation}
+              \label{ueq}
+              u(z) = \frac{c^2}{k-(k-c^2)\e ^{cz/D}},
+            \end{equation}
+            and substituting $z= x-ct$ gives the required result.
+          }
+
+        \item{The denominator will become zero if $k>c^2$ so the solution cannot be valid in this case.  If $k=c^2$, the solution will be constant. If  $k<c^2$, the denominator will not vanish.  In the limit $x\to -\infty$ the exponential term vanishes and the function approaches $c^2/k$ asymptotically. In the opposite limit, the exponential term in the denominator will tend to infinity and the solution approaches zero asymptotically. It is bound between these two values. The exponential function means the transition between $c^2/k$ and $0$ will occur over a small range of $x$-values (in an exam a drawing would be acceptable).
+          }
+        \item{Let's say there is some point $x$ where $u<\epsilon$ for some small $\epsilon$. We might think of this as the front for the moving population $u$. As $t$ increases, the position $x$ of this point increases, so eventually as $t$ goes to $\infty$ so does this front. As $v$ decreases (is eaten) at a rate proportional to $u$, it exponentially decreases where $u>0$ and stays (almost) fixed in the region where $u<\epsilon$. Thus we see the bacteria $u$ is steadily consuming the food $v$ and will eventually remove all the food.
+          }
+
+        \item{In the scenario $D\to 0$, the argument in the exponential function is large except in the neighbourhood of $x = ct$, and the solution drops from $c^2/k$ to $0$ over a vanishingly small x-domain. In other words, it starts to look like a step function (it drops from $c^2/k$ to $0$ almost instantly). This is the limit in which diffusion becomes negligible so $u$ is moving almost solely due to the chemotactic effect. In this case, the bacteria is instantaneously consuming the food and reaching its peak value which depends on the rate $k$ at which the food is consumed.
+          }
+      \end{enumerate}
+
+    }
+    %
+
+    %===========================================================================
+
+    %
+    \question{PDE stability (Exam section A type)}
+    {
+      \emph{PDE stability will return in Epiphany term, so if this seems alien to you before you see it again, feel free to hold off.}
+
+      Consider the following partial differential equation:
+      \begin{equation}
+        \pdd{y}{x}  + y^2\pd{y}{x} +C(1-y) = \pd{y}{t}.
+        \label{eq-1}
+      \end{equation}
+      We assume $x\in[0,L]$ and that $y$ satisfies $y(0,t)=y(L,t)=\alpha$, for some constant $\alpha$.
+      \begin{enumerate}[label=(\alph*)]
+        \item Find the spatially homogeneous equilibrium of \cref{eq-1}.
+        \item Hence explain why the constant $\alpha$ must equal $1$.
+        \item Find the domain of $C$ for which this equilibrium is stable and state the form of the linearised solutions.
+        \item If we had instead chosen the boundary conditions
+          \begin{equation}
+            \pd{y}{x}(0,t) = \pd{y}{x}(L,t) = 0,
+          \end{equation}
+          what would be the requirement on $C$ for a stable spatially homogeneous equilibrium?
+      \end{enumerate}
+    }
+    {
+      \label{lambda-real-q}
+      Our partial differential equation is
+      \begin{equation}
+        \pdd{y}{x}  + y^2\pd{y}{x} +C(1-y) = \pd{y}{t}.
+      \end{equation}
+      with $x\in[0,L]$ and $y(0,t)=y(L,t)=\alpha$.
+      \begin{enumerate}[label=(\alph*)]
+        \item{Looking for when all time and space derivatives are zero, we get $y_0=1$.
+          }
+        \item The homogeneous equilibrium solution must also satisfy the boundary conditions. The only way for this to be the case is if $y_0=\alpha$, i.e.\ $\alpha = 1$.
+        \item{\label{lambda-real}We first linearise the equation by expanding $y \approx y_0 + \epsilon y_1$, recalling that derivatives of the constant $y_0$ are zero:
+            \begin{equation}
+              \epsilon \pdd{y_1}{x}  + (y_0 + \epsilon y_1)^2\epsilon \pd{y_1}{x} +C(1-y_0-\epsilon y_1) = \epsilon \pd{y_1}{t}.
+            \end{equation}
+            Collecting terms of the same order together, we have therefore:
+            \begin{align}
+              [1]&&C(1-y_0)&=0\\
+              [\epsilon]&&\pdd{y_1}{x} + y_0^2\pd{y_1}{x} -Cy_1 &= \pd{y_1}{t}.
+            \end{align}
+            The $\mathcal{O}(1)$ equation, as it always does, just gives you an equation for the homogeneous equilibria. [If you're not sure why it always does this, have a think.] It says what we already know from part (a), namely that $y_0=1$.
+
+            The equation with terms of $\mathcal{O}(\epsilon)$ is therefore
+            \begin{align}
+              \pdd{y_1}{x}  + \pd{y_1}{x} -Cy_1 = \pd{y_1}{t}.
+            \end{align}
+            Since we have more than just diffusion happening in our spatial derivatives, we cannot simply use an ansatz of the form $y_1 = A\e^{\lambda t} \sin(kx)$ or $y_1 = A\e^{\lambda t} \cos(kx)$.
+
+            Instead we use the more general ansatz $y_1 = A\e^{\i kx +\lambda t}$, thus
+            \begin{equation}
+              -k^2 + \i k - C = \lambda.
+              \label{eq-omega-0}
+            \end{equation}
+            The boundary conditions for $y_1$ (note not $y$!) are $y_1(0,t)=y_1(L,t)=0$.
+
+            To satisfy these boundary conditions, we need $\Re(k) = n\pi/L$. We only need the \emph{real} part of $k$ to satisfy this because there is no problem with $k$ having an imaginary part: it just means exponential decay or growth in $y_1$ with $x$.
+
+            But $\lambda$ must be real. This is because, if $\lambda = p + \i q$, then
+            \begin{equation}
+              y_1 = A\e^{\i (kx+qt) + p t},
+            \end{equation}
+            and the boundary conditions can no longer be satisfied for all time. (The $kx+qt$ goes into the sin/cos term and we can't fix this as $t$ changes... unless $q=0$.) So $\lambda$ is real.
+
+            Going back to $k$, if we say $k = a + \i b$, then \cref{eq-omega-0} tells us
+            \begin{equation}
+              -(a^2 - b^2) -2\i ab   + \i a -b -C = \lambda.
+              \label{eq-omega}
+            \end{equation}
+            For the imaginary part of $\lambda$ to vanish we need
+            \begin{equation}
+              a - 2ab = 0\implies a =0 \text{ or } b=\frac12.
+            \end{equation}
+            Since we know $a=n\pi/L \neq 0$, we have that $b=1/2$.
+            %\Cref{eq-omega} is quadratic with a negative $a^2$ component so $\lambda$ can only be positive for part of the domain, if at all.
+            The equilibrium is stable when $\Re(\lambda) < 0$. We therefore need
+            \begin{equation}
+              \lambda = -a^2 + \frac14 - \frac12 - C < 0 \implies -a^2 < \frac14 + C.
+            \end{equation}
+            The lowest possible nonzero value of $a$ is $\pi/L$ so
+            \begin{equation}
+              C>-\frac{\pi^2}{L^2} - \frac14.
+            \end{equation}
+            The linearised solutions take on the form
+            \begin{equation}
+              y_1 = A\e^{\i (n \pi /L + \i/2)x+\lambda t} = B\e ^{-x/2+\lambda t}\sin\left(\frac{n\pi x}{L}\right),
+            \end{equation}
+            where $A = -\i B$.
+          }
+        \item{Under these different boundary conditions, the equilibrium $y=1$ is still the same, as is the requirement of real $\lambda$. In this case however, $a=0$ would also have been an admissible solution since, differentiating $y_1 = A\e^{\i kx +\lambda t}$ where $k=a+\i b$,
+            \begin{equation}
+              \pd{y_1}{x} = A\i(a + \i b)\e ^{\i (a + \i b)x + \lambda t}
+            \end{equation}
+            and this can satisfy the boundary conditions if $a = b =0$. This corresponds to homogenous perturbations that are just a function of time, $y_1 = f(t)$. \Cref{eq-omega} becomes $-C=\lambda$ and thus in this case for $\Re(\lambda) < 0$ we require
+            \begin{equation}
+              C >0,
+            \end{equation}
+            a stricter condition than the previous case.
+          }
+      \end{enumerate}
+
+    }
+    %
+
+    %===========================================================================
+
+    %
+    \question{PDE stability (Exam section A type)}
+    {
+      Consider the following diffusion-type model for a scalar density $u$:
+      \begin{equation}
+        \pd{u}{t} = D_1 \pdd{u}{x} + D_2\pdn{4}{u}{x},\quad  u(0) = 0,\quad u(L)=0,
+      \end{equation}
+      where $D_1,D_2\geq 0$ are constants and $x\in[0,L]$.
+      \begin{enumerate}[label=(\alph*)]
+        \item Find the homogeneous equilibrium of this system.
+
+        \item Consider the case $D_1>0$ and $D_2=0$. Show that this homogeneous equilibrium is asymptotically stable, whatever the value of the domain length, $L$.
+
+        \item Consider the case $D_1,D_2>0$. Find an expression for the minimum integer wavemode $n$ which is unstable for a given length, $L$.
+
+        \item{}[\emph{A part A question would have stopped there, but here's one more question for the sake of revision}]
+
+          Consider a similar model,
+          \begin{equation}
+            \pd{u}{t} = D_1 \pdd{u}{x} + D_2\pd{u}{x},\quad u(0) = 0,\quad u(L)=0.
+          \end{equation}
+          Assess the stability of the homogeneous equilibrium $u=0$.
+
+      \end{enumerate}
+    }
+    {
+      \begin{enumerate}[label=(\alph*)]
+        \item{
+            $u(x)=0$
+          }
+        \item{
+            If we linearise about this equilibrium, $u = \epsilon u_1$ and assume solutions in the form $u_1= A\e ^{\i k x+\lambda t}$, then to $\mathcal{O}(\epsilon)$ we have
+            \begin{equation}
+              \lambda = -D_1k^2.
+            \end{equation}
+            The boundary conditions require $k=n\pi/L$ where $n =1,2,\dots$. So $k^2$ is $>0$ and all $\lambda$ are negative as required.
+          }
+        \item{
+            As in the last answer, we linearise and assume exponential solutions. Thus
+            \begin{equation}
+              \lambda = -D_1k^2+ D_2k^4.
+            \end{equation}
+            Therefore $\lambda >0$ when
+            \begin{equation}
+              D_2k^2> D_1\implies k>\sqrt{\frac{D_1}{D_2}}.
+            \end{equation}
+            Substituting in the boundary conditions we find
+            \begin{equation}
+              \frac{n\pi}{L} >\sqrt{\frac{D_1}{D_2}}\implies n>\frac{L}{\pi}\sqrt{\frac{D_1}{D_2}}.
+            \end{equation}
+            We therefore take $n$ to be the smallest integer above this value.
+          }
+        \item{
+            Again we linearise and assume exponential solutions,
+            \begin{equation}
+              \lambda = -D_1k^2  +\i D_2 k.
+            \end{equation}
+            We know (see solution to question \ref{lambda-real-q}\ref{lambda-real}) that we cannot satisfy the boundary conditions if $\lambda$ has an imaginary part. Thus if $k=a + \i b$,  we have
+            \begin{equation}
+              \lambda = -D_1(a^2 - b^2) - 2\i D_1a b +\i D_2a - D_2 b.
+            \end{equation}
+            Requiring the imaginary part vanishes, we have
+            \begin{equation}
+              b = \frac{D_2}{2D_1},
+            \end{equation}
+            and hence
+            \begin{equation}
+              \lambda = -D_1a^2 + \frac{D_2^2}{4 D_1} - \frac{D_2^2}{2 D_1} =  -D_1a^2- \frac{D_2^2}{4 D_1}.
+            \end{equation}
+            So $\lambda$ is negative for all $k$.
+          }
+      \end{enumerate}
+
+    }
+    %
+
+    %===========================================================================
+
+    %
+    \question{Supported Euler buckling (Exam section A, 2017)}
+    {
+      Consider an Euler beam of length $L=1$ under a load $N$. The beam is placed in a spongy medium which will resist its bending. Modelling the medium as having a resistive spring constant $\mu$, the modified beam equation for the deflection $w$, as a function of arclength $s$ and time $t$, takes the form
+      \begin{equation}
+        \label{beameq}
+        \pdn{4}{w}{s} + N\pdd{w}{s} +\mu w +\rho \pdd{w}{t}=0,
+      \end{equation}
+      with $\rho$, $N$ and $\mu$ positive constants.
+      This has been used as a model for the microtubule structures which embed in cell cytoplasm to provide rigidity to the cell structure. There is an equilibrium $w(s)=0,\forall s\in[0,1]$.
+      \begin{enumerate}[label=(\alph*)]
+        \item Show using a linear stability analysis that the condition required for stability of this equilibrium is
+          \begin{equation}
+            k^4 -N k^2+\mu >0,
+          \end{equation}
+          where $k$ is the wavenumber of the perturbation.
+
+        \item Calculate the critical load $N$ at which the beam becomes unstable and gives way, on the assumption that $N^2\geq 4\mu$ and $\mu=81\pi^4$. You are advised that this does \emph{not} occur for the $n=1$ mode.
+
+      \end{enumerate}
+    }
+    {
+      \begin{enumerate}[label=(\alph*)]
+        \item{
+            Linearising $w \approx w_0 + \epsilon w_1$ has no effect on the equation as it is linear. We try for solutions in the form
+            \begin{equation}
+              \label{d1}
+              w_1(s,t) = A\e ^{\i ks + \omega t}.
+            \end{equation}
+            Substituting into the modified beam equation gives
+            \begin{equation}
+              k^4 - N k^2 +\mu  + \rho\omega^2 =0,
+            \end{equation}
+            and hence
+            \begin{equation}
+              \omega = \pm \sqrt{-\frac{k^4 - N k^2 +\mu}{\rho}}.
+            \end{equation}
+            If $k^4 -N k^2 + \mu\leq 0$, then the positive root perturbations will grow (or at least not die). If $k^4 -N k^2 +\mu>0$ then the form \cref{d1} cannot satisfy the boundary conditions $k=n\pi$ ($w_1$ is zero at both ends: this was assumed for the case $\mu =0$ in class and you should know why the boundary conditions cannot be satisfied if $\omega$ is imaginary).
+          }
+        \item{
+            We need to solve the quartic
+            \begin{equation}
+              k^4 - N k^2 +\mu = 0.
+            \end{equation}
+            Substitute in $\ell = k^2$ and solve for $\ell$:
+            \begin{equation}
+              \ell  =\frac{1}{2}\left(N \pm \sqrt{N^2-4\mu}\right).
+            \end{equation}
+            If $N^2>4\mu$, then applying the boundary conditions $k=n\pi$ gives
+            \begin{equation}
+              n^2\pi^2 =\frac{1}{2}(N \pm\sqrt{N^2-4\mu}),
+            \end{equation}
+            and solving for $N$ we obtain
+            \begin{equation}
+              N = \frac{n^4\pi^4+\mu}{n^2\pi^2}.
+            \end{equation}
+            Now we must find the minimum force. This may not be for the $n=1$ mode. To find out if there is a turning point with respect to $n$, we take $\fd{N}{n}$ to find
+            \begin{equation}
+              \fd{N}{n} =4 \pi ^2 n-\frac{2 \left(\mu +\pi ^4 n^4\right)}{\pi ^2 n^3}.
+            \end{equation}
+            We substitute in $\mu = 81\pi^4$,
+            \begin{equation}
+              \frac{2 \pi ^2 \left(n^4-81\right)}{n^3},
+            \end{equation}
+            then solve $\fd{N}{n}=0$ to find $n=3$ and the minimum force is
+            \begin{equation}
+              N = 18 \pi^2.
+            \end{equation}
+          }
+      \end{enumerate}
+
+    }
+
+\end{enumerate}
+\end{document}

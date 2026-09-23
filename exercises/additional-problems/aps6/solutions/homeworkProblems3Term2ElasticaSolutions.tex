@@ -1,0 +1,313 @@
+\documentclass[]{article}
+
+\usepackage{amsmath,amsfonts,graphicx}
+\usepackage[caption=false]{subfig}
+\usepackage{geometry,enumerate}
+\usepackage{enumitem,color}
+
+\newcommand{\rmd}{\mathrm{d}}
+\newcommand{\deriv}[2]{\frac{\rmd#1}{\rmd #2}}
+\newcommand{\derivn}[3]{\frac{\rmd^{#3} #1}{\rmd #2^{#3}}}
+\newcommand{\pder}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\pdern}[3]{\frac{\partial^{#3} #1}{\partial #2^{#3}}}
+\newcommand{\mvec}[2]{\left(\begin{array}{c}#1\\#2\end{array}\right)}
+\newcommand{\mat}[4]{\left(\begin{array}{cc}#1 & #2\\#3&#4\end{array}\right)}
+\newcommand{\im}{\mathrm{i}}
+\newcommand{\kmi}{\widehat{{\bf k}\cdot{\bf x }}_i}
+
+\begin{document}
+
+\section*{Question 1}
+\begin{figure}
+\centering
+\subfloat[]{\includegraphics[width=5cm]{twistedDNA2.png}}\quad\subfloat[]{\includegraphics[width=5cm]{twistedDNA1.png}}
+\caption{\label{minicircledna}Depictions of a possible minicircle DNA model.  (a) The red circle is the tube's axis. The blue curve represents the tip of the vector ${\bf d}_1$ and indicates the extend to which the tube is twisted. (b) the green vectors represent the twist free basis $({\bf E}_1,{\bf E}_2)$.}
+\end{figure}
+Consider a simple model for a DNA mini-circle as a twisted elastic tube. The tube's axis is assumed to be a circle
+\begin{equation}
+{\bf r}(t) = \left(R\cos(2\pi t),R\sin(2\pi t),0\right), t\in[0,1]
+\end{equation}
+where $R$ is the radius of the circle. We assume tube can be modelled as an unstretchable tube satisfying the folowing kinematic equations
+\begin{equation}
+\label{stretchkinematics}
+\deriv{}{s}
+\left(\begin{array}{c} {\bf r} \\ {\bf d}_1 \\{\bf d}_2\\ {\bf d}_3 \end{array}\right) = 
+\left(\begin{array}{cccc}
+0 &0 & 0 & 1\\
+0 & 0 &  u_3 & -u_2\\
+0 & -u_3 &  0 & u_1\\
+0 & u_2 &  -u_1 & 0
+\end{array}\right)
+\left(\begin{array}{c}{\bf r}\\ {\bf d}_1 \\ {\bf d}_2 \\ {\bf d}_3 \end{array}\right).
+\end{equation}
+and the following equilibrium equations
+\begin{align}
+\label{mechanics2}
+\deriv{}{s}{\bf n}&= {\bf 0},\\
+\nonumber \deriv{}{s}{\bf m}  +{\bf d}_3 \times{\bf n} &={\bf 0}.
+\end{align}
+where ${\bf n}$ is the internal force of the tube, ${\bf m}$ the internal couple. We assume the following constitutive laws for the system
+\begin{equation}
+{\bf m} = A u_1{\bf d}_1 + B u_2{\bf  d}_2 + C u_3{\bf d}_3,\quad {\bf n} = n_1{\bf d}_1 + n_2{\bf d}_2 +  n_3{\bf d}_3.
+\end{equation}
+\begin{enumerate}[label=(\alph*)]
+\item{Find the arclength parametrsiation ${\bf r}(s)$ of this curve.
+
+Sln:
+The arclength parameter $s(t)$  (such that $\deriv{{\bf r}}{s}\cdot\deriv{{\bf r}}{s}=1$) is given by
+\begin{equation}
+s(t) = \int_{0}^{t}\sqrt{\deriv{{\bf r}}{t'}\cdot\deriv{{\bf r}}{t'}}\rmd t' = 2\pi Rt.
+\end{equation}
+Thus $2\pi t =s/R$ and we have
+\begin{equation}
+{\bf r}(s) = \left(R\cos(s/R),R\sin(s/R),0\right),\,\,s\in[0,2\pi R].
+\end{equation}
+}
+\item{Express the ${\bf d}_i$ components of the equations (\ref{mechanics2}).
+
+Sln: You should work through this yourself and verify that they take the following form for the force equations
+\begin{align}
+\label{forceequations}
+\deriv{n_1}{s}-n_2u_3 +n_3u_2 =0,\\
+\nonumber\deriv{n_2}{s}+n_1u_3 -  n_3 u_1 =0,\\
+\nonumber \deriv{n_3}{s}-n_1u_2 + n_2 u_1 =0.
+\end{align}
+The moment derivatives take the following form,
+\begin{align}
+\label{momentequations}
+A\deriv{u_1}{s}+ u_2u_3(C-B)-n_2 =0,\\
+\nonumber B\deriv{u_2}{s}+ u_1u_3(A-C)+n_1 =0,\\
+\nonumber C\deriv{u_3}{s}+ u_1u_2(B-A) =0.
+\end{align}
+}
+\item{
+It can be shown that the kinematic parameters can be written as
+\begin{equation}
+u_1 = \frac{\sin(\phi(s))}{R},\quad u_2=\frac{\cos(\phi(s))}{R},\quad u_3 = \deriv{\phi}{s}.
+\end{equation}
+If $\phi(s)=0,\forall s$ then the pair $({\bf d}_1,{\bf d}_2)$ are parallel transported around  ${\bf r}(s)$, as shown in Figure \ref{minicircledna}(b), this represents an untwisted tube. An example of a non zero twisted tube (basis pair) is shown in Figure \ref{minicircledna}(a). State the (two) boundary conditions on $\phi$ on the assumption that the deformation of the tube is differentiable.
+
+Sln:
+We require that $\phi(0)=\phi(2\pi R)+2\pi n$ for some integer $n$ and $\deriv{\phi}{s}(0)=\deriv{\phi}{s}(2\pi R)$.
+}\item{
+Demonstrate that the twist function $\deriv{\phi}{s}$ takes the following implict form:
+\begin{equation}
+\deriv{\phi}{s}=\pm \sqrt{2\left(D+\frac{\cos(2\phi)}{4R^2}(B-A)\right)/C},
+\end{equation}
+where $D$ is a constant of integration.
+
+Sln:
+The moment equation takes the following form
+\begin{equation}
+C\derivn{\phi}{s}{2} + \frac{\sin\phi\cos\phi}{R^2}(B-A) =0.
+\end{equation}
+We multiply both sides by $\deriv{\phi}{s}$, note that $\sin\phi\cos\phi =\sin(2\phi)/2$ ,and integrate to obtian
+\begin{equation}
+\frac{C}{2}\left(\deriv{\phi}{s}\right)^2 -\frac{\cos(2\phi)}{4R^2}(B-A)= D,
+\end{equation}
+where $D$ is a constant of integration. So 
+\begin{equation}
+\deriv{\phi}{s}=\pm \sqrt{2\left(D+\frac{\cos(2\phi)}{4R^2}(B-A)\right)/C}.
+\end{equation}
+where the sign will depend on the handedness of the twisting. Note that this function would satisfy both boundary conditions (i.e. when $\phi$ is periodic so will $\deriv{\phi}{s}$ be). 
+}\item{
+Find a condition on the constants $A$ and $B$ for the possibility of solutions to the full system of equations when there is non-zero twisting. You may assume that the O.D.E for $\phi$ obtained in the previous question has solutions.
+
+Sln:
+The other two moment equations determine $n_1$ and $n_2$.
+\begin{align}
+n_2 = A\deriv{u_1}{s}+ u_2u_3(C-B)=\deriv{\phi}{s}\frac{1}{R}\left[A + (C-B)\right]\cos\phi,\\
+n_1 =  -B\deriv{u_2}{s}+ u_1u_3(C-A)= \deriv{\phi}{s}\frac{1}{R}\left[B + (C-A)\right]\sin\phi.
+\end{align}
+To keep things simple in the force equations we write $n_1 = f_1(s)\sin\phi$ and $n_2=f_2(s)\cos\phi$, then, looking at the ${\bf d}_1$ and ${\bf d}_2$ force equations we have
+\begin{align}
+\label{feq1q1}\deriv{f_1}{s}\sin\phi+f_1\deriv{\phi}{s}\cos\phi-f_2\cos\phi\deriv{\phi}{s} +\frac{n_3}{R}\cos\phi =0,\\
+\label{feq2q2}\deriv{f_2}{s}\cos\phi-f_2\deriv{\phi}{s}\sin\phi +f_1\sin\phi\deriv{\phi}{s} -\frac{n_3}{R}\sin\phi =0
+\end{align}
+The question startses that $\phi$ is not zero (everywhere) so we have to be careful with the fact that $\sin\phi$ and $\cos\phi$ are linearly independent. If ir were the case that $A=B$, so that the twist rate is constant then we are back to the case we covered in class. You should review that derivation to see that in that case we can solve the system.
+
+If $A\neq B$ then looking at (\ref{feq1q1}) the first term becomes
+\begin{equation}
+\deriv{f_1}{s}= \frac{1}{R}\derivn{\phi}{s}{2}\left[B + (C-A)\right] = \frac{\sin\phi\cos\phi(A-B)}{CR^3}\left[B + (C-A)\right].
+\end{equation}
+So, to solve (\ref{feq1q1}) we require that 
+\begin{equation}
+\deriv{\phi}{s}(f_1-f_2) +\frac{n_3}{R}=\frac{2}{R}\left(\deriv{\phi}{s}\right)^2(B-A) +\frac{n_3}{R} = - \frac{\sin^2\phi(A-B)}{CR^3}\left[B+ (C-A)\right]
+\end{equation}
+A similar argument applied to (\ref{feq2q2}) would see that we would need,
+\begin{equation}
+\deriv{\phi}{s}(f_1-f_2) -\frac{n_3}{R}=\frac{2}{R}\left(\deriv{\phi}{s}\right)^2(B-A) -\frac{n_3}{R} = - \frac{\cos^2\phi(A-B)}{CR^3}\left[A + (C-B)\right]
+\end{equation}
+Adding these two conditions together we find 
+\begin{equation}
+\label{balance1}
+\frac{4}{R}\left(\deriv{\phi}{s}\right)^2(B-A) =  \frac{(B-A)}{CR^3}\left[C -(B-A)(\cos^2\phi-\sin^2\phi)\right]=  \frac{(B-A)}{CR^3}\left[C -(B-A)\cos(2\phi)\right]
+\end{equation}
+But using the form of $\deriv{\phi}{s}$ we found in the last equation we have
+\begin{align}
+\frac{4(B-A)}{R}*\frac{2\left(D+\frac{\cos(2\phi)}{4R^2}(B-A)\right)}{C} =\frac{8(B-A)D}{CR} + \frac{2(B-A)(B-A)}{CR^3}\cos(2\phi).
+\end{align}
+Thus to satisfy (\ref{balance1}) we would require
+\begin{equation}
+ \frac{2(B-A)(B-A)}{CR^3}\cos(2\phi)= -\frac{(B-A)(B-A)}{CR^3}\cos(2\phi)
+\end{equation}
+Which is clearly not possible unless $B=A$.
+[This basically implies that if you want bending stiffness which differ for  closed twisted tube model you need non-constant curvature]
+}
+\end{enumerate}
+\section*{Question 2}
+\begin{enumerate}[label=(\alph*)]
+\item{
+We remind ourselves that
+\begin{equation}
+\deriv{}{s}{\bf d}_1 = -u_2{\bf d}_3 + u_3{\bf d}_2,\quad \deriv{}{s}{\bf d}_2 = u_1{\bf d}_3 - u_3{\bf d}_1,\quad  \deriv{}{s}{\bf d}_3 = -u_1{\bf d}_2 +u_2{\bf d}_1.
+\end{equation}
+So the force equation for each component $i$ becomes
+\begin{equation}
+\deriv{n_i}{s}{\bf d}_i + n_i\deriv{}{s}{\bf d}_i + f_i=0. 
+\end{equation}
+Hence,
+\begin{align}
+\deriv{n_1}{s}-n_2u_3 + n_3 u_2 =0,\\
+\nonumber\deriv{n_2}{s}+n_1u_3 - n_3 u_1 =0,\\
+\nonumber\deriv{n_3}{s}-n_1u_2 + n_2 u_1 =0.
+\end{align}
+To finish off we substitute in the constitutive law for $n_3$
+\begin{align}
+\deriv{n_1}{s}-n_2u_3 + E(\nu(s)-1)u_2 =0,\\
+\nonumber\deriv{n_2}{s}+n_1u_3 -E(\nu(s)-1) u_1 =0,\\
+\nonumber E\deriv{\nu}{s}-n_1u_2 + n_2 u_1 =0.
+\end{align}
+
+Next the moment equations. The moment derivative is 
+\begin{equation}
+\deriv{m_i}{s}{\bf d}_i +m_i\deriv{}{s}{\bf d}_i. 
+\end{equation}
+The only change with stretchability form the standard system derived in class is that the term ${|bf d}_3\times{\bf n}$ is replaced by  $\rmd {\bf r}/\rmd s\times {\bf n}=\nu {\bf d}_3\times{\bf n}$ so the moment equations become:
+\begin{align}
+A\deriv{u_1}{s}+ u_2u_3(C-A)-\nu n_2 =0,\\
+\nonumber B\deriv{u_2}{s}+ u_1u_3(A-C)+\nu n_1=0,\\
+\nonumber C\deriv{u_3}{s}=0.
+\end{align}
+(note that the twist is still constant)
+}\item{
+It ensures the axis is confined to a 2-D  plane. 
+}\item{
+The third moment equation becomes irrelevant. The first and second moment equations become
+\begin{equation}
+A\deriv{u_1}{s} =\nu n_2,\quad n_1=0.
+\end{equation}
+The first force equation is irrelevant the second and third become:
+\begin{align}
+\frac{A}{\nu}\derivn{u_1}{s}{2}-\frac{1}{\nu}\deriv{\nu}{s}n_2 -E(\nu-1)u_1 =0,\\
+E\deriv{\nu}{s} +A\deriv{u_1}{s}u_1=0.
+\end{align}
+or
+\begin{align}
+\frac{A}{\nu}\derivn{u_1}{s}{2}-\frac{A}{\nu^2}\deriv{\nu}{s}\deriv{u_1}{s} -E(\nu-1)u_1 =0,\\
+E\nu\deriv{\nu}{s} +A\deriv{u_1}{s}u_1=0.
+\end{align}
+Which are the required equations
+}\item{
+Straight implies $u_1=0$ and if the rod in compression $\nu=\nu_0<1\forall s$. One can verify the equations derived in the previous question are then satisfied as all terms vanish.  Then we must apply the force boundary condition. The axial force is $n_3 = -N$ the minus as we are in compression. Then 
+\begin{equation}
+-N = E(\nu_0-1),\,\nu_0 = \frac{E-N}{E} =1-\frac{N}{E}.
+\end{equation}
+as one would expect  if they can remember their A-Level/High school mechanics!
+}\item{
+We assume $\nu = 1-N/E+\epsilon \nu_1$ and $u_1 =\epsilon u_1^1$, in what follows we drop the superscript on $u_1^1$ as it will not cause any confusion. To $\mathcal{O}(\epsilon)$ the equations of equilibrium become. 
+
+\begin{align}
+\frac{A}{1-N/E}\derivn{u_1}{s}{2}+N u_1 =0,\\
+E\nu_0\deriv{\nu_1}{s}=0.
+\end{align}
+The second equation just implies the correction to $\nu$ is constant and determined by the change in boundary conditions. For a stability analysis we assume no change so $\nu_1=0$. Then the first is just the harmonic equation.
+\begin{equation}
+\derivn{u_1}{s}{2}+\frac{N}{A}(1-N/E) u_1 =0
+\end{equation}
+where $\nu_0$ is the original stretching $1-N/E$. Solutions are 
+\begin{equation}
+u_1 = A\cos\left(\sqrt{\frac{N(1-N/E)}{A}}s\right) + B\sin\left(\sqrt{\frac{N(1-N/E)}{A}} s\right).
+\end{equation}
+Applying the boundary condition $u_1(0) =0 $ implies $A=0$. The second condition $u_1(L)=0$ implies. 
+\begin{equation}
+B\sin\left(\sqrt{\frac{N(1-N/E)}{A}}L\right)= 0 \Rightarrow \sqrt{\frac{N(1-N/E)}{A}}L =  n\pi,\quad n=1,2 \dots.
+\end{equation}
+(the $n=0$ case is trivial).  This is satisfied for two potentially valid values
+\begin{equation}
+N =\frac{1}{2} \left(E \pm \sqrt{E}\sqrt{E-\frac{4 \pi ^2 A n^2}{L^2}} \right)
+\end{equation} 
+
+The analysis of this result is somewhat more complex than the standard Euler buckling analysis, but note that if 
+\begin{equation}
+E<\frac{4 \pi ^2 A n^2}{L^2}
+\end{equation}
+Then we have no physically realistic forces which can lead to buckling. This places a constraint on the allowed modes, which is actually independent of the force. A somewhat surprising result! For modes where 
+\begin{equation}
+E>\frac{4 \pi ^2 A n^2}{L^2}
+\end{equation}
+the lowest force will always be for the negative root and also the $n=0$ case, so the critical force is 
+\begin{equation}
+N =\frac{1}{2} \left(E - \sqrt{E}\sqrt{E-\frac{4 \pi ^2 A}{L^2}} \right)
+\end{equation} 
+if 
+\begin{equation}
+E>\frac{4 \pi ^2 A}{L^2}.
+\end{equation}
+}
+\end{enumerate}
+\section*{Question 3}
+		\begin{enumerate}[label=(\alph*)]
+\item{
+The force equation indicates the force ${\bf n}$ is constant. The stated boundary condition in the question indicates that it 
+takes the form
+\begin{equation}
+{\bf n} =N\hat{x}.
+\end{equation} 
+Student should be able to see ${\bf d}_2=-\hat{y}$.
+To get the curvatures we note that (given $u_3=0$)
+\begin{equation}
+\deriv{}{s} {\bf d}_2 =-\deriv{}{s} \hat{y} = 0= u_1 {\bf d}_3,\Rightarrow u_1=0,\quad \deriv{}{s} {\bf d}_1 = 0  - \deriv{\theta}{s}{\bf d}_3 = -u_2{\bf d}_3,\Rightarrow u_2= \deriv{\theta}{s}.
+\end{equation}
+Also we note that ${\bf d}_2=-\hat{y}$ so it has no $s$ derivative. So, 
+\begin{equation}
+\deriv{{\bf m}}{s} = -A\derivn{\theta}{s}{2}\hat{y},
+\end{equation}
+and
+\begin{equation}
+{\bf d}_3\times{\bf n} =N (\cos\theta,0,\sin\theta)\times(1,0,0) = N\sin\theta\hat{y}.
+\end{equation}
+ giving the required expression as the $\hat{y}$ component of the moment equation.
+}\item{
+First, mutiplying by $\deriv{\theta}{s}$ and dividing through by $A$, and then  integrating, we obtain 
+\begin{equation}
+\frac{1}{2}\left(\deriv{\theta}{s}\right)^2+ \gamma\cos\theta = C_1.
+\end{equation}
+where $\gamma= N/A$. Then we can re-arrange this to give
+\begin{equation}
+\deriv{\theta}{s} = \pm\sqrt{2}\sqrt{C_1-\gamma\cos\theta}.
+\end{equation}
+The two solution branches will be symmetric about $\theta=0$ so we only need to integrate the positive branch (using separation of variable) and use the stated identity to obtain
+\begin{equation}
+F\left(\theta(s)/2\bigg\vert \frac{2\gamma}{C_1-\gamma}\right) = \frac{\sqrt{C_1-\gamma}}{\sqrt{2}} s + C_2,
+\end{equation}
+where $C_2$ is a constant of integration. The definition of $F$ indicates it is zero at $\theta=0$ so we see $C_2=0$. 
+}\item{
+
+Since $s$ and $\theta$ must be real we require $ C_1-\gamma>0$ so $C_1>N/A$.
+}\item{ 
+The definition of $\mathrm{am}$ given in the question imply 
+\begin{equation}
+\theta(s)  = 2\,\mathrm{am}\left(\frac{\sqrt{C_1-\gamma}}{2} s \bigg\vert \frac{2\gamma}{C_1-\gamma}\right).
+\end{equation}
+}\item{
+The crucial point here is that almost reaches $2\pi$, so undergoes a full loop. It is symmetric about $s=5$. Near the wall where it is attached is is relatively flat and also at its end. Because of its symmetry, and the fact it ends up pointing in the same direction as it start, and the fact that it performs an fulle loop means it will self overlap (it is planar).  Hence it is not physically realistic.
+} 
+\item{The $A(s)$ variability shows the resistance to bending varies with the length of the rod. This might make some regions weaker and some stiffer. You should be able to show me the equation would have taken the form:
+\begin{equation}
+\deriv{A}{s}\deriv{\theta}{s} +  A(s)\derivn{\theta}{s}{2} -N\sin(\theta)=0.
+\end{equation}
+ }
+\end{enumerate}	
+
+\end{document}

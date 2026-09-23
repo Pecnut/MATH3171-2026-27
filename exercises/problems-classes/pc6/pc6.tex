@@ -1,0 +1,182 @@
+\documentclass[a4paper,12pt]{article}
+\input{../common/preamble.tex}
+\begin{document} 
+%
+\newcommand{\sol}[1]{}\heading{Epiphany}{Problems class 6}
+%\newcommand{\sol}[1]{\\ \hrule\hfill \\ \textcolor{blue}{\textbf{SOLUTION:}} #1 \\ \hrule\hfill}\heading{Epiphany}{Problems class 6: Solutions}
+
+\section{Practice for PDE Stability Analysis: How Neighboring Regions Influence SIS Epidemics}
+NB: This problem follows from the SIS model in Problems Class 5; it can be helpful to look up the solutions to that sheet to remind you what happens in the ODE version of this model, which takes the form:
+\begin{equation*}
+    \fd{p}{t} = (B-\delta)p - Bp^2.
+\end{equation*}
+
+
+Consider an epidemic in a spatial region which has stopped all movement in and out of the region (i.e.~people can move around within the region, but cannot leave or enter it). For simplicity, let's consider the spatial domain $x \in \Omega = [0,L]$.
+\begin{enumerate}
+    \item Assuming movement of infected individuals within $\Omega$ is random (Fickian diffusion at some rate $D$), what would an equation determining $p$ be? What would suitable boundary conditions be?
+    \sol{From above, we have an equation for how susceptible and infected populations interact. One of the simplest ways to model the spatial movement is to just modify the rate of change of $p$ to account for this movement. So our equation for $p(x,t)$ is:
+    $$
+    \pd{p}{t} = D\pdd{p}{x}+(B-\delta)p - Bp^2,
+    $$
+    where $D$ is a diffusion coefficient. If the infected proportion of the population can't leave the domain, then suitable boundary conditions are the Neumann/no-flux conditions:
+    $$
+    \pd{p}{x}(0,t)=\pd{p}{L} = 0.
+    $$
+    }
+    \item Determine the spatially homogeneous steady states of this PDE model, and compute their linear stability. Does the spatial part influence the dynamics (at least the linear stability) compared to the ODE model?
+    \sol{As any constant solution satisfies the Neumann boundary conditions, it will also be a steady state to our PDE. So the steady states are $p_0(x) = 0$ and $p_0(x) = (B-\delta)/B$, as before.
+    
+    We can derive the linear equation satisfied by small perturbations, or we can just note that it must take the form:
+    $$
+    \pd{p_1}{t} = D\pdd{p_1}{x}+((B-\delta) - 2Bp_0)p_1.
+    $$
+    The only change between this linear equation, and the nonlinear equation for $p$ above, is that we have again taken the derivative of the nonlinearity and evaluated it at the steady state (that is, computed $f'(p_0)$). As the Laplacian is a linear operator, we will always have this kind of thing for the linearization. This is a really important step, so make sure you see why this happens for any reaction-diffusion equation. 
+    
+    As in the lecture notes, we can solve this via separation of variables, or we can note that the correct eigenfunctions for the no-flux boundary conditions are: $w_k(x) = \cos(k \pi x/L)$, with $k=0,1,2,\dots$ . So we can use a substitution of the form $p_1 = \exp(\lambda_k t)\cos(k \pi x/L)$ to find that the growth rates satisfy:
+    $$
+    \lambda_k = -D\left(\frac{k\pi}{L}\right)^2+((B-\delta) - 2Bp_0).
+    $$
+    These growth rates are exactly what we find for the ODE problem, plus an extra term involving the diffusion. As this extra term is always negative, as in the `closed environment' problem in the lecture notes, it cannot make an equilibrium unstable. The growth rate with largest real part is $\lambda_0 = (B-\delta) - 2Bp_0$, which is exactly the same growth rate as the ODE case, and hence the PDE stability analysis gives the same answers as the ODE stability analysis.
+        }
+    \item Now assume that the neighboring regions are doing a bad job of taking care of the disease, and movement is no longer restricted. As a simple model of this, replace the boundary conditions above with ones where $p = p_0>0$ at the domain boundaries (where $p_0 = (B-\delta)/B$ is the endemic equilibrium). 
+    \begin{enumerate}
+        \item What is the biological reason that we must assume $B > \delta$?
+    \sol{
+    If $B < \delta$, then the equilibrium is not feasible, and we would be forcing a negative proportion of infected individuals at the boundaries, which doesn't make sense. If $B = \delta$, then the endemic equilibrium is $0$, and hence not really an endemic state.
+    }
+    \item What are the spatially homogeneous equilibria in this scenario? 
+    \sol{
+    The extinction steady state $p_0=0$ does not satisfy these boundary conditions, so is not permissible. The endemic steady state (which is equal to the value of these Dirichlet conditions) does, so we can do linear stability about this state.
+    }
+    \item How does this change the linear stability results? \emph{Hint:} Think carefully about the boundary conditions that the linear perturbations, $p_1$, satisfy. It may help to carefully derive the full system for $p_1$ by taking $p = p_0 + \varepsilon p_1$.
+    \sol{This is now similar to the `survival in a harsh environment' problem in the lecture, except that the boundary conditions are slightly different. We can write these as:
+    $$
+    p(0,t)=p(L,t) = (B-\delta)/B.
+    $$
+    Here we will proceed more carefully, as something different does come out of the linearization.
+    
+    Letting $p = p_0 + \varepsilon p_1(x,t) = (B-\delta)/B + \varepsilon p_1(x,t)$, and again collecting $O(\varepsilon)$ terms, we have that the equation for $P$ is the same linear one above, but that the boundary conditions are different. To be specific we have:
+    $$
+    p(0,t) = (B-\delta)/B + \varepsilon p_1(0,t) = (B-\delta)/B \implies p_1(0,t)=0,
+    $$
+    and exactly the same thing happens at $x = L$. The takeaway is that this is that this is the homogeneous Dirichlet conditions seen in the lecture notes. So the only main difference in our perturbation $p_1$ is that our spatial eigenfunctions are now  $w_k(x) = \sin(k \pi x/L)$, with $k=1,2,\dots$ .  
+    
+    So focusing on $p_0= (B-\delta)/B$, we have the growth rates,
+    $$
+    \lambda_k = -D\left(\frac{k\pi}{L}\right)^2-(B-\delta),
+    $$
+    which will always be negative for $B>\delta$. Hence, the spatial aspect does not really change the stability result, but it does in some sense make the growth rates more negative. In a sense this can be thought of as stabilizing the endemic equilibrium.
+    }
+    \end{enumerate}
+    
+    \item Finally consider neighboring regions which are eliminating the disease so quickly that no one there is infected. What boundary conditions would make sense in this case? As before, determine how this changes the predictions from the linear stability analysis (and now consider all positive values of $B$ and $\delta$).
+    \sol{Everything is as above with the endemic equilibrium at the boundaries, except now we linearize about the extinction equilibrium (as the endemic equilibrium is no longer a spatially homogeneous equilibrium) and no longer assume $B> \delta$. We find the growth rates:
+    $$
+    \lambda_k = -D\left(\frac{k\pi}{L}\right)^2+(B-\delta), \quad k=1,2,3\dots
+    $$
+    (remember that the linear equation for perturbations here will be satisfied by $\sin$ functions, hence $k$ starting at $1$). For $B < \delta$, we have the same answer from the ODE stability analysis that $p_0=0$ is stable. Now the ODE analysis says that $B > \delta$ is the switching point from a disease-free/extinction equilibrium to an endemic one, where there is some positive proportion of the population with the disease.  But here the smallest growth rate is given by:
+    $$
+    \lambda_1 = -D\left(\frac{\pi}{L}\right)^2+(B-\delta) \implies \lambda_1 < 0 \textrm{ if } B< \delta + D\left(\frac{\pi}{L}\right)^2.
+    $$
+    So now in order for an infection to take off, the bulk infectivity rate, $B$, must be sufficiently large to violate the inequality above.
+    }
+\end{enumerate}
+
+\section{Another Spatial Variant (not another...)}
+Consider an SIS epidemic (again see the sheet from problems class 1) which lasts over a long timescale, such that growth and death of the underlying populations occurs. Consider the following \emph{demographic} SIS model on a spatial region $x \in \Omega=[0,L]$:
+    \begin{align*}
+        \pd{S}{t} &= \Lambda - \mu S + \delta I - \beta SI + D_S\pdd{S}{x},\\
+        \pd{I}{t} &= \beta SI-\delta I - (\mu+\gamma)I+D_I\pdd{I}{x},
+    \end{align*}
+    where all parameters are positive. Consider Neumann boundary conditions for both species.
+    \begin{enumerate}
+        \item What do the (positive) parameters $\Lambda, \beta, \delta, \mu, \gamma, D_S$, and $D_I$ mean? 
+        \sol{$\Lambda$ -- this is the growth rate of the susceptible population. An interesting feature is that it is not density-dependent (that is, since it is not a multiple of $S$, the number of new susceptibles is the same even if $S=0$.)
+        
+        $\beta$ -- this is the infection rate of the disease. One interpretation is that this is proportional to the probability of infection when one infected and one susceptible person meet (hence the quadratic term $S*I$).
+        
+        $\delta$ -- this is the recovery rate of the disease, for those who recover but become susceptible again.
+        
+        $\mu$ -- this is the natural death rate of the population, independent of the disease dynamics. So both susceptible and infected people have this death rate, and are taken out of our model (there are not $+\mu$ terms).
+        
+        $\gamma$ -- this is the additional deaths caused by the disease. It may be the case that $\gamma=0$ for a disease with no heightened mortality, or one could alternatively write $\mu+\gamma$ as a new parameter $\mu_I>\mu$.
+        
+        $D_S, D_I$ -- these are the rates of diffusion for each sub-population. 
+        }
+        \item If there was no disease, what would happen to the population as $t \to \infty$? That is, what is $S(x,t)$ as $t \to \infty$ if $I(x,0)=0$? Hint: Just consider the ODE kinetic system (that is, the same equation without diffusion/space).
+        \sol{
+        We have that since $I(0)=0$, and the second equation always has a factor of $I$, we can neglect the infected population. In other words, $I(t)=0$ for all $t \geq 0$. Another way to see this is that $I=0$ is a steady state of the second equation independent of whatever form $S$ has.
+        
+        Using the hint, we can think of the dynamics of $S$ in terms of just ODE dynamics (which is true for long times and Neumann boundary conditions):
+        $$
+        \fd{S}{t} = \Lambda - \mu S,
+        $$
+        so this has a stable steady state value of $S_0 = \Lambda/\mu$. Hence, in the absence of disease, the population approaches this value.
+        }
+        \item Find both spatially homogeneous equilibria of this model. Linearize the system around these equilibria by writing $(S(x,t),I(x,t))^T = (S_0,I_0)^T + \varepsilon (S_1(x,t),I_1(x,t))^T$, and retaining only $O(\varepsilon)$ terms. You can leave terms  in the linear system in terms of an arbitrary steady state, $(S_0,I_0)^T$, and do not need to write these out.  NB: The notation $(\cdot,\cdot)^T$ is just writing the row vector as a column vector.
+        \sol{We have already found one equilibrium above, namely $(S_0,I_0)=(\Lambda/\mu, 0)$. The other can be found by setting all of the derivatives to $0$, and dividing out an $I$ from the second equation, to find:
+        \begin{align*}
+           0 &= \Lambda - \mu S_0 + \delta I_0 - \beta S_0I_0,\\
+            0 &= \beta S_0-\delta  - (\mu+\gamma).
+        \end{align*}
+        The second equation says that $S_0 = (\mu+\gamma+\delta)/\beta$, and rearranging the first equation for $I$ we have:
+        $$
+        I_0 = \frac{\mu S_0-\Lambda}{\delta-\beta S_0} = \frac{\mu (\mu+\gamma+\delta)-\beta\Lambda}{\beta\delta-\beta (\mu+\gamma+\delta)} = \frac{\beta\Lambda-\mu (\mu+\gamma+\delta)}{\beta (\mu+\gamma)}.
+        $$
+        
+        The linearization proceeds exactly as in question 1, and you do not need to go through it in general. Essentially the nonlinear kinetics will be replaced by the Jacobian, and the diffusion terms will remain the same. We obtain the system:
+    \begin{align*}
+        \pd{S_1}{t} &= - (\mu+\beta I_0) S_1 + (\delta-\beta S_0) I_1  + D_S\pdd{S_1}{x},\\
+        \pd{I_1}{t} &= \beta I_0 S_1+ (\beta S_0 - \delta-\mu-\gamma)I_1 +D_I\pdd{I_1}{x}.
+    \end{align*}
+    Note that the $S_0$ and $I_0$ terms come from the $\beta IS$ term of the original equation (the only nonlinearity), and are just the coefficients you get by taking partials of that term and evaluating them at the steady state.
+        }
+        \item Now consider the ansatz:
+        $$
+        \begin{pmatrix}
+        S_1(x,t)\\ I_1(x,t)
+        \end{pmatrix} =  
+        \begin{pmatrix}
+        C_S\\ C_I
+        \end{pmatrix}\exp(\lambda_k t) \cos\left (\frac{k \pi x}{L} \right).
+        $$
+        By substituting this into your linear system, and requiring that the constants $C_S$ and $C_I$ are not both zero, determine an equation for the growth rates of these perturbations $\lambda_k$. You do not need to explicitly compute the coefficients of this equation at a particular steady state, but instead be precise in exactly how they are computed. You also do not need to solve this equation. 
+        \sol{Substituting this ansatz into the linear system above, we find:
+     \begin{align*}
+        \lambda_k S_1 &= - (\mu+\beta I_0) S_1 + (\delta-\beta S_0) I_1  -D_S\left(\frac{k \pi }{L} \right)^2 S_1,\\
+        \lambda_k I_1 &= \beta I_0 S_1+ (\beta S_0 - \delta-\mu-\gamma)I_1 -D_I\left(\frac{k \pi }{L} \right)^2 I_1.
+    \end{align*}
+    While this looks messy, we can write it in a vector form as,
+    $$
+    \lambda_k\begin{pmatrix}
+        S_1\\ I_1
+    \end{pmatrix} = \underbrace{\begin{pmatrix}
+        - (\mu+\beta I_0)-D_S\left(\frac{k \pi }{L} \right)^2 & (\delta-\beta S_0)\\ 
+        \beta I_0 & (\beta S_0 - \delta-\mu-\gamma) -D_I\left(\frac{k \pi }{L} \right)^2
+        \end{pmatrix}}_{\m{M}}
+        \begin{pmatrix}
+        S_1\\ I_1
+        \end{pmatrix}. 
+    $$
+    So, using the matrix $\m{M}$ above, we have that $\lambda_k$ satisfies:
+    $$
+    \lambda_k^2 - \tr(\m{M}) \lambda_k + \det(\m{M}) = 0.
+    $$
+    Given that we are not asked to analyze this equation, being explicit how these coefficients of $\lambda_k$ are computed (as in the equation above) is sufficient for `full marks' for this part (nothing new is learned by computing the trace and determinant other than what these terms look like). 
+    
+    You should be able to explicitly compute the terms however, for which we find:
+    \begin{align*}
+    \tr(\m{M}) &= - (\mu+\beta I_0)-D_S\left(\frac{k \pi }{L} \right)^2 +(\beta S_0 - \delta-\mu-\gamma) -D_I\left(\frac{k \pi }{L} \right)^2\\
+    &= \beta (S_0-I_0) - \delta-2\mu-\gamma -(D_S+D_I)\left(\frac{k \pi }{L} \right)^2,\\
+    \end{align*}
+    and
+    \begin{align*}
+    \det(\m{M}) &=  \left(-\mu+-\beta I_0-D_S\left(\frac{k \pi }{L} \right)^2\right)\left(\beta S_0 - \delta-\mu-\gamma -D_I\left(\frac{k \pi }{L} \right)^2\right)\\
+    &-(\delta-\beta S_0)\beta I_0.
+    \end{align*}
+        }
+    \end{enumerate}
+
+
+\end{document}

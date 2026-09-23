@@ -1,0 +1,428 @@
+\documentclass[a4paper,12pt]{article}
+\input{../common/preamble.tex}
+\usepackage{booktabs}
+\setbool{show_question}{true}
+\setbool{show_solution}{false}
+\setbool{show_commentary}{false}
+\begin{document}
+%
+\heading{Michaelmas}{Problem sheet 2\solutioninheading}
+%
+%
+\ifbool{show_solution}{}{
+  This problem sheet is due in by \textbf{5pm} on \textbf{Wednesday 12 November 2025}. You may submit it on paper to my office (\textsc{mcs}\,3008) or electronically on Gradescope. There is a discretionary mark available for neat and legible solutions.
+
+  \textbf{Topics covered}: Chapter 3.
+
+Consider this variation on competitive Lotka--Volterra, where the interaction terms are of a predator--prey type:
+	\begin{subequations}
+    \begin{align}
+    	\fd{x}{t} &= ax\left(1-\frac{x}{\eta_1}\right) - bxy,\\
+		\fd{y}{t} &= cy\left(1-\frac{y}{\eta_2}\right) + dxy,
+    \end{align}
+    \end{subequations}
+where $a,b,c,d,\eta_1,\eta_2 > 0$. 
+}
+
+\begin{enumerate}
+	% Q1
+	\question{}
+	{ % Question
+	\begin{enumerate}
+		\item Give a short biological interpretation of the parameters $a,b,c,d,\eta_1,\eta_2$. 
+		\item Which of $x$ and $y$ might represent a predator, and which might represent prey? 
+		\item In traditional Lotka--Volterra, the predator dies out if the prey population is zero. Is that the case here? What does this say about the predator's diet in this model?
+	\end{enumerate}
+	}
+	{ % Solution
+	\begin{enumerate}
+		\item We have that $a$ and $c$ are the birth rates of $x$ and $y$; $b$ and $d$ are interaction parameters, effectively saying how good/bad interaction is for $x$ and $y$; $\eta_1$ and $\eta_2$ are the carrying capacities of $x$ and $y$ in the absence of the other, when both species exhibit logistic growth.
+		%
+		\commentary{
+		The major mistake was exactly the same as one made on Problem Sheet 1: referring to $\eta_1$ and $\eta_2$ as the \emph{maximum populations}. They are not: there is no maximum; they are values at which the populations will tend to \emph{if} there is no interaction. The acceptable shorthand name for this is the carrying capacity.
+		}
+		%
+		\item Interactions are bad for $x$ and good for $y$, so $x$ is the prey and $y$ is the predator in this model.
+		%
+		\commentary{
+		Pretty much everyone got this!
+		}		
+		%
+		\item The predator here can live without the prey, and in fact exhibits logistic growth up the carrying capacity. This suggests the predator has a more varied diet (these are sometimes called `generalist' or `intraguild' predators).
+		%
+		\commentary{
+		Pretty much all of you got the answer here, although some people forgot to answer the question about diet explicitly---remember to answer the question in full! 
+		
+		However, a large number of you completely forgot this in question 6 where the $(0,1)$ predator-winning equilibrium was stable. A number of you said this was bad as \emph{the predator can't survive without its prey}, but this directly contradicts what you had said here!
+		}
+	\end{enumerate}
+	}
+	
+	% Q2
+	\question{}
+	{ % Question
+	By setting $x=\hat{x}X$, $y=\hat{y}Y$, $t=\hat{t}T$, nondimensionalise the system and then remove hats to obtain
+	\begin{subequations}
+    \begin{align}
+    	\fd{x}{t} &= x(1-x - \gamma_1 y),\\
+		\fd{y}{t} &= \beta y(1-y + \gamma_2 x),
+    \end{align}
+    \end{subequations}
+    where $\beta, \gamma_1,\gamma_2 > 0$. In doing so, give the definition of the new parameters in terms of the old parameters.
+    }
+    { % Solution 
+Setting $x=\hat{x}X$, $y=\hat{y}Y$, $t=\hat{t}T$, the system becomes
+	\begin{subequations}
+    \begin{align}
+    	\frac{X}{T}\fd{\hat{x}}{\hat{t}} &= a\hat{x}X\left(1-\frac{\hat{x}X}{\eta_1}\right) - b\hat{x}\hat{y}XY,\\
+		\frac{Y}{T}\fd{\hat{y}}{\hat{t}} &= c\hat{y}Y\left(1-\frac{\hat{y}Y}{\eta_2}\right) + d\hat{x}\hat{y}XY,
+    \end{align}
+    \end{subequations}
+    Clearing the left-hand side of $X$, $Y$ and $T$ by multiplying through we get
+	\begin{subequations}
+    \begin{align}
+    	\fd{\hat{x}}{\hat{t}} &= a\hat{x}T\left(1-\frac{\hat{x}X}{\eta_1}\right) - b\hat{x}\hat{y}TY,\\
+		\fd{\hat{y}}{\hat{t}} &= c\hat{y}T\left(1-\frac{\hat{y}Y}{\eta_2}\right) + d\hat{x}\hat{y}TX.
+    \end{align}
+    \end{subequations}
+    Keeping an eye on the target, we can bring the last term on the right-hand side for each equation into the bracket,
+	\begin{subequations}
+    \begin{align}
+    	\fd{\hat{x}}{\hat{t}} &= a\hat{x}T\left(1-\frac{\hat{x}X}{\eta_1} - \frac{b}{a}\hat{y}Y\right),\label{minor-mistake}\\
+		\fd{\hat{y}}{\hat{t}} &= c\hat{y}T\left(1-\frac{\hat{y}Y}{\eta_2} + \frac{d}{c}\hat{x}X\right),
+    \end{align}
+    \end{subequations}
+    and now we can begin to compare term-by-term. Starting on the top, we can see $T=1/a$ and $X=\eta_1$:
+	\begin{subequations}
+    \begin{align}
+    	\fd{\hat{x}}{\hat{t}} &= \hat{x}\left(1-\hat{x} - \frac{b}{a}\hat{y}Y\right),\\
+		\fd{\hat{y}}{\hat{t}} &= \frac{c}{a}\hat{y}\left(1-\frac{\hat{y}Y}{\eta_2} + \frac{d\eta_1}{c}\hat{x}\right),
+    \end{align}
+    \end{subequations}    
+	Then if $Y=\eta_2$, we are left with
+	\begin{subequations}
+    \begin{align}
+    	\fd{\hat{x}}{\hat{t}} &= \hat{x}\left(1-\hat{x} - \frac{b\eta_2}{a}\hat{y}\right),\\
+		\fd{\hat{y}}{\hat{t}} &= \frac{c}{a}\hat{y}\left(1-\hat{y} + \frac{d\eta_1}{c}\hat{x}\right),
+    \end{align}
+    \end{subequations}  	
+    and so $\gamma_1 = b\eta_2/a$, $\beta=c/a$ and $\gamma_2=d\eta_1/c$. Removing hats, we're left with
+   	\begin{subequations}
+    \begin{align}
+    	\fd{x}{t} &= x(1-x - \gamma_1 y),\\
+		\fd{y}{t} &= \beta y(1-y + \gamma_2 x).
+    \end{align}
+    \end{subequations}
+    All together:
+    \begin{equation}
+    	X=\eta_1, \quad Y=\eta_2, \quad T=\frac1a, \quad \beta=\frac{c}{a}, \quad \gamma_1 = \frac{b\eta_2}{a}, \quad \gamma_2 = \frac{d\eta_1}{c}.
+    \end{equation}    
+    %
+	\commentary{
+	The main minor mistake was not factorising out the $a$ correctly from the final term in \cref{minor-mistake}. Some of you also ended up with $\gamma_1$ looking different to $\gamma_2$: the symmetry of the equations suggests that they should look pretty similar. 
+	
+	And finally, some of you didn't explicitly write the new parameters in terms of the old parameters. It is very important to explicitly answer the question! Making your answer clear will help with this.
+	}   
+    }    
+    
+    %Q3
+    \question{}
+    { % Question
+    \label{sketch} By sketching the nullclines of the system for two different cases, show how the number of permissible equilibria depends on $\gamma_1$. (Note this is different to the competitive Lotka--Volterra model we saw in class, where the number of permissible equilibria depended on both $\gamma_1$ and $\gamma_2$.)
+    }
+    { % Solution 
+    The nullclines are
+    \begin{subequations}
+    \begin{align}
+    	0 &= x(1-x - \gamma_1 y) &\implies x=0, \quad x=1-\gamma_1 y,\\
+		0 &=\beta y(1-y + \gamma_2 x) &\implies y=0, \quad y=1+\gamma_2 x.
+    \end{align}
+    \end{subequations}
+    Sketching these lines we see that whether the two diagonal lines cross to form a permissible equilibrium depends on $\gamma_1 \lessgtr 1$:
+    \begin{center}
+    	\scalebox{0.9}{
+    	\input{images/comp-lv-pp-phase-1.pgf}
+    	\input{images/comp-lv-pp-phase-2.pgf}}
+    \end{center}
+    %
+	\commentary{
+	The big errors made here were:
+    	\begin{itemize}[topsep=1ex,itemsep=0pt]
+    	\item Just plain not marking the equilibria on the diagram (use circles).
+    	\item Missing the $(0,0)$ or $(0,1)$ equilibrium.
+    	\item Not considering two separate cases in $\gamma_1$. The models will almost always have some parameter dependence so more than one graph will be needed.
+    	\end{itemize}
+	But many of you used colour well and spelt permissible successfully. Well done!
+	}
+    }
+    
+    % Q4
+	\question{}
+	{
+	\label{sa} The Jacobian of the linearised system, $\m{J}$, is
+    \begin{equation}
+    	\m{J} =
+		\begin{pmatrix}
+    	1-2x_0-\gamma_1 y_0 & -\gamma_1 x_0 \\
+    	\beta \gamma_2 y_0 & \beta(1-2y_0 +\gamma_2 x_0)    
+    	\end{pmatrix},
+    \end{equation}
+    and, similarly to competitive Lotka--Volterra, there are four equilibria, at
+    \begin{equation*}
+    	(x_0,y_0) = (0,0), \quad (1,0), \quad (0,1) \quad \text{and} \quad 
+    \left(\frac{1-\gamma_1}{1+\gamma_1\gamma_2}, \frac{1+\gamma_2}{1+\gamma_1\gamma_2}\right).
+    \end{equation*}
+    The characteristic equation for this final equilibrium is
+    \begin{equation}
+    \lambda ^2 (1+\gamma_1 \gamma_2)+  \lambda (1-\gamma_1+\beta[1+\gamma_2])+\beta(1-\gamma_1 )(1+\gamma_2) =0.
+    \end{equation}
+    Recalling that $\beta,\gamma_1,\gamma_2>0$, show that for any given parameter set $(\beta,\gamma_1,\gamma_2)$, all equilibria are unstable \emph{apart from exactly one}.
+    
+    \emph{Hint:} It will help to fill this table with `stable', `degenerate' or `unstable'. Remember that a saddle point is a type of unstable equilibrium (because it's unstable in at least one direction). %You can use results from your notes about $(0,0)$ and $(0,1)$.
+        \begin{center}
+    	\begin{tabular}{ccccc}
+		\toprule
+		& $(0,0)$ & $(0,1)$ & $\big(\frac{1-\gamma_1}{1+\gamma_1\gamma_2}, \frac{1+\gamma_2}{1+\gamma_1\gamma_2}\big)$ & $(1,0)$ \\
+		\midrule
+		$\gamma_1<1$ & ? & ? & ? & ? \\
+		$\gamma_1=1$ & ? & ? & ? & ? \\
+		$\gamma_1>1$ & ? & ? & ? & ? \\
+		\bottomrule
+		\end{tabular}
+    \end{center}
+    }
+    { % Solution
+    Let's have a look at the four equilibria in turn.
+    \begin{description}
+    	\item[Equilibrium 1, $(0,0)$:]
+		The Jacobian is
+		\begin{equation}
+			\m{J} = \begin{pmatrix}1 & 0 \\ 0 & \beta \end{pmatrix},
+		\end{equation}
+		and so the eigenvalues are $1,\beta>0$ so this is always an unstable equilibrium (indeed an unstable node, but this question does not ask you to classify the equilibria more than stable/degenerate/unstable). So far:
+		
+		\begin{center}
+    	\begin{tabular}{ccccc}
+		\toprule
+		& $(0,0)$ & $(0,1)$ & $\big(\frac{1-\gamma_1}{1+\gamma_1\gamma_2}, \frac{1+\gamma_2}{1+\gamma_1\gamma_2}\big)$ & $(1,0)$ \\
+		\midrule
+		$\gamma_1<1$ & unstable & ? & ? & ? \\
+		$\gamma_1=1$ & unstable & ? & ? & ? \\
+		$\gamma_1>1$ & unstable & ? & ? & ? \\
+		\bottomrule
+		\end{tabular}
+    	\end{center}
+		
+		\item[Equilibrium 2, $(0,1)$:]
+		The Jacobian is
+		\begin{equation}
+			\m{J} = \begin{pmatrix} 1-\gamma_1 & 0 \\ \beta\gamma_2 & -\beta \end{pmatrix},
+		\end{equation}
+		and so the eigenvalues are $1-\gamma_1$ and $-\beta<0$. So this equilibrium is:
+		\begin{itemize}
+			\item $\gamma_1<1$:  unstable (saddle point),
+			\item $\gamma_1=1$:  degenerate,
+			\item $\gamma_1>1$:  stable (stable node).
+		\end{itemize} 
+		So far:
+		
+		\begin{center}
+    	\begin{tabular}{ccccc}
+		\toprule
+		& $(0,0)$ & $(0,1)$ & $\big(\frac{1-\gamma_1}{1+\gamma_1\gamma_2}, \frac{1+\gamma_2}{1+\gamma_1\gamma_2}\big)$ & $(1,0)$ \\
+		\midrule
+		$\gamma_1<1$ & unstable & unstable & ? & ? \\
+		$\gamma_1=1$ & unstable & degenerate & ? & ? \\
+		$\gamma_1>1$ & unstable & stable & ? & ? \\
+		\bottomrule
+		\end{tabular}
+    	\end{center}
+		
+		\item[Equilibrium 4, $(1,0)$:]
+		The Jacobian is
+		\begin{equation}
+			\m{J} = \begin{pmatrix} -1 & -\gamma_1 \\ 0 & \beta(1+\gamma_2) \end{pmatrix},
+		\end{equation}
+		and so the eigenvalues are $-1$ and $\beta(1+\gamma_2)>0$. So this equilibrium is always unstable (a saddle point). So far:
+		
+		\begin{center}
+    	\begin{tabular}{ccccc}
+		\toprule
+		& $(0,0)$ & $(0,1)$ & $\big(\frac{1-\gamma_1}{1+\gamma_1\gamma_2}, \frac{1+\gamma_2}{1+\gamma_1\gamma_2}\big)$ & $(1,0)$ \\
+		\midrule
+		$\gamma_1<1$ & unstable & unstable & ? & unstable \\
+		$\gamma_1=1$ & unstable & degenerate & ? & unstable \\
+		$\gamma_1>1$ & unstable & stable & ? & unstable \\
+		\bottomrule
+		\end{tabular}
+    	\end{center}		
+	
+		\item[Equilibrium 3, $\big(\frac{1-\gamma_1}{1+\gamma_1\gamma_2}, \frac{1+\gamma_2}{1+\gamma_1\gamma_2}\big)$:]
+		Time to face the music. The question tells us that the eigenvalue equation is
+	\begin{equation}
+    c_2\lambda^2 + c_1\lambda + c_0 = 0,
+    \end{equation}
+    where 
+    \begin{align}
+    &c_2 = 1+\gamma_1\gamma_2,\\
+    &c_1 = 1-\gamma_1+\beta[1+\gamma_2],\\
+    &c_0 = \beta(1-\gamma_1)(1+\gamma_2),
+    \end{align}
+    First, notice that when $\gamma_1=1$, this equilibrium is equal to $(0,1)$, which we already know is degenerate in this case.
+    
+    We can also notice that if $\gamma_1>1$, then this equilibrium is not permissible, but we can still do a linear stability analysis on it.
+    
+	Let's look at the signs of $c_{2,1,0}$ for the two unsolved cases of $\gamma_1$, remembering that the question tells us that $\gamma_1>0$:
+		\begin{itemize}
+			\item $(0<)\;\gamma_1<1$:
+			\[c_2>0, \quad c_1>0, \quad c_0>0.\]
+			By Descartes' rule of signs, $\Re(\lambda_1),\Re(\lambda_2)<0$, so this equilibrium is stable.
+			\item $\gamma_1>1$:
+			\[c_2>0, \quad c_1 \dots ?, \quad c_0<0.\]
+			We don't need to know the sign of $c_1$ to see that there can only be one change of sign, so $\Re(\lambda_1)<0<\Re(\lambda_2)$ and so this is a saddle point, and hence unstable.
+		\end{itemize} 	
+	In conclusion:
+		
+		\begin{center}
+    	\begin{tabular}{ccccc}
+		\toprule
+		& $(0,0)$ & $(0,1)$ & $\big(\frac{1-\gamma_1}{1+\gamma_1\gamma_2}, \frac{1+\gamma_2}{1+\gamma_1\gamma_2}\big)$ & $(1,0)$ \\
+		\midrule
+		$\gamma_1<1$ & unstable & unstable & stable & unstable \\
+		$\gamma_1=1$ & unstable & degenerate & equal to $(0,1)$ & unstable \\
+		$\gamma_1>1$ & unstable & stable & unstable & unstable \\
+		\bottomrule
+		\end{tabular}
+    	\end{center}	
+
+    \end{description}
+    \vspace{5mm}
+    %
+    \commentary{
+		Almost all the errors were on the coexistence equilibria. The main error was not recognising that $(0,1)$ and the coexistence equilibrium become the same equilibrium at $\gamma_1=1$. This is to be expected where there is some bifurcation -- a switch in stability -- and it should go through degeneracy. The second error relating to this was that a number of people seemed to assume the stability of those equilibria at $\gamma=1$ followed from either the $\gamma<1$ or $\gamma>1$ stability. Without some extra analysis you cannot judge the stability of the degenerate equilibrium. One way to do it (and you weren't asked to do this) is to draw the phase diagram: it would have showed you it is in fact stable as the solutions tend towards it.
+		
+		One quick algebra tip: if your $2\times2$ matrix has a zero on the off-diagonal, the eigenvalues are just the terms on the diagonal.
+	}
+    }
+    
+    % Q5
+    \question{}
+    { % Question
+    For the case $\gamma_1<1$, draw a complete phase portrait, including some sample trajectories, and confirm your findings with regards to the stability of the equilibria for this case in question \ref{sa}. You should be able to start by using one of your nullcline sketches from question \ref{sketch}.
+    }
+    { % Solution
+    The phase portrait should look like:
+    \begin{center}
+    	\input{images/comp-lv-pp-phase-traj-1.pgf}
+    \end{center}
+    showing the stability of the $\big(\frac{1-\gamma_1}{1+\gamma_1\gamma_2}, \frac{1+\gamma_2}{1+\gamma_1\gamma_2}\big)$ equilibrium.
+	\commentary{
+		Revisit Problems Class 2 if you are struggling with this. The main mistake was to not have trajectories that cross the $x$- and $y$-nullclines vertically and horizontally, respectively.
+		
+		A related issue was drawing too small a diagram. Go big or go home! It is a lot easier to get it right if you have given yourself space. It also helps if when you submit your work, your diagrams are not split in half over a page break!
+	}  
+    }
+    
+    % Q6
+    \question{}
+    { % Question
+    Finally, in light of the results in question \ref{sa}, discuss the validity of the model for a biological system. As part of this analysis, consider the physical interpretation of each equilibrium and whether it would be desirable for it to be stable or not. 
+    }
+    {% Solution 
+	\commentary{
+    Whether a model is good or not depends on what system it's trying to model. No model is perfect and we should always recognise its strengths and flaws. Here, the target system isn't specified, so we can say some broad things about features this model has. A good approach is to address each equilibrium's stability and discuss its relative merits, critically discussing any parameter dependence for this stability. Then you should always round up and conclude.
+    }
+    
+   As you noted in question 1, this model is not a pure predator--prey one. The fact the the `predator' has logistic growth in the absence of prey indicates it has an alternate food source to $x$ as it will reach a non-zero equilibrium even if $x$ is zero. The interaction terms could instead reflect a competitive system where $y$ carries a fatal disease for $x$, so interactions make the alternative food source more accessible for $y$. So actually, $x$ is less well able to survive rather than being directly eaten!
+    
+    \begin{itemize}
+    	\item Unstable $(1,0)$ equilibrium: this says the weaker species cannot win out or outcompete. I think you are relatively safe to say this is a good thing. I am sure one could find examples in nature where the weaker competitor can win out, but it would be a very extreme system. 
+		\item No stable $(0,0)$ equilibrium: Many students either class this as invalid or valid. In reality I think it's ambiguous. Instability implies a small seeding population(s) will automatically grow to a finite (noticeable) value. In this model this behaviour is dictated by the logistic growth which we know on its own always forces a population to a finite level (the carrying capacity). For a highly infectious disease like Covid-19 this is probably a good property. But there will be some physical situations where some critical mass is required for a population to not die out quickly. Like we saw in the Allee model in 1D, this is known to be true of plankton populations; they survive far better in large populations due to their mutual cooperation and fail if it is lacking.
+	\item The $(0,1)$ and coexistence equilibrium switch stability when $\gamma_1$ goes from $<1$ to $>1$: This is the best aspect of in the model. We see that $\gamma_1$ represents the relative balance between growth of the weaker species $x$ (from the logistic model) and a negative interaction. When $\gamma_1>1$ the stronger competitor/predator is too dominant and wins out (again this is not a problem, logistic growth says it has a separate food source); $\gamma_1<$ implies a balance. 
+	\item One stable equilibrium: this is again a little ambiguous; we saw the notion of multistability in the outbreak/spruce budworm model in class. This implies the end state depends on where you start, i.e.\ for a disease if the initial seeding is not too big it may settle at a low level, but if it gets too big the disease can break out to a larger value. This is seen as a good model property in most of epidemiology, but our model here cannot have that. In the model at hand the end state is independent of the initial conditions. It's not a terrible property in and of itself, but it means the model is limited as to what physical situations it can describe.
+    \end{itemize}
+  
+	\commentary{
+      One final comment on the $\gamma_1 =1$ case, which had the degeneracy. This occurred basically as the two equilibria $(0,1)$ and coexistence coalesced. While mathematically it's interesting, from a model perspective it isn't really. It's just the meeting point for the two regimes (predator winning and coexistence). The parameter is supposed to represent physical parameters like food sources, environmental conditions and competition (which will typically differ for members of the species: sometimes you get big prey and weak predators!). A fixed value $1$ amongst a real set of values $(0,\infty)$ represents essentially no conditions (it has measure zero if we are being fancy). It just wouldn't really come up in reality.
+	}
+  
+    Overall we are left with the conclusion this model has some good points, with a parametric dependence on who wins, but it is limited, with no multistability or mutual extinction. Of course it has no spatial behaviour as well which is a generic complaint I would always accept about any purely temporal system.
+    
+	\commentary{
+		There were also some answers which said things like `if we’re at an unstable extinction equilibrium, a population can come back from nothing'. Of course this isn't strictly true: you need to have a small nudge to get the population to rebound. 
+			
+		A final commentary on specific answers: some people suggested the existence of (e.g.) the coexistence equilibrium was good because it allowed both populations to happily exist. This depends a bit on what is being modelled: if the populations are hair nits and cockroaches, we might feel differently!
+	}
+
+
+    }
+
+    %
+    % Q2
+%    \item %
+%    In chapter 4 of the lecture notes, we showed that the enzyme-reaction system
+%	\begin{subequations}
+%    \begin{align}
+%    \label{limcyc}
+%    \fd{u}{t} &= a - u +u^2v,\\
+%    \fd{v}{t} &= b - u^2v,
+%    \end{align}
+%    \end{subequations}
+%    has equilibria
+%    \begin{equation}
+%    u_0 = a+b,\quad v_0 = \frac{b}{(a+b)^2}.
+%    \end{equation}
+%    Its stability matrix $\m{A}_1$ is
+%    \begin{equation}
+%    \left(
+%    \begin{array}{cc}
+%    -1+2u_0 v_0 & u_0^2\\
+%    -2u_0v_0 & -u_0^2
+%    \end{array}
+%     \right)
+%    \end{equation}
+%    and, on substituting in our equilibria, we have
+%    \begin{equation}
+%    \tr(\m{A}_1) = \frac{b-a}{a+b} -(a+b)^2,\quad \det(\m{A}_1) = (a+b)^2>0.
+%    \end{equation}
+%    We want to see a `perfect' switch, which goes between an oscillating periodic solution and a non-oscillatory decaying solution, both with the same $u_0$. This is done with digital functions $a(t)$ and $b(t)$ as we did in the notes: we need values $(a_\text{on},b_\text{on})$ which give oscillatory behaviour, and $(a_\text{off},b_\text{off})$ which cause the solution to decay exponentially to a fixed value. In the notes, we found the parameter sets for fixed amplitude local oscillatory behaviour to be
+%    \begin{equation}
+%    \label{fixedampcon}
+%    b-a  = (a+b)^3.
+%    \end{equation}
+%    But we don't have any condition for the non-oscillatory decaying parameters, which we will find in what follows.
+%    \begin{enumerate}
+%    %
+%    \item Show that $a_\text{on}$ and $b_\text{on}$, the oscillatory parameters, are given by 
+%    \begin{equation}
+%    a_\text{on} = \frac{u_0(1-u_0^2)}{2},\quad b_\text{on}= \frac{u_0(1+u_0^2)}{2}.
+%    \end{equation}
+%    We require $u_0>0$. State the condition required for $a_\text{on}>0$ (we want both $a$ and $b$ to be positive for biochemical realism). %\hfill (2 marks) 
+%    %
+%    \item We now search for the non-oscilliatory parameters  $(a_\text{off},b_\text{off})$. State the condition on the trace and determinant for non-oscillatory local solutions $u_1$ and $v_1$. (Not necessarily non-oscillatory solutions \emph{that decay}, but just non-oscillatory in general) %\hfill (1 mark)
+%    %
+%    \item Show that the function $f(a,b) = \tr(\m{A}_1)^2-4 \det(\m{A}_1)=0$ can be written as 
+%    \begin{equation}
+%    g(a,u_0) = \frac{\left(2 a+u_0^3-u_0\right)^2}{u_0^2}-4 u_0^2,
+%    \end{equation}
+%    with the substitution $b = u_0-a$. %\hfill (2 marks) 
+%    %
+%    \item We seek solutions $g(a,u_0) = 0$. Show this reduces to the cubic equation,
+%    \begin{equation}
+%    u_0^3 \pm 2u_0^2 -u_0 + 2a = 0.
+%    \end{equation} 
+%    %\strut\hfill(2 marks)
+%    %    
+%    \item This cubic equation is very unwieldy. However, we can find a simpler way in. It transpires there are solutions $u_{01}$ and $u_{02} = -u_{01}$ (equal in magnitude, but opposite in sign).  Show that $u_{01}=1$ and that $a=1$ in this case. You will not receive marks for just substituting these values in; they should be the result of solving the system subject to the highlighted symmetry. %\hfill (3 marks)
+%    %
+%    \item Why is this solution not physically permissible? %\hfill (1 mark)
+%    %
+%    %\item \textbf{For your own interest, not to hand in}: 
+%    %Show that by decreasing $a$, we will decrease the solution $u_{01}$ at a rate less than $a$ (if $u_{01}<1$) and show why this implies that for all $0<a_\text{off}<1$, we have a valid set of solutions $(a_\text{on},b_\text{on})$ and $(a_\text{off},b_\text{off})$ which define a `perfect switch'.
+%    %
+%    %\item \textbf{For your own interest, not to hand in}:  State the form of the differential equation of the switch for a given choice of $a_\text{off}$ and $u_0$ (see your notes).
+%    \end{enumerate}
+
+\end{enumerate}
+
+\end{document}

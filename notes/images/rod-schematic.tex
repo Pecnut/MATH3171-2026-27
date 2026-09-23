@@ -1,0 +1,19 @@
+\begin{tikzpicture}
+    \node[anchor=center,inner sep=0] at (0,0) {\includegraphics[height=7cm]{images/BuckledRodn1.pdf}};
+    \node (centre) at (0,0) {};
+    %\draw[red,ultra thick,rounded corners] (0,0) rectangle (9.4,6.2);
+    \node[anchor=south west] (bottomSlabel) at (-0.2,-3.5) {$s=0$};
+    \node[anchor=north west] (topSlabel) at (-0.2,3.5) {$s=L$};
+    
+    \node[anchor=north west] (Nlabel) at (-.4,4.2) {$N$};
+    \draw[-{>[scale=2,length=4,width=4]}] (-0.35,4.1) -- (-0.35,3.4);    
+    
+    \node (wlabel) at (0,0.3) {$w$};
+    \node (dArrowOne) at (-0.5,0) {};
+    \node (dArrowTwo) at (0.5,0) {};
+    \draw[-{>[scale=2,length=4,width=4]}] (dArrowOne) -- (dArrowTwo);    
+    
+    \node[anchor=west] (slabel) at (0.25,-2.45) {$s$};
+    \draw[-{>[scale=2,length=4,width=4]}] (0.25,-2.5) -- (0.45,-1.8);    
+    
+\end{tikzpicture}

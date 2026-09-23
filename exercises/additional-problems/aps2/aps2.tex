@@ -1,0 +1,1340 @@
+\documentclass[a4paper, 12pt]{article}
+\input{../common/preamble.tex}
+\setbool{show_question}{true}
+\setbool{show_solution}{false}
+\begin{document}
+%
+\heading{Michaelmas}{Additional problem sheet 2\solutioninheading}
+\ifbool{show_question}{\textbf{Topics covered}: Chapters 3--5.}{}
+
+\begin{enumerate}[label={\bf \arabic{*}.\;}, ref={\arabic{*}},itemsep=3ex, left=0ex]
+
+    \question{Modified Lotka--Volterra (Exam section B type, but a little short)}
+    {
+      Consider the following system:
+      \begin{subequations}
+        \begin{align}
+          \fd{x}{t} &= r_1x\left[1-\frac{x}{k_1 + a_1 y}\right],\\
+          \fd{y}{t} &= r_2y\left[1-\frac{y}{k_2 + a_2 x}\right],
+        \end{align}
+      \end{subequations}
+      where the constants $r_1,r_2,k_1,k_2,a_1,a_2$ are all assumed positive.
+      \begin{enumerate}[label=(\alph*)]
+        \item
+          By setting $x = \hat{x}X$, $y = \hat{y}Y$ and $t = \hat{t}T$, show that the system can be written in the form
+          \begin{subequations}
+            \begin{align}
+              \fd{\hat{x}}{\hat{t}} &= \hat{x}\left[1-\frac{\hat{x}}{1 + \hat{y}}\right],\\
+              \fd{\hat{y}}{\hat{t}} &= \gamma \hat{y}\left[1-\frac{\hat{y}}{\alpha + \beta \hat{x}}\right],
+            \end{align}
+          \end{subequations}
+          and give the values of $X$, $Y$, $T$, $\alpha$, $\beta$ and $\gamma$ in terms of the original parameters.
+
+          This is one technique for simplifying such systems. We have reduced the equations from dependence on six parameters to just three.
+        \item Determine all the equilibria of this system and analyse their stability.
+        \item Part (b) should have told you that there are only stable equilibria for a subset of all the admissible parameters $r_1,r_2,k_1,k_2,a_1,a_2>0$. What choice of parameters can we make such that there is always a stable equilibrium? Does this change lead to a physically reasonable model? (Consider the permissible equilibria and what they mean in this analysis).
+
+      \end{enumerate}
+    }
+    {
+      \begin{enumerate}[label=(\alph*)]
+        \item Substituting in, we obtain
+          \begin{subequations}
+            \begin{align}
+              \fd{\hat{x}}{\hat{t}} &= r_1T\hat{x}\left[1-\frac{X\hat{x}}{k_1 + a_1 Y\hat{y}}\right],\\
+              \fd{\hat{y}}{\hat{t}} &= r_2 T \hat{y}\left[1-\frac{Y\hat{y}}{k_2 + a_2 X\hat{x}}\right].
+            \end{align}
+          \end{subequations}
+          Looking at the first equation, we can set $r_1 T = 1$, i.e.\ $T=1/r_1$. We then write
+          \begin{equation}
+            \frac{X\hat{x}}{k_1 + a_1 Y\hat{y}}  =\frac{\hat{x}}{ \frac{k_1}{X} + a_1\frac{Y}{X}\hat{y}}
+          \end{equation}
+          and set $k_1/X=1$, i.e.\ $X=k_1$; and $a_1Y/X = a_1 Y/k_1 = 1$, i.e.\ $Y=k_1/a_1$. The second equation has become
+          \begin{equation}
+            \fd{\hat{y}}{\hat{t}} = \frac{r_2}{r_1} \hat{y}\left[1-\frac{\frac{k_1}{a_1}\hat{y}}{k_2 + a_2 k_1\hat{x}}\right].
+          \end{equation}
+          This suggests $\gamma = r_2/r_1$.  Doing the same trick with the fraction in this equation, we have
+          \begin{equation}
+            \frac{\frac{k_1}{a_1}\hat{y}}{k_2 + a_2 k_1\hat{x}} =
+            \frac{\hat{y}}{\frac{k_2a_1}{k_1} + \frac{a_2}{a_1}\hat{x}},
+          \end{equation}
+          and so we set $\alpha = k_2a_1/k_1$ and $\beta = a_1 a_2$.
+
+          In conclusion:
+          \begin{equation}
+            X = k_1, \quad Y=\frac{k_1}{a_1}, \quad T=\frac{1}{r_1}, \quad \alpha = \frac{k_2a_1}{k_1 }, \quad \beta = a_1 a_2, \quad \gamma = \frac{r_2}{r_1}.
+          \end{equation}
+
+        \item We drop the hat notation in what follows. The equilibria require we solve
+          \begin{equation}
+            x\left[1-\frac{x}{1 + y}\right] =0\quad \text{and} \quad y\left[1-\frac{y}{\alpha + \beta x}\right] =0
+          \end{equation}
+          so we clearly have $(0,0)$, $(0,\alpha)$ and $(1,0)$. The final equilibrium can be obtained by solving the first equation to get $x = 1+y$, then the second equation gives
+          \begin{equation}
+            \alpha +\beta(1+y) = y.
+          \end{equation}
+          Hence the final equilibrium is
+          \begin{equation}
+            (x,y) = \left(\frac{1+\alpha}{1-\beta}, \frac{\alpha+\beta}{1-\beta}\right).
+          \end{equation}
+
+          The Jacobian $\m{J}$ (at a general equilibrium $(x_0,y_0)$) is
+          \begin{equation}
+            \m{J} = \mat{1-\frac{2x_0}{1+y_0}}{\frac{x_0^2}{(1+y_0)^2}}{\frac{\gamma\beta y_0^2}{(\alpha +\beta x_0)^2}}{\gamma\left(1-\frac{2 y_0}{\alpha+ \beta x_0}\right)}.
+          \end{equation}
+          Now let's go through the equilibria:
+
+          \begin{enumerate}[label=(\roman*)]
+            \item $(0,0)$:
+              The Jacobian takes the form
+              \begin{equation}
+                \m{J} = \mat{1}{0}{0}{\gamma}.
+              \end{equation}
+              So $\det(\m{J} - \lambda \m{I})=0$ is
+              \begin{equation}
+                (1-\lambda)(\gamma-\lambda) = 0.
+              \end{equation}
+              So $\lambda_1 = 1$ and $\lambda_2 = \gamma$. This equilibrium is unstable.
+
+            \item $(1,0)$: The Jacobian $\m{J}$ takes the form
+              \begin{equation}
+                \m{J} = \mat{-1}{1}{0}{\gamma}.
+              \end{equation}
+              So $\det(\m{J} - \lambda \m{I})=0$ is
+              \begin{equation}
+                (-1-\lambda)(\gamma-\lambda) = 0
+              \end{equation}
+              So $\lambda_1 = -1$ and $\lambda_2 = \gamma$. This equilibrium is unstable.
+
+            \item $(0,\alpha)$:
+              The Jacobian $\m{J}$ is
+              \begin{equation}
+                \m{J} = \mat{1}{0}{\gamma\beta}{-\gamma}.
+              \end{equation}
+              So  $\lambda_1 = 1$ and $\lambda_2 = -\gamma$. This equilibrium is unstable.
+
+            \item Finally the no extinction case: The Jacobian is simpler than we might first think. Remember that
+              \begin{equation}
+                1+ y_0  = x_0 \implies x_0/(1 + y_0) = 1,
+              \end{equation}
+              Similarly,
+              \begin{equation}
+                \alpha + \beta x_0 = y_0 \implies y_0/(\alpha + \beta x_0) = 1.
+              \end{equation}
+              With this the Jacobian simplifies to
+              \begin{equation}
+                \m{J} = \mat{-1}{1}{\gamma\beta}{-\gamma}.
+              \end{equation}
+              We know that in this general case,
+              \begin{equation}
+                \lambda = \frac{1}{2}\left[\tr(\m{J}) \pm \sqrt{\tr(\m{J})^2 -4\det(\m{J})}\right],
+              \end{equation}
+              and here
+              \begin{equation}
+                \tr(\m{J}) = -(1+\gamma),\quad \det(\m{J})= \gamma(1-\beta).
+              \end{equation}
+              Stability requires $\det(\m{J})>0$ and $\tr(\m{J}) <0$ so $\beta<1$. The trace is clearly always negative so this will ensure that if $\beta<1$ the equilibrium is stable.
+          \end{enumerate}
+
+        \item The equilibria $(0,0)$ and $(0,\alpha)$ will always be unstable. However, the $(1,0)$ equilibrium could be stable if $\gamma<0$. If we assume $\gamma<0$, then it will be stable for all parameters. As $\gamma =r_2/r_1$ this means one of the growth rates must be positive and one negative. This is fine: the negative growth rate could be the predator as in the original predator--prey model. As the permissible equilibria in this scenario would be $(1,0)$ and $\left(\frac{1+\alpha}{1-\beta},\frac{\alpha+\beta}{1-\beta}\right)$, we should make $r_1$ negative so that it is the predator. The equilibria then correspond to either mutual existence or the predator killing off the prey.
+
+      \end{enumerate}
+    }
+    %
+
+    %===========================================================================
+
+    %
+    \question{More population dynamics stability analysis (Exam between parts A and B)}
+    {
+      Consider the following system of ordinary differential equations for the time-dependent interaction of two populations $u$ and $v$:
+      \begin{subequations}
+        \label{thesys}
+        \begin{align}
+          \fd{u}{t} &= -(u-1)(u-a) + \gamma u v,\\
+          \fd{v}{t} &= v(1-v) - \gamma u v.
+        \end{align}
+      \end{subequations}
+      We assume the interaction term $\gamma$ is positive so that $u$ is the predator, and that $a$ is a real constant.
+      \begin{enumerate}[label=(\alph*)]
+        \item State a condition on $u$ and $v$ for the system to be considered physically reasonable.
+        \item Find the four possible equilibria of the system.
+        \item Show that the Jacobian $\m{J}$ for  \cref{thesys} takes the form
+          \begin{equation}
+            \m{J} =
+            \begin{pmatrix}
+              -2u_0 + (1+a)+ \gamma v_0 & \gamma u_0 \\
+              -\gamma v_0 & 1-2v_0 -\gamma u_0
+            \end{pmatrix},
+          \end{equation}
+          where $u_0$ and $v_0$ are equilibrium solutions to (\ref{thesys}).
+        \item State the conditions on the parameter $\gamma$ for the stability of the equilibria:
+          \begin{enumerate}[label=(\roman*)]
+            \item $(u_0,v_0) = (1,0)$,
+            \item $(u_0,v_0) = (a,0)$.
+          \end{enumerate}
+      \end{enumerate}
+    }
+    {
+      Recall the system is
+      \begin{subequations}
+        \label{thesys}
+        \begin{align}
+          \fd{u}{t} &= -(u-1)(u-a) + \gamma u v,\\
+          \fd{v}{t} &= v(1-v) - \gamma u v.
+        \end{align}
+      \end{subequations}
+      with $a$ real and $\gamma>0$.
+
+      \begin{enumerate}[label=(\alph*)]
+        \item{For the system to be considered physically reasonable, $u,v\geq0$.}
+        \item{We must solve the simultaneous equations,
+            \begin{subequations}
+              \begin{align}
+                \label{ueq}-(u-1)(u-a) + \gamma u v&=0,\\
+                \label{veq}v(1-v) -\gamma uv &=0.
+              \end{align}
+            \end{subequations}
+            Adding the two equations we find
+            \begin{equation}
+              -(u-1)(u-a)+ v(1-v) = 0
+            \end{equation}
+            which requires $v=0,1$ and $u=1,a$
+
+            If $v=0,u=1$ then the first equation will vanish, similarly for $v=0,u=a$. If $v=1$ then neither $u=1$ or $u=a$ will give an equilibrium.
+
+            Also, \cref{veq} can be written as
+            \begin{align}
+              v((1-v) - \gamma u)=0,\\
+              \label{vsol}\implies v=1- \gamma u.
+            \end{align}
+
+            Substituting this into \cref{ueq} we obtain
+            \begin{align}
+              -(u-1)(u-a) + \gamma u(1-\gamma u) &= 0,\\
+              \implies -u^2(1+ \gamma^2) + u(\gamma +1+a) -a &=0,
+            \end{align}
+            so
+            \begin{equation}
+              \label{usol}
+              u = \frac{(\gamma +1+a) \pm \sqrt{(\gamma +1+a)^2  - 4 a(1+ \gamma^2)}}{2(1+\gamma^2)}.
+            \end{equation}
+            Thus, \cref{usol} in conjunction with \cref{vsol} give the remaining two solutions.
+          }
+        \item{
+            Differentiating the right-hand side of each equation with respect to $u$ and then $v$ we get
+            \begin{equation}
+              \m{J} =
+              \begin{pmatrix}-2u_0 +(1+a) +\gamma v_0 & \gamma u_0\\
+                -\gamma v_0 & 1 -2v_0 -\gamma u_0
+              \end{pmatrix}
+              ,
+            \end{equation}
+            as required.
+          }
+        \item{
+            \begin{enumerate}[label=(\roman*)]
+              \item $(1,0)$: Substituting these values into the Jacobian $\m{J}$ gives
+                \begin{equation}
+                  \m{J} = \left(
+                    \begin{array}{cc}
+                      -1+a & \gamma  \\
+                      0& 1-\gamma
+                  \end{array}\right).
+                \end{equation}
+                To find the eigenvalues we solve $\det(\m{J}- \lambda \m{I})=0$:
+                \begin{equation}
+                  (a-1 - \lambda)(1-\gamma-\lambda) =0,
+                \end{equation}
+                so $\lambda = (a-1)$ and $\lambda =(1-\gamma)$, and hence we require $\gamma>1$ and $a<1$ for stability.
+
+              \item $(a,0)$:
+                \begin{equation}
+                  \m{J} = \left(
+                    \begin{array}{cc}
+                      1-a & \gamma a \\
+                      0 & 1-\gamma a
+                    \end{array}
+                  \right).
+                \end{equation}
+                So $\det(\m{J}-\lambda \m{I})=0$ gives
+                \begin{equation}
+                  (1-a -\lambda)(1-\gamma a -\lambda)=0,
+                \end{equation}
+                and $\lambda = 1-a$ or $\lambda = 1-\gamma a$. So the condition for stability is either
+                \begin{equation}
+                  a>1 \quad \text{or} \quad a>1/\gamma,
+                \end{equation}
+                so whichever of $1$ or $1/\gamma$  is the largest.
+            \end{enumerate}
+          }
+      \end{enumerate}
+    }
+    %
+
+    %===========================================================================
+
+    %
+    \question{ODE species interaction (Exam section A, 2017)}
+    {
+      Consider the following system used to model herbivore--plankton interaction,
+      \begin{subequations}
+        \begin{align}
+          \fd{u}{t} &= r_1u\left[(K-u) - \frac{B v}{C+u}\right],\\
+          \fd{v}{t} &= r_2v\left[\frac{u}{C+u}-Av\right],
+        \end{align}
+      \end{subequations}
+      where $r_1,r_2,A,B,C,K$ are positive constants.
+      \begin{enumerate}[label=(\alph*)]
+        \item Show that we can nondimensionalise this model so that it takes the form
+          \begin{subequations}
+            \begin{align}
+              \fd{\hat{u}}{\hat{t}} &= \hat{u}\left[(k-\hat{u}) - \frac{\hat{v}}{1+\hat{u}}\right],\\
+              \fd{\hat{v}}{\hat{t}} &= r\hat{v}\left[\frac{\hat{u}}{1+\hat{u}}-a \hat{v}\right].
+            \end{align}
+          \end{subequations}
+
+        \item Describe the various inter-species interactions of the system and the intra-species interactions.
+
+        \item
+          Assume that $r=0$  and that $\hat{v}$ takes a constant value, $\hat{v}_0$. If $\hat{v}_0 \gg \hat{u}$ then to a reasonable approximation,
+          \begin{equation}
+            \fd{\hat{u}}{\hat{t}} = -\frac{\hat{u}\hat{v}_0}{1+\hat{u}}.
+          \end{equation}
+          Using this approximation, show that $\hat{u}$ satisfies
+          \begin{equation}
+            \log(\hat{u}) + \hat{u}= -\hat{v}_0\hat{t} +D,
+          \end{equation}
+          with $D$ a constant of integration. Further, show that if $\hat{u}\ll 1$ when $\hat{t}$ gets large ($\hat{t}\gg1$), then $\hat{u}$ decays exponentially.
+
+      \end{enumerate}
+    }
+    {
+      \begin{enumerate}[label=(\alph*)]
+        \item{
+            We write $u=c_1\hat{u}$, $v=c_2\hat{v}$, $t = c_3\hat{t}$ so that the first equation becomes
+            \begin{equation}
+              \frac{c_1}{c_3}\fd{\hat{u}}{\hat{t}} = c_1r_1\hat{u}\left[(k-\hat{u})c_1 - \frac{c_2 B\hat{v}}{c_1(\frac{C}{c_1}+\hat{u})}\right],
+            \end{equation}
+            where $k =K/c_1$.
+            First we set $C=c_1$. Then we write
+            \begin{equation}
+              \fd{\hat{u}}{\hat{t}} = c_3r_1\hat{u}\left[(k-\hat{u})C - \frac{c_2 B\hat{v}}{C(1+\hat{u})}\right].
+            \end{equation}
+            Next we set $c_3C r_1 =1$ so $c_3 = 1/C r_1$. Finally we set $c_2B/C^2 = 1$ so $c_2= C^2/B$. Putting these forms into the second equation gives
+            \begin{equation}
+              \fd{\hat{v}}{\hat{t}} = \frac{r_2}{C r_1}\hat{v}\left[\frac{\hat{u}}{1+\hat{u}}- \hat{v}\frac{AC^2}{B}\right],
+            \end{equation}
+            so that $r = r_2/r_1C$ and $a= AC^2/B$.
+          }
+        \item{
+            (Dropping hats for brevity) First, $\fd{u}{t}$ depends on a logistic growth rate $u(k-u)$, an intra-species term. Alone it would mean $u$ has an equilibrium population $k$. The inter-species term,
+            \begin{equation}
+              -\frac{uv}{1+u},
+            \end{equation}
+            will tend to decrease $u$ through interaction with $v$, so $u$ is the prey. The divisor $1+u$ means this is bounded as a function of $u$ between $0$ and $v$.
+
+            For $\fd{v}{t}$ there is an intra-species decay term, $-rav^2$. So the population $v$ can only grow through interaction with $u$. This happens through a term
+            \begin{equation}
+              r\frac{uv}{1+u},
+            \end{equation}
+            which is the same (up to the constant $r$) as the inter-species interaction term of $u$, except it has a positive sign so tends to increase $v$.
+          }
+        \item{
+            Using separation of variables we have
+            \begin{equation}
+              \int\left(\frac{1}{u} +1\right)\d{u} = \log(u) + u= -v_0t +D,
+            \end{equation}
+            where $D$ is a constant of integration. If $u\ll 1$ (making $t$ large) then $\log(u) \approx -v_0t +D$ so that
+            \begin{equation}
+              u \approx D_a\e ^{-v_0 t}.
+            \end{equation}
+          }
+      \end{enumerate}
+
+    }
+    %
+
+    %===========================================================================
+
+    %
+    \question{Stability analysis of population interaction (Exam section B, 2017 resit)}
+    {
+      Consider the following system of ODEs used to model herbivore--plankton interaction,
+      \begin{subequations}
+        \begin{align}
+          \fd{u}{t} &= u\left[(k-u) - \frac{v}{1+u}\right],\\
+          \fd{v}{t} &= r v\left[\frac{u}{1+u}-a\right],
+        \end{align}
+      \end{subequations}
+      where $r,a\geq 0$ and $k \in \mathbb{R}$ are constants.
+      \begin{enumerate}[label=(\alph*)]
+        \item Find the three permissible equilibria of the system.
+        \item For what parameter ranges can we have physically valid equilibria for which both $u_0$ and $v_0$ are nonzero?
+        \item Assume $v(0)=0$. Solve for $u(t)$ with an initial condition $u(0)=u_0$.
+        \item No longer assume $v(0)=0$. Instead, assume $k<0$. Perform a linear stability analysis for all physically permissible equilibria.
+      \end{enumerate}
+    }
+    {
+      \begin{enumerate}[label=(\alph*)]
+        \item{
+            We must solve
+            \begin{subequations}
+              \begin{align}
+                0&= u\left[(k-u) - \frac{v}{1+u}\right],\\
+                0 &= r v\left[\frac{u}{1+u}-a\right].
+              \end{align}
+            \end{subequations}
+            Setting $u=0$ in the first equation gives $-rva$ in the second, so $(0,0)$ is an equilibrium.
+
+            Setting $v=0$ in the second gives $u(k-u)=0$ so $(k,0)$ is a second equilibrium.
+            Setting $a= u/(1+u)$ in the second equation gives
+            \begin{equation}
+              u = \frac{a}{1-a}.
+            \end{equation}
+            Substituting this into the first equation, we can solve to give
+            \begin{equation}
+              v = (k-u)(1+u) = \frac{k-a (k+1)}{(a-1)^2}.
+            \end{equation}
+          }
+        \item{
+            Only one equilibrium can have both populations nonzero, that is
+            \begin{equation}
+              u = \frac{a}{1-a},\quad   v = \frac{k-a (k+1)}{(a-1)^2}.
+            \end{equation}
+            For us to have $u>0$ and $u$ be finite we need $0 < a<1$.
+
+            We also need $v >0$. The denominator of $v$ will be positive, so we need, rearranging the numerator of the $v$ equation,
+            \begin{equation}
+              a<\frac{k}{k+1}.
+            \end{equation}
+            We remember that the question states $a>0$. If $k$ is positive, $0 < k/(k+1) < 1$. If $k$ is negative, $k/(k+1) > 0$ if $k < -1$. The value of $k/(k+1)$ will always be greater than $1$ in this case. So if $k < -1$ then $0\leq a<1$. If $k>0$, $0<a<k/(k+1)$.
+          }
+        \item{
+            Using separation of variables,
+            \begin{equation}
+              \int\frac{1}{u(k-u)}\,\d{u} = t+C,
+            \end{equation}
+            and
+            \begin{equation}
+              \int\frac{1}{u(k-u)}\,\d{u} = \int\frac{1}{ku}\,\d{u}  + \int\frac{1}{k(k-u)}\,\d{u},
+            \end{equation}
+            so
+            \begin{equation}
+              \log(u) -\log(k-u) = kt +C,
+            \end{equation}
+            and
+            \begin{equation}
+              u(t) = \frac{kA\e ^{kt}}{1+A\e ^{kt}}.
+            \end{equation}
+            Applying the initial condition gives
+            \begin{equation}
+              u(t) = \frac{ku_0\e ^{kt}}{k+u_0(\e ^{kt}-1)}.
+            \end{equation}
+          }
+        \item{
+            The Jacobian of the system at $(u_0,v_0)$ is
+            \begin{equation}
+              \m{J} = \mat{k-2u_0 -\frac{v_0}{1+u_0} + \frac{u_0v_0}{(1+u_0)^2}}{-\frac{u_0}{1+u_0}}{\frac{rv_0}{1+u_0}-\frac{rv_0u_0}{(1+u_0)^2}}{r(\frac{u_0}{1+u_0}-a)}.
+            \end{equation}
+
+            Let's go through the equilibria:
+            \begin{enumerate}[label=(\roman*)]
+              \item $(0,0)$:
+                \begin{equation}
+                  \m{J} = \mat{k}{0}{0}{-ra}.
+                \end{equation}
+                Solving $\det(\m{J}-\lambda \m{I})=0$, we find
+                \begin{equation}
+                  (k-\lambda)(-ar-\lambda) = 0.
+                \end{equation}
+                So $\lambda = -ar$ which will always be negative. The second solution is $\lambda=k$, which is negative by assumption. Therefore $(0,0)$ is stable.
+
+              \item $(k,0)$: This is not physically permissible.
+
+              \item The final equilibrium,
+                \begin{equation}
+                  u = \frac{a}{1-a},\quad   v = \frac{k-a (k+1)}{(a-1)^2},
+                \end{equation}
+                is a lot easier than we might think!
+
+                The solutions take the form
+                \begin{equation}
+                  \lambda = \frac{1}{2}\left[\tr(\m{J}) \pm \sqrt{\tr(\m{J})^2-4\det(\m{J})} \right]
+                \end{equation}
+                so stability requires $\det(\m{J})>0$ and $\tr(\m{J}) <0$.
+                The bottom-right entry of $\m{J}$ is
+                \begin{equation}
+                  r\left(\frac{u_0}{1+u_0}-a\right) = 0.
+                \end{equation}
+                The bottom-left entry is
+                \begin{equation}
+                  \frac{rv_0}{1+u_0}-\frac{rv_0u_0}{(1+u_0)^2} = \frac{rv_0}{1+u_0}(1-a),
+                \end{equation}
+                and the top-right entry is
+                \begin{equation}
+                  -\frac{u_0}{1+u_0} = -a.
+                \end{equation}
+                So the determinant of $\m{J}$ is
+                \begin{equation}
+                  a\frac{rv_0}{1+u_0}(1-a).
+                \end{equation}
+                Physically we needed $0<a<1$ (from part (b)) so this is positive for relevant parameters. The trace must be negative as
+                \begin{equation}
+                  -\frac{v_0}{1+u_0} + \frac{u_0v_0}{(1+u_0)^2}=-\frac{rv_0}{1+u_0}(1-a)<0.
+                \end{equation}
+                So the only requirements are that $k < -1$  and $0<a<1$ for $u_0$ to be physically permissible (from part (b)).
+            \end{enumerate}
+          }
+      \end{enumerate}
+
+    }
+    %
+
+    %===========================================================================
+
+    %
+    \question{More population interaction (Exam 2021 resit)}
+    {
+      Consider the following generalised predator--prey system,
+      \begin{align*}
+        \fd{x}{t} &= ax\left(1-\frac{x}{K}\right) - byf(x), \\
+        \fd{y}{t} &= cyf(x) - dy,
+      \end{align*}
+      where $x(t)$ is the number of prey and $y(t)$ is the number of predators, both of which vary in time. The parameters $a$, $b$, $c$, $d$ and $K$ are positive constants. The function $f(x)$ is given by
+      \begin{equation*}
+        f(x) = \frac{x}{x+E}
+      \end{equation*}
+      for some positive constant $E$.
+
+      \begin{enumerate}[label=(\alph*)]
+        \item Give a biological interpretation of the predator--prey interaction arising from this form of $f(x)$.
+        \item Choose an appropriate scaling for $t$, $x$ and $y$, to show that the nondimensionalised system in $\hat{t}$, $\hat{x}$ and $\hat{y}$, once hats have been removed, is
+          %Show that nondimensionalising the system using
+          %\begin{equation}
+          %  \hat{t} = at, \quad \hat{x} = \frac{x}{K}, \quad \hat{y} = \frac{yb}{aK}
+          %\end{equation}
+          %produces, once hats are removed,
+          \begin{align*}
+            \fd{x}{t} = x(1-x) - \frac{xy}{x+\delta},\\
+            \fd{y}{t} = y\left( \frac{\alpha x}{x+\delta} - \mu \right),
+          \end{align*}
+          stating the values of $\alpha$, $\delta$ and $\mu$.
+          %
+        \item Show that there are two equilibria of the system which always exist, and a further, $(x^*, y^*)$, which exists under conditions you should state. %Assuming that $x,y\geq0$, show that $(0,0)$ and $(1,0)$ are always equilibria. Show also that if $\alpha > \mu$ and $\alpha > \mu(1+\delta)$ then there is an additional equilibrium, $(x^*, y^*)$, which you should state.
+        \item Show that if $(x^*, y^*)$ is an equilibrium, then the other two equilibria are unstable.
+        \item Show that $(x^*, y^*)$ is stable if $(1+\delta)\mu > \alpha(1-\delta)$.
+      \end{enumerate}
+    }
+    {
+      \begin{enumerate}[label=(\alph*)]
+        \item % 2.2(i)
+          For large numbers of prey, $x$, $f(x) \sim 1$ so the per-predator rate saturates. This implies that the predators get full. For small $x$, $f(x) \sim x/E$, so the per predator rate is linear, capturing the traditional Lotka--Volterra interaction.
+
+        \item % 2.2(ii)
+          We write
+          \begin{equation}
+            x = X\hat{x}, \quad y = Y\hat{y}, \quad t = T\hat{t},
+          \end{equation}
+          where nondimensional forms have hats, and substituting this in to the first equation we get
+          \begin{equation}
+            \frac{X}{T}\fd{\hat{x}}{\hat{t}} = aX\hat{x}\left(1-\frac{X\hat{x}}{K}\right) - \frac{bXY\hat{x}\hat{y}}{X\hat{x}+E}.
+          \end{equation}
+          Multiplying through to clean up the left-hand side we get
+          \begin{equation}
+            \fd{\hat{x}}{\hat{t}} = aT\hat{x}\left(1-\frac{X\hat{x}}{K}\right) - \frac{bTY\hat{x}\hat{y}}{X\hat{x}+E},
+          \end{equation}
+          and, looking at the target, we can factorise in the final equation to get
+          \begin{equation}
+            \fd{\hat{x}}{\hat{t}} = aT\hat{x}\left(1-\frac{X\hat{x}}{K}\right) - \frac{bTY\hat{x}\hat{y}}{X(\hat{x}+E/X)}.
+          \end{equation}
+          So now we can set
+          \begin{equation}
+            X=K, \qquad T = \frac{1}{a}, \qquad Y = \frac{X}{bT} = \frac{Ka}{b}, \qquad \delta = \frac{E}{X} = \frac{E}{K},
+          \end{equation}
+          and this equation is cleaned up. Putting these into the second equation, we have
+          \begin{align*}
+            \fd{\hat{y}}{\hat{t}} &= \frac{1}{a}\hat{y} \left( \frac{c\hat{x}}{\hat{x}+\delta} - d \right),
+          \end{align*}
+          and so
+          \begin{equation}
+            \alpha = \frac{c}{a}, \quad \mu = \frac{d}{a},
+          \end{equation}
+          and we're done.
+
+        \item % 2.2(iii)
+          Equilibria are where
+          \begin{align}
+            0 &= x(1-x) - \frac{xy}{x+\delta}, \label{eq1}\\
+            0 &= y\left(\frac{\alpha x}{x + \delta} - \mu \right) \label{eq2}.
+          \end{align}
+
+          \Cref{eq2} gives us that
+          \begin{equation}
+            y = 0 \quad \text{or} \quad \mu = \frac{\alpha x}{x + \delta}.
+          \end{equation}
+
+          If $y=0$ then \cref{eq1} gives us
+          \begin{equation}
+            x = 0 \quad \text{or} \quad x = 1,
+          \end{equation}
+          so we have the equilibria $(0,0)$ and $(1,0)$.
+
+          The other possibility is
+          \begin{equation}
+            \mu = \frac{\alpha x}{x + \delta} \implies x = \frac{\delta \mu}{\alpha-\mu}.
+            \label{poss2}
+          \end{equation}
+          Rearranging \cref{eq1} for $y$ we have
+          \begin{equation}
+            y = (1-x)(x+\delta) = \frac{\alpha\delta(\alpha - \mu - \delta \mu)}{(\alpha-\mu)^2},
+          \end{equation}
+          and so the final equilibrium is
+          \begin{equation}
+            (x^*,y^*) = \left( \frac{\delta\mu}{\alpha-\mu}, \frac{\alpha\delta(\alpha-\mu-\delta \mu)}{(\alpha-\mu)^2} \right).
+          \end{equation}
+          For this equilibrium to be valid, $x^*,y^*\geq0$, so we need $\alpha > \mu$ and $\alpha > \mu(1+\delta)$.
+
+        \item % 2.2(iv)
+          The Jacobian is
+          \begin{equation}
+            \m{J} =
+            \begin{pmatrix}
+              1 - 2x - \frac{\delta y}{(x+\delta)^2} &
+              - \frac{x}{x+\delta} \\
+              \frac{\alpha \delta y}{(x+\delta)^2} &
+              \frac{\alpha x}{x+\delta} - \mu
+            \end{pmatrix}.
+          \end{equation}
+          Evaluated at the equilibria, we have
+          \begin{align*}
+            (0,0):&&
+            \begin{pmatrix} 1 & 0 \\ 0 & -\mu
+            \end{pmatrix} &\implies \lambda = 1,\, -\mu.\\  (1,0):&&
+            \begin{pmatrix} -1 & \frac{-1}{1+\delta} \\ 0 & \frac{\alpha}{1+\delta}-\mu
+            \end{pmatrix} &\implies \lambda = -1, \, \frac{\alpha}{1+\delta}-\mu.
+          \end{align*}
+          The $(0,0)$ equilibrium is always unstable as the first eigenvalue is positive, and the $(1,0)$ equilibrium is unstable if $\alpha > \mu(1+\delta)$, which is satisfied if the $(x^*,y^*)$ equilibrium exists.
+
+        \item % 2.2(v)
+          Evaluating the Jacobian at
+          \begin{equation}
+            (x^*,y^*) = \left( \frac{\delta\mu}{\alpha-\mu}, \frac{\alpha\delta(\alpha-\mu-\delta \mu)}{(\alpha-\mu)^2} \right),
+          \end{equation}
+          we can see we are going to be faced with some horrible algebra in evaluating
+          \begin{equation}
+            \frac{\delta y^*}{(x^*+\delta)^2} \quad \text{and} \quad \frac{x^*}{x^*+\delta}.
+          \end{equation}
+          But lo! \Cref{poss2} tell us
+          \begin{equation}
+            \frac{x^*}{x^*+\delta} = \frac{\mu}{\alpha}.
+          \end{equation}
+          The other term requires a bit more work, but it helps if we notice
+          \begin{equation}
+            x^* + \delta = \frac{\delta \alpha}{\alpha-\mu}.
+          \end{equation}
+          Then
+          \begin{equation}
+            \frac{\delta y^*}{(x^*+\delta)^2}=\frac{(\alpha-\mu)^2}{(\delta \alpha)^2}\frac{\delta \alpha \delta(\alpha-\mu-\delta\mu)}{(\alpha-\mu)^2} = \frac{\alpha-\mu-\delta\mu}{\alpha}.
+          \end{equation}
+          This gives us a Jacobian of
+          \begin{equation}
+            \m{J} =
+            \begin{pmatrix}
+              1 - 2 \frac{\delta \mu}{\alpha-\mu} - \frac{\alpha-\mu-\delta\mu}{\alpha} &
+              - \mu/\alpha \\
+              \alpha-\mu-\delta\mu &
+              0
+            \end{pmatrix}.
+          \end{equation}
+          The best way to test for stability here is through the determinant/trace method.
+
+          The determinant is
+          \begin{equation}
+            \det\m{J} = \frac{\mu}{\alpha}[\alpha-\mu(1+\delta)] > 0
+          \end{equation}
+          by the condition that the equilibrium exists. We therefore need to look for when the trace is negative to find when the equilibrium is stable. The trace is
+          \begin{align*}
+            \tr\m{J} &= 1 - \frac{2\delta\mu}{\alpha-\mu}-\frac{\alpha-\mu-\delta\mu}{\alpha} \\
+            &= \frac{\alpha(\alpha-\mu)-2\alpha\delta\mu-(\alpha-\mu)(\alpha-\mu-\delta\mu)}{\alpha(\alpha-\mu)}\\
+            &=\frac{\mu}{\alpha(\alpha-\mu)}\left[ -2\alpha\delta + (\alpha-\mu)(1+\delta) \right] \\
+            &=\frac{\mu}{\alpha(\alpha-\mu)}\left[ \alpha(1-\delta) - \mu(1+\delta) \right].
+          \end{align*}
+
+          We know that $\alpha-\mu > 0$ by the condition that the equilibrium exists, and so we have a stable equilibrium if
+          \begin{equation}
+            \alpha(1-\delta)-\mu(1+\delta) < 0 \implies \alpha(1-\delta) < \mu(1+\delta),
+          \end{equation}
+          as requested.
+
+      \end{enumerate}
+
+    }
+    %
+
+    %===========================================================================
+
+    %
+    \question{Nondimensionalisation and model simplifications (Exam 2022)}
+    {
+
+      Consider the following model for a species $u(x,t)$, which we will see in chapter 6:
+      \begin{equation}
+        \pd{{u}}{{t}} = D\pdd{{u}}{{x}} + r{u}\left(1-\frac{{u}}{K} \right), \quad {x}\in[0,L],
+      \end{equation}
+      where $D,r,K>0$.
+
+      This is the Fisher--Kolmogorov equation modelling an invasive species, and you'll notice it's a partial differential equation: the population, $u$, is a function of space, $x$, and time, $t$. We'll derive it chapter 6 and learn all about it then, so don't panic. We're going to use it for nondimensionalisation practice.
+
+      \begin{enumerate}[label=(\alph*)]
+        \item Just before we begin, if $r=0$, what does this equation become and what do you remember about it from Calculus I? What if instead $D=0$?
+        \item By setting $u = \hat{u}U$, $x = \hat{x}X$ and $t = \hat{t}T$, nondimensionalise the model to reduce it to the equation
+          \begin{equation}
+            \pd{\hat{u}}{\hat{t}} = \pdd{\hat{u}}{\hat{x}} + \alpha \hat{u}(1-\beta \hat{u}), \quad \hat{x} \in [0,1],\label{FKPP_nondim}
+          \end{equation}
+          stating clearly how the new and old variables are related. (Hint: look at how the domain has changed as well.)
+        \item Without introducing additional parameters (that is, keeping the coefficients of $1$ in front of the derivative terms and the same scale for $\hat{x}$), can you find a nondimensionalisation for which we have $\beta=1$? Can we additionally have $\alpha=1$? Explain why or why not in each case.
+      \end{enumerate}
+    }
+    {
+      \begin{enumerate}[label=(\alph*)]
+        \item If $r=0$, this is the heat or diffusion equation. If $D=0$, this is just logistic growth.
+        \item Formally, trying
+          \begin{equation}
+            u=U\hat{u}, \quad x = X\hat{x}, \quad t = T\hat{t},
+          \end{equation}
+          the equation and domain become
+          \begin{equation}
+            \frac{U}{T}\pd{\hat{u}}{\hat{t}} = \frac{DU}{X^2}\pdd{\hat{u}}{\hat{x}}+Ur\hat{u}\left(1-\frac{U\hat{u}}{K}\right), \quad X\hat{x}\in\left[0,L\right],
+          \end{equation}
+          and dividing through we get
+          \begin{equation}
+            \pd{\hat{u}}{\hat{t}} = \frac{DT}{X^2}\pdd{\hat{u}}{\hat{x}}+Tr\hat{u}\left(1-\frac{U\hat{u}}{K}\right), \quad \hat{x}\in\left[0,\frac{L}{X}\right].
+          \end{equation}
+          To sort the domain we choose $X=L$, so the equation becomes
+          \begin{equation}
+            \pd{\hat{u}}{\hat{t}} = \frac{DT}{L^2}\pdd{\hat{u}}{\hat{x}}+Tr\hat{u}\left(1-\frac{U\hat{u}}{K}\right), \quad \hat{x}\in\left[0,1\right],
+          \end{equation}
+          and to sort the $\pdd{\hat{u}}{\hat{x}}$ term we choose $T=L^2/D$. This gives
+          \begin{equation}
+            \pd{\hat{u}}{\hat{t}} = \pdd{\hat{u}}{\hat{x}} + \alpha \hat{u}( 1-\beta \hat{u} ),  \quad x \in [0,1],
+          \end{equation}
+          where
+          \begin{equation}
+            X=L, \quad T=\frac{L^2}{D}, \quad \alpha = \frac{rL^2}{D}, \quad \beta = \frac{U}{K}.
+          \end{equation}
+        \item While we can choose $U=K$ to make $\beta=1$, we do not have a free scale (i.e.\ we have nothing left to choose from $U$, $X$ and $T$) in the $\alpha$ term. This is because the derivative and linear terms all involve $U$, so we can only set two of the three constants in these three terms to unity (changing the $U$ scale will always cancel out due to homogeneity of linear functions).
+      \end{enumerate}
+    }
+    %
+
+    %===========================================================================
+
+    %
+    \question{Spherical diffusion (Exam section A type)}
+    {
+      Consider the diffusion of a bacterial species $c(\v{x},t)$, $\v{x}\in\mathbb{R}^3$. It satisfies the diffusion equation,
+      \begin{equation}
+        \label{diff-eq}
+        \pd{c}{t} = \nabla^2 c,
+      \end{equation}
+      where the diffusion constant has been set to 1. We use a spherical co-ordinate system for which
+      \begin{equation}
+        \nabla^2 c = \frac{1}{r^2}\pd{}{r}\left[r^2\pd{c}{r}\right] +\frac{1}{r^2\sin\theta}\pd{}{\theta}\left[\sin\theta\pd{c}{\theta}\right] + \frac{1}{r^2\sin^2\theta}\pdd{c}{\phi}.
+      \end{equation}
+      \begin{enumerate}[label=(\alph*)]
+        \item Write down the diffusion equation for the bacteria, \cref{diff-eq}, assuming radial symmetry, $c(\v{x},t) = c(r,t)$.
+        \item Now assume that a spherical region of radius $a$, centred at $r=0$, contains a chemical which kills the bacteria in  the region. What boundary condition does this imply for this problem?
+        \item Use this boundary condition, as well as $c(r\rightarrow \infty,t) = c_0$, to derive an equilibrium profile of this system.
+      \end{enumerate}
+    }
+    {
+      \begin{enumerate}[label=(\alph*)]
+        \item{Assuming radial symmetry, the bacterial diffusion equation is
+            \begin{equation}
+              \pd{c}{t} = \frac{1}{r^2}\pd{}{r}\left(r^2\pd{c}{r}\right).
+            \end{equation}
+          }
+        \item{The boundary condition is $c(a,t) = 0$.
+          }
+        \item{We need to solve
+            \begin{equation}
+              \fd{}{r}\left(r^2\fd{c}{r}\right) = 0 \implies r^2\fd{c}{r} = C,
+            \end{equation}
+            with $C$ a constant of integration. Then
+            \begin{equation}
+              \fd{c}{r} = \frac{C}{r^2} \implies c(r)=  -\frac{C}{r} + A.
+            \end{equation}
+            Now, $c(\infty)= c_0$ implies $A=c_0$. Thus
+            \begin{equation}
+              c(a) = 0 = -\frac{C}{a} + c_0 \implies C = c_0a.
+            \end{equation}
+            This gives us, in addition to remembering that for $r < a$, the concentration is zero,
+            \begin{equation}
+              c(r) = \twopartdef{\displaystyle -\frac{c_0 a}{r} + c_0}{r\geq a}{0}{0 \leq r < a.}
+            \end{equation}
+          }
+      \end{enumerate}
+    }
+    %
+
+    %===========================================================================
+
+    %
+    \question{Reflecting and absorbing boundary conditions (Exam section A type)}
+    {
+      A bacterial population density $c$ disperses diffusively in a 1D channel between $x=0$ and $x=L$, with a diffusion constant $D$ (we assume it follows Fick's law). It is advected by the surrounding fluid, moving at a velocity $v$. Bacteria are reflected at the boundary $x=0$, while a constant concentration $c_0$ is maintained at all times at $x=L$.
+      \begin{enumerate}[label=(\alph*)]
+        \item Write down the equation for $c(x,t)$.
+        \item Write down the boundary conditions at $x=0$ and $x=L$ for $c$.
+        \item Find the equilibrium of this system.
+      \end{enumerate}
+    }
+    {
+      \begin{enumerate}[label=(\alph*)]
+        \item{The system describes advection--diffusion in 1D with no source term, so
+            \begin{equation}
+              \pd{c}{t} =-v\pd{c}{x} + D\pdd{c}{x}.
+            \end{equation}
+          }
+        \item{The boundary conditions at $x=0$ and $x=L$ for $c$ are
+            \begin{equation}
+              \pd{c(0,t)}{x} = 0\quad  c(L,t) = c_0.
+            \end{equation}
+          }
+        \item{The equilibrium of this system is when $\pd{c}{t}=0$:
+            \begin{equation}
+              -v\fd{c}{x} + D\fdd{c}{x} = 0 \implies -v c + D\fd{c}{x} = C_1.
+            \end{equation}
+            This is a first order ODE in the form
+            \begin{equation}
+              \label{fov1}
+              \fd{c}{x} - \frac{v}{D}c = C_1.
+            \end{equation}
+            so we use the integrating factor technique. The integrating factor is
+            \begin{equation}
+              \e^{\int(-v/D)\d x} = \e^{-vx/D},
+            \end{equation}
+            giving us
+            \begin{align}
+              \fd{}{x}[c\e^{-vx/D}] & = C_1\e^{-vx/D}\\
+              \implies c\e^{-vx/D} &= -\frac{DC_1}{v}\e^{-vx/D} + C_2\\
+              \implies c &= -\frac{DC_1}{v} + C_2\e^{vx/D}.
+            \end{align}
+            Finally we apply our boundary conditions to find the constant of integration $C_2$. First, $\fd{c}{x}=0$ at $x=0$ implies
+            \begin{equation}
+              \frac{C_2 v}{D}  = 0 \implies C_2 = 0,
+            \end{equation}
+            and then
+            \begin{equation}
+              c = -\frac{DC_1}{v}
+            \end{equation}
+            So we have a constant solution of value $c_0$.
+          }
+      \end{enumerate}
+
+    }
+    %
+
+    %===========================================================================
+
+    %
+    \question{Yet more advection--diffusion (Exam section A type)}
+    {
+      Consider a one-dimensional concentration of ants, $c(x,t)$, in a channel $x=[0,L]$. Assume that the ant population's bulk motion is governed by the advection--diffusion equation,
+      \begin{equation}
+        \label{addiff}
+        \pd{c}{t} = D\pdd{c}{x} - v\pd{c}{x}.
+      \end{equation}
+      \begin{enumerate}[label=(\alph*)]
+        \item Derive an expression for the ant flux $F(x,t)$, whose definition comes from comparing to a conservation law in the form
+          \begin{equation}
+            \pd{c}{t} = -\pd{F}{x} + f.
+          \end{equation}
+          The flux $F$ basically represents the local change in $c$ accounting for the fact it is diffusing (spreading out) but also moving, both of which cause $c$ to change locally.
+        \item By imposing a radiative boundary condition $F(L,t) = -\gamma$ (concentration points outward) and setting $c(0,t) = 0$, solve for the equilibrium of this system.
+        \item What is the physical interpretation of this distribution in which the diffusion rate is significantly faster than any advective effect, i.e.\ $vL/D \ll 1$?
+      \end{enumerate}
+    }
+    {
+      Recall the motion is governed by
+      \begin{equation}
+        \label{addiff}
+        \pd{c}{t} = D\pdd{c}{x} - v\pd{c}{x}.
+      \end{equation}
+      \begin{enumerate}[label=(\alph*)]
+        \item In \cref{addiff} there is no source term: we merely have diffusion, in the form of Fick's law $-D\pd{c}{x}$, and we have advection, with a negative velocity $-v$. Thus in the conservation law,
+          \begin{equation}
+            \pd{c}{t} = -\pd{F}{x}+f,
+          \end{equation}
+          $f = 0$, and comparing, we have
+          \begin{equation}
+            -  \pd{F}{x} =  D\pdd{c}{x} - v\pd{c}{x}.
+          \end{equation}
+          This gives us
+          \begin{equation}
+            F= -D\pd{c}{x} + v c.
+          \end{equation}
+
+        \item{
+            The equilibrium of the system is when $\pd{c}{t} = 0$,
+            \begin{equation}
+              D\fdd{c}{x} - v\pd{c}{x}= 0 \implies  D\fd{c}{x} - vc = C_1.
+            \end{equation}
+            This tells us that the flux $F$ is conserved spatially (basically because there is no source term). $C_1$ = $\gamma$ from our first boundary condition. So we need to solve
+            \begin{equation}
+              \fd{c}{x} - \frac{v}{D}c = \frac{\gamma}{D}.
+            \end{equation}
+            Again we use the integrating factor method (and indeed the same integrating factor as in question 5): the integrating factor is
+            \begin{equation}
+              \e^{\int(-v/D)\d x} = \e^{-vx/D},
+            \end{equation}
+            giving us
+            \begin{align}
+              \fd{}{x}[c\e^{-vx/D}] & = \frac{\gamma}{D}\e^{-vx/D}\\
+              \implies c\e^{-vx/D} &= -\frac{\gamma}{v}\e^{-vx/D} + C_2\\
+              \implies c &= -\frac{\gamma}{v} + C_2\e^{vx/D}.
+            \end{align}
+            Applying the second boundary condition we have
+            \begin{equation}
+              \frac{\gamma}{v} = C_2,
+            \end{equation}
+            and hence
+            \begin{equation}
+              c = \frac{\gamma}{v}(\e ^{vx/D}-1).
+            \end{equation}
+          }
+        \item{In the limit $vL/D \ll 1$, the exponential term changes very slowly. Thus the population is not much above zero. The  overwhelming speed of diffusive motion, which because of the boundary conditions means the population wants to spread out and hence leave the system at $x=L$, means most of the bacteria has escaped by spreading out over space.
+          }
+      \end{enumerate}
+    }
+    %
+
+    %===========================================================================
+
+    %
+    \question{Bacterial diffusion (Exam section A, August 2017)}
+    {
+      Consider a species of bacterium represented by its density (number per unit length) $u(x,t)$ and constrained to a long thin tube (1D domain).  The bacteria move subject to diffusion and advection with a constant velocity $v$. The diffusion follows Fick's law, and the bacteria reproduce at a rate which is proportional to $u$, with a constant of proportionality $\lambda$. The length of the tube is $L$. At one end (say $x=0$) there is some chemical which kills the bacteria instantaneously. At the other end of the tube, the bacteria are flowing in with a density gradient $\mu$.
+      \begin{enumerate}[label=(\alph*)]
+        \item Explain why the bacteria should be modelled with the equation
+          \begin{equation}
+            \pd{u}{t} = D\pdd{u}{x} - v\pd{u}{x}+\lambda u
+          \end{equation}
+          and state the boundary conditions.
+        \item Solve for the equilibrium of the system on the assumption that $\lambda D> v^2$.
+        \item Describe what happens to the solution in the limit $\lambda \rightarrow \infty$ with $v$ and $D$ fixed.
+      \end{enumerate}
+    }
+    {
+      \begin{enumerate}[label=(\alph*)]
+        \item{
+            We start with the advection--diffusion equation, which in one dimension is
+            \begin{equation}
+              \pd{u}{t} = -v\pd{u}{x} - \pd{J}{x} + f.
+            \end{equation}
+            Here, $J$ is the flux, $f$ is a source and $v$ is the bulk velocity. Fick's law in one dimension is $J = -D\,\pd{u}{x}$, with $D$ the diffusion constant.  Finally the bacteria reproduction mentioned in the text is clearly a source term, $\lambda u$. Put together this gives the required equation.
+
+            The boundary conditions will be at $x=0$ and $x=L$. The death condition at $x=0$ requires the population is zero at this point, $u(0,t)=0$. The density gradient condition requires that $\pd{u}{x}(L,t)=\mu$.
+          }
+        \item{
+            To solve for the equilibrium, we must solve when $\pd{u}{t} = 0$, i.e.\
+            \begin{equation}
+              D\fdd{u}{x} - v\fd{u}{x}+\lambda u =0.
+            \end{equation}
+            This is a second-order ODE with constant coefficients. The auxiliary equation (in $m$) is
+            \begin{equation}
+              Dm^2 - vm + \lambda = 0,
+            \end{equation}
+            giving us
+            \begin{equation}
+              m = \frac{v \pm \sqrt{v^2 - 4D\lambda}}{2D}.
+            \end{equation}
+            The condition $\lambda D> v^2$ tells us that the square root is imaginary. In other words,
+            \begin{equation}
+              m = \frac{v}{2D} \pm \frac{\sqrt{4D\lambda-v^2}}{2D}\i,
+            \end{equation}
+            and our general solution can be written in the form
+            \begin{equation}
+              u(x) = \e ^{vx/2D}\left[A\cos\left(\frac{wx}{2D}\right)+B\sin\left(\frac{wx}{2D}\right) \right],\quad \text{where } w = \sqrt{4D\lambda-v^2}.
+            \end{equation}
+            The death boundary condition $u(0) =0$ implies $A = 0$. The second boundary condition then implies
+            \begin{equation}
+              \fd{u}{x}(L) = B\left[\frac{w\e ^{vL/2D}}{2 D}\cos\left(\frac{wL}{2D}\right) + \frac{v\e ^{vL/2D}}{2D}\sin\left(\frac{wL}{2D}\right) \right] =\mu,
+            \end{equation}
+            and so
+            \begin{equation}
+              B = \frac{2\mu D}{\e ^{v L/2 D}\left(w \cos(w L/2 D)+ v\sin(w L/2 D) \right)}.
+            \end{equation}
+            Putting it together, we have
+            \begin{equation}
+              u(x) = \frac{2\mu D\e ^{v x/2 D}\sin(w x/2 D)}{\e ^{vL/2D}\left(w \cos(w L/2 D)+ v\sin(w L/2 D) \right)}.
+            \end{equation}
+          }
+        \item{
+            In this limit the solution begins to oscillate at an increasingly rapid rate as a function of position. At the same time, the amplitude of these oscillations gets smaller and smaller. So we are pushed to higher frequency, lower amplitude oscillatory behaviour.
+          }
+      \end{enumerate}
+
+    }
+    %
+
+    %===========================================================================
+
+    %
+    \question{Diffusion with a source term}
+    {
+      In class, we solved the 1D diffusion equation for a population density $u(x,t)$ on a bounded domain $x \in [0,L]$. Now consider the diffusion equation on the same domain, but with an additional source term which represents exponential growth of the population, equal to $\beta u$. The population is constrained to be zero at the boundaries, and the initial condition is a Dirac delta function at $x=L/2$.
+      \begin{enumerate}[label=(\alph*)]
+        \item    Solve this problem for $u(x,t)$, using the separation of variables method. You should present your final answer as a summation, with all constants reasonably evaluated.
+
+        \item Give a sketch of $u(x,t)$ for a few different $t$.
+      \end{enumerate}
+    }
+    {
+      \begin{enumerate}[label=(\alph*)]
+        \item
+          Our equation is
+          \begin{equation}
+            \pd{u}{t} = D\pdd{u}{x} + \beta u.
+          \end{equation}
+          Let $u(x,t) = X(x)T(t)$, then we get
+          \begin{equation}
+            XT' = DX''T+\beta XT \implies \frac{T'}{T} = \frac{DX''}{X}+\beta = \lambda,
+          \end{equation}
+          for some constant $\lambda$.
+
+          What follows is not the only way to tackle this problem. We could divide the $X$ equation through by $D$, and have $X''/X + \beta/D = \lambda$ as the $X$ equation (with different $\lambda$ but still constant); alternatively we could include the $\beta$ in the $T$ equation, and have $T'/T - \beta = \lambda$; or a combination of both. Nonetheless, here's one way to do it.
+
+          Solving the $T$ equation first, we have
+          \begin{equation}
+            T'=T\lambda \implies T=C\e^{\lambda t}.
+          \end{equation}
+          For the $X$ equation we have
+          \begin{equation}
+            X'' = \frac{\lambda-\beta}{D}X, \quad X(0) = X(L) = 0.
+          \end{equation}
+          We look at three cases depending on the sign of $(\lambda-\beta)/D$:
+
+          \paragraph{Case I, $(\lambda-\beta)/D = \alpha^2 > 0$:} Then
+          \begin{equation}
+            X = A\cosh \alpha x  + B\sinh \alpha x ,
+          \end{equation}
+          but this is unable to satisfy the boundary conditions unless  $A=B=0$, i.e.\ it is the zero solution.
+
+          \paragraph{Case II, $(\lambda-\beta)/D = 0$: } Then
+          \begin{equation}
+            X = Ax+B,
+          \end{equation}
+          but the boundary conditions once again mean $A=B=0$, so this case reduces to the zero solution only.
+
+          \paragraph{Case III, $(\lambda-\beta)/D=-\alpha^2<0$:} Then
+          \begin{equation}
+            X = A\sin \alpha x + B \cos \alpha x.
+          \end{equation}
+          The boundary condition $X(0)=0$ means $B=0$. The boundary condition $X(L)=0$ means
+          \begin{equation}
+            0 = A\sin\alpha L \implies \alpha = n \pi/L.
+          \end{equation}
+          The full $X$ solution is therefore
+          \begin{align}
+            u(x,t) = XT & = \sum_{n=1}^\infty C_n\sin\left(\frac{n\pi x}{L}\right)\e^{\lambda t}
+            \\
+            & = \sum_{n=1}^\infty C_n\sin\left(\frac{n\pi x}{L}\right)\e^{[-D(n\pi/L)^2 + \beta] t}.\label{eval-me}
+          \end{align}
+          To evaluate the $C_n$ we need to use the initial condition. We have that $u(x,0) = u_0(x) = \delta(x-L/2)$, i.e.\ evaluating \cref{eval-me} at $t=0$ we have
+          \begin{equation}
+            \delta\left(x-\frac{L}{2}\right) = \sum_{n=1}^\infty C_n\sin\left(\frac{n\pi x}{L}\right).
+          \end{equation}
+          We multiply both sides by $\sin(m\pi x/L)$ and integrate; using the orthogonality relations, we have, for $m>1$,
+          %\begin{equation}
+          %  C_0 = \frac{1}{L}\int_0^L u_0(x) \d x = \frac{1}{L}.
+          %\end{equation}
+          %And the $C_m$ are
+          \begin{align}
+            C_m &= \frac{1}{L}\int_0^L \sin\left( \frac{m\pi x}{L}\right) \delta\left(x-\frac{L}{2}\right)  \d x \\
+            &= \frac{2}{L} \sin\left(\frac{m\pi}{2}\right)\\
+            &= \frac{2}{L}\{1,0,-1,0,...\}.
+          \end{align}
+          This is enough. We could go further but I think we can all agree that the result is not particularly readable.
+
+        \item
+          The long-term behaviour of this depends on the size of $\beta$ relative to $D(\pi/L)^2$, i.e.\ whether the exponential behaviour is growth or decay. On the left: small $\beta$; on the right, large $\beta$.
+      \end{enumerate}
+
+      \begin{center}
+        \input{images/diffusion-bounded-hw-2.pgf}
+        \input{images/diffusion-bounded-hw.pgf}
+      \end{center}
+
+    }
+    %
+
+    %===========================================================================
+
+    %
+    \question{Two separate Fourier transform practice exercises}
+    {
+      \begin{enumerate}[label=(\roman*)]
+        \item Consider the square pulse
+          \begin{equation}
+            c(x,0) =
+            \begin{cases}
+              0 & x<-a,\\
+              1 & -a\leq x \leq a,\\
+              0 & x>a.
+            \end{cases}
+          \end{equation}
+          Calculate its Fourier transform.
+        \item Solve the fundamental problem for the 1D advection--diffusion equation using Fick's law, no source and a velocity $v$.
+
+      \end{enumerate}
+    }
+    {
+      \begin{enumerate}[label=(\roman*)]
+        \item{The transform reduces to the following integral:
+            \begin{equation}
+              \Four(k)[c]=  \frac{1}{\sqrt{2\pi}}\int_{-a}^{a}\e ^{-\i k x}\d{x} = \left[\frac{1}{\i\sqrt{2\pi}k}\e ^{\i kx}\right] = \frac{1}{\i\sqrt{2\pi}k}(\e ^{\i ka}-\e ^{-\i ka}) = \sqrt{\frac{2}{\pi}}\frac{\sin(ak)}{k}.
+            \end{equation}
+            This is the so-called \emph{sinc} function, a sinusoid with polynomial amplitude decay. This is a famous result. It basically shows a non smooth signal $c(x,0)$ has a smooth well behaved transform (we can represent digital signals with smooth functions).
+          }
+
+        \item{The problem at hand is
+            \begin{equation}
+              \pd{c}{t} = D\pdd{c}{x} - v\pd{c}{x},\quad c(x,0) = \delta(x),\quad c(\pm\infty,0)= 0.
+            \end{equation}
+            We apply the Fourier transform to the the main equation to give
+            \begin{equation}
+              \fd{\Four(k)[c]}{t} =(-D k^2 -v\i {k}) \Four(k)[c],
+            \end{equation}
+            a first order differential equation in $\Four(k)[c]$. Integrating, we get
+            \begin{equation}\label{invert-me}
+              \Four(k)[c] = \Four(k)[c(x,0)]\e ^{ (-D k^2 -v\i {k})t},
+            \end{equation}
+            which is similar to the notes (7.10). The transformed initial condition is
+            \begin{equation}
+              \Four(k)[c(x,0)] = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \delta(x) \e^{-\i kx}\dx = \frac{1}{\sqrt{2\pi}},
+            \end{equation}
+            so \cref{invert-me} becomes
+            \begin{equation}
+              \Four(k)[c(x,t)] = \frac{1}{\sqrt{2\pi}} \e ^{ (-D k^2 -v\i {k})t},
+            \end{equation}
+
+            Applying the inverse Fourier transform gives $c(x,t)$ to be
+            \begin{align}
+              c(x,t) &= \frac{1}{2\pi}\int_{-\infty}^{\infty}\e ^{\i kx}\e ^{ (-D k^2 -v\i {k})t}\,\d{k} \\
+              & = \frac{1}{2\pi}\int_{-\infty}^{\infty}\e ^{\i k(x-vt)}\e ^{ -D k^2 t}\,\d{k}.
+            \end{align}
+            We can basically repeat the integration trick from the notes here, but with $x-vt$ instead of $x$. To remind you, we use the known result from the notes that
+            \begin{equation}
+              \Four(k)[\e^{-\alpha x^2}] \coloneqq \frac{1}{\sqrt{2\pi}}\int^\infty_{-\infty} \e^{-\i k x} \e^{-\alpha x^2} \, \d x = \frac{1}{\sqrt{2\alpha}}\e^{-k^2/4\alpha}.
+            \end{equation}
+            With the relabelling $k\to-x$, $x\to k$, this equation says
+            \begin{equation}
+              \frac{1}{\sqrt{2\pi}}\int^\infty_{-\infty} \e^{\i k x} \e^{-\alpha k^2} \, \d k = \frac{1}{\sqrt{2\alpha}}\e^{-x^2/4\alpha}.
+            \end{equation}
+            Now just replace $x$ with $x-vt$ and $\alpha$ with $Dt$ and you have
+            \begin{equation}
+              c(x,t) = \frac{\e ^{-(x-vt)^2/4Dt}}{2\sqrt{\pi D t}}.
+            \end{equation}
+            The only difference from the pure diffusion case is that the mean of the Gaussian distribution moves at a velocity $-v$. This is what was to be expected given that we showed in the notes that advection--diffusion was equivalent to random motion with a bias towards one direction.
+          }
+      \end{enumerate}
+
+    }
+    %
+
+    %===========================================================================
+
+    %
+    \question{Fourier transform (Exam section A, 2017)}
+    {
+      Consider the following PDE and its fundamental problem:
+      \begin{equation}
+        \label{prob1}
+        \pdd{c_f}{t} = D\pdd{c_f}{x},\quad c_f(x,0) =\delta(x),\quad \pd{c_f}{t}(x,0) = 0,\quad c_f(\pm\infty,t) = 0.
+      \end{equation}
+      Here $\delta(x)$ is the Dirac delta distribution and $D>0$. We define the Fourier transform as
+      \begin{align}
+        \Four[c(x)](k)= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}\e ^{-\i k x}c(x)\,\d{x},
+      \end{align}
+      and its inverse as
+      \begin{align}
+        \Four^{-1}[c(k)](x)= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}\e ^{\i k x}c(k)\,\d{k}.
+      \end{align}
+
+      \begin{enumerate}[label=(\alph*)]
+        \item Show that \cref{prob1} implies
+          \begin{equation}
+            \Four[c_f(x,t)](k) = \frac{1}{\sqrt{2\pi}}\cos(k\sqrt{D}t).
+          \end{equation}
+
+        \item
+          Using a Green's function, solve the problem
+          \begin{align}
+            \pdd{c}{t} &= D\pdd{c}{x},\quad c(x,0) = g(x),\quad \pd{c}{t}(x,0) = 0,\quad c(\pm\infty,t) = 0,\\
+            g(x)&=
+            \begin{cases}
+              0 & x< -a,\\
+              1 & -a \leq x \leq a,\\
+              0 & x>a,
+            \end{cases}
+          \end{align}
+          and describe briefly the changing shape of the distribution over time.  You may use the result
+          \begin{equation}
+            \Four[\cos(a x)](k) = \sqrt{\frac{\pi}{2}}\left[\delta(k-a) + \delta(k+a)\right].
+          \end{equation}
+
+      \end{enumerate}
+    }
+    {
+      \begin{enumerate}[label=(\alph*)]
+        \item{ We apply the Fourier transform to
+            \begin{equation}
+              \pdd{c_f}{t} = D\pdd{c_f}{x}
+            \end{equation}
+            to get
+            \begin{equation}
+              \fdd{\Four[c_f](k)}{t} = -k^2 D \Four[c_f](k),
+            \end{equation}
+            remembering that time derivatives are immune to Fourier transforms, and that $\Four[\pdn{n}{c}{x}](k) = (\i k)^n \Four[c](k)$ from the notes. This is a second order ODE in $t$ for $\Four[c_f](k)$ which has solutions in the form
+            \begin{equation}
+              \Four[c_f(x,t)](k) = A\cos(k \sqrt{D} t) + B\sin(k \sqrt{D} t).
+            \end{equation}
+            Our Fourier transformed initial conditions are
+            \begin{equation}
+              \Four[c_f(x,0)](k) = \Four[\delta(x)](k) = \frac{1}{\sqrt{2\pi}}\quad\text{and}\quad \pd{\Four[c_f](x,0)(k)}{t} = \Four[0](k) = 0.
+            \end{equation}
+            Applying these initial conditions gives
+            \begin{equation}
+              \Four[c_f(x,t)](k) = \frac{1}{\sqrt{2\pi}}\cos(k \sqrt{D} t)
+            \end{equation}
+            as required.
+          }
+        \item{
+            Using a Green's function, the solution to our new problem will be
+            \begin{equation}
+              c(x,t)=\int_{-\infty}^{\infty}c_f(x-s,t)g(s)\,\d{s}.
+            \end{equation}
+            So we must first invert the solution to part (a), i.e.\
+            \begin{equation}
+              c_f(x,t) = \frac{1}{2\pi}\int_{-\infty}^{\infty}\e ^{\i kx}\cos(k\sqrt{D}t)\,\d{k}.
+            \end{equation}
+            The supplied identity tells us
+            \begin{equation}
+              \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \e^{-\i k x} \cos(ax)\, \d x = \sqrt{\frac{\pi}{2}}[\delta(k-a) + \delta(k+a)].
+            \end{equation}
+            Relabelling $x \to -k$, $k \to x$, and using the fact that $\cos$ is even, this is equivalent to
+            \begin{equation}
+              \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \e^{\i k x} \cos(ak)\, \d k = \sqrt{\frac{\pi}{2}}[\delta(x-a) + \delta(x+a)].
+            \end{equation}
+            Setting $a=\sqrt{D}t$ gives us
+            \begin{equation}
+              c_f(x,t) =\frac{\delta(x-\sqrt{D}t) + \delta(x+\sqrt{D}t)}{2},
+            \end{equation}
+            and so
+            \begin{equation}
+              c(x,t) =\frac{1}{2}\int_{-a}^{a}\left[\delta(x-\sqrt{D}t-s) + \delta(x+\sqrt{D}t -s)\right]\d{s}.
+            \end{equation}
+            So each integral is only non zero if $\vert x \pm \sqrt{D}t\vert<a$. As time increases, the domains of $x$ values satisfying this constraint move towards $\infty$ (respectively, $-\infty$). The original distribution can be thought of as two overlaying rectangles of height $1/2$ and width $2a$ which then split apart moving away from each other at a velocity $\sqrt{D}$.
+          }
+      \end{enumerate}
+
+    }
+    %
+
+    %===========================================================================
+
+    %
+    \question{Similarity solution (Exam section A, 2018)}
+    {
+      Consider the following non-autonomous partial differential equation for a function $c(x,t)$,
+      \begin{equation}
+        \label{mainpde}
+        \pd{c}{t} = D\pdd{c}{x} - \frac{1}{t^{1/2}}\pd{c}{x},
+      \end{equation}
+      where $D$ is a positive constant, $x\in\mathbb{R}$ and $t>0$.
+      \begin{enumerate}[label=(\alph*)]
+        \item
+          Assume a similarity solution $v$ which relates to $c$ as
+          \begin{equation}
+            c(x,t)  = \frac{1}{t^{\alpha}}v(y),\quad y = x/t^{\beta}.
+          \end{equation}
+          Show that, for a suitable choice of  $\beta$, (\ref{mainpde}) reduces to the following ODE in $y$,
+          \begin{equation}
+            D\fdd{v}{y} -\fd{v}{y} + \alpha v + y\beta\fd{v}{y}=0.
+          \end{equation}
+
+        \item
+          Show by integration, that, for a suitable choice of $\alpha$, this equation can be written as
+          \begin{equation}
+            D\fd{v}{y} + v\left(\frac{1}{2}y-1\right) = C,
+          \end{equation}
+          where $C$ is a constant of integration.
+
+        \item There is a turning point, $\pd{c}{x}=0$, whose position is $x= 2t^{1/2}$. Assuming $\alpha$ and $\beta$ take the values found in (a) and (b), show that the solution to \cref{mainpde} takes the form
+          \begin{equation}
+            c(x,t) = t^{-1/2} A\exp\left(\frac{x(1-\frac{1}{4t^{1/2}}x)}{Dt^{1/2}}\right),
+          \end{equation}
+          where $A$ is a constant of integration.
+
+      \end{enumerate}
+    }
+    {
+      Recall the PDE is
+      \begin{equation}
+        \label{mainpde}
+        \pd{c}{t} = D\pdd{c}{x} - \frac{1}{t^{1/2}}\pd{c}{x}.
+      \end{equation}
+
+      \begin{enumerate}[label=(\alph*)]
+        \item {With this substitution we have
+            \begin{align}
+              \pd{c}{t} &= -\alpha\frac{1}{t^{\alpha+1}}v- \frac{x\beta}{t^{\alpha+\beta+1}}\fd{v}{y} =  -\alpha\frac{1}{t^{\alpha+1}}v- \frac{y\beta}{t^{\alpha+1}}\fd{v}{y},\\
+              \pd{}{x}&= \frac{1}{t^{\beta}}\fd{}{y} \implies \pd{c}{x} = \frac{1}{t^{\alpha +\beta}}\fd{v}{y},\\
+              \pdd{c}{x} &= \frac{1}{t^{\alpha+ 2\beta}}\fdd{v}{y},
+            \end{align}
+            and our equation becomes
+            \begin{equation}
+              \frac{1}{t^{\alpha+1}}\left(-\alpha v - y\beta\fd{v}{y}\right) =\frac{D}{t^{\alpha+2\beta}}\fdd{v}{y} - \frac{1}{t^{\alpha+\beta + \frac{1}{2}}}\fd{v}{y}.
+            \end{equation}
+            We can eliminate the  factor of $t^{\alpha+1}$ if $\beta =1/2$, which gives the required equation.
+
+          }
+        \item{
+            We note that if $\alpha =1/2$, the term
+            \begin{equation}
+              \alpha v + y\beta\fd{v}{y} = \frac{1}{2}\fd{v y}{y}.
+            \end{equation}
+            This gives us
+            \begin{equation}
+              D\fdd{v}{y} -\fd{v}{y} +\frac{1}{2}\fd{vy}{y}=0.
+            \end{equation}
+            and integrating gives the required expression.
+
+          }
+        \item{The stated condition implies that $\fd{v}{y}=0$ at $y=2$, thus $C=0$. Then we can solve the equation by separation of variables:
+            \begin{equation}
+              \int \frac{D}{v} \, \d v = \int \left(1-\frac{1}{2}y\right)\d{y} \implies D\log(v) = y\left(1-\frac{1}{4}y\right) + C_2.
+            \end{equation}
+            This gives us
+            \begin{equation}
+              v(y)= A\exp\left(\frac{y(1-\frac{1}{4}y)}{D}\right),
+            \end{equation}
+            and hence
+            \begin{equation}
+              c(x,t) = t^{-1/2} A\exp\left(\frac{x(1-\frac{1}{4t^{1/2}}x)}{Dt^{1/2}}\right).
+            \end{equation}
+          }
+      \end{enumerate}
+
+    }
+\end{enumerate}
+
+%
+
+%===========================================================================
+
+%
+
+\end{document}

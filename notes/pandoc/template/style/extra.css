@@ -1,0 +1,177 @@
+body {
+    font-family: Charter, Georgia, serif;
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+img {
+    display: inline-block;
+    max-width: 100%;
+    height: 18rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+td img{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+    margin-top:2rem;
+    margin-bottom:2rem;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    font-family: "Fira Sans";
+    font-weight: 500;
+    margin-top: 2rem;
+    color: #5f466d;
+}
+
+h1.title{
+    margin-top:0px;
+    line-height: 2.8rem;
+}
+
+h1.title::first-line{
+    color:#222;
+    font-size: 1.5rem;
+    letter-spacing: 2pt;
+}
+
+span.header-section-number {
+    margin-right: 0.5rem;
+    font-weight: 500;
+    color: #222;
+}
+
+p.author{
+    /* font-size: 1rem; */
+    font-family: "Fira Sans";
+    font-weight: 400;
+    font-variant-caps: normal;
+    line-height: 1.4;
+}
+
+p.date{
+    text-align: center;
+}
+
+div.center p {
+    text-align: center;
+}
+
+div.do-it-yourself,
+div.examplebox,
+div.info-box,
+div.nem-box,
+div.extra-reading {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.8rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+div.do-it-yourself {
+    background-color: #f6f1fa;
+    border-left: 3px #5f466d solid;
+}
+
+div.do-it-yourself::before {
+    content: '▶︎ Have a go!';
+    font-weight: 500;
+    color: #5f466d;
+    font-family: 'Fira Sans', sans-serif;
+}
+
+div.examplebox {
+    border-left: 3px #5f466d solid;
+}
+
+div.examplebox::before {
+    content: '● Example';
+    font-weight: 500;
+    color: #5f466d;
+    font-family: 'Fira Sans', sans-serif;
+}
+
+div.info-box {
+    background-color: #FFF4E5;
+    border-left: 3px #7a4501 solid;
+}
+
+div.info-box::before {
+    content: '◼︎ Information';
+    font-weight: 500;
+    color: #7a4501;
+    font-family: 'Fira Sans', sans-serif;
+}
+
+div.nem-box {
+    background-color: #FFEDF0;
+    border-left: 3px #d21f3c solid;
+}
+
+div.nem-box::before {
+    content: '◆ Non-examinable';
+    font-weight: 500;
+    color: #d21f3c;
+    font-family: 'Fira Sans', sans-serif;
+}
+
+div.extra-reading {
+    background-color: #e8f1ff;
+    border-left: 3px #0e4d92 solid;
+}
+
+div.extra-reading::before {
+    content: '★ Extra reading';
+    font-weight: 500;
+    color: #0e4d92;
+    font-family: 'Fira Sans', sans-serif;
+}
+
+h5{
+    font-size: 1.1rem;
+    color: #333;
+}
+
+figure {
+    /* display: inline-block; */
+    max-width: 100%;
+    /* height: 18rem; */
+    margin-top:2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    text-align:center;
+    background-color: #fff;
+}
+
+figure img {
+    padding-top: 0;
+    padding-bottom: 1rem;
+}
+
+figure p {
+    text-align: center;
+}
+
+figcaption {
+    font-size: 0.9rem;
+    text-align: center;
+    color: #666;
+    font-family: "Fira Sans";
+}

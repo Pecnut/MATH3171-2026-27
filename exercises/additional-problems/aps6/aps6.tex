@@ -1,0 +1,173 @@
+\documentclass[a4paper,12pt]{article}
+\input{../common/preamble.tex}
+\begin{document} 
+%
+\heading{Epiphany}{Additional problem sheet 6}
+%
+\section{}
+\begin{figure}[h!]
+\centering
+\subfloat[]{\includegraphics[width=5cm]{twistedDNA2.png}}\quad\subfloat[]{\includegraphics[width=5cm]{twistedDNA1.png}}
+\caption{\label{minicircledna}Depictions of a possible minicircle DNA model.  (a) The red circle is the tube's axis. The blue curve represents the tip of the vector $\v{d}_1$ and indicates the extend to which the tube is twisted. (b) the green vectors represent the twist free basis $({\bf E}_1,{\bf E}_2)$.}
+\end{figure}
+Consider a simple model for a DNA mini-circle as a twisted elastic tube. The tube's axis is assumed to be a circle
+\begin{equation}
+\v{r}(t) = \left(R\cos(2\pi t),R\sin(2\pi t),0\right), t\in[0,1]
+\end{equation}
+where $R$ is the radius of the circle. We assume tube can be modelled as an unstretchable tube satisfying the folowing kinematic equations
+\begin{equation}
+\label{stretchkinematics}
+\fd{}{s}
+\left(\begin{array}{c} \v{r} \\ \v{d}_1 \\\v{d}_2\\ \v{d}_3 \end{array}\right) = 
+\left(\begin{array}{cccc}
+0 &0 & 0 & 1\\
+0 & 0 &  u_3 & -u_2\\
+0 & -u_3 &  0 & u_1\\
+0 & u_2 &  -u_1 & 0
+\end{array}\right)
+\left(\begin{array}{c}\v{r}\\ \v{d}_1 \\ \v{d}_2 \\ \v{d}_3 \end{array}\right).
+\end{equation}
+and the following equilibrium equations
+\begin{align}
+\label{mechanics2}
+\fd{}{s}\v{n}&= {\bf 0},\\
+\nonumber \fd{}{s}\v{m}  +\v{d}_3 \times\v{n} &={\bf 0}.
+\end{align}
+where $\v{n}$ is the internal force of the tube, $\v{m}$ the internal couple. We assume the following constitutive laws for the system
+\begin{equation}
+\v{m} = A u_1\v{d}_1 + B u_2{\bf  d}_2 + C u_3\v{d}_3,\quad \v{n} = n_1\v{d}_1 + n_2\v{d}_2 +  n_3\v{d}_3.
+\end{equation}
+\begin{enumerate}[label=(\alph*)]
+\item{Find the arclength parametrsiation $\v{r}(s)$ of this curve.
+}
+\item{Express the $\v{d}_i$ components of the equations (\ref{mechanics2}).
+}
+\item{
+It can be shown that the kinematic parameters can be written as
+\begin{equation}
+u_1 = \frac{\sin(\phi(s))}{R},\quad u_2=\frac{\cos(\phi(s))}{R},\quad u_3 = \fd{\phi}{s}.
+\end{equation}
+If $\phi(s)=0,\forall s$ then the pair $(\v{d}_1,\v{d}_2)$ are parallel transported around  $\v{r}(s)$, as shown in Figure \ref{minicircledna}(b), this represents an untwisted tube. An example of a non zero twisted tube (basis pair) is shown in Figure \ref{minicircledna}(a). State the (two) boundary conditions on $\phi$ on the assumption that the deformation of the tube is differentiable.
+}\item{
+Demonstrate that the twist function $\fd{\phi}{s}$ takes the following implict form:
+\begin{equation}
+\fd{\phi}{s}=\pm \sqrt{2\left(D+\frac{\cos(2\phi)}{4R^2}(B-A)\right)/C},
+\end{equation}
+where $D$ is a constant of integration.
+}\item{
+Find a condition on the constants $A$ and $B$ for the possibility of solutions to the full system of equations when there is non-zero twisting. You may assume that the O.D.E for $\phi$ obtained in the previous question has solutions. (Hint: you should not need to solve the equations).
+}
+\end{enumerate}
+\section{}
+The kinematics of the rod  are described by the set of vectors $\v{r}(s),\v{d}_i(s)[0,L]\rightarrow \mathbb{R}^3\,,i=1,2,3$ and the following system of ordinary differential equations
+\begin{equation*}
+\label{fullkinematics}
+\fd{}{s}
+\left(\begin{array}{c} \v{r} \\ \v{d}_1 \\\v{d}_2\\ \v{d}_3 \end{array}\right) = 
+\left(\begin{array}{cccc}
+0 &0 & 0 & \nu \\
+0 & 0 &  u_3 & -u_2\\
+0 & -u_3 &  0 & u_1\\
+0 & u_2 &  -u_1 & 0
+\end{array}\right)
+\left(\begin{array}{c}\v{r}\\ \v{d}_1 \\ \v{d}_2 \\ \v{d}_3 \end{array}\right),
+\end{equation*}
+with the $u_i,\nu$ smooth scalar functions of $s$ representing the system's curvatures and stretching
+
+The equations of equilibrium of this body are given by the following vector equations:
+\begin{align}
+\label{mechanics}
+\fd{}{s}\v{n}&= {\bf 0},\\
+\nonumber \fd{}{s}\v{m}  +\fd{\v{r}}{s}\times\v{n} &={\bf 0}.
+\end{align}
+The following choice of constitutive law for the internal couple is assumed
+\begin{equation*}
+\v{m} =  A u_1\v{d}_1 + A u_2\v{d}_2 +C u_3\v{d}_3,
+\end{equation*}
+with $A,C>0$ constants. To complete the system (\ref{mechanics}) we assume the following consttutive law relating the axial force and the stretching:
+\begin{equation}
+n_3(s) = E(\nu(s)-1).
+\end{equation}
+where $E$ is the Young's modulus of the elastic rod. 
+\begin{enumerate}[label=(\alph*)]
+\item{Write out the system (\ref{mechanics}) in component form in the $(\v{d}_1,\v{d}_2,\v{d}_3)$ basis.
+
+}\item{Now assume that $u_2=u_3=0$, how does this constraint the tube's geometry?
+}\item{Use the assumption that $u_2=u_3=0$ to reduce the system (\ref{mechanics}) to a pair of non-linear ordinary differential equations for $\nu$ and $u_1$.
+}\item{Verify that a straight vertical rod with arbitrary \emph{constant compression} is in equilibrium for this model and given an expression for the compression under an axial load $N$ applied to the rod.
+}\item{Demonstrate the rod is unstable to the forces with the following values for integer $n$: 
+\begin{equation}
+N =\frac{1}{2} \left(E \pm \sqrt{E}\sqrt{E-\frac{4 \pi ^2 A n^2}{L^2}} \right)
+\end{equation} 
+To do this assume the rod remains planar under small perturbations about this equilibrium (Hint: perform a linear stability analysis). 
+}\end{enumerate}
+
+
+\section{}
+
+\begin{figure}
+\centering
+\includegraphics[width=8cm]{thetaPlot.pdf}
+\caption{\label{q1fig} A function $\theta(s),\, s\in[0,10]$ which is a solution to the tube system considered in Question 5}
+\end{figure}
+Consider a slender elastic rod whose central axis is represented by a curve $\v{r}(s):[0,L]\rightarrow \mathbb{R}^3$, where $s$ is the body's arclength. The coordinates of $\mathbb{R}^3$ take the form $(x,y,z)$ with unit vectors $\uv{x},\uv{y}$ and $\uv{z}$ respectively. A force $\v{n}(s)$ represents the internal force acting on each cross-section of the the body and $\v{m}(s)$ represents the internal couple acting on each cross section. Net forces and couples can be applied at $s=0$ and $s=L$. 
+
+The kinematics of the rod  are described by the set of vectors $\v{r}(s),\v{d}_i(s):[0,L]\rightarrow \mathbb{R}^3\,,i=1,2,3$ and the following system of ordinary differential equations
+\begin{equation*}
+\label{fullkinematics}
+\fd{}{s}
+\left(\begin{array}{c} \v{r} \\ \v{d}_1 \\\v{d}_2\\ \v{d}_3 \end{array}\right) = 
+\left(\begin{array}{cccc}
+0 &0 & 0 & 1 \\
+0 & 0 &  u_3 & -u_2\\
+0 & -u_3 &  0 & u_1\\
+0 & u_2 &  -u_1 & 0
+\end{array}\right)
+\left(\begin{array}{c}\v{r}\\ \v{d}_1 \\ \v{d}_2 \\ \v{d}_3 \end{array}\right),
+\end{equation*}
+with the $u_i$ smooth scalar functions of $s$ representing the system's curvatures.
+
+The equations of equilibrium of this body are given by the following vector equations:
+\begin{align}
+\label{mechanics}
+\fd{}{s}\v{n}&= {\bf 0},\\
+\nonumber \fd{}{s}\v{m}  +\v{d}_3 \times\v{n} &={\bf 0}.
+\end{align}
+The following choice of constitutive law for the internal couple is assumed
+\begin{equation*}
+\v{m} =  A u_1\v{d}_1 + A u_2\v{d}_2 +C u_3\v{d}_3,
+\end{equation*}
+with $A,C>0$ constants. Further assume the rod is a planar curve and the pair  $\v{d}_3$ and $\v{d}_1$ are parameterised by a function $\theta(s)$:
+\begin{equation*}
+\v{d}_3(s) = \left(\cos\theta(s),0,\sin\theta(s)\right),\quad \v{d}_1(s) = \left(-\sin\theta(s),0,\cos\theta(s)\right).
+\end{equation*} 
+Assume the rod is never twisted ($u_3=0$). Finally, consider the rod to be attached to a wall at $s=0$ at an angle $\theta=0$ and that a load $N \uv{x}$ pushing on the rod is applied at $s=L$.
+\begin{enumerate}[label=(\alph*)]
+\item{Show that the system (\ref{mechanics}) can be reduced to the following non-linear ODE for $\theta$:
+\begin{equation}
+\label{maineq}
+A\fdd{\theta}{s} -N\sin(\theta)=0.
+\end{equation} 
+}\item{
+Using the following integral identity 
+\begin{equation*}
+\int^{\theta}\frac{\d\theta}{\sqrt{C_1-\gamma\cos\theta}} = \frac{2}{\sqrt{C_1-\gamma}} F\left(\frac{\theta}{2}\large\bigg \vert \frac{2 \gamma}{C_1-\gamma}\right),
+\end{equation*}
+where 
+\begin{equation*}
+F\left(x\large\vert k\right) = \int_{0}^{x}\frac{\d x'}{\sqrt{1-k^2\sin^2 x'}}
+\end{equation*}
+is the elliptic integral of the first kind, integrate (\ref{maineq}) twice in order to find an implicit relationship between $\theta$ and $s$ and  a constant of integration $C_1$. In doing so you  should impose the stated boundary condition on $\theta$ at $s=0$. 
+}\item{
+State a constraint on the value of $C_1$ in terms of the applied load $N$ and bending stiffness $A$.
+}\item{
+The elliptic integral of the first kind has an inverse, the so-called Jacobi amplitude function $\mathrm{am}(x\vert k)$ defined by
+\begin{equation*}
+F\left(\mathrm{am}(x\vert k)\large\vert k\right) = x.
+\end{equation*}
+Use this relation to obtain an explicit solution for $\theta$.
+}\item{An example solution for $\theta(s),s\in[0,10]$ is shown in Figure \ref{q1fig}. Describe/sketch the tube configuration $\v{r}(s),s\in[0,10]$ corresponding to this solution. Is it physically realistic? } 
+\item{Consider a similar model except with the bending coefficient $A(s)$ dependent on the arclength. What does this represent physically and how would it alter the equation obtained in (a) (assuming all else stays equal)? }
+\end{enumerate}
+
+\end{document}

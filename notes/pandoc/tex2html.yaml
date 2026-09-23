@@ -1,0 +1,58 @@
+from: latex+latex_macros
+
+to: html
+
+output-file: ./index.html
+
+template: pandoc/template/html5template
+standalone: true
+
+# note that structured variables may be specified:
+variables:
+  lang: en
+  environmentCounters:
+     counter1:
+      - definition
+      - theorem
+      - lemma
+      - example
+      - exampleqed
+      - proposition
+      - remark
+      - corollary
+      - exercise
+      - question
+      # If you want to use a separate counter for examples, uncomment the two lines below and comment out example from the list above. Move other envinronments to counter2 similarly. You may also move environments to an environment3 (or 4) if required. Simply follow the structure as given here.
+     # counter2:
+      # - example
+
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"
+
+include-in-header: [pandoc/template/mathjax_config.html,
+                    pandoc/template/google-fonts.html]
+include-after-body: []
+
+# If you want to load additional custom css, do so here. This is loaded after the external stylesheet.
+css:
+- pandoc/template/style/latex.css
+- pandoc/template/style/extra.css
+- https://cdn.jsdelivr.net/npm/charter-webfont@4/charter.min.css
+
+filters:
+- pandoc/date_format.lua
+- pandoc/numbering_depth.lua
+
+pdf-engine: pdflatex
+
+table-of-contents: true
+toc-depth: 2
+number-sections: true
+
+shift-heading-level-by: -1 # Make \chapter be top level instead of \part
+number-offset: [-1,0,0,0,0,0] # Start chapter numbering at 0
+
+section-divs: true
+identifier-prefix: ""
+title-prefix: ""
