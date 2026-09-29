@@ -29,8 +29,7 @@
       where $a$, $b$ and $k$ are positive constants.
       \begin{enumerate}[label=(\alph*)]
         \item Provide a biological interpretation of the interaction term between the two species. Can you summarise it in three words?
-        \item Show that there are two equilibria of the system, $(u_0,v_0) = (0,0)$ and $(k,0)$, which are always permissible; and that there is a further, $(u^*,v^*)$, which is permissible under conditions you should state.
-        \item From now on, let $a=2$ and $b=1$. What does this make the value of the coexistence equilibrium, $(u^*,v^*)$, and what are the new conditions for it to be permissible?
+        \item From now on, let $a=2$ and $b=1$. Show that there are two equilibria of the system, $(u_0,v_0) = (0,0)$ and $(k,0)$, which are always permissible; and that there is a further, $(u^*,v^*)$, which is permissible under conditions you should state.
         \item Determine the conditions under which each of the three equilibria is stable or unstable. In particular, you should show that the Jacobian of the system, evaluated at the coexistence equilibrium, is
           \begin{equation}
             \m{J}(u^*,v^*) =
@@ -60,46 +59,35 @@
           Looking for equilibria, we say
           \begin{subequations}
             \begin{align}
-              0 &= u\left(1-\frac{u}{k}\right)-\frac{auv}{1+u}, \label{null1}\\
-              0 &= -bv + \frac{auv}{1+u}. \label{null2}
+              0 &= u\left(1-\frac{u}{k}\right)-\frac{2uv}{1+u}, \label{null1}\\
+              0 &= -v + \frac{2uv}{1+u}. \label{null2}
             \end{align}
           \end{subequations}
           Looking first at \cref{null2}, we have
           \begin{equation}
-            0 = v\left(-b+\frac{au}{1+u}\right) \implies v=0, \quad b=\frac{au}{1+u}.
+            0 = v\left(-1+\frac{2u}{1+u}\right) \implies v=0, \quad 1=\frac{2u}{1+u}.
           \end{equation}
           Plugging the first solution, $v=0$, into \cref{null1}, we get $u=0$ or $u=k$, so we have found $(0,0)$ and $(k,0)$.
 
           The second solution rearranges to
           \begin{equation}
-            u = \frac{b}{a-b}.
+            u = 1.
           \end{equation}
           Rearranging \cref{null1} for $v$ and substituting this solution for $u$ in, we get
           \begin{equation}
-            v = \frac{1+u}{a}\left[1-\frac{u}{k}\right] = \cdots = \frac{k(a-b)-b}{k(a-b)^2},
+            v = \frac{1+u}{2}\left[1-\frac{u}{k}\right] = \cdots = \frac{k-1}{k},
           \end{equation}
           and so our final equilibrium is
           \begin{equation}
-            (u^*,v^*) = \left( \frac{b}{a-b}, \frac{k(a-b)-b}{k(a-b)^2} \right).
+            (u^*,v^*) = \left( 1, \frac{k-1}{k} \right).
           \end{equation}
-          This is permissible if $a>b$ and $k(a-b)\geq b$.
+          This is permissible if $k\geq 1$.
           %
           \commentary{
             Up to a few errors this was fine; nothing obviously systematic.
           }
 
         \item %(c)
-          If $a=2$ and $b=1$ then
-          \begin{equation}
-            (u^*,v^*) = \left( 1, \frac{k-1}{k} \right),
-          \end{equation}
-          and this is permissible if $k\geq 1$.
-          %
-          \commentary{
-            Generally fine!
-          }
-
-        \item %(d)
           Under this choice for $a$ and $b$, the Jacobian is
           \begin{equation}
             \m{J} =
@@ -169,7 +157,7 @@
         There is an important principle here: \emph{never do more than is needed} in an exam. You only have a finite amount of time, so just answer what is asked and no more. If it says \emph{classify} the equilibria, you need to know if you have complex behaviour or not; if it asks for stability you don't.
           }
 
-        \item %(e)
+        \item %(d)
           Look again at the table above. Ignoring the complete extinction equilibrium, we have
           \begin{equation}
             (u_0,v_0) = (k,0) \quad\text{and}\quad \left(1,\frac{k-1}{k}\right).
@@ -195,7 +183,7 @@
             This was a mixed bag. I think some people weren't clear on what a bifurcation diagram is, in which case, just make sure you understand what is above. Common mistakes included drawing the wrong stability on the lines (remember stable equilibria get solid lines; unstable equilibria get dashed lines), drawing impermissible equilibria ($u_0=1$ is only permissible for $k=1$ so don't draw anything for $k<1$) and just missing equilibria (some people missed the line for $v_0=0$).
             }
 
-        \item %(f)
+        \item %(e)
           The Hopf bifurcation is the point where a stable spiral becomes an unstable spiral (or the other way round).
 
           Looking at the graph, there are two bifurcations where stability changes: one at $k=1$ and $k=3$.
@@ -245,7 +233,10 @@
             \begin{equation}
               \pd{u}{t} = D\pdd{u}{x}-\lambda u,
             \end{equation}
-            and state the boundary conditions. You should start from the general advection--diffusion equation.
+            and state the boundary conditions. You should start from the general advection--diffusion equation, which says for a concentration $c(\v{x},t)$,
+            \begin{equation}
+            	\pd{c}{t} = -\vnabla\cdot(c \v{v})-\vnabla \cdot \v{J} + f.
+            \end{equation}
             %\hfill (4 marks)
           }
         \item Show that the equilibrium of the system, $u(x)$, in the case $\lambda=1$ is given by

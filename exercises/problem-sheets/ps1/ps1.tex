@@ -11,7 +11,7 @@
 \heading{Michaelmas}{Problem sheet 1\solutioninheading}
 %
 \ifbool{show_solution}{}{
-  This problem sheet is due in by \textbf{5pm} on \textbf{Wednesday 29 October 2025}. You may submit it on paper to my office (\textsc{mcs}\,3008) or electronically on Gradescope. There is a discretionary mark available for neat and legible solutions.
+  This problem sheet is due in by \textbf{noon} on \textbf{Monday 26 October 2026}. You may submit it on paper to my office (\textsc{mcs}\,3008) or electronically on Gradescope. There is a discretionary mark available for neat and legible solutions.
 
   \textbf{Topics covered}: Chapters 1--2.
 }
@@ -225,9 +225,9 @@ saying $K$ had units was the inverse of density: it's on the denominator which i
         \fd{y}{t} &= 2x + 2y -10.
       \end{align}
       \begin{enumerate}
-        \item{Discuss each term in the equations: what do they represent (growth? decay? interaction?). Are these meaningful equations? (`I do/don't think this is realistic because\dots')}
-        \item{Find the equilibrium of the system: state its permissibility and determine its stability. You do not need to do a formal $\epsilon$-style expansion; you can simply state a useful result from lectures to start you off. }
-        \item Take a look at table 3.1 in the online notes on Ultra. What name should we give to this equilibrium?
+        \item Discuss each term in the equations: what do they represent (growth? decay? interaction?). Are these meaningful equations? (`I do/don't think this is realistic because\dots')
+        \item Find the equilibrium of the system and state its permissibility. % and determine its stability. You do not need to do a formal $\epsilon$-style expansion; you can simply state a useful result from lectures to start you off. 
+        %\item Take a look at table 3.1 in the online notes on Ultra. What name should we give to this equilibrium?
       \end{enumerate}
     }
     { % Solution
@@ -264,24 +264,24 @@ saying $K$ had units was the inverse of density: it's on the denominator which i
             \end{equation}
             which can then be used to get $y =3$. This is permissible.
 
-            The Jacobian of the system is
-            \begin{equation}
-              \t{J} =
-              \begin{pmatrix}
-                1 & -2 \\
-                2 & 2
-              \end{pmatrix},
-            \end{equation}
-            so we need to find its eigenvalues. We do so by solving
-            \begin{align}
-              \det(\t{J}-\lambda \t{I}) = 0 \implies (1-\lambda)(2-\lambda) + 4&= 0
-              \\  \implies \lambda^2-3\lambda +6  &= 0,
-            \end{align}
-            giving us
-            \begin{equation}
-              \lambda = \frac{1}{2}\left(3 \pm \i\sqrt{15}\right).
-            \end{equation}
-            So both solutions have positive real part and the system is an \textbf{unstable spiral}.
+%            The Jacobian of the system is
+%            \begin{equation}
+%              \t{J} =
+%              \begin{pmatrix}
+%                1 & -2 \\
+%                2 & 2
+%              \end{pmatrix},
+%            \end{equation}
+%            so we need to find its eigenvalues. We do so by solving
+%            \begin{align}
+%              \det(\t{J}-\lambda \t{I}) = 0 \implies (1-\lambda)(2-\lambda) + 4&= 0
+%              \\  \implies \lambda^2-3\lambda +6  &= 0,
+%            \end{align}
+%            giving us
+%            \begin{equation}
+%              \lambda = \frac{1}{2}\left(3 \pm \i\sqrt{15}\right).
+%            \end{equation}
+%            So both solutions have positive real part and the system is an \textbf{unstable spiral}.
             
        \begin{commentary}
           A number of people assumed it would look like actual Lotka--Volterra, but it doesn't. It's best not to assume it would; indeed the stability analysis makes it clear it's not. 
@@ -313,3 +313,4 @@ saying $K$ had units was the inverse of density: it's on the denominator which i
 \end{enumerate}
 
 \end{document}
+

@@ -1,3 +1,5 @@
-Do the a=1,b=2 simplification right from the start. This is already really long to mark and there's no need to make it longer. If you can shorten it some other way, do it. They can basically all do the LSA anyway.
+Do the a=2,b=1 simplification right from the start. This is already really long to mark and there's no need to make it longer. If you can shorten it some other way, do it. They can basically all do the LSA anyway.
 
 I should make it clear that they need to start from the GENERAL adv-diff eqn.
+
+-- All changed 23/9/26 I think. -- [AKT]
