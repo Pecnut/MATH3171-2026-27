@@ -2,7 +2,7 @@
 \input{../common/preamble.tex}
 \usepackage{multicol}
 \setbool{show_question}{true}
-\setbool{show_solution}{true}
+\setbool{show_solution}{false}
 \begin{document}
 %
 \heading{Michaelmas}{Problems class 2\solutioninheading}
@@ -29,7 +29,7 @@
         \item Infer direction of trajectories and join up.
       \end{enumerate}
 
-      Trajectories in a phase portrait do not intersect: can you explain why?
+      \textbf{Question:} Trajectories in a phase portrait do not intersect: can you explain why?
     }
     { % Solution
       Trajectories in a phase portrait do not intersect, because where they intersect, the trajectory (i.e.\ value of $(\dot{x},\dot{y})$) should be unique in a deterministic (i.e.\ non-random) system.
@@ -87,7 +87,7 @@
     % Q4
     \question{Competitive Lotka--Volterra}
     { % Question
-      Recall from last week's lectures that the competitive Lotka--Volterra system, in nondimensional form, looks like
+      Recall from lectures that the competitive Lotka--Volterra system, in nondimensional form, looks like
       \begin{align}
         \fd{x}{t} &= x(1-x-\gamma_1 y),\\
         \fd{y}{t} &= \beta y (1-y-\gamma_2 x),

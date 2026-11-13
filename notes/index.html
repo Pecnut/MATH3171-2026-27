@@ -5,7 +5,7 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Chris Prior Adam Townsend Andrew Krause" />
-  <meta name="dcterms.date" content="2026-09-22" />
+  <meta name="dcterms.date" content="2026-11-12" />
   <title> MATH3171 Mathematical Biology III</title>
   <style>
     /* Default styles provided by pandoc.
@@ -95,8 +95,8 @@ Mathematical Biology III</h1>
 <p class="author">Chris Prior<br />
 Adam Townsend<br />
 Andrew Krause</p>
-<p class="date"><em style="margin-right: 0.4rem">Last updated</em> 22
-September 2026</p>
+<p class="date"><em style="margin-right: 0.4rem">Last updated</em> 12
+November 2026</p>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -3352,7 +3352,7 @@ to <span class="math inline">\(n\)</span> populations. For example, for
 three or more populations, the system can show chaotic behaviour: a
 phenomenon not possible for two populations on account of (for example)
 the <a
-href="https://en.wikipedia.org/wiki/Poincar%C3%A9%E2%80%93Bendixson_theorem">Poincaré-Bendixson
+href="https://en.wikipedia.org/wiki/Poincar%C3%A9%E2%80%93Bendixson_theorem">Poincaré–Bendixson
 theorem</a>. Mathematicians such as Stephen Smale and Morris Hirsch have
 proved some deep results regarding the asymptotic (limiting) behaviour
 of more general systems. However, these results are somewhat out of the
@@ -3447,7 +3447,7 @@ class="math inline">\(H\)</span>, as soon as we go over <span
 class="math inline">\(H=aK/4\)</span>, <span
 class="math inline">\(\mathchoice{\frac{\mathrm{d}x}{\mathrm{d}t}}{\mathrm{d}x/\mathrm{d}t}{\mathrm{d}x/\mathrm{d}t}{\mathrm{d}x/\mathrm{d}t}\)</span>
 becomes always negative and we reach extinction in finite time. An
-interesting result about the dangerous of overharvesting! This
+interesting result about the dangers of overharvesting! This
 discontinuous jump in the long-time solution is known as a
 <em>catastrophe</em>.</p>
 <p>In general, when changes in parameter values in our models lead to
@@ -3504,7 +3504,7 @@ class="smallcaps">cc by 3.0</span>; Thayne Tuason, <span
 class="smallcaps">cc by-sa 4.0</span>]</em> </figcaption>
 </figure>
 <p>One cannot take a mathematical biology course without encountering
-the spruce budworm. It shows how a simple, one-dimensional systems can
+the spruce budworm. It shows how a simple, one-dimensional system can
 yield rich dynamics with relevant predictions of a biological
 phenomenon. The <a
 href="https://en.wikipedia.org/wiki/Choristoneura_fumiferana">spruce
@@ -3516,12 +3516,12 @@ moths produce larvae which feed on the needles of the conifers: a
 serious infestation can lead to complete defoliation of a forest in
 about four years, and so the budworm is considered one of the most
 destructive pests in North America.</p>
-<p>The budworm is preyed upon by birds that for low budworm population
-feed only upon the budworms once the budworm population has reached a
-certain level. Assuming logistic growth for the budworm population in
-the absence of birds, the budworm population size, <span
-class="math inline">\(x\)</span>, is governed by the variation on the
-logistic equation, <span class="math display">\[\begin{equation}
+<p>The budworm is preyed upon by birds that feed only upon the budworms
+once the budworm population has grown to a certain level. Assuming
+logistic growth for the budworm population in the absence of birds, the
+budworm population size, <span class="math inline">\(x\)</span>, is
+governed by the variation on the logistic equation, <span
+class="math display">\[\begin{equation}
 	\mathchoice{\frac{\mathrm{d}x}{\mathrm{d}t}}{\mathrm{d}x/\mathrm{d}t}{\mathrm{d}x/\mathrm{d}t}{\mathrm{d}x/\mathrm{d}t}
 = rx\left(1-\frac{x}{K}\right) - \frac{Bx^2}{A^2 + x^2}.
 \end{equation}\]</span> What does the new term tell us? As <span
@@ -3995,9 +3995,9 @@ constants <span class="math inline">\(k_j^{+,-} \geq 0\)</span>.</p>
 <p>The law of mass action gives the differential equation for the
 concentration <span class="math inline">\(a_i\)</span> as <span
 class="math display">\[\begin{equation}
-	\mathchoice{\frac{\mathrm{d}x_i}{\mathrm{d}t}}{\mathrm{d}x_i/\mathrm{d}t}{\mathrm{d}x_i/\mathrm{d}t}{\mathrm{d}x_i/\mathrm{d}t}
+	\mathchoice{\frac{\mathrm{d}a_i}{\mathrm{d}t}}{\mathrm{d}a_i/\mathrm{d}t}{\mathrm{d}a_i/\mathrm{d}t}{\mathrm{d}a_i/\mathrm{d}t}
 = \sum_{j=1}^M(\beta_{ij}-\alpha_{ij})\left(k_j^+\prod_{\ell=1}^N
-a_\ell^{\alpha_{\ell j}} - k_j^-\prod_{\ell=1}^N a_i^{\beta_{\ell j}}
+a_\ell^{\alpha_{\ell j}} - k_j^-\prod_{\ell=1}^N a_\ell^{\beta_{\ell j}}
 \right).
 \end{equation}\]</span></p>
 </div>
@@ -4042,7 +4042,7 @@ data-reference="limcyc">[limcyc]</a>.</figcaption>
 href="#limcyc" data-reference-type="ref+label"
 data-reference="limcyc">[limcyc]</a>. (a) <span
 class="math inline">\(a=1,b=2\)</span>: a stable node, with the solution
-relaxating to fixed nonzero values. (b) <span class="math inline">\(a=
+relaxing to fixed nonzero values. (b) <span class="math inline">\(a=
 0.19, b=0.55\)</span>: a stable spiral, with slowly decaying periodic
 behaviour. (c) <span class="math inline">\(a=0.1,b=0.5\)</span>:
 transition into a cycle of fixed period. <strong>Bottom:</strong>
@@ -4157,7 +4157,7 @@ href="#req-for-cyclic-2" data-reference-type="ref+label"
 data-reference="req-for-cyclic-2">[req-for-cyclic-2]</a> and so, as long
 as we pick <span class="math inline">\(a\)</span> and <span
 class="math inline">\(b\)</span> such that <span
-class="math inline">\(b-a = (a+b)^3\)</span>, we will have periodic
+class="math inline">\(b-a = (a+b)^3\)</span>, we can have periodic
 solutions. This relation was used to get the curve shown in <a
 href="#limc" data-reference-type="ref+label"
 data-reference="limc">4.9</a>(c).</p>
@@ -4894,7 +4894,7 @@ class="math inline">\(u = U_2(x,t)\)</span> satisfy <a
 href="#heat-US-eqn" data-reference-type="ref+label"
 data-reference="heat-US-eqn">[heat-US-eqn]</a>, then <span
 class="math inline">\(u = C_1U_1(x,t) + C_2U_2(x,t)\)</span> also
-satisfies this equation, (and similarly for the boundary conditions, <a
+satisfies this equation (and similarly for the boundary conditions, <a
 href="#BCs" data-reference-type="ref+label"
 data-reference="BCs">[BCs]</a>). This property, probably quite familiar
 to you by this stage, is the <em>principle of superposition</em> which
@@ -4990,8 +4990,8 @@ can see the rapid spreading out of <span
 class="math inline">\(u\)</span>, until <span
 class="math inline">\(u\)</span> has ‘settled’.</p>
 <div class="info-box">
-<p>You will remember the Dirac delta from AMV. The Dirac delta is a
-function which can be loosely thought of as being zero everywhere,
+<p>You will remember the Dirac delta from Methods II. The Dirac delta is
+a function which can be loosely thought of as being zero everywhere,
 except at the origin, where it is infinite. It is constrained by the
 property that (over the real line, say), <span
 class="math display">\[\begin{equation}
@@ -5429,7 +5429,7 @@ is that they are always positive, even out towards infinity where you
 would expect no population at all. In fact, as the population diffuses,
 as we saw in <a href="#rectheat" data-reference-type="ref+label"
 data-reference="rectheat">[rectheat]</a>, you end up with
-infinitely-fast travelling waves which head out towards <span
+infinitely-fast propagation towards <span
 class="math inline">\(x=\pm\infty\)</span>.</p>
 <p>To counter this, we can make the diffusion constant, <span
 class="math inline">\(D\)</span>, dependent on the density. A popular
@@ -5449,14 +5449,18 @@ turn to a radially symmetric two-dimensional case. We will again ignore
 source terms (<span class="math inline">\(f\equiv 0\)</span>) and we
 shall assume no velocity <span
 class="math inline">\(\mathbfit{v}\)</span>, so only diffusive behaviour
-is present. We seek a fundamental solution with particle density <span
-class="math inline">\(Q\)</span>, i.e., we are seeking a solution to the
-problem <span class="math display">\[\begin{equation}
+is present. For algebraic simplicity we set <span
+class="math inline">\(D_0=c_0=1\)</span> (this is equivalent to a
+nondimensionalisation).</p>
+<p>We seek a fundamental solution describing the spreading of an
+initially concentrated particle population with total mass <span
+class="math inline">\(Q\)</span>. This corresponds to solving <span
+class="math display">\[\begin{equation}
 \mathchoice{\frac{\partial c}{\partial t}}{\partial c/\partial
 t}{\partial c/\partial t}{\partial c/\partial t} =
-D_0\boldsymbol{\nabla}\cdot\left[\left(\frac{c}{c_0}\right)^m
-\boldsymbol{\nabla}c\right],\quad c(\mathbfit{x},0) =
-Q\delta(\mathbfit{x}), \quad c(\mathbfit{x} \to \infty,t)=0.
+\boldsymbol{\nabla}\cdot\left[c^m \boldsymbol{\nabla}c\right],\quad
+c(\mathbfit{x},0) = Q\delta(\mathbfit{x}), \quad c(\mathbfit{x} \to
+\infty,t)=0.
 \label{radial-diff-eqn}
 \end{equation}\]</span> By <span class="math inline">\(c(\mathbfit{x}
 \to \infty,t)\)</span> we mean to imply that the distribution must
@@ -5487,24 +5491,22 @@ data-reference-type="ref+label"
 data-reference="radial-diff-eqn">[radial-diff-eqn]</a> yields <span
 class="math display">\[\begin{equation}
 \label{porusradial}
-D_0\boldsymbol{\nabla}\cdot\left[\left(\frac{c}{c_0}\right)^m\mathchoice{\frac{\partial
-c}{\partial r}}{\partial c/\partial r}{\partial c/\partial r}{\partial
-c/\partial r} \widehat{\mathbfit{e}}_r\right] =
-\frac{D_0}{r}\mathchoice{\frac{\partial}{\partial r}}{\partial/\partial
+\boldsymbol{\nabla}\cdot\left[c^m\mathchoice{\frac{\partial c}{\partial
+r}}{\partial c/\partial r}{\partial c/\partial r}{\partial c/\partial r}
+\widehat{\mathbfit{e}}_r\right] =
+\frac{1}{r}\mathchoice{\frac{\partial}{\partial r}}{\partial/\partial
 r}{\partial/\partial r}{\partial/\partial
-r}\left[r\left(\frac{c}{c_0}\right)^m\mathchoice{\frac{\partial
-c}{\partial r}}{\partial c/\partial r}{\partial c/\partial r}{\partial
-c/\partial r} \right],
+r}\left[rc^m\mathchoice{\frac{\partial c}{\partial r}}{\partial
+c/\partial r}{\partial c/\partial r}{\partial c/\partial r} \right],
 \end{equation}\]</span> and our equation becomes <span
 class="math display">\[\begin{equation}
 	\label{porous-media-eqn}
 	\mathchoice{\frac{\partial c}{\partial t}}{\partial c/\partial
 t}{\partial c/\partial t}{\partial c/\partial t} =
-\frac{D_0}{r}\mathchoice{\frac{\partial}{\partial r}}{\partial/\partial
+\frac{1}{r}\mathchoice{\frac{\partial}{\partial r}}{\partial/\partial
 r}{\partial/\partial r}{\partial/\partial
-r}\left[r\left(\frac{c}{c_0}\right)^m\mathchoice{\frac{\partial
-c}{\partial r}}{\partial c/\partial r}{\partial c/\partial r}{\partial
-c/\partial r} \right].
+r}\left[rc^m\mathchoice{\frac{\partial c}{\partial r}}{\partial
+c/\partial r}{\partial c/\partial r}{\partial c/\partial r} \right].
 \end{equation}\]</span> This is an example of the <em>porous media
 equation</em>. We will shortly show that the solution is <span
 class="math display">\[\begin{equation}
@@ -5512,7 +5514,7 @@ class="math display">\[\begin{equation}
 c(r,t) =
 	\left\{
 		\begin{array}{ll}
-			\displaystyle\frac{c_0}{\lambda^2(t)}\left[1 - \left(\frac{r}{r_0
+			\displaystyle\frac{1}{[\lambda(t)]^2}\left[1 - \left(\frac{r}{r_0
 \lambda(t)}\right)^2\right]^{1/m} &amp; \mbox{} r\leq r_0\lambda(t) ,
 \\[6pt]
 			0 &amp; \mbox{} r &gt; r_0 \lambda(t) ,
@@ -5521,8 +5523,8 @@ c(r,t) =
 \end{equation}\]</span> where <span
 class="math display">\[\begin{equation}
 \lambda(t) = \left(\frac{t}{t_0}\right)^{\frac{1}{2(m+1)}}, \quad t_0 =
-\frac{r_0^2 m}{4D_0(m+1)}, \quad r_0^2=\frac{Q}{\pi
-c_0}\left(1+\frac{1}{m}\right).
+\frac{r_0^2 m}{4(m+1)}, \quad
+r_0^2=\frac{Q}{\pi}\left(1+\frac{1}{m}\right).
 \end{equation}\]</span> The solution has <em>compact support</em> – it
 is zero outside of a finite radius – and this finite radius grows in
 time. The volume, <span class="math inline">\(Q\)</span>, is conserved
@@ -5551,15 +5553,15 @@ data-reference="porussol">[porussol]</a>.</figcaption>
 <h3 data-number="5.5.2"><span class="header-section-number">5.5.2</span>
 Similarity solutions</h3>
 <p>Deriving this solution involves using another technique for solving
-partial differential equation: a symmetry reduction technique known as
+partial differential equations: a symmetry reduction technique known as
 looking for <em>similarity solutions</em>. The basic idea is that if we
 can find some transformation of our solution which changes its shape but
 still solves the basic equations, then we should be able to use this
 transformation to eliminate one of the independent variables. This is a
 bit like with Fourier transforms when this elimination turns a PDE into
-an ODE. Unfortunately, of course, first you must such a scaling, and
-this is not always easy! But for a significant class of PDEs with one
-spatial dimension the generic transformation of <span
+an ODE. Unfortunately, of course, first you must find such a scaling,
+and this is not always easy! But for a significant class of PDEs with
+one spatial dimension the generic transformation of <span
 class="math inline">\(u(x,t)\)</span> given by <span
 class="math display">\[\begin{equation}
 \label{dilation}
@@ -5680,11 +5682,10 @@ class="math display">\[\begin{equation}
 \label{radialpde}
 \mathchoice{\frac{\partial c}{\partial t}}{\partial c/\partial
 t}{\partial c/\partial t}{\partial c/\partial t} =
-\frac{D_0}{r}\mathchoice{\frac{\partial}{\partial r}}{\partial/\partial
-r}{\partial/\partial r}{\partial/\partial r}\left[r
-\left(\frac{c}{c_0}\right)^m \mathchoice{\frac{\partial c}{\partial
-r}}{\partial c/\partial r}{\partial c/\partial r}{\partial c/\partial
-r}\right],
+\frac{1}{r}\mathchoice{\frac{\partial}{\partial r}}{\partial/\partial
+r}{\partial/\partial r}{\partial/\partial r}\left[r c^m
+\mathchoice{\frac{\partial c}{\partial r}}{\partial c/\partial
+r}{\partial c/\partial r}{\partial c/\partial r}\right],
 \end{equation}\]</span> and, using the observed similarity solution,
 make the substitution <span class="math display">\[\begin{equation}
 	c(r,t) = \frac{1}{t^{\alpha}}v\left(\frac{r}{t^{\beta}}\right).
@@ -5712,16 +5713,17 @@ r}{\partial c/\partial r}{\partial c/\partial r}=
 \frac{1}{t^{\alpha+\beta}}\mathchoice{\frac{\mathrm{d}v}{\mathrm{d}\eta}}{\mathrm{d}v/\mathrm{d}\eta}{\mathrm{d}v/\mathrm{d}\eta}{\mathrm{d}v/\mathrm{d}\eta},
 \end{equation}\]</span> and so we have <span
 class="math display">\[\begin{align}
-\frac{D_0}{r}\mathchoice{\frac{\partial}{\partial r}}{\partial/\partial
-r}{\partial/\partial r}{\partial/\partial r}\left[r
-\left(\frac{c}{c_0}\right)^m \mathchoice{\frac{\partial c}{\partial
-r}}{\partial c/\partial r}{\partial c/\partial r}{\partial c/\partial
-r}\right]&amp;=\frac{D_0}{\eta
+\frac{1}{r}\mathchoice{\frac{\partial}{\partial r}}{\partial/\partial
+r}{\partial/\partial r}{\partial/\partial r}\left[r c^m
+\mathchoice{\frac{\partial c}{\partial r}}{\partial c/\partial
+r}{\partial c/\partial r}{\partial c/\partial
+r}\right]&amp;=\frac{1}{\eta
 t^{2\beta}}\mathchoice{\frac{\partial}{\partial\eta}}{\partial/\partial\eta}{\partial/\partial\eta}{\partial/\partial\eta}\left[\frac{t^\beta
 \eta}{t^{\alpha
-m}}\left(\frac{v}{c_0}\right)^m  \frac{1}{t^{\alpha+\beta}}\mathchoice{\frac{\mathrm{d}v}{\mathrm{d}\eta}}{\mathrm{d}v/\mathrm{d}\eta}{\mathrm{d}v/\mathrm{d}\eta}{\mathrm{d}v/\mathrm{d}\eta}\right]\\
+m}}v^m  \frac{1}{t^{\alpha+\beta}}\mathchoice{\frac{\mathrm{d}v}{\mathrm{d}\eta}}{\mathrm{d}v/\mathrm{d}\eta}{\mathrm{d}v/\mathrm{d}\eta}{\mathrm{d}v/\mathrm{d}\eta}\right]\\
 \label{finalrhs}&amp;=
-\frac{1}{t^{\alpha(m+1)+2\beta}}\frac{D_0}{\eta}\mathchoice{\frac{\mathrm{d}}{\mathrm{d}\eta}}{\mathrm{d}/\mathrm{d}\eta}{\mathrm{d}/\mathrm{d}\eta}{\mathrm{d}/\mathrm{d}\eta}\left[\eta\left(\frac{v}{c_0}\right)^m
+\frac{1}{t^{\alpha(m+1)+2\beta}}\frac{1}{\eta}\mathchoice{\frac{\mathrm{d}}{\mathrm{d}\eta}}{\mathrm{d}/\mathrm{d}\eta}{\mathrm{d}/\mathrm{d}\eta}{\mathrm{d}/\mathrm{d}\eta}\left[\eta
+v^m
 \mathchoice{\frac{\mathrm{d}v}{\mathrm{d}\eta}}{\mathrm{d}v/\mathrm{d}\eta}{\mathrm{d}v/\mathrm{d}\eta}{\mathrm{d}v/\mathrm{d}\eta}\right].
 \end{align}\]</span> Comparing <a href="#fincaldcdt"
 data-reference-type="ref+label"
@@ -5736,7 +5738,8 @@ class="math inline">\(t^{\alpha+1}\)</span> to obtain <span
 class="math display">\[\begin{equation}
 \alpha v + \beta
 \mathchoice{\frac{\mathrm{d}v}{\mathrm{d}\eta}}{\mathrm{d}v/\mathrm{d}\eta}{\mathrm{d}v/\mathrm{d}\eta}{\mathrm{d}v/\mathrm{d}\eta}\eta
-+\frac{D_0}{\eta}\mathchoice{\frac{\mathrm{d}}{\mathrm{d}\eta}}{\mathrm{d}/\mathrm{d}\eta}{\mathrm{d}/\mathrm{d}\eta}{\mathrm{d}/\mathrm{d}\eta}\left[\eta\left(\frac{v}{c_0}\right)^m\mathchoice{\frac{\mathrm{d}v}{\mathrm{d}\eta}}{\mathrm{d}v/\mathrm{d}\eta}{\mathrm{d}v/\mathrm{d}\eta}{\mathrm{d}v/\mathrm{d}\eta}\right]
++\frac{1}{\eta}\mathchoice{\frac{\mathrm{d}}{\mathrm{d}\eta}}{\mathrm{d}/\mathrm{d}\eta}{\mathrm{d}/\mathrm{d}\eta}{\mathrm{d}/\mathrm{d}\eta}\left[\eta
+v^m\mathchoice{\frac{\mathrm{d}v}{\mathrm{d}\eta}}{\mathrm{d}v/\mathrm{d}\eta}{\mathrm{d}v/\mathrm{d}\eta}{\mathrm{d}v/\mathrm{d}\eta}\right]
 =0.
 \label{rel-between-alpha-and-beta}
 \end{equation}\]</span> So now we have a relationship between <span
@@ -5758,7 +5761,8 @@ class="math display">\[\begin{equation}
 \alpha v \eta + \beta
 \mathchoice{\frac{\mathrm{d}v}{\mathrm{d}\eta}}{\mathrm{d}v/\mathrm{d}\eta}{\mathrm{d}v/\mathrm{d}\eta}{\mathrm{d}v/\mathrm{d}\eta}
 \eta^2 +
-D_0\mathchoice{\frac{\mathrm{d}}{\mathrm{d}\eta}}{\mathrm{d}/\mathrm{d}\eta}{\mathrm{d}/\mathrm{d}\eta}{\mathrm{d}/\mathrm{d}\eta}\left[\eta\left(\frac{v}{c_0}\right)^m
+\mathchoice{\frac{\mathrm{d}}{\mathrm{d}\eta}}{\mathrm{d}/\mathrm{d}\eta}{\mathrm{d}/\mathrm{d}\eta}{\mathrm{d}/\mathrm{d}\eta}\left[\eta
+v^m
 \mathchoice{\frac{\mathrm{d}v}{\mathrm{d}\eta}}{\mathrm{d}v/\mathrm{d}\eta}{\mathrm{d}v/\mathrm{d}\eta}{\mathrm{d}v/\mathrm{d}\eta}\right]=0.
 \end{equation}\]</span> The idea is to turn the first two terms into a
 derivative so we can integrate. You might notice that for some <span
@@ -5780,13 +5784,14 @@ data-reference-type="ref+label" data-reference="newode">[newode]</a>
 becomes <span class="math display">\[\begin{equation}
 \beta\mathchoice{\frac{\mathrm{d}}{\mathrm{d}\eta}}{\mathrm{d}/\mathrm{d}\eta}{\mathrm{d}/\mathrm{d}\eta}{\mathrm{d}/\mathrm{d}\eta}[v\eta^2]
 +
-D_0\mathchoice{\frac{\mathrm{d}}{\mathrm{d}\eta}}{\mathrm{d}/\mathrm{d}\eta}{\mathrm{d}/\mathrm{d}\eta}{\mathrm{d}/\mathrm{d}\eta}\left[\eta\left(\frac{v}{c_0}\right)^m
+\mathchoice{\frac{\mathrm{d}}{\mathrm{d}\eta}}{\mathrm{d}/\mathrm{d}\eta}{\mathrm{d}/\mathrm{d}\eta}{\mathrm{d}/\mathrm{d}\eta}\left[\eta
+v^m
 \mathchoice{\frac{\mathrm{d}v}{\mathrm{d}\eta}}{\mathrm{d}v/\mathrm{d}\eta}{\mathrm{d}v/\mathrm{d}\eta}{\mathrm{d}v/\mathrm{d}\eta}\right]
 = 0.
 \end{equation}\]</span> Integrating with respect to <span
 class="math inline">\(\eta\)</span> gives <span
 class="math display">\[\begin{equation}
-\beta v\eta^2 + D_0\eta\left(\frac{v}{c_0}\right)^m
+\beta v\eta^2 + \eta v^m
 \mathchoice{\frac{\mathrm{d}v}{\mathrm{d}\eta}}{\mathrm{d}v/\mathrm{d}\eta}{\mathrm{d}v/\mathrm{d}\eta}{\mathrm{d}v/\mathrm{d}\eta}
 = C,
 \end{equation}\]</span> with <span class="math inline">\(C\)</span> a
@@ -5801,22 +5806,20 @@ saying the population vanishes as <span class="math inline">\(r\to
 <p>We solve the differential equation by noting either <span
 class="math inline">\(v=0\)</span> or, using separation of variables,
 <span class="math display">\[\begin{align}
-\beta \int \eta\,\mathrm{d}{\eta} &amp;= - \int
-\frac{D_0}{c_0^m}v^{m-1}\mathrm{d}{v},\\
-\implies \frac{\beta \eta^2}{2} &amp;=- \frac{D_0}{m c_0^m}v^{m} + A,\\
-\implies v^m &amp;= \frac{m c_0^m}{D_0}\left(A
--  \frac{\beta\eta^2}{2}\right).
+\beta \int \eta\,\mathrm{d}{\eta} &amp;= - \int v^{m-1}\mathrm{d}{v},\\
+\implies \frac{\beta \eta^2}{2} &amp;=- \frac{1}{m}v^{m} + A,\\
+\implies v^m &amp;= m\left(A -  \frac{\beta\eta^2}{2}\right).
 \end{align}\]</span> Finally, using <span class="math inline">\(c=
 v/t^\alpha\)</span> and <span class="math inline">\(\eta=
 r/t^{\beta}\)</span>, we get <span
 class="math display">\[\begin{equation}
-c(r,t)= \frac{m^{1/m} c_0}{t^{\alpha}D_0^{1/m}}\left(A -  \frac{\beta
+c(r,t)= \frac{m^{1/m}}{t^{\alpha}}\left(A -  \frac{\beta
 r^2}{2t^{2\beta}}\right)^{1/m},
 \end{equation}\]</span> where <span class="math inline">\(\alpha =
 1/(m+1)\)</span> and <span
 class="math inline">\(\beta=1/[2(m+1)]\)</span>. The concentration,
 <span class="math inline">\(c\)</span>, is only non-negative (and real)
-if the term is the bracket is non-negative, i.e. <span
+if the term in the brackets is non-negative, i.e. <span
 class="math display">\[\begin{equation}
 	r^2 \leq \frac{2A}{\beta}t^{2\beta},
 \end{equation}\]</span> and so outside this region, the solution must be
@@ -5870,7 +5873,7 @@ href="https://www.math.ubc.ca/~feldman/m267/pdeft.pdf">good examples on
 his website</a>.</p></li>
 <li><p>Green’s functions: What we cover here is essentially the basics,
 which you can find on Wikipedia. It can be used in a much wider context
-than given here but that steps outside the relevancy for this course so
+than given here but that steps outside the relevance for this course so
 I recommend you stick to what is here.</p></li>
 <li><p>Finite diffusion and spherically symmetric densities are covered
 in <span class="smallcaps">Murray</span>, vol. I, chap. 11.3. The
@@ -5880,7 +5883,7 @@ L. C., 1998 <em>Partial Differential Equations</em>, page 188,
 coordinates; we have adapted the method for the polar case. In that book
 there are other examples.</p></li>
 <li><p>Helen Wilson at UCL also provides <a
-href="http://www.ucl.ac.uk/~ucahhwi/LTCC/sectionB-similarity.pdf">relevant
+href="https://www.homepages.ucl.ac.uk/~ucahhwi/LTCC/sectionB-similarity.pdf">relevant
 worked examples</a>.</p></li>
 </ul>
 </div>
@@ -6205,9 +6208,10 @@ class="math inline">\(v\)</span>-nullclines have been drawn on in blue
 and orange respectively.</figcaption>
 </figure>
 <p>The final part of Kolmogorov’s contribution was to effectively couple
-this with a physical rule that waves travel at their slowest possible
-speed. We can therefore say that our travelling wave solution exists
-with <span class="math inline">\(c=2\)</span>.</p>
+this with a physical rule that, so long as the populations are initially
+localised, waves travel at their slowest possible speed. We can
+therefore say that our travelling wave solution exists with <span
+class="math inline">\(c=2\)</span>.</p>
 <p>How does this translate back into the graph of <span
 class="math inline">\(u(z)\)</span>? We know it must go from <span
 class="math inline">\(u=1\)</span> to <span
@@ -7142,7 +7146,7 @@ data-reference="fig-CL-tree-sizes">7.4</a> (right) demonstrates on
 primates that body weight plotted against chest circumference (<span
 class="math inline">\(\sim b\)</span>) is a power law with exponent
 <span class="math inline">\(8/3\)</span> as hoped.</p>
-<p>As as for cows, <a href="#fig-CL-cow-sizes"
+<p>As for cows, <a href="#fig-CL-cow-sizes"
 data-reference-type="ref+label"
 data-reference="fig-CL-cow-sizes">7.5</a> shows two annotated figures
 from the wonderful 1000-page tome <em>Bioenergetics and Growth</em>

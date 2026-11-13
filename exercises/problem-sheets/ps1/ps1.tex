@@ -2,9 +2,9 @@
 \input{../common/preamble.tex}
 \newcommand{\xh}{\hat{x}}
 \renewcommand{\th}{\hat{t}}
-\setbool{show_question}{true}
-\setbool{show_solution}{false}
-\setbool{show_commentary}{false}
+\setbool{show_question}{false}
+\setbool{show_solution}{true}
+\setbool{show_commentary}{true}
 
 \begin{document}
 %
@@ -44,16 +44,16 @@
             \item $x=K$, stable.
           \end{itemize}
           (You might argue that you can't evaluate $\fd{x}{t}$ at $x=0$ because of the $\log(K/x)$ term. But as the graph illustrates, $\lim_{x\to 0}\log(K/x)=0$, and for the purposes of biological population modelling, this is enough.)
-          \begin{commentary}
+          \commentary{
           	The main error was not recognising the function tends to zero in the limit $x \rightarrow 0$.
 	
 			I appreciate the model is a little mathematically fiddly, since the growth rate is not really defined at $x=0$. Indeed, as said above, it only tends to zero at this point, so is this really an equilibrium? One could argue you should really have a composite function with the supplementary rule $\fd{x}{t}=0$ at $x=0$. It's not really an issue here as the equilibrium is unstable (more accurately, you will never tend towards it) so it wasn't worth worrying about this time. But if it had been stable, you might have had to think a little more. Nonetheless, you would be unlikely to have a model like that in this course.
-          \end{commentary}
+          }
 
         \item This is very similar to the logistic model. It's Kolmogorov, so populations can't grow out of nothing (from $x=0$). We once again have a carrying capacity $x=K$ and the parameter $a$ again really just scales time. The difference is that the phase space is no longer symmetric: the Gompertz model shuts down growth more rapidly as $x$ approaches the carrying capacity.
-        \begin{commentary}
-        A number of students confused $a$, which really just sets the timescale, with the `growth rate', which is the entire function $\fd{x}{t}$. Also a good number of students weren't explicit about what $K$ is: it is the carrying capacity, a stable equilibrium of the system. It is \emph{not} the maximum value: $x$ can take on any value, dependent on the initial condition $x(0)$. This was a case where I knew what you meant, but you needed to be precise. Finally, not enough students made a \emph{direct} comparison between the two models: don't forget to answer the whole question!  
-		\end{commentary}
+        \commentary{
+        A good number of students weren't explicit about what $K$ is: it is the carrying capacity, a stable equilibrium of the system. It is \emph{not} the maximum value: $x$ can take on any value, dependent on the initial condition $x(0)$. This was a case where I knew what you meant, but you needed to be precise. Finally, not enough students made a \emph{direct} comparison between the two models: don't forget to answer the whole question!  
+		}
       \end{enumerate}
 
     }
@@ -106,16 +106,16 @@
     { % Solution
       \begin{enumerate}
         \item This is a logistic model -- with carrying capacity $K$ and time scaling $R$ -- but with an additional constant death rate $P$. The $P$ makes this a simple \emph{harvesting} model: imagine something like a fishing quota, where a fixed number of fish are removed every week. Obviously this model requires a sufficient number of the population to exist, though, in order for $x$ not to become negative. We will see this model again later in the course.
-        \begin{commentary}
-        The main error was that $P$ can not really be a predator term: it is still there even if $x=0$ and predation should depend on size. It is more like some constant removal, like a farmer selling a fixed amount of livestock each year. Ultimately, it's a bad model and $P$ appearing like this is a problem. It can occasionally be used as a nice simple mathematical model if we only apply it when $x$ is not too small, but we should try to improve it.
+        \commentary{
+        The main error was that $P$ cannot really be a predator term: it is still there even if $x=0$, and predation should depend on size. It is more like some constant removal, like a farmer selling a fixed amount of livestock each year. Ultimately, it's a bad model and $P$ appearing like this is a problem. It can occasionally be used as a nice simple mathematical model if we only apply it when $x$ is not too small, but we should try to improve it.
         
         Other issues: again $K$ was not often precisely enough defined. The logistic term was sometimes described as linear, when it is quadratic. This seems to be because ChatGPT describes the `growth rate per capita', which would indeed be linear: be careful!
-        \end{commentary}
+        }
         
         \item At $x=0$, $\fd{x}{t}$ is negative and this is nonsense.
-        \begin{commentary}
+        \commentary{
         This was almost uniformly answered correctly. :-)
-        \end{commentary}
+        }
         
         
         \item The key here is to see that the left-hand side has units $\text{density}/\text{time}$ and so the right-hand side needs to match. Furthermore, you can't add two terms with different units, so anything added together needs to match units. For this to work:
@@ -125,12 +125,12 @@
             \item $P$ needs units of $\text{density}/\text{time}$,
             \item $A$ needs units of density.
           \end{itemize}
-          \begin{commentary}
+          \commentary{
           A number of people said that density had units $\text{kg}/\text{m}^3$, but we're talking about \emph{population} density: the number of individuals per area, possible per volume if we're talking fish in the ocean. Best to just leave `density' as a base unit.
           
           A couple of silly common mistakes: (i) saying $A$ was density squared due to the $A^2$ term (you have to root the units), (ii)
 saying $K$ had units was the inverse of density: it's on the denominator which is why not.
-          \end{commentary}
+          }
 
         \item Letting $x=X\xh$ and $t=T\th$, substituting this into our model we have
           \begin{equation}
@@ -153,9 +153,9 @@ saying $K$ had units was the inverse of density: it's on the denominator which i
             X=A, \quad T=\frac{A}{P}, \quad r=\frac{RA}{P}, \quad q=\frac{K}{A}.
           \end{equation}
           
-          \begin{commentary}
+          \commentary{
           The most common small error was to not answer the question directly: you had to write $X$, $T$, $r$ and $q$ explicitly in terms of $A$, $P$, $R$ and $K$. It helps if you summarise at the end, like we've done here. But this was mostly done very well; it's clear you got what to do.
-          \end{commentary}
+          }
 
           %
           %
@@ -181,11 +181,11 @@ saying $K$ had units was the inverse of density: it's on the denominator which i
             \input{images/fixed.pgf}
           \end{center}
           So we can see the problem is fixed, since now $\xh=0$ is also an equilibrium.
-		  \begin{commentary}
+		  \commentary{
 		  OK, so this was the question you struggled with most. The key point is the exponential decay is so rapid it essentially acts in a different bit of $\xh$ space from the quadratic, so the logistic `hill' is still there. Next we see the exponential term is net negative which is why the graph goes down. Finally you see the exponential at very very small $\xh$ is of value $1$ making the term zero, hence why $x=0$ is an equilibrium; then it rapidly looks like $1-\ep$. In an exam this would be tough-ish marks.
 		  
 		  A tip for everyone: you need to \emph{use sentences!} The question asked you to show that the problem in (b) has been fixed, so you should restate what the problem is, and explicitly state that it has been fixed (and how).
-		  \end{commentary}
+		  }
 
 
         \item Looking at the phase space, it's clear there are at least two nonzero equilibria if the top of the unhappy quadratic is positive. %The stationary points of the graph are where
@@ -209,9 +209,9 @@ saying $K$ had units was the inverse of density: it's on the denominator which i
           \begin{equation}
             \frac{rq}{4}-1>0 \implies rq>4.
           \end{equation}
-		  \begin{commentary}
+		  \commentary{
 		  Those who attempted this broadly did alright, but often weren't clear or confident in their intention. You have to take the reader on a journey so that they understand. I would be happy with the level of rigour demonstrated here. The main minor error was actually using the wrong notation for the derivative of the phase portrait: it is $\frac{\d}{\d\xh}\bigl[\frac{\d \xh}{\d \th}\bigr]$, not $\fdd{\xh}{\th}$.
-		  \end{commentary}          
+		  }    
       \end{enumerate}
 
     }
@@ -239,17 +239,17 @@ saying $K$ had units was the inverse of density: it's on the denominator which i
           \end{equation}
           which gives exponential growth. The same is true for the term $2y$ in (8). This is quite standard.
 
-          The second term in (7), $-2y$ will cause the population $x$ to decrease, presumably as the predator $y$ kills the prey. But this term has no dependence on the size of the population, $x$, unlike in Lotka--Volterra. This seems  unrealistic as it should be harder for the predator to act if the prey size $x$ is small (and vice versa if large). Similar analysis holds for the $2x$ term in (8).
+          The second term in (7), $-2y$ will cause the population $x$ to decrease, presumably as the predator $y$ kills the prey. But this term has no dependence on the size of the population, $x$, unlike in Lotka--Volterra. This seems unrealistic as it should be harder for the predator to act if the prey size $x$ is small (and vice versa if large). Similar analysis holds for the $2x$ term in (8).
 
           Finally, the constant terms $4$ and $-10$ imply population-independent growth, maybe some kind of source or sink, like immigration or emigration.
 
           Overall this is a bad model for a predator--prey  system.
           
-          \begin{commentary}
+          \commentary{
           A lot of marks were lost as people didn't explicitly describe what each term represented. When answering this kind of question, always list the terms (or mark them on an equation with colours/underbraces) and give a concise description of each term. 
     
-    	  Also lots of people didn't comment on the fact the `interaction' terms are not really interactions: you can't have $y$ decreasing $x$ if there is no $x$, but this model does exactly that. 
-          \end{commentary}
+    	  Also, lots of people didn't comment on the fact the `interaction' terms are not really interactions: you can't have $y$ decreasing $x$ if there is no $x$, but this model does exactly that. 
+          }
 
 
         \item
@@ -283,11 +283,12 @@ saying $K$ had units was the inverse of density: it's on the denominator which i
 %            \end{equation}
 %            So both solutions have positive real part and the system is an \textbf{unstable spiral}.
             
-       \begin{commentary}
-          A number of people assumed it would look like actual Lotka--Volterra, but it doesn't. It's best not to assume it would; indeed the stability analysis makes it clear it's not. 
-    
-	      One could have been sharp and notice that if $x$ or $y$ are greater than their equilibrium values then $\fd{y}{t}$ is positive so you will see the instability.
-      \end{commentary}
+       \commentary{
+       	  This was mostly done well, but some people didn't realise that permissibility means $\geq 0$. The main mistake was misspelling permiss\textbf{\large\color{red}i}ble.
+%          A number of people assumed it would look like actual Lotka--Volterra, but it doesn't. It's best not to assume it would; indeed the stability analysis makes it clear it's not. 
+%    
+%	      One could have been sharp and notice that if $x$ or $y$ are greater than their equilibrium values then $\fd{y}{t}$ is positive so you will see the instability.
+      }
           
       \end{enumerate}
     }

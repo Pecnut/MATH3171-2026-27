@@ -12,14 +12,14 @@
     { % Question
       Consider a population which is either susceptible ($S$) or infected ($I$) with a disease.
       \begin{enumerate}[label=(\alph*)]
-        \item We assume that the total population, $N$, is constant. Given the population is either susceptible or infected, write down a simple equation for $N$.
-        \item Infected people infect susceptible people by interacting with them. By considering how we represented interactions between greenflies and ladybirds, write down an equation for $\fd{I}{t}$ in terms of $I$ and $S$.
+        \item We assume that the total population, $N$, is constant: no one is born and no one dies within the timeframe of the model. Given the population is either susceptible or infected, write down a very simple equation for $N$.
+        \item Infected people infect susceptible people by interacting with them. By considering how we represented interactions between greenflies and ladybirds, write down a simple equation for $\fd{I}{t}$ in terms of $I$ and $S$.
         \item By substituting in $N$, eliminate $S$ from this equation and show that
         \begin{equation}
-        	\fd{I}{t} = \beta I (N-I).
+        	\fd{I}{t} = \beta I (N-I),
         \end{equation}
-        Do you recognise this type of model from chapter 1?
-        \item Find the equilibria of this model for $I$, establish when they are permissible, and assess their stability. You can assess the stability either graphically, or by doing an algebraic linear stability analysis (with $\ep$ etc.)
+        for a constant $\beta > 0$. Do you recognise this type of model from chapter 1?
+        \item Find the equilibria of this model for $I$, establish when they are permissible, and assess their stability graphically.% Assess the stability graphically.%, or by doing an algebraic linear stability analysis (with $\ep$ etc.)
         \item What does this mean for the spread of the disease? 
       \end{enumerate}
     }
@@ -30,8 +30,8 @@
         \item $\fd{I}{t} = \beta I (N-I)$. This is a logistic model.
         \item The equilibria are where $\fd{I}{t} = 0$, i.e.\ $I=0,N$ (no-one or everyone).
 
-          To assess their stability, we can use two methods.
-          \paragraph{Method I: Graphical analysis}
+          To assess their stability, we can use a graphical analysis.
+          %\paragraph{Method I: Graphical analysis}
           Graphical analysis of the phase plane is really convenient, but often it requires us to make assumptions about the signs of our constants which we have to be careful to be explicit about. This isn't something to catch you out! Look here, where we've plotted the phase plane ($\fd{I}{t}$ against $I$):
 
           \begin{center}%
@@ -40,27 +40,27 @@
 
           This is the shape of the graph assuming $\beta>0$ and $N>0$. These are part of our model choices, so that's OK. The graph allows us to see instantly that $0$ is unstable, and $N$ is stable.
 
-          \paragraph{Method II: Formal linear stability analysis}
-          Let $I = I_0 + \epsilon I_1$. Then
-          \begin{equation}
-            \epsilon\fd{I_1}{t} = \beta(I_0 + \epsilon I_1)(N - I_0 - \epsilon I_1).
-          \end{equation}
-
-          For $I_0 = 0$:
-          \begin{equation}
-            \epsilon\fd{I_1}{t} = \beta\epsilon I_1 N
-          \end{equation}
-          to order $\epsilon$, giving us
-          \begin{equation}
-            I_1 = A\e^{\beta N t}.
-          \end{equation}
-          Since $\beta N > 0$, this is unstable.
-
-          For $I_0 = N$:
-          \begin{equation}
-            \epsilon\fd{I_1}{t} = -\beta N \epsilon I_1
-          \end{equation}
-          to order $\epsilon$, which is asymptotically stable. Given that this is a logistic map, we sort of knew this anyway.
+%          \paragraph{Method II: Formal linear stability analysis}
+%          Let $I = I_0 + \epsilon I_1$. Then
+%          \begin{equation}
+%            \epsilon\fd{I_1}{t} = \beta(I_0 + \epsilon I_1)(N - I_0 - \epsilon I_1).
+%          \end{equation}
+%
+%          For $I_0 = 0$:
+%          \begin{equation}
+%            \epsilon\fd{I_1}{t} = \beta\epsilon I_1 N
+%          \end{equation}
+%          to order $\epsilon$, giving us
+%          \begin{equation}
+%            I_1 = A\e^{\beta N t}.
+%          \end{equation}
+%          Since $\beta N > 0$, this is unstable.
+%
+%          For $I_0 = N$:
+%          \begin{equation}
+%            \epsilon\fd{I_1}{t} = -\beta N \epsilon I_1
+%          \end{equation}
+%          to order $\epsilon$, which is asymptotically stable. Given that this is a logistic map, we sort of knew this anyway.
 
           \item What this means for the disease is that it spreads without bound so long as $\beta > 0$.
 
@@ -75,9 +75,10 @@
       \begin{enumerate}[label=(\alph*)]
         \item Write down a new equation for $\fd{I}{t}$ in terms of $I$ and $S$. Once again substitute in $N$ to remove $S$ from this equation, and show that
         \begin{equation}
-        	\fd{I}{t} = I[\beta(N-I)-\gamma].
+        	\fd{I}{t} = I[\beta(N-I)-\gamma],
         \end{equation}
-        \item Find the equilibria of this model for $I$, establish when they are permissible, and assess their stability. Show that the disease spreads if $R_0 > 1$, where $R_0$ is a ratio of terms you will find.
+        for constants $\beta, \gamma >0$.
+        \item Find the equilibria of this model for $I$, establish when they are permissible, and assess their stability. Show that the disease spreads if $R_0 > 1$, where $R_0$ is a ratio of terms you will find. (Hint: be careful of signs when drawing graphs.)
         \item By considering the units of the terms in the definition of $R_0$, convince yourself that it is dimensionless.
       \end{enumerate}
       Congratulations! You have found our first definition of the famous $R_0$. This term is known as the basic reproductive ratio, and as we heard plenty of in the news during the peak of the pandemic crisis, can be interpreted as the average number of susceptible people that an infected person infects in a disease-free population of size $N$.
@@ -92,9 +93,9 @@
           where $\beta,\gamma > 0$.
         \item The equilibria are where $\fd{I}{t} = 0$, i.e.\ $I = 0, N-\gamma/\beta$. The second equilibrium is permissible if $N-\gamma/\beta > 0$, i.e.\ $\beta N/\gamma > 1$.
 
-          To assess their stability, we once again have two methods.
+          %To assess their stability, we once again have two methods.
 
-          \paragraph{Method I: Graphical analysis}
+          %\paragraph{Method I: Graphical analysis}
           Once again we can plot the phase plane: $\fd{I}{t}$ v $I$. Let's be careful, because a priori either of these phase planes are possible, depending on whether $N-\gamma/\beta \gtrless 0$:
 
           \begin{center}%
@@ -113,36 +114,36 @@
             \item If $R_0 < 1$, only the zero-infection equilibrium exists and the disease dies out.
           \end{itemize}
 
-          \paragraph{Method II: Formal linear stability analysis}
-          \begin{equation}
-            \epsilon\fd{I_1}{t} = (I_0 + \epsilon I_1)\left[ \beta(N-I_0-\epsilon I_1) - \gamma \right].
-          \end{equation}
+          %\paragraph{Method II: Formal linear stability analysis}
+          %\begin{equation}
+          %  \epsilon\fd{I_1}{t} = (I_0 + \epsilon I_1)\left[ \beta(N-I_0-\epsilon I_1) - \gamma \right].
+          %\end{equation}
 
-          For $I_0 = 0$:
-          \begin{equation}
-            \epsilon\fd{I_1}{t} = \epsilon I_1[\beta N - \gamma]
-          \end{equation}
-          to order $\epsilon$, giving us
-          \begin{equation}
-            I_1 = A\e^{(\beta N - \gamma) t}.
-          \end{equation}
-          This is unstable if $\beta N - \gamma > 0$, i.e.\ $R_0 = \beta N/\gamma > 1$.
+          %For $I_0 = 0$:
+          %\begin{equation}
+          %  \epsilon\fd{I_1}{t} = \epsilon I_1[\beta N - \gamma]
+          %\end{equation}
+          %to order $\epsilon$, giving us
+          %\begin{equation}
+          %  I_1 = A\e^{(\beta N - \gamma) t}.
+          %\end{equation}
+          %This is unstable if $\beta N - \gamma > 0$, i.e.\ $R_0 = \beta N/\gamma > 1$.
 
-          For $I_0 = N-\gamma/\beta$,
-          \begin{equation}
-            \epsilon \fd{I_1}{t} = -\epsilon I_1 [\beta N - \gamma]
-          \end{equation}
-          to order $\epsilon$, giving us
-          \begin{equation}
-            I_1 = A\e^{-(\beta N-\gamma)t}.
-          \end{equation}
-          If $R_0 > 1$ (also the condition for this equilibrium to be permissible), this is stable.
+          %For $I_0 = N-\gamma/\beta$,
+          %\begin{equation}
+          %  \epsilon \fd{I_1}{t} = -\epsilon I_1 [\beta N - \gamma]
+          %\end{equation}
+          %to order $\epsilon$, giving us
+          %\begin{equation}
+          %  I_1 = A\e^{-(\beta N-\gamma)t}.
+          %\end{equation}
+          %If $R_0 > 1$ (also the condition for this equilibrium to be permissible), this is stable.
 
-          We can conclude that:
-          \begin{itemize}
-            \item If $R_0 > 1$, there are two equilibria and the disease spreads (away from $I=0$).
-            \item If $R_0 < 1$, only the zero-infection equilibrium exists and the disease dies out.
-          \end{itemize}
+          %We can conclude that:
+          %\begin{itemize}
+          %  \item If $R_0 > 1$, there are two equilibria and the disease spreads (away from $I=0$).
+          %  \item If $R_0 < 1$, only the zero-infection equilibrium exists and the disease dies out.
+          %\end{itemize}
 
         \item $R_0 = \beta N/\gamma$. Looking at our equation for $\fd{I}{t}$, which has units $1/T$ (for $T$ time), $\gamma$ must have units $1/T$ and $\beta$ units of inverse time and density (or size). Finally since $N$ is the total population size or density we see we have no units for $R_0$.
       \end{enumerate}

@@ -1594,7 +1594,7 @@ This is a weakness of the Lotka--Volterra model. For a model to be successful, s
 In the original model, \cref{reducedlotvol}, the control of the greenfly and ladybird populations was mediated entirely by the $xy$ interaction term. In our competitive model, the populations are also self-controlled by the logistic part of \cref{lotvolcomp2scaled}, which is independent of the interacting population, i.e., $\eta_1$ has no dependence on the size of $y$. A popular variation of the competition model is to make $\eta_1$ and $\eta_2$ depend on $y$ and $x$ respectively. This re-introduces the periodicity to the model, but still allows for extinction. In \cref{switching} we will encounter an example of a model which can do just this. 
 
 \begin{nem}
-There has been a significant body of work regarding extensions to the predator--prey model, including the above behaviour as well as extensions to $n$ populations. For example, for three or more populations, the system can show chaotic behaviour: a phenomenon not possible for two populations on account of (for example) the \href{https://en.wikipedia.org/wiki/Poincar\%C3\%A9\%E2\%80\%93Bendixson_theorem}{Poincar\'e-Bendixson theorem}. Mathematicians such as Stephen Smale and Morris Hirsch have proved some deep results regarding the asymptotic (limiting) behaviour of more general systems. However, these results are somewhat out of the scope of this course.
+There has been a significant body of work regarding extensions to the predator--prey model, including the above behaviour as well as extensions to $n$ populations. For example, for three or more populations, the system can show chaotic behaviour: a phenomenon not possible for two populations on account of (for example) the \href{https://en.wikipedia.org/wiki/Poincar\%C3\%A9\%E2\%80\%93Bendixson_theorem}{Poincar\'e--Bendixson theorem}. Mathematicians such as Stephen Smale and Morris Hirsch have proved some deep results regarding the asymptotic (limiting) behaviour of more general systems. However, these results are somewhat out of the scope of this course.
 \end{nem}
 
 \begin{extra-reading}
@@ -1640,7 +1640,7 @@ As $H$ increases, we can see graphically we go from two equilibria, to one, to n
 	\label{bifurcation-equilibrium-harvesting}
 	x_0 = \frac{K \pm \sqrt{K^2 - 4HK/a}}{2}.
 \end{equation}
-So if we increase $H$, as soon as we go over $H=aK/4$, $\fd{x}{t}$ becomes always negative and we reach extinction in finite time. An interesting result about the dangerous of overharvesting! This discontinuous jump in the long-time solution is known as a \emph{catastrophe}. 
+So if we increase $H$, as soon as we go over $H=aK/4$, $\fd{x}{t}$ becomes always negative and we reach extinction in finite time. An interesting result about the dangers of overharvesting! This discontinuous jump in the long-time solution is known as a \emph{catastrophe}. 
 
 In general, when changes in parameter values in our models lead to qualitative changes in the equilibria and their stability, we say a \emph{bifurcation} has occurred. The parameter values at which we see the bifurcation is called the \emph{bifurcation point}.
 
@@ -1670,9 +1670,9 @@ Can you spot where the bifurcation point is on the diagram? It's where the unsta
 \label{fig:spruce-budworm}%
 \end{figure}
 
-One cannot take a mathematical biology course without encountering the spruce budworm. It shows how a simple, one-dimensional systems can yield rich dynamics with relevant predictions of a biological phenomenon. The \href{https://en.wikipedia.org/wiki/Choristoneura_fumiferana}{spruce budworm}, shown in \cref{fig:spruce-budworm}, is a moth that infects spruce trees (a type of fir tree) in eastern Canada and the US. The moths produce larvae which feed on the needles of the conifers: a serious infestation can lead to complete defoliation of a forest in about four years, and so the budworm is considered one of the most destructive pests in North America. 
+One cannot take a mathematical biology course without encountering the spruce budworm. It shows how a simple, one-dimensional system can yield rich dynamics with relevant predictions of a biological phenomenon. The \href{https://en.wikipedia.org/wiki/Choristoneura_fumiferana}{spruce budworm}, shown in \cref{fig:spruce-budworm}, is a moth that infects spruce trees (a type of fir tree) in eastern Canada and the US. The moths produce larvae which feed on the needles of the conifers: a serious infestation can lead to complete defoliation of a forest in about four years, and so the budworm is considered one of the most destructive pests in North America. 
 
-The budworm is preyed upon by birds that for low budworm population feed only upon the budworms once the budworm population has reached a certain level. Assuming logistic growth for the budworm population in the absence of birds, the budworm population size, $x$, is governed by the variation on the logistic equation,
+The budworm is preyed upon by birds that feed only upon the budworms once the budworm population has grown to a certain level. Assuming logistic growth for the budworm population in the absence of birds, the budworm population size, $x$, is governed by the variation on the logistic equation,
 \begin{equation}
 	\fd{x}{t} = rx\left(1-\frac{x}{K}\right) - \frac{Bx^2}{A^2 + x^2}.
 \end{equation}
@@ -1981,7 +1981,7 @@ with stoichiometric parameters $\alpha_{ij}, \beta_{ij} \geq 0$, and rate consta
 
 The law of mass action gives the differential equation for the concentration $a_i$ as
 \begin{equation}
-	\fd{x_i}{t} = \sum_{j=1}^M(\beta_{ij}-\alpha_{ij})\left(k_j^+\prod_{\ell=1}^N a_\ell^{\alpha_{\ell j}} - k_j^-\prod_{\ell=1}^N a_i^{\beta_{\ell j}} \right).
+	\fd{a_i}{t} = \sum_{j=1}^M(\beta_{ij}-\alpha_{ij})\left(k_j^+\prod_{\ell=1}^N a_\ell^{\alpha_{\ell j}} - k_j^-\prod_{\ell=1}^N a_\ell^{\beta_{\ell j}} \right).
 \end{equation}
 \end{nem}
 
@@ -2029,7 +2029,7 @@ In Epiphany term you will analyse a variant of this system which includes \emph{
 	\centering
 	\input{images/enzyme-reaction-traj-3.pgf}
 \end{subfigure}
-\caption{\textbf{Top:} Solutions to the system in \cref{limcyc}. (a) $a=1,b=2$: a stable node, with the solution relaxating to fixed nonzero values. (b) $a= 0.19, b=0.55$: a stable spiral, with slowly decaying periodic behaviour. (c) $a=0.1,b=0.5$: transition into a cycle of fixed period. \textbf{Bottom:} Associated phase portraits of (a), (b) and (c). Dotted lines represent nullclines.}
+\caption{\textbf{Top:} Solutions to the system in \cref{limcyc}. (a) $a=1,b=2$: a stable node, with the solution relaxing to fixed nonzero values. (b) $a= 0.19, b=0.55$: a stable spiral, with slowly decaying periodic behaviour. (c) $a=0.1,b=0.5$: transition into a cycle of fixed period. \textbf{Bottom:} Associated phase portraits of (a), (b) and (c). Dotted lines represent nullclines.}
 \label{limc}
 \end{figure} 
 
@@ -2130,7 +2130,7 @@ Zero trace requires
 b-a = (a+b)^3.
 \label{zero-trace-enzyme}
 \end{equation}
-The condition $\tr(\m{J}) = 0$ automatically satisfies the first condition in \cref{req-for-cyclic-2} and so, as long as we pick $a$ and $b$ such that $b-a = (a+b)^3$, we will have periodic solutions. This relation was used to get the curve shown in \cref{limc}(c). 
+The condition $\tr(\m{J}) = 0$ automatically satisfies the first condition in \cref{req-for-cyclic-2} and so, as long as we pick $a$ and $b$ such that $b-a = (a+b)^3$, we can have periodic solutions. This relation was used to get the curve shown in \cref{limc}(c). 
 
 %Thinking back to our $(k,R)$ parameter plane for our one-dimensional bifurcation, \cref{fig:spruce-rk}, what does \cref{zero-trace-enzyme} look like in $(b,a)$ parameter space? Solving this cubic is messy, but the line is drawn in \cref{fig:enzyme-bifurcation}(a), splitting the plane into two regions. But what are these regions?
 
@@ -2525,7 +2525,7 @@ u(x,t) = C\e^{\lambda t}\cos(x\sqrt{-\lambda}) = C\e^{-(n \pi/L)^2t}\cos\left(\f
 \end{equation}
 This solution satisfies the original PDE (check this by plugging it in!) and the boundary conditions, but it does not satisfy the initial conditions unless $u_0(x)$ is exactly equal to a scalar times one of these cosine functions. So what do we do? \sout{Panic!}
 
-OK, it turns out we can use the linearity of the PDE, and the fact that we have `many' candidate solutions to come up with a solution for any $u_0(x)$ (at least satisfying some abstract integrability constraints). First, check that if $u = U_1(x,t)$ and $u = U_2(x,t)$ satisfy \cref{heat_eqn}, then $u = C_1U_1(x,t) + C_2U_2(x,t)$ also satisfies this equation, (and similarly for the boundary conditions, \cref{BCs}). This property, probably quite familiar to you by this stage, is the \emph{principle of superposition} which will allow us to add together many solutions to construct one which fits our initial data. This principle also plays an important role in quantum mechanics, and will be seen again next term in a more abstract setting.
+OK, it turns out we can use the linearity of the PDE, and the fact that we have `many' candidate solutions to come up with a solution for any $u_0(x)$ (at least satisfying some abstract integrability constraints). First, check that if $u = U_1(x,t)$ and $u = U_2(x,t)$ satisfy \cref{heat_eqn}, then $u = C_1U_1(x,t) + C_2U_2(x,t)$ also satisfies this equation (and similarly for the boundary conditions, \cref{BCs}). This property, probably quite familiar to you by this stage, is the \emph{principle of superposition} which will allow us to add together many solutions to construct one which fits our initial data. This principle also plays an important role in quantum mechanics, and will be seen again next term in a more abstract setting.
 
 Since we have that $u$ given by \cref{sol} is a solution for any $n$, we can take a linear combination of these for all $n$ as
 \begin{equation}\label{full_sol}
@@ -2572,7 +2572,7 @@ which we can rearrange to compute $C_m$ for each $m$. Finally, with these values
 An example solution is shown in \cref{diffusion-bounded} for $u_0(x) = \delta(x-L/2)$, where $\delta$ is the Dirac delta function. We can see the rapid spreading out of $u$, until $u$ has `settled'.
 
 \begin{info}
-	You will remember the Dirac delta from AMV. The Dirac delta is a function which can be loosely thought of as being zero everywhere, except at the origin, where it is infinite. It is constrained by the property that (over the real line, say),
+	You will remember the Dirac delta from Methods II. The Dirac delta is a function which can be loosely thought of as being zero everywhere, except at the origin, where it is infinite. It is constrained by the property that (over the real line, say),
 \begin{equation}
 	\int_{-\infty}^\infty \delta(x) \, \d x = 1.
 \end{equation}
@@ -2813,7 +2813,7 @@ There is one critical problem with the fundamental solution: the Gaussian distri
 %\begin{nem}
 %\Cref{chap:finite-diffusion} is not examinable for the 2024--25 year. Go directly to \cref{chap:travelling-waves}. Do not pass Go. Do not collect £200. 
 %\end{nem}
-We have commented already that a problem with Gaussian distributions is that they are always positive, even out towards infinity where you would expect no population at all. In fact, as the population diffuses, as we saw in \cref{rectheat}, you end up with infinitely-fast travelling waves which head out towards $x=\pm\infty$. 
+We have commented already that a problem with Gaussian distributions is that they are always positive, even out towards infinity where you would expect no population at all. In fact, as the population diffuses, as we saw in \cref{rectheat}, you end up with infinitely-fast propagation towards $x=\pm\infty$. 
 
 To counter this, we can make the diffusion constant, $D$, dependent on the density. A popular assumption is that 
 \begin{equation}
@@ -2823,9 +2823,11 @@ for some $D_0, m, c_0>0$. In this case, as the density expands and its value dro
 
 \subsection{The porous medium equation}
 
-Rather than carrying on with the standard one-dimensional case we now turn to a radially symmetric two-dimensional case. We will again ignore source terms ($f\equiv 0$) and we shall assume no velocity $\v{v}$, so only diffusive behaviour is present. We seek a fundamental solution with particle density $Q$, i.e., we are seeking a solution to the problem
+Rather than carrying on with the standard one-dimensional case we now turn to a radially symmetric two-dimensional case. We will again ignore source terms ($f\equiv 0$) and we shall assume no velocity $\v{v}$, so only diffusive behaviour is present. For algebraic simplicity we set $D_0=c_0=1$ (this is equivalent to a nondimensionalisation).
+
+We seek a fundamental solution describing the spreading of an initially concentrated particle population with total mass $Q$. This corresponds to solving
 \begin{equation}
-\pd{c}{t} = D_0\vdel\cdot\left[\left(\frac{c}{c_0}\right)^m \vgrad c\right],\quad c(\v{x},0) = Q\delta(\v{x}), \quad c(\v{x} \to \infty,t)=0.
+\pd{c}{t} = \vdel\cdot\left[c^m \vgrad c\right],\quad c(\v{x},0) = Q\delta(\v{x}), \quad c(\v{x} \to \infty,t)=0.
 \label{radial-diff-eqn}
 \end{equation}
 By $c(\v{x} \to \infty,t)$ we mean to imply that the distribution must eventually go to zero in all directions.
@@ -2841,22 +2843,22 @@ and for some vector $\v{A} = A_r\uv{e}_r + A_{\theta}\uv{e}_\theta$,
 If we assume radial symmetry, $c(r,\theta,t) \equiv c(r,t)$, then the right-hand side of \cref{radial-diff-eqn} yields
 \begin{equation}
 \label{porusradial}
-D_0\vdel\cdot\left[\left(\frac{c}{c_0}\right)^m\pd{c}{r} \uv{e}_r\right] = \frac{D_0}{r}\pd{}{r}\left[r\left(\frac{c}{c_0}\right)^m\pd{c}{r} \right],
+\vdel\cdot\left[c^m\pd{c}{r} \uv{e}_r\right] = \frac{1}{r}\pd{}{r}\left[rc^m\pd{c}{r} \right],
 \end{equation}
 and our equation becomes
 \begin{equation}
 	\label{porous-media-eqn}
-	\pd{c}{t} = \frac{D_0}{r}\pd{}{r}\left[r\left(\frac{c}{c_0}\right)^m\pd{c}{r} \right].
+	\pd{c}{t} = \frac{1}{r}\pd{}{r}\left[rc^m\pd{c}{r} \right].
 \end{equation}
 This is an example of the \emph{porous media equation}. We will shortly show that the solution is
 % Expression in Murray p404 (I've checked it and it's right)
 \begin{equation}
 \label{porussol}
-c(r,t) = \twopartdef{\displaystyle\frac{c_0}{\lambda^2(t)}\left[1 - \left(\frac{r}{r_0 \lambda(t)}\right)^2\right]^{1/m}}{r\leq r_0\lambda(t) ,}{0}{r > r_0 \lambda(t) ,}
+c(r,t) = \twopartdef{\displaystyle\frac{1}{[\lambda(t)]^2}\left[1 - \left(\frac{r}{r_0 \lambda(t)}\right)^2\right]^{1/m}}{r\leq r_0\lambda(t) ,}{0}{r > r_0 \lambda(t) ,}
 \end{equation}
 where
 \begin{equation}
-\lambda(t) = \left(\frac{t}{t_0}\right)^{\frac{1}{2(m+1)}}, \quad t_0 = \frac{r_0^2 m}{4D_0(m+1)}, \quad r_0^2=\frac{Q}{\pi c_0}\left(1+\frac{1}{m}\right).
+\lambda(t) = \left(\frac{t}{t_0}\right)^{\frac{1}{2(m+1)}}, \quad t_0 = \frac{r_0^2 m}{4(m+1)}, \quad r_0^2=\frac{Q}{\pi}\left(1+\frac{1}{m}\right).
 \end{equation}
 % Equivalent expression I worked out myself after non-dimensionalising. Is it better? Who knows.
 %\begin{equation}
@@ -2893,7 +2895,7 @@ The solution has \emph{compact support} -- it is zero outside of a finite radius
 
 \subsection{Similarity solutions}
 
-Deriving this solution involves using another technique for solving partial differential equation: a symmetry reduction technique known as looking for \emph{similarity solutions}. The basic idea is that if we can find some transformation of our solution which changes its shape but still solves the basic equations, then we should be able to use this transformation to eliminate one of the independent variables. This is a bit like with Fourier transforms when this elimination turns a PDE into an ODE. Unfortunately, of course, first you must such a scaling, and this is not always easy! But for a significant class of PDEs with one spatial dimension the generic transformation of $u(x,t)$ given by
+Deriving this solution involves using another technique for solving partial differential equations: a symmetry reduction technique known as looking for \emph{similarity solutions}. The basic idea is that if we can find some transformation of our solution which changes its shape but still solves the basic equations, then we should be able to use this transformation to eliminate one of the independent variables. This is a bit like with Fourier transforms when this elimination turns a PDE into an ODE. Unfortunately, of course, first you must find such a scaling, and this is not always easy! But for a significant class of PDEs with one spatial dimension the generic transformation of $u(x,t)$ given by
 \begin{equation}
 \label{dilation}
 U = \lambda^{-\alpha} u, \quad X = \lambda^\beta x, \quad T = \lambda t
@@ -2958,7 +2960,7 @@ As we saw in \cref{funsol}, this confirms that the solution $u(x,t)$ has the sam
 Let's go back to \cref{porous-media-eqn},
 \begin{equation}
 \label{radialpde}
-\pd{c}{t} = \frac{D_0}{r}\pd{}{r}\left[r \left(\frac{c}{c_0}\right)^m \pd{c}{r}\right],
+\pd{c}{t} = \frac{1}{r}\pd{}{r}\left[r c^m \pd{c}{r}\right],
 \end{equation}
 and, using the observed similarity solution, make the substitution
 \begin{equation}
@@ -2976,8 +2978,8 @@ On the right-hand side,
 \end{equation}
 and so we have 
 \begin{align}
- \frac{D_0}{r}\pd{}{r}\left[r \left(\frac{c}{c_0}\right)^m \pd{c}{r}\right]&=\frac{D_0}{\eta t^{2\beta}}\pd{}{\eta}\left[\frac{t^\beta \eta}{t^{\alpha m}}\left(\frac{v}{c_0}\right)^m  \frac{1}{t^{\alpha+\beta}}\fd{v}{\eta}\right]\\
-\label{finalrhs}&= \frac{1}{t^{\alpha(m+1)+2\beta}}\frac{D_0}{\eta}\fd{}{\eta}\left[\eta\left(\frac{v}{c_0}\right)^m \fd{v}{\eta}\right].
+ \frac{1}{r}\pd{}{r}\left[r c^m \pd{c}{r}\right]&=\frac{1}{\eta t^{2\beta}}\pd{}{\eta}\left[\frac{t^\beta \eta}{t^{\alpha m}}v^m  \frac{1}{t^{\alpha+\beta}}\fd{v}{\eta}\right]\\
+\label{finalrhs}&= \frac{1}{t^{\alpha(m+1)+2\beta}}\frac{1}{\eta}\fd{}{\eta}\left[\eta v^m \fd{v}{\eta}\right].
 \end{align}
 Comparing \cref{fincaldcdt,finalrhs} we see we want to set the $t$-exponents equal to each other, 
 \begin{equation}
@@ -2985,7 +2987,7 @@ Comparing \cref{fincaldcdt,finalrhs} we see we want to set the $t$-exponents equ
 \end{equation}
 We can multiply through by $t^{\alpha+1}$ to obtain
 \begin{equation}
-\alpha v + \beta \fd{v}{\eta}\eta +\frac{D_0}{\eta}\fd{}{\eta}\left[\eta\left(\frac{v}{c_0}\right)^m\fd{v}{\eta}\right] =0.
+\alpha v + \beta \fd{v}{\eta}\eta +\frac{1}{\eta}\fd{}{\eta}\left[\eta v^m\fd{v}{\eta}\right] =0.
 \label{rel-between-alpha-and-beta}
 \end{equation}
 So now we have a relationship between $\alpha$ and $\beta$, but still some freedom in choosing one of them. 
@@ -2995,7 +2997,7 @@ We now manipulate \cref{rel-between-alpha-and-beta} to simplify it with an appro
 Multiply our equation through by $\eta$,
 \begin{equation}
 \label{newode}
-\alpha v \eta + \beta \fd{v}{\eta} \eta^2 + D_0\fd{}{\eta}\left[\eta\left(\frac{v}{c_0}\right)^m \fd{v}{\eta}\right]=0.
+\alpha v \eta + \beta \fd{v}{\eta} \eta^2 + \fd{}{\eta}\left[\eta v^m \fd{v}{\eta}\right]=0.
 \end{equation}
 The idea is to turn the first two terms into a derivative so we can integrate. You might notice that for some $\gamma$,
 \begin{equation}
@@ -3008,11 +3010,11 @@ which is almost the form we want. If we set $\gamma=\beta$, then we have two sim
 \end{align}
 This gives us $\alpha = 1/(m+1)$ and $\beta=1/[2(m+1)]$, so \cref{newode} becomes
 \begin{equation}
-\beta\fd{}{\eta}[v\eta^2] + D_0\fd{}{\eta}\left[\eta\left(\frac{v}{c_0}\right)^m \fd{v}{\eta}\right] = 0.
+\beta\fd{}{\eta}[v\eta^2] + \fd{}{\eta}\left[\eta v^m \fd{v}{\eta}\right] = 0.
 \end{equation}
 Integrating with respect to $\eta$ gives
 \begin{equation}
-\beta v\eta^2 + D_0\eta\left(\frac{v}{c_0}\right)^m \fd{v}{\eta} = C,
+\beta v\eta^2 + \eta v^m \fd{v}{\eta} = C,
 \end{equation}
 with $C$ a constant of integration.
 
@@ -3020,16 +3022,16 @@ We choose the imposed boundary condition that $v(\eta) \to 0$ sufficiently fast 
 
 We solve the differential equation by noting either $v=0$ or, using separation of variables,
 \begin{align}
-\beta \int \eta\,\d{\eta} &= - \int \frac{D_0}{c_0^m}v^{m-1}\d{v},\\
-\implies \frac{\beta \eta^2}{2} &=- \frac{D_0}{m c_0^m}v^{m} + A,\\
-\implies v^m &= \frac{m c_0^m}{D_0}\left(A -  \frac{\beta\eta^2}{2}\right).
+\beta \int \eta\,\d{\eta} &= - \int v^{m-1}\d{v},\\
+\implies \frac{\beta \eta^2}{2} &=- \frac{1}{m}v^{m} + A,\\
+\implies v^m &= m\left(A -  \frac{\beta\eta^2}{2}\right).
 \end{align}
 Finally, using $c= v/t^\alpha$ and $\eta= r/t^{\beta}$, we get 
 \begin{equation}
-c(r,t)= \frac{m^{1/m} c_0}{t^{\alpha}D_0^{1/m}}\left(A -  \frac{\beta r^2}{2t^{2\beta}}\right)^{1/m},
+c(r,t)= \frac{m^{1/m}}{t^{\alpha}}\left(A -  \frac{\beta r^2}{2t^{2\beta}}\right)^{1/m},
 \end{equation}
 where $\alpha = 1/(m+1)$ and $\beta=1/[2(m+1)]$.
-The concentration, $c$, is only non-negative (and real) if the term is the bracket is non-negative, i.e.\
+The concentration, $c$, is only non-negative (and real) if the term in the brackets is non-negative, i.e.\
 \begin{equation}
 	r^2 \leq \frac{2A}{\beta}t^{2\beta},
 \end{equation}
@@ -3054,9 +3056,9 @@ Additional Problem Sheet 2 contains an example of the use of this method. Also, 
 \begin{itemize}
 	\item Diffusion of populations is covered in \textsc{Murray}, vol.~I, chap.~11. Note that we don't do long-range diffusion, and that our derivation is more general than the derivation in the book since we include advection.
 	\item Solution of PDEs by Fourier transform: The \href{https://en.wikipedia.org/wiki/Fourier_transform}{Wikipedia page} for the Fourier transform is very comprehensive on the topic. Really what you need to do is find examples to test yourself with. Joel Feldman at UBC provides a lot of \href{https://www.math.ubc.ca/~feldman/m267/pdeft.pdf}{good examples on his website}.
-    \item Green's functions: What we cover here is essentially the basics, which you can find on Wikipedia. It can be used in a much wider context than given here but that steps outside the relevancy for this course so I recommend you stick to what is here.
+    \item Green's functions: What we cover here is essentially the basics, which you can find on Wikipedia. It can be used in a much wider context than given here but that steps outside the relevance for this course so I recommend you stick to what is here.
     \item Finite diffusion and spherically symmetric densities are covered in \textsc{Murray}, vol.~I, chap.~11.3. The solution method is taken from \textsc{Evans}, L.~C., 1998 \emph{Partial Differential Equations}, page 188, `Similarity under scaling'. In that case it is done in Cartesian coordinates; we have adapted the method for the polar case. In that book there are other examples.
-    \item Helen Wilson at UCL also provides \href{http://www.ucl.ac.uk/~ucahhwi/LTCC/sectionB-similarity.pdf}{relevant worked examples}.
+    \item Helen Wilson at UCL also provides \href{https://www.homepages.ucl.ac.uk/~ucahhwi/LTCC/sectionB-similarity.pdf}{relevant worked examples}.
 \end{itemize}
 \end{extra-reading}
 
@@ -3217,7 +3219,7 @@ We can draw this as \cref{fig:fk-travelling-wave-phase}(a).
 \label{fig:fk-travelling-wave-phase}
 \end{figure}
 
-The final part of Kolmogorov's contribution was to effectively couple this with a physical rule that waves travel at their slowest possible speed. We can therefore say that our travelling wave solution exists with $c=2$.
+The final part of Kolmogorov's contribution was to effectively couple this with a physical rule that, so long as the populations are initially localised, waves travel at their slowest possible speed. We can therefore say that our travelling wave solution exists with $c=2$.
 
 How does this translate back into the graph of $u(z)$? We know it must go from $u=1$ to $u=0$, and that $\fd{u}{z}$ ($=v$, remember) is negative throughout. Furthermore, we know the magnitude of $\fd{u}{z}$ increases then decreases. The result... \cref{fig:fk-travelling-wave}(a). This plot is from a numerical solution, but you can see we were able to qualitatively describe it analytically. Furthermore, see what happens when $c<2$: in \cref{fig:fk-travelling-wave}(b) you see that $u<0$ at some point, as expected. Red card!
 
@@ -3970,16 +3972,16 @@ But there exists a special class of equilibria -- homogeneous equilibria -- wher
 \label{rodvibrations}
 \end{figure}
 
-Take a look at \cref{rod-schematic}. We consider a thin tubular elastic body which is initially lined up along the $z$-axis. It is subjected to a load, $N$, at one end, and it is clamped at the other end. We assume its ends stay lined up along $z$ as it is (possibly) deformed under the force, and we monitor the deflection, $w(s,t)$, as a function of arclength along the tube, $s$, and time, $t$, from the $z$-axis. The equation of motion of this system can be shown to be 
+Take a look at \cref{rod-schematic}. We consider a thin tubular elastic body which is initially lined up along the $z$-axis. It is subjected to a load, $N$, at one end, and it is pinned at the other end. We assume its ends stay lined up along $z$ as it is (possibly) deformed under the force, and we monitor the deflection, $w(s,t)$, as a function of arclength along the tube, $s$, and time, $t$, from the $z$-axis. The equation of motion of this system can be shown to be 
 \begin{align}
 \label{beameq}
 \pdn{4}{w}{s} + \frac{N}{EI}\pdd{w}{s} +\rho A \pdd{w}{t}=0,
 \end{align}
 with $\rho$ the tube density, $A$ its cross-sectional area, $E$ its Young's modulus (resistance to stretching), and $I$ a moment of inertia. (You're not expected to derive this equation!) The boundary conditions are 
 \begin{equation}
-w(0,t) = 0,\quad w(L,t) = 0,\quad \pd{w}{s}(0,t)= 0,\quad \pd{w}{s}(L,t)=0 \quad \forall t.
+w(0,t) = 0,\quad w(L,t) = 0,\quad \pdd{w}{s}(0,t)= 0,\quad \pdd{w}{s}(L,t)=0 \quad \forall t.
 \end{equation}
-These boundary conditions are \emph{clamped conditions}: the first two mean no deflection at either end and the last two mean it straightens out towards the end of the beam. 
+These boundary conditions are \emph{pinned conditions}: the first two mean no deflection at either end and the last two mean that the bending moment is zero at either end (there's nothing to bend against). Physically, this means that the beam is free to rotate at the supports, but cannot move vertically.
 
 There is a trivial equilibrium solution $w_0(s,t)=0$ for all $s,t$, which corresponds to the body remaining straight. Note this is true whatever the applied load, $N$. However, our experience tells us the tube should give way under enough force. To ascertain when this happens we perform a linear stability analysis using the same steps as in the ODE case
 
@@ -4027,7 +4029,7 @@ If we let $B=b+\i c$ be complex, this is a smart (lazy?) way of representing bot
 \end{equation}
 and we assume we only want to satisfy the real part of the equation obtained by substituting this in. Choosing $B$ selects the required behaviour.
 
-The boundary conditions we need to satisfy are $w_1(0,t) = w_1(L,t) = 0$ (no further end deflection) but we allow for arbitrary (but small) changes in the derivatives of the perturbation, $w_1$, at the boundary. Therefore $S(0)=S(L) =0$ are the only boundary conditions we impose for our small variations around equilibrium. These boundary conditions can only be satisfied for the $\sin$ part of $S(s)$: recalling that we only need to satisfy the real part of the equation, we set $B =-C\i $, for some real $C$, and hence
+The boundary conditions we need to satisfy are $w_1 = 0$ and $\pdd{w_1}{s}=0$ at both $s=0$ and $s=L$. This gives us $S(0) = S(L) = 0$ and $S''(0) = S''(L) = 0$. These boundary conditions can only be satisfied for the $\sin$ part of $S(s)$: recalling that we only need to satisfy the real part of the equation, we set $B =-C\i $, for some real $C$, and hence
 \begin{equation}
 	\label{kbcon}
 	C \sin ks = 0 \implies kL = n \pi.
@@ -4090,7 +4092,7 @@ N_c=\frac{\pi^2 E I}{L^2}.
 This is a famous result due to (surprise!) Euler, although the way he derived it is a little different. It has actually been shown to have some biological relevance...
 
 \begin{nem}
-What happens if we include the derivative boundary conditions for $w_1$? First note that $S(s) = B\e^{\i ks}$, with $kL=n\pi$, as we had in \cref{complexsol}, can't satisfy both the condition that $S = 0$ and $S' = 0$ at $s=0$ and $s=L$, unless $B=0$. What \emph{could} satisfy both boundary conditions is $S(s) = B(1+\e^{\i k s})$ with $kL=2n\pi$, or more intuitively,
+What happens if we clamp the ends instead, and not let the ends rotate? The boundary conditions instead become $w = 0$ and $\pd{w}{s}=0$ at $s=0,L$. First note that $S(s) = B\e^{\i ks}$, with $kL=n\pi$, as we had in \cref{complexsol}, can't satisfy both the condition that $S = 0$ and $S' = 0$ at $s=0$ and $s=L$, unless $B=0$. What \emph{could} satisfy both boundary conditions is $S(s) = B(1+\e^{\i k s})$ with $kL=2n\pi$, or more intuitively,
 \begin{equation}
 	S(s) = \tilde{C} \left [1 + \cos\left(\frac{2 n \pi s}{L}\right)\right],
 \end{equation} 
@@ -4153,7 +4155,7 @@ Given that weight scales as volume, then under our $3/2$ relationship,
 \end{equation}
 and \cref{fig:tree-sizes} (right) demonstrates on primates that body weight plotted against chest circumference ($\sim b$) is a power law with exponent $8/3$ as hoped. 
 
-As as for cows, \cref{fig:cow-sizes} shows two annotated figures from the wonderful 1000-page tome \emph{Bioenergetics and Growth} (\textsc{Brody}, 1945), which has every conceivable piece of data on cows you would wish to hope for. See how (on the left) cow weight vs chest girth ($\sim b$) matches a power law with exponent $8/3$, and how (on the right) cow weight vs height ($\sim a$) matches relatively well a power law with exponent $4$, as we predicted above.
+As for cows, \cref{fig:cow-sizes} shows two annotated figures from the wonderful 1000-page tome \emph{Bioenergetics and Growth} (\textsc{Brody}, 1945), which has every conceivable piece of data on cows you would wish to hope for. See how (on the left) cow weight vs chest girth ($\sim b$) matches a power law with exponent $8/3$, and how (on the right) cow weight vs height ($\sim a$) matches relatively well a power law with exponent $4$, as we predicted above.
 
 \begin{figure}
 	\providecommand{\mathdefault}[1]{#1}
