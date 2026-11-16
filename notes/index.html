@@ -5,7 +5,7 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Chris Prior Adam Townsend Andrew Krause" />
-  <meta name="dcterms.date" content="2026-11-12" />
+  <meta name="dcterms.date" content="2026-11-16" />
   <title> MATH3171 Mathematical Biology III</title>
   <style>
     /* Default styles provided by pandoc.
@@ -95,7 +95,7 @@ Mathematical Biology III</h1>
 <p class="author">Chris Prior<br />
 Adam Townsend<br />
 Andrew Krause</p>
-<p class="date"><em style="margin-right: 0.4rem">Last updated</em> 12
+<p class="date"><em style="margin-right: 0.4rem">Last updated</em> 16
 November 2026</p>
 </header>
 <nav id="TOC" role="doc-toc">
@@ -6803,7 +6803,7 @@ data-reference-type="ref+label" data-reference="rod-schematic">7.1</a>.
 We consider a thin tubular elastic body which is initially lined up
 along the <span class="math inline">\(z\)</span>-axis. It is subjected
 to a load, <span class="math inline">\(N\)</span>, at one end, and it is
-clamped at the other end. We assume its ends stay lined up along <span
+pinned at the other end. We assume its ends stay lined up along <span
 class="math inline">\(z\)</span> as it is (possibly) deformed under the
 force, and we monitor the deflection, <span
 class="math inline">\(w(s,t)\)</span>, as a function of arclength along
@@ -6825,14 +6825,17 @@ area, <span class="math inline">\(E\)</span> its Young’s modulus
 (resistance to stretching), and <span class="math inline">\(I\)</span> a
 moment of inertia. (You’re not expected to derive this equation!) The
 boundary conditions are <span class="math display">\[\begin{equation}
-w(0,t) = 0,\quad w(L,t) = 0,\quad \mathchoice{\frac{\partial w}{\partial
-s}}{\partial w/\partial s}{\partial w/\partial s}{\partial w/\partial
-s}(0,t)= 0,\quad \mathchoice{\frac{\partial w}{\partial s}}{\partial
-w/\partial s}{\partial w/\partial s}{\partial w/\partial s}(L,t)=0 \quad
+w(0,t) = 0,\quad w(L,t) = 0,\quad \mathchoice{\frac{\partial^2
+w}{\partial s^2}}{\partial^2 w/\partial s^2}{\partial^2 w/\partial
+s^2}{\partial^2 w/\partial s^2}(0,t)= 0,\quad
+\mathchoice{\frac{\partial^2 w}{\partial s^2}}{\partial^2 w/\partial
+s^2}{\partial^2 w/\partial s^2}{\partial^2 w/\partial s^2}(L,t)=0 \quad
 \forall t.
-\end{equation}\]</span> These boundary conditions are <em>clamped
+\end{equation}\]</span> These boundary conditions are <em>pinned
 conditions</em>: the first two mean no deflection at either end and the
-last two mean it straightens out towards the end of the beam.</p>
+last two mean that the bending moment is zero at either end (there’s
+nothing to bend against). Physically, this means that the beam is free
+to rotate at the supports, but cannot move vertically.</p>
 <p>There is a trivial equilibrium solution <span
 class="math inline">\(w_0(s,t)=0\)</span> for all <span
 class="math inline">\(s,t\)</span>, which corresponds to the body
@@ -6917,13 +6920,15 @@ ks),
 part of the equation obtained by substituting this in. Choosing <span
 class="math inline">\(B\)</span> selects the required behaviour.</p>
 <p>The boundary conditions we need to satisfy are <span
-class="math inline">\(w_1(0,t) = w_1(L,t) = 0\)</span> (no further end
-deflection) but we allow for arbitrary (but small) changes in the
-derivatives of the perturbation, <span
-class="math inline">\(w_1\)</span>, at the boundary. Therefore <span
-class="math inline">\(S(0)=S(L) =0\)</span> are the only boundary
-conditions we impose for our small variations around equilibrium. These
-boundary conditions can only be satisfied for the <span
+class="math inline">\(w_1 = 0\)</span> and <span
+class="math inline">\(\mathchoice{\frac{\partial^2 w_1}{\partial
+s^2}}{\partial^2 w_1/\partial s^2}{\partial^2 w_1/\partial
+s^2}{\partial^2 w_1/\partial s^2}=0\)</span> at both <span
+class="math inline">\(s=0\)</span> and <span
+class="math inline">\(s=L\)</span>. This gives us <span
+class="math inline">\(S(0) = S(L) = 0\)</span> and <span
+class="math inline">\(S&#39;&#39;(0) = S&#39;&#39;(L) = 0\)</span>.
+These boundary conditions can only be satisfied for the <span
 class="math inline">\(\sin\)</span> part of <span
 class="math inline">\(S(s)\)</span>: recalling that we only need to
 satisfy the real part of the equation, we set <span
@@ -7010,10 +7015,15 @@ N_c=\frac{\pi^2 E I}{L^2}.
 Euler, although the way he derived it is a little different. It has
 actually been shown to have some biological relevance...</p>
 <div class="nem-box">
-<p>What happens if we include the derivative boundary conditions for
-<span class="math inline">\(w_1\)</span>? First note that <span
-class="math inline">\(S(s) = B\mathrm{e}^{\mathrm{i}ks}\)</span>, with
-<span class="math inline">\(kL=n\pi\)</span>, as we had in <a
+<p>What happens if we clamp the ends instead, and not let the ends
+rotate? The boundary conditions instead become <span
+class="math inline">\(w = 0\)</span> and <span
+class="math inline">\(\mathchoice{\frac{\partial w}{\partial
+s}}{\partial w/\partial s}{\partial w/\partial s}{\partial w/\partial
+s}=0\)</span> at <span class="math inline">\(s=0,L\)</span>. First note
+that <span class="math inline">\(S(s) =
+B\mathrm{e}^{\mathrm{i}ks}\)</span>, with <span
+class="math inline">\(kL=n\pi\)</span>, as we had in <a
 href="#complexsol" data-reference-type="ref+label"
 data-reference="complexsol">[complexsol]</a>, can’t satisfy both the
 condition that <span class="math inline">\(S = 0\)</span> and <span
