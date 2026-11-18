@@ -1,9 +1,9 @@
 \documentclass[a4paper,12pt]{article}
 \input{../common/preamble.tex}
 \usepackage{booktabs}
-\setbool{show_question}{true}
-\setbool{show_solution}{false}
-\setbool{show_commentary}{false}
+\setbool{show_question}{false}
+\setbool{show_solution}{true}
+\setbool{show_commentary}{true}
 \begin{document}
 %
 \heading{Michaelmas}{Problem sheet 2\solutioninheading}
@@ -315,11 +315,13 @@ Setting $x=\hat{x}X$, $y=\hat{y}Y$, $t=\hat{t}T$, the system becomes
     \begin{center}
     	\input{images/comp-lv-pp-phase-traj-1.pgf}
     \end{center}
-    showing the stability of the $\big(\frac{1-\gamma_1}{1+\gamma_1\gamma_2}, \frac{1+\gamma_2}{1+\gamma_1\gamma_2}\big)$ equilibrium.
+    showing the stability of the equilibria.
 	\commentary{
 		Revisit Problems Class 2 if you are struggling with this. The main mistake was to not have trajectories that cross the $x$- and $y$-nullclines vertically and horizontally, respectively.
 		
 		A related issue was drawing too small a diagram. Go big or go home! It is a lot easier to get it right if you have given yourself space. It also helps if when you submit your work, your diagrams are not split in half over a page break!
+		
+		Also try to make sure that you draw enough trajectories -- as a rule of thumb, you want to draw enough so that you can see what's happening near all of the equilibria (not just the stable ones) as well as in the big open spaces.
 	}  
     }
     
@@ -330,7 +332,7 @@ Setting $x=\hat{x}X$, $y=\hat{y}Y$, $t=\hat{t}T$, the system becomes
     }
     {% Solution 
 	\commentary{
-    Whether a model is good or not depends on what system it's trying to model. No model is perfect and we should always recognise its strengths and flaws. Here, the target system isn't specified, so we can say some broad things about features this model has. A good approach is to address each equilibrium's stability and discuss its relative merits, critically discussing any parameter dependence for this stability. Then you should always round up and conclude.
+    Whether a model is good or not depends on \emph{what system it's trying to model}. No model is perfect and we should always recognise its strengths and flaws. Here, the target system isn't specified, so we can say some broad things about features this model has. A good approach is to address each equilibrium's stability and discuss its relative merits, critically discussing any parameter dependence for this stability. Then you should always round up and conclude.
     }
     
    As you noted in question 1, this model is not a pure predator--prey one. The fact the the `predator' has logistic growth in the absence of prey indicates it has an alternate food source to $x$ as it will reach a non-zero equilibrium even if $x$ is zero. The interaction terms could instead reflect a competitive system where $y$ carries a fatal disease for $x$, so interactions make the alternative food source more accessible for $y$. So actually, $x$ is less well able to survive rather than being directly eaten!
@@ -351,7 +353,7 @@ Setting $x=\hat{x}X$, $y=\hat{y}Y$, $t=\hat{t}T$, the system becomes
 	\commentary{
 		There were also some answers which said things like `if we’re at an unstable extinction equilibrium, a population can come back from nothing'. Of course this isn't strictly true: you need to have a small nudge to get the population to rebound. 
 			
-		A final commentary on specific answers: some people suggested the existence of (e.g.) the coexistence equilibrium was good because it allowed both populations to happily exist. This depends a bit on what is being modelled: if the populations are hair nits and cockroaches, we might feel differently!
+		A final commentary on specific answers: quite a few people suggested the existence of (e.g.) the coexistence equilibrium was good because it allowed both populations to happily exist. This depends a bit on what is being modelled: if the populations are hair nits and cockroaches, we might feel differently!
 	}
 
 

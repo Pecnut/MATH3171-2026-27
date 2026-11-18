@@ -10,7 +10,7 @@ rc('text', usetex=True)
 rc('font', family='serif')
 rc('font', size=12)
 
-fig = plt.figure(figsize=(3,2.2))
+fig = plt.figure(figsize=(5,3.67))
 ax = fig.subplots(1, 1)
 
 ax.spines['right'].set_visible(False)
@@ -46,7 +46,9 @@ t = np.linspace(t_min, t_max, num=1000)
 # initials conditions: 1 greenfly and 1 ladybird
 for i,X0 in enumerate([[0.1,0.1],[0.1,0.4],[0.1,0.7],
                        [0.2,1.5],[0.5,1.7],[1,1.5],
-                       [1.5,1],[1.5,0.5],[0.5,0.1]]):
+                       [1.5,1],[1.5,0.5],[0.5,0.1],
+                       [0.02, 1.9], [0.01, 0.5],
+                       [0.7, 0.02], [1.5, 0.01]]):
     X0 = np.array(X0)
     X = integrate.odeint(dX_dt, X0, t)                # >>> 'Integration successful.'
     greenflies, ladybirds = X.T
@@ -55,7 +57,7 @@ for i,X0 in enumerate([[0.1,0.1],[0.1,0.4],[0.1,0.7],
     if 1==1:#i <= 1:
         # Arrows
         # sample at 0, 1/3rd, and 2/3rd of curve
-        adx0 = [90,90,90,30,30,30,30,30,90][i]
+        adx0 = [90,90,90,30,30,30,30,30,90,90,90,90,90][i]
         #adx1 = len(t) // 3
         #adx2 = adx1 * 2
         x = greenflies
@@ -120,7 +122,7 @@ ax.set_yticklabels([0,1,'$1/\gamma_1$'])
 
 ax.text(0.2,1.8,'$\dot{x}<0$\n$\dot{y} < 0$',ha='center',va='center',bbox=dict(fc='w',lw=0,alpha=0.7),fontsize=8)
 ax.text(0.4,0.2,'$\dot{x}>0$\n$\dot{y} > 0$',ha='center',va='center',bbox=dict(fc='w',lw=0,alpha=0.7),fontsize=8)
-ax.text(0,1.3,'$\dot{x}>0$\n$\dot{y} < 0$',ha='center',va='center',bbox=dict(fc='w',lw=0,alpha=0.7),fontsize=8)
+ax.text(0.1,1.3,'$\dot{x}>0$\n$\dot{y} < 0$',ha='center',va='center',bbox=dict(fc='w',lw=0,alpha=0.7),fontsize=8)
 ax.text(1.1,0.5,'$\dot{x}<0$\n$\dot{y} > 0$',ha='center',va='center',bbox=dict(fc='w',lw=0,alpha=0.7),fontsize=8)
 
 #plt.legend(ncol=1, frameon=False, framealpha=0, borderpad=0, borderaxespad=0)
@@ -130,7 +132,7 @@ t1 = ['$\gamma_1<1$','$\gamma_1>1$'][g1>1]
 t2 = ['$\gamma_2<1$','$\gamma_2>1$'][g2>1]
 tt = t1
 
-ax.set_title(tt,fontsize=12)
+# ax.set_title(tt,fontsize=12)
 # plt.title('$\gamma_1>1$, $\gamma_2<1$')
 
 plt.tight_layout(pad=0.2, w_pad=0, h_pad=0)
