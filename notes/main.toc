@@ -1,0 +1,187 @@
+\babel@toc {UKenglish}{}\relax 
+\babel@toc {UKenglish}{}\relax 
+\contentsline {chapter}{\numberline {0}Introduction}{5}{chapter.0}%
+\contentsline {paragraph}{Lotka--Volterra (dimensionless)}{7}{figure.caption.2}%
+\contentsline {paragraph}{Competitive Lotka--Volterra}{7}{AMS.6}%
+\contentsline {paragraph}{Schnakenberg enzyme reaction system}{7}{AMS.10}%
+\contentsline {paragraph}{Advection--diffusion equation}{7}{AMS.14}%
+\contentsline {paragraph}{Spatial Lotka--Volterra}{7}{AMS.15}%
+\contentsline {paragraph}{Spatial competitive Lotka--Volterra}{7}{AMS.19}%
+\contentsline {part}{I\hspace {1em}Michaelmas term}{9}{part.1}%
+\contentsline {chapter}{\numberline {1}Population models: growth and competition}{10}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Exponential growth}{10}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Logistic growth}{11}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Self-competition}{11}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Solutions to the logistic equation}{11}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Equilibria of the logistic equation}{12}{subsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.2.4}A first look at stability}{13}{subsection.1.2.4}%
+\contentsline {section}{\numberline {1.3}The Allee effect}{14}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Predator--prey (Lotka--Volterra)}{15}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}Interactions between predator and prey}{15}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}Parameter reduction of Lotka--Volterra}{17}{subsection.1.4.2}%
+\contentsline {subsection}{\numberline {1.4.3}Solutions to Lotka--Volterra}{18}{subsection.1.4.3}%
+\contentsline {subsection}{\numberline {1.4.4}Equilibria of Lotka--Volterra}{19}{subsection.1.4.4}%
+\contentsline {subsection}{\numberline {1.4.5}Stability of Lotka--Volterra?}{20}{subsection.1.4.5}%
+\contentsline {chapter}{\numberline {2}Linear stability analysis}{22}{chapter.2}%
+\contentsline {section}{\numberline {2.1}The rigid pendulum equation}{22}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Equations of motion}{22}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Solutions to the pendulum equation}{23}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Equilibria of the pendulum equation}{24}{subsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.1.4}Order notation, $\mathcal {O}$}{24}{subsection.2.1.4}%
+\contentsline {subsection}{\numberline {2.1.5}Four steps of a linear stability analysis}{25}{subsection.2.1.5}%
+\contentsline {subsection}{\numberline {2.1.6}Linear stability analysis of the damped pendulum}{25}{subsection.2.1.6}%
+\contentsline {paragraph}{Stability of $\theta _0=0$:}{27}{equation.2.1.20b}%
+\contentsline {paragraph}{Stability of $\theta _0 =\pi $:}{27}{equation.2.1.22}%
+\contentsline {subsection}{\numberline {2.1.7}Linear stability analysis of the frictionless pendulum}{28}{subsection.2.1.7}%
+\contentsline {paragraph}{Stability of $\theta _0=0$:}{28}{equation.2.1.26}%
+\contentsline {paragraph}{Stability of $\theta _0=\pi $:}{28}{equation.2.1.27}%
+\contentsline {subsection}{\numberline {2.1.8}Summary}{28}{subsection.2.1.8}%
+\contentsline {section}{\numberline {2.2}General single autonomous ODEs}{29}{section.2.2}%
+\contentsline {paragraph}{The degenerate case}{32}{figure.caption.33}%
+\contentsline {section}{\numberline {2.3}General systems of first order autonomous ODEs}{33}{section.2.3}%
+\contentsline {paragraph}{Stability of $(0,0)$:}{36}{equation.2.3.63}%
+\contentsline {paragraph}{Stability of $(1,1)$:}{36}{equation.2.3.64}%
+\contentsline {chapter}{\numberline {3}Two-dimensional systems of interacting populations}{38}{chapter.3}%
+\contentsline {section}{\numberline {3.1}General stability criteria for 2D systems}{38}{section.3.1}%
+\contentsline {paragraph}{Remark}{41}{equation.3.1.8}%
+\contentsline {subsection}{\numberline {3.1.1}Phase portraits}{41}{subsection.3.1.1}%
+\contentsline {section}{\numberline {3.2}Lotka--Volterra revisited}{42}{section.3.2}%
+\contentsline {paragraph}{Periodic behaviour is seen in nature.}{43}{figure.caption.37}%
+\contentsline {paragraph}{...but so is extinction.}{43}{figure.caption.38}%
+\contentsline {paragraph}{Odd sensitivity to initial conditions.}{44}{figure.caption.38}%
+\contentsline {section}{\numberline {3.3}Competitive Lotka--Volterra: the exclusion principle}{44}{section.3.3}%
+\contentsline {paragraph}{Stability of $(0,0)$:}{48}{equation.3.3.17}%
+\contentsline {paragraph}{Stability of $(0,1)$:}{48}{figure.caption.42}%
+\contentsline {paragraph}{Stability of $(1,0)$:}{48}{equation.3.3.19}%
+\contentsline {paragraph}{Stability of $\left ( \frac {1-\gamma _1}{1-\gamma _1\gamma _2}, \frac {1-\gamma _2}{1-\gamma _1\gamma _2} \right )$:}{49}{equation.3.3.19}%
+\contentsline {subsection}{\numberline {3.3.1}Reflections on our new model}{51}{subsection.3.3.1}%
+\contentsline {paragraph}{An analogy with the pendulum}{52}{subsection.3.3.1}%
+\contentsline {paragraph}{How could we fix this?}{52}{equation.3.3.24}%
+\contentsline {chapter}{\numberline {4}Bifurcations}{54}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Bifurcations of scalar equations}{54}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Logistic growth with harvesting}{54}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Insect outbreak: the spruce budworm}{56}{subsection.4.1.2}%
+\contentsline {subsubsection}{Jump to... \Circled {\smaller \sf 4}\tmspace +\thickmuskip {.2777em}\tmspace +\thickmuskip {.2777em}Assess stability}{57}{figure.caption.46}%
+\contentsline {paragraph}{Bifurcation diagram}{58}{figure.caption.46}%
+\contentsline {paragraph}{Hysteresis}{58}{figure.caption.47}%
+\contentsline {subsection}{\numberline {4.1.3}General bifurcations of single-species models}{59}{subsection.4.1.3}%
+\contentsline {paragraph}{Saddle node bifurcation}{59}{subsection.4.1.3}%
+\contentsline {paragraph}{Pitchfork bifurcation}{60}{figure.caption.48}%
+\contentsline {paragraph}{Hysteresis (again)}{61}{figure.caption.49}%
+\contentsline {section}{\numberline {4.2}The Schnakenberg enzyme reaction system}{62}{section.4.2}%
+\contentsline {subsubsection}{\Circled {\smaller \sf \hspace {0.1ex}2}\tmspace +\thickmuskip {.2777em}\tmspace +\thickmuskip {.2777em}Linearise the system}{65}{equation.4.2.15}%
+\contentsline {paragraph}{Spatial behaviour}{67}{figure.caption.53}%
+\contentsline {chapter}{\numberline {5}Diffusion of populations}{68}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Random walks}{69}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Discrete random walks}{69}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Continuum limit of random walks}{71}{subsection.5.1.2}%
+\contentsline {section}{\numberline {5.2}The advection--diffusion equation}{71}{section.5.2}%
+\contentsline {paragraph}{Fick's law of diffusion}{73}{equation.5.2.12}%
+\contentsline {section}{\numberline {5.3}The 1D diffusion equation on a bounded domain}{73}{section.5.3}%
+\contentsline {paragraph}{Case I, $\lambda > 0$:}{75}{equation.5.3.23}%
+\contentsline {paragraph}{Case II, $\lambda =0$:}{75}{equation.5.3.30}%
+\contentsline {paragraph}{Case III, $\lambda <0$:}{75}{equation.5.3.30}%
+\contentsline {paragraph}{What about Dirichlet boundary conditions?}{78}{figure.caption.58}%
+\contentsline {section}{\numberline {5.4}The 1D diffusion equation on an unbounded domain}{79}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}The Fourier transform}{80}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}Solving the diffusion equation}{80}{subsection.5.4.2}%
+\contentsline {subsection}{\numberline {5.4.3}Fundamental solutions (or Green's functions)}{82}{subsection.5.4.3}%
+\contentsline {subsection}{\numberline {5.4.4}Solving the diffusion equation with different initial conditions}{83}{subsection.5.4.4}%
+\contentsline {paragraph}{Warning: This is only for linear systems!}{84}{equation.5.4.67}%
+\contentsline {paragraph}{Reflections}{84}{equation.5.4.69}%
+\contentsline {section}{\numberline {5.5}Finite diffusion}{84}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}The porous medium equation}{84}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2}Similarity solutions}{85}{subsection.5.5.2}%
+\contentsline {subsection}{\numberline {5.5.3}Back to the porous media equation}{88}{subsection.5.5.3}%
+\contentsline {paragraph}{Reflections}{90}{equation.5.5.110}%
+\contentsline {chapter}{\numberline {6}Travelling waves}{92}{chapter.6}%
+\contentsline {section}{\numberline {6.1}The Fisher--Kolmogorov (FK) equation}{92}{section.6.1}%
+\contentsline {paragraph}{Stability of $(0,0)$:}{95}{equation.6.1.13}%
+\contentsline {paragraph}{Stability of $(1,0)$:}{96}{equation.6.1.15}%
+\contentsline {section}{\numberline {6.2}Invasion of the squirrels}{97}{section.6.2}%
+\contentsline {paragraph}{Nondimensionalise}{97}{figure.caption.65}%
+\contentsline {section}{\numberline {6.3}Invasion of the predators}{101}{section.6.3}%
+\contentsline {section}{\numberline {6.4}The importance of boundary conditions}{105}{section.6.4}%
+\contentsline {chapter}{\numberline {7}Linear stability for PDEs: Euler buckling and scale-limited cows}{106}{chapter.7}%
+\contentsline {section}{\numberline {7.1}PDE stability is harder than ODE stability}{106}{section.7.1}%
+\contentsline {section}{\numberline {7.2}The Euler buckling problem}{107}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Cow buckling}{110}{section.7.3}%
+\contentsline {paragraph}{In the real world:}{112}{equation.7.3.26}%
+\contentsline {part}{II\hspace {1em}Epiphany term}{115}{part.2}%
+\contentsline {chapter}{\numberline {8}PDE stability: populations, boundaries and spatial modes}{116}{chapter.8}%
+\contentsline {section}{\numberline {8.1}What problem are we linearising?}{116}{section.8.1}%
+\contentsline {section}{\numberline {8.2}From Mathematical Methods to mathematical biology}{118}{section.8.2}%
+\contentsline {section}{\numberline {8.3}A spatial population model}{120}{section.8.3}%
+\contentsline {section}{\numberline {8.4}Linearisation and the mode matrix}{120}{section.8.4}%
+\contentsline {section}{\numberline {8.5}Extinction and the size of a habitat}{121}{section.8.5}%
+\contentsline {subsection}{\numberline {8.5.1}What changes with no-flux boundaries?}{121}{subsection.8.5.1}%
+\contentsline {subsection}{\numberline {8.5.2}Invasion of a resident population}{123}{subsection.8.5.2}%
+\contentsline {section}{\numberline {8.6}A scalar comparison and the spatial eigenvalue viewpoint}{123}{section.8.6}%
+\contentsline {section}{\numberline {8.7}From spatial modes to biological patterns}{124}{section.8.7}%
+\contentsline {section}{\numberline {8.8}Why do we need interacting species?}{125}{section.8.8}%
+\contentsline {chapter}{\numberline {9}The Turing instability}{130}{chapter.9}%
+\contentsline {section}{\numberline {9.1}How can interactions make diffusion destabilising?}{130}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Linear stability analysis of reaction--diffusion systems}{131}{section.9.2}%
+\contentsline {subsection}{\numberline {9.2.1}Boundary conditions and the homogeneous mode}{133}{subsection.9.2.1}%
+\contentsline {subsection}{\numberline {9.2.2}Growing inhomogeneous modes}{134}{subsection.9.2.2}%
+\contentsline {section}{\numberline {9.3}Biological implications of the Turing conditions}{135}{section.9.3}%
+\contentsline {subsection}{\numberline {9.3.1}The Turing instability requires short-range activation, long-range inhibition}{136}{subsection.9.3.1}%
+\contentsline {subsection}{\numberline {9.3.2}Restrictions on sign structures of the Jacobian}{137}{subsection.9.3.2}%
+\contentsline {section}{\numberline {9.4}A summary of the Turing instability result in one and two dimensions}{139}{section.9.4}%
+\contentsline {section}{\numberline {9.5}Geometry and discrete wavenumber selection}{140}{section.9.5}%
+\contentsline {subsection}{\numberline {9.5.1}The peak unstable mode}{141}{subsection.9.5.1}%
+\contentsline {section}{\numberline {9.6}Example: Turing analysis of the Schnakenberg system}{142}{section.9.6}%
+\contentsline {subsubsection}{Condition 1}{143}{equation.9.6.56}%
+\contentsline {subsubsection}{Condition 2}{143}{equation.9.6.57}%
+\contentsline {subsubsection}{Condition 3}{143}{equation.9.6.58}%
+\contentsline {subsubsection}{Condition 4}{144}{equation.9.6.59}%
+\contentsline {subsection}{\numberline {9.6.1}Summary of the conditions}{144}{subsection.9.6.1}%
+\contentsline {subsection}{\numberline {9.6.2}Mode selection via parameter controls (non-examinable)}{146}{subsection.9.6.2}%
+\contentsline {section}{\numberline {9.7}Usefulness \& limitations of Turing-type analysis}{146}{section.9.7}%
+\contentsline {section}{\numberline {9.8}Summary \& relaxing the assumptions}{147}{section.9.8}%
+\contentsline {chapter}{\numberline {10}Reaction--diffusion patterning in complex domains}{150}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Three-dimensional patterns}{150}{section.10.1}%
+\contentsline {section}{\numberline {10.2}Bacterial growth in a Petri dish}{152}{section.10.2}%
+\contentsline {subsection}{\numberline {10.2.1}Homogeneous equilibrium \& linear stability analysis}{153}{subsection.10.2.1}%
+\contentsline {subsection}{\numberline {10.2.2}Reuse the disc spectrum from Mathematical Methods}{153}{subsection.10.2.2}%
+\contentsline {subsection}{\numberline {10.2.3}The biological conclusion: a critical dish radius}{154}{subsection.10.2.3}%
+\contentsline {section}{\numberline {10.3}Modelling whorl patterns in \emph {Acetabularia}}{154}{section.10.3}%
+\contentsline {subsection}{\numberline {10.3.1}Reuse the kinetics; change the spatial spectrum}{157}{subsection.10.3.1}%
+\contentsline {subsection}{\numberline {10.3.2}Thin annuli: predicting the number of hairs}{158}{subsection.10.3.2}%
+\contentsline {subsection}{\numberline {10.3.3}Comparison with regeneration rates}{158}{subsection.10.3.3}%
+\contentsline {subsection}{\numberline {10.3.4}What does agreement with regeneration data mean?}{160}{subsection.10.3.4}%
+\contentsline {section}{\numberline {10.4}Turing analysis on general domains}{160}{section.10.4}%
+\contentsline {chapter}{\numberline {11}Generalised pattern formation in reaction--transport systems}{162}{chapter.11}%
+\contentsline {section}{\numberline {11.1}Models of directed motion}{162}{section.11.1}%
+\contentsline {subsection}{\numberline {11.1.1}Snake skin pattern formation via chemotaxis}{163}{subsection.11.1.1}%
+\contentsline {subsection}{\numberline {11.1.2}Geometry, shared modes and alternative snake patterns}{167}{subsection.11.1.2}%
+\contentsline {subsection}{\numberline {11.1.3}General cross-diffusion systems}{168}{subsection.11.1.3}%
+\contentsline {section}{\numberline {11.2}Non-local interactions}{170}{section.11.2}%
+\contentsline {subsection}{\numberline {11.2.1}Relation to PDEs}{171}{subsection.11.2.1}%
+\contentsline {subsection}{\numberline {11.2.2}Linearisation and spectral analysis}{173}{subsection.11.2.2}%
+\contentsline {subsection}{\numberline {11.2.3}Example: Non-local spatial patterning in a mechanical strain model}{174}{subsection.11.2.3}%
+\contentsline {chapter}{\numberline {12}Transient bacterial patterns: an evolving background}{176}{chapter.12}%
+\contentsline {section}{\numberline {12.1}From observations to a model}{176}{section.12.1}%
+\contentsline {subsection}{\numberline {12.1.1}Reduction for a short liquid-phase experiment}{177}{subsection.12.1.1}%
+\contentsline {section}{\numberline {12.2}The homogeneous solution is not an equilibrium}{177}{section.12.2}%
+\contentsline {section}{\numberline {12.3}A scalar equation for the mode amplitude}{178}{section.12.3}%
+\contentsline {section}{\numberline {12.4}A local approximation and what it can tell us}{179}{section.12.4}%
+\contentsline {subsection}{\numberline {12.4.1}Why the crossing time is not the exact peak time}{180}{subsection.12.4.1}%
+\contentsline {subsection}{\numberline {12.4.2}An optional reduced approximation}{180}{subsection.12.4.2}%
+\contentsline {section}{\numberline {12.5}Returning to the biological observations}{180}{section.12.5}%
+\contentsline {chapter}{\numberline {13}Spiral waves: amplitude, phase and rotating patterns}{184}{chapter.13}%
+\contentsline {section}{\numberline {13.1}Biological waves and the modelling question}{184}{section.13.1}%
+\contentsline {section}{\numberline {13.2}A spatial oscillator model}{185}{section.13.2}%
+\contentsline {section}{\numberline {13.3}Amplitude and phase equations}{185}{section.13.3}%
+\contentsline {section}{\numberline {13.4}A pattern of fixed shape rotating in time}{186}{section.13.4}%
+\contentsline {subsection}{\numberline {13.4.1}Seeing the choices of amplitude and phase}{186}{subsection.13.4.1}%
+\contentsline {subsection}{\numberline {13.4.2}Equations for the radial profile}{187}{subsection.13.4.2}%
+\contentsline {subsection}{\numberline {13.4.3}The core and the far field}{188}{subsection.13.4.3}%
+\contentsline {section}{\numberline {13.5}What this calculation explains}{189}{section.13.5}%
+\contentsline {section}{\numberline {13.6}Why does the $f$--$g$ model describe much more general systems? Non-examinable}{189}{section.13.6}%
+\contentsline {chapter}{\numberline {A}Weakly nonlinear oscillations and Fredholm solvability: non-examinable}{193}{appendix.A}%
+\contentsline {section}{\numberline {A.1}Assumptions and a consistent scaling}{193}{section.A.1}%
+\contentsline {section}{\numberline {A.2}The first two orders}{194}{section.A.2}%
+\contentsline {section}{\numberline {A.3}Third order: where Fredholm enters}{194}{section.A.3}%
+\contentsline {section}{\numberline {A.4}A worked projection without quadratic algebra}{195}{section.A.4}%
+\contentsline {section}{\numberline {A.5}What is shared, and what remains model-dependent}{196}{section.A.5}%

@@ -24,19 +24,19 @@ The vector $\v{F}$ describes the local biological or chemical interactions: grow
 \[
 \m{D}=\diag(D_1,\ldots,D_m),
 \]
-so that species $\m{J}$ diffuses with coefficient $D_j$. The scalar case is included by taking $m=1$. If for example $m=2$ and 
+so that species $j$ diffuses with coefficient $D_j$. The scalar case is included by taking $m=1$. If for example $m=2$ and 
 \[
 \m{D}  = \mat{D_{11}}{D_{12}}{D_{21}}{D_{22}}
 \]
 then:
 \begin{align}
-\pd{u_1}{t}&=D_{11}\nabla^2 u_1+ D_{11}\nabla^2 u_2 + F_{1}(u,v),\\
-\pd{u_2}{t}&=D_{21}\nabla^2 u_1+ D_{22}\nabla^2 u_2 + F_{2}(u,v).
+\pd{u_1}{t}&=D_{11}\nabla^2 u_1+ D_{12}\nabla^2 u_2 + F_{1}(u_1,u_2),\\
+\pd{u_2}{t}&=D_{21}\nabla^2 u_1+ D_{22}\nabla^2 u_2 + F_{2}(u_1,u_2).
 \end{align}
 and in the diagonal case:
 \begin{align}
-\pd{u_1}{t}&=D_{1}\nabla^2 u_1 + F_{1}(u,v),\\
-\pd{u_2}{t}&=D_{2}\nabla^2 u_2 + F_{2}(u,v).
+\pd{u_1}{t}&=D_{1}\nabla^2 u_1 + F_{1}(u_1,u_2),\\
+\pd{u_2}{t}&=D_{2}\nabla^2 u_2 + F_{2}(u_1,u_2).
 \end{align}
 This last pair of equations is the system we will focus on most this term. At the end of this chapter, we will use this case to show why interacting species are needed for the diffusion-driven instability studied in \cref{turinganalysis}.
 
@@ -70,7 +70,7 @@ The question is therefore no longer just `which eigenvalues does $\m{J}$ have?' 
 \section{From Mathematical Methods to mathematical biology}\label{merged:methodsbridge}
 \begin{info}
 \textbf{A quick route back into Mathematical Methods II.}
-It may have been some time since you used these ideas. Chapter~2, \S2.2 (separation of variables) introduces the spatial eigenfunctions, while \S2.3 shows that the same spatial mode can decay or grow depending on its time equation. Chapter~4, \S4.2 develops the same idea using eigenfunction expansions. For orthogonality, projection and linear independence, see Chapter~1, \S\S1.2.2--1.2.3.
+It may have been some time since you used these ideas. Chapter~2, \S2.2 (separation of variables) introduces the spatial eigenfunctions, while \S2.3 shows that the same spatial mode can decay or grow depending on its time equation. Chapter~4, \S4.2 develops the same idea using eigenfunction expansions. For orthogonality, projection and linear independence, see Chapter~1, \SS1.2.2--1.2.3.
 \end{info}
 
 Start with the scalar heat equation
@@ -219,7 +219,7 @@ The word \emph{and} matters: decay of one population does not compensate for gro
 \begin{figure}
 \includegraphics[width=5cm]{images2/lotvolSpatialStabDuelDeatht0.pdf}\quad \includegraphics[width=5cm]{images2/lotvolSpatialStabDuelDeatht0p5.pdf}\quad \includegraphics[width=5cm]{images2/lotvolSpatialStabDuelDeatht10.pdf}\quad
 \includegraphics[width=5cm]{images2/lotvolSpatialStabNoDeatht0.pdf}\quad \includegraphics[width=5cm]{images2/lotvolSpatialStabNoDeatht0p5.pdf}\quad \includegraphics[width=5cm]{images2/lotvolSpatialStabNoDeatht10.pdf}.
-\caption{\label{extinctionzero}Two mode 1 perturbations of the system around $(u_0=0,v_0=0)$, the first (a)-(c) $t=0,0.5,10$ respectively, is asymptoptically stable, the second (d)-(f) at the same times is not stable. The domain is doubled in size for the second case.}
+\caption{\label{extinctionzero}Two mode 1 perturbations of the system around $(u_0=0,v_0=0)$, the first (a)--(c) $t=0,0.5,10$ respectively, is asymptotically stable, the second (d)--(f) at the same times is not stable. The domain is doubled in size for the second case.}
 \end{figure}
 
 \subsection{What changes with no-flux boundaries?}
@@ -287,13 +287,13 @@ The purpose of the calculation is to explain an observed structure. A spatial ei
     \label{patterns_fig}
 \end{figure}
 
-In the simplest interpretation a cell changes its behaviour when a morphogen concentration crosses a threshold. If $u=u_0+\varepsilon u_1$, a condition $u>u_{\mathrm{th}}$ becomes $u_1>(u_{\mathrm{th}}-u_0)/\varepsilon$. Negative values of $u_1$ represent concentrations below the equilibrium value, not negative physical concentrations. In the illustrative figures below the plotted field and threshold have been rescaled.
+In the simplest interpretation a cell changes its behaviour when a morphogen concentration crosses a threshold. If $u=u_0+\varepsilon u_1$, a condition $u>u_{\text{th}}$ becomes $u_1>(u_{\text{th}}-u_0)/\varepsilon$. Negative values of $u_1$ represent concentrations below the equilibrium value, not negative physical concentrations. In the illustrative figures below the plotted field and threshold have been rescaled.
 
 \begin{figure}
 \subfloat[]{\includegraphics[width=8cm]{images2/chessBoard.png}}\quad \subfloat
 []{\includegraphics[width=8cm]{images2/spots1.png}}\quad 
 \subfloat[]{\includegraphics[width=8cm]{images2/stripes1.png}}\quad \subfloat[]{\includegraphics[width=8cm]{images2/stripes2.png}}
-\caption{\label{cartpat} Various `patterns" formed from restricted Fourier series where $u>u_0$ is white, else dark. (a) A checkerboard pattern $n=10$ , $m=10$ $u_0=0$. (b) $n=10$, $m=10$  but with $u_0=0.5$ as the cut-off, spots!. (c) $n=1$, $m=10$, $u_0=0$, stripes . (d) $n=1$, $m=10$, $u_0=0.5$ (fins?)}
+\caption{\label{cartpat} Various `patterns' formed from restricted Fourier series where $u>u_0$ is white, else dark. (a) A checkerboard pattern $n=10$, $m=10$, $u_0=0$. (b) $n=10$, $m=10$ but with $u_0=0.5$ as the cut-off, spots! (c) $n=1$, $m=10$, $u_0=0$, stripes. (d) $n=1$, $m=10$, $u_0=0.5$ (fins?)}
 \end{figure}
 
 For example, a product of sine functions on a rectangle can give a checkerboard when thresholded at zero, or separated spots at a higher threshold. Unequal mode numbers can produce elongated bands. The eigenfunction and the response threshold both matter; the images alone do not identify a unique biological mechanism.
@@ -347,7 +347,7 @@ f'(K)=-r,\qquad
 \]
 For example, a small initial variation $u(x,0)=K+\varepsilon\cos(\pi x/L)$ evolves, to linear order, as
 \[
-u(x,t)=K+\varepsilon\mathrm e^{-[r+D(\pi/L)^2]t}\cos(\pi x/L).
+u(x,t)=K+\varepsilon\e^{-[r+D(\pi/L)^2]t}\cos(\pi x/L).
 \]
 Local logistic growth restores the carrying capacity, while diffusion smooths out the spatial variation. Increasing $D$ makes this variation disappear faster; it cannot make it grow.
 
@@ -395,26 +395,26 @@ The scalar calculation in \cref{merged:scalarbridge} gives us a clear target: st
 Diffusion still smooths the concentration of each species, as the dye illustration suggests. Turing's insight was that this smoothing can alter the balance between coupled reactions: species that jointly restore equilibrium in a well-mixed system need not do so for every spatial disturbance. We will turn this possibility into explicit inequalities on the reaction Jacobian and the diffusion rates. The resulting linear analysis identifies which spatial modes initially grow; the nonlinear equations determine their subsequent amplitude and whether a persistent pattern forms.
 
 \section{Linear stability analysis of reaction--diffusion systems}
-The modal framework is already in place: see \cref{merged:methodsbridge} and Mathematical Methods \S\S2.3, 4.2. We now retain the detailed matrix calculation because the new issue is whether stable reaction kinetics can become unstable when diffusion is added.
-We now consider the following general reaction--diffusion system,\footnote{The, generally nonlinear, functions $F$ and $G$ are quite arbitrary, though one needs some technical assumptions on their growth rates to ensure that solutions exist for all time etc. We will not dwell on these technicalities, but always assume these functions are sufficiently `nice' to guarantee what we need. Generally systems like the functions we've seen in the ODE examples from last term work well enough.} 
+The modal framework is already in place: see \cref{merged:methodsbridge} and Mathematical Methods \SS2.3, 4.2. We now retain the detailed matrix calculation because the new issue is whether stable reaction kinetics can become unstable when diffusion is added.
+We now consider the following general reaction--diffusion system,\footnote{The generally nonlinear functions $F$ and $G$ are quite arbitrary, though one needs some technical assumptions on their growth rates to ensure that solutions exist for all time etc. We will not dwell on these technicalities, but always assume these functions are sufficiently `nice' to guarantee what we need. Generally systems like the functions we've seen in the ODE examples from last term work well enough.} 
 \begin{align}
 \pd{u}{t} &= D_1\nabla^2u + F(u,v),\\
 \pd{v}{t} &= D_2\nabla^2v + G(u,v).
 \end{align}
-and make the scalings\footnote{In Murray's book, and in previous versions of these notes, the timescale was nondimensionalised as $\hat{t} = t/\gamma$ and the $\v{x}$ scale was also scaled by this timescale. For notational simplicity, we do not choose a timescale, so if you look at past exams or additional questions you can remember that here we've taken $\gamma=1$.} $\hat{\v{x}} =\v{x}/\sqrt{D_1}$, and $D = D_2/D_1$, so that upon substituting and dropping the hat notation we have.
+and make the scalings\footnote{In Murray's book, and in previous versions of these notes, the timescale was nondimensionalised as $\hat{t} = t/\gamma$ and the $\v{x}$ scale was also scaled by this timescale. For notational simplicity, we do not choose a timescale, so if you look at past exams or additional questions you can remember that here we've taken $\gamma=1$.} $\hat{\v{x}} =\v{x}/\sqrt{D_1}$, and $D = D_2/D_1$, so that upon substituting and dropping the hat notation, we have
 \begin{align}\label{RD_System}
 \pd{u}{t} &= \nabla^2u +  F(u,v),\\
 \pd{v}{t} &= D\nabla^2v +  G(u,v).
 \end{align}
-The parameter $D>0$, the nondimensionalised ratio of diffusion rates of $u$ and $v$, e.g.\ if $D<1$ then $u$ diffuses faster than $v$ and vice-versa.  The term `reaction' is not always literal as $F$ and $G$ can be the interaction of the two densities $u$ and $v$, which could be populations (predator prey, competition, etc), biochemical reactions, or electrochemical effects, such as in neural signal propagation. It can also represent independent growth/decay or self competition terms. For simplicity in what follows, we will refer to $F$ and $G$ as reactions or sometimes the `reaction kinetics'. This is the language Turing used, as he was really thinking of chemicals as a model for how genetic information determined spatial structure in an embryo.
+The parameter $D>0$, the nondimensionalised ratio of diffusion rates of $u$ and $v$, e.g.\ if $D<1$ then $u$ diffuses faster than $v$ and vice-versa.  The term `reaction' is not always literal as $F$ and $G$ can be the interaction of the two densities $u$ and $v$, which could be populations (predator--prey, competition, etc), biochemical reactions, or electrochemical effects, such as in neural signal propagation. It can also represent independent growth/decay or self-competition terms. For simplicity in what follows, we will refer to $F$ and $G$ as reactions or sometimes the `reaction kinetics'. This is the language Turing used, as he was really thinking of chemicals as a model for how genetic information determined spatial structure in an embryo.
 
-Unless otherwise stated, we will assume no-flux  boundary conditions; if our domain is $\Omega$ with $\hat{\v{n}}$ the normal to the boundary $\partial \Omega$, then $\vdel u\cdot \hat{\v{n}}=0$ and $\vdel v\cdot \hat{\v{n}}=0$. This implies nothing can enter or leave the system and any pattern formation is due to internal changes in the system. For the homogeneous equilibrium considered here, $u=u_0$ and $v=v_0$ throughout the domain. We will firstly consider the cuboidal domain $\Omega = [0,L_1]\times[0,L_2]\times\dots [0,L_n]$.
+Unless otherwise stated, we will assume no-flux  boundary conditions; if our domain is $\Omega$ with $\uv{n}$ the normal to the boundary $\partial \Omega$, then $\vnabla u\cdot \uv{n}=0$ and $\vnabla v\cdot \uv{n}=0$. This implies nothing can enter or leave the system and any pattern formation is due to internal changes in the system. For the homogeneous equilibrium considered here, $u=u_0$ and $v=v_0$ throughout the domain. We will firstly consider the cuboidal domain $\Omega = [0,L_1]\times[0,L_2]\times\dots [0,L_n]$.
 
 The Turing analysis is essentially a linear stability analysis around a spatially homogeneous equilibrium, though we will want to look specifically for conditions when a \emph{spatial} instability occurs which would not occur in the absence of diffusion. Using the notation from last chapter, this means we want $\Re(\lambda_0)<0$ so that the equilibrium is stable in the absence of diffusion, but we are aiming for $\Re(\lambda_k)>0$ for some $k>0$ so that some inhomogeneous mode destabilises our spatially homogeneous equilibrium.
 
 
 \subsection*{Find the spatially homogeneous equilibria}
-We are interested in the stability of \emph{homogeneous} equilibria. As in the population model in the previous chapter, this means we look for constant solutions which satisfy the system of PDEs given by \cref{RD_System}. As before, \emph{homogenous} implies that $u_0$ and $v_0$ have no variation in $x$, i.e.\ $\pdn{n}{u_0}{x_i}=0=\pdn{n}{v_0}{x_i}$ for all $n$ and in all spatial directions $i$. Such equilibria occur when 
+We are interested in the stability of \emph{homogeneous} equilibria. As in the population model in the previous chapter, this means we look for constant solutions which satisfy the system of PDEs given by \cref{RD_System}. As before, \emph{homogeneous} implies that $u_0$ and $v_0$ have no variation in $x$, i.e.\ $\pdn{n}{u_0}{x_i}=0=\pdn{n}{v_0}{x_i}$ for all $n$ and in all spatial directions $i$. Such equilibria occur when 
 \begin{align}
 F(u_0,v_0) = 0,\quad G(u_0,v_0)= 0.
 \end{align}
@@ -547,7 +547,7 @@ D \vert F_u \vert + \vert G_v\vert < 0 \implies D <-\frac{\vert G_v\vert}{\vert 
 \end{equation} 
 But physically we need $D>0$ (negative diffusion does not make sense) so this cannot be permissible. Therefore, if $F_u>0$ we must have $G_v<0$ and vice versa.
 
-One can see that this condition (of opposing $F_u$ and $G_v$) make physical sense. The `reaction' $F$ promotes $u$ and $G$ promotes $v$. Consider for example the case $F_u>0$ and $G_v<0$. To induce a separation in concentration peaks, we want it to be the case that where a small increase in  $u$  leads to an acceleration in the production of $u$ to coincide with small increases in $v$ leading to a drop in $v$ so that (in this case) $u$ can become dominant over $v$. Decreases in $u$ and $v$ should lead to $v$ being favoured. If both  $F_u$ and $G_v$ are the same sign they will both tend to grow and decay simultaneously, this will not promote separation and hence pattern formation. 
+One can see that this condition (of opposing $F_u$ and $G_v$) makes physical sense. The `reaction' $F$ promotes $u$ and $G$ promotes $v$. Consider for example the case $F_u>0$ and $G_v<0$. To induce a separation in concentration peaks, we want it to be the case that where a small increase in  $u$  leads to an acceleration in the production of $u$ to coincide with small increases in $v$ leading to a drop in $v$ so that (in this case) $u$ can become dominant over $v$. Decreases in $u$ and $v$ should lead to $v$ being favoured. If both  $F_u$ and $G_v$ are the same sign they will both tend to grow and decay simultaneously, this will not promote separation and hence pattern formation. 
 
 The biochemical terminology here is that the $u$ species is a self-activator (assuming without loss of generality that $F_u>0$), and that $v$ is a self-inhibitor. Often this is shortened to `activator and inhibitor' dynamics, though it is important to note that we have only determined how these species interact with themselves (and only at the steady state $(u_0,v_0)$).
 
@@ -626,7 +626,7 @@ or in 2-D:
 \pd{u}{x_1}(0,x_2,t) = \pd{u}{x_1}(L_1,x_2,t) =\pd{u}{x_2}(x_1,0,t)=\pd{u}{x_2}(x_1,L_2,t) = 0,\\
 \pd{v}{x_1}(0,x_2,t) = \pd{v}{x_1}(L_1,x_2,t) =\pd{v}{x_2}(x_1,0,t)=\pd{v}{x_2}(x_1,L_2,t) = 0.
 \end{align}
-In all cases we assume the system has a \emph{homogenous} equilibrium 
+In all cases we assume the system has a \emph{homogeneous} equilibrium 
 \begin{equation}
 F(u_0,v_0) =0,\quad G(u_0,v_0) =0.
 \end{equation}
@@ -667,10 +667,10 @@ ensure that we can solve (in 1-D)
 \begin{equation}
  D\rho_n^2  -  \rho_n(G_v+ D F_u)+ (F_uG_v  -G_uF_v)= 0,
 \end{equation}
-in order the find a \emph{real} valued domain $\rho_n \in[\rho_n^{\min},\rho_n^{\max}]$ which defines the set of possible patterns which will grow in time, that is $\lambda_{(n)}>0$. In 2-D, this is exactly the same except that we replace the index $n$ with $(n_1, n_2)$, and for any given value of $\rho_{(n_1, n_2)}$, there can be different values of $n_1$ and $n_2$ that give rise to this value. 
+in order to find a \emph{real} valued domain $\rho_n \in[\rho_n^{\min},\rho_n^{\max}]$ which defines the set of possible patterns which will grow in time, that is $\lambda_{(n)}>0$. In 2-D, this is exactly the same except that we replace the index $n$ with $(n_1, n_2)$, and for any given value of $\rho_{(n_1, n_2)}$, there can be different values of $n_1$ and $n_2$ that give rise to this value. 
 
 
-In either case, the pattern is assumed to be observed when the morphogen rises above some concentration value $a$ ($u_1>a$) to stimulate some chemical/physical process. In the context of a developing embryo, such a region of high concentration will lead some cells to differentiating (turning on or off some genes to express a certain `phenotype' or set of behaviour), which will lead to subsequent restructuring of the tissue locally etc. When this happens for some periodic pattern, this can lead to things like hair follicles expressing different colours, or the digits forming in one's hand etc -- at least this is the theory! 
+In either case, the pattern is assumed to be observed when the morphogen rises above some concentration value $a$ ($u_1>a$) to stimulate some chemical/physical process. In the context of a developing embryo, such a region of high concentration will lead some cells to differentiate (turning on or off some genes to express a certain `phenotype' or set of behaviour), which will lead to subsequent restructuring of the tissue locally etc. When this happens for some periodic pattern, this can lead to things like hair follicles expressing different colours, or the digits forming in one's hand, etc.\ -- at least this is the theory! 
 
 \section{Geometry and discrete wavenumber selection}
 The four algebraic Turing conditions are necessary on a finite domain. They become sufficient for the linear instability only when an admissible spatial eigenvalue lies in the unstable interval; sufficiently large domains permit this. The derivation of the growth rates, with solutions given by \cref{turinglambda}, is instead a general result that depends on the spatial eigenvalues of the Laplacian $\rho_k$. It is these spatial eigenvalues which encode both the geometry of the domain (its lengths etc), as well as the boundary conditions, as we saw in the case of Neumann and Dirichlet conditions in the last chapter. Here we discuss the case of finite mode selection briefly, just to get across some intuition of how this works on a fixed bounded domain. We will also continue to restrict to the case of Neumann boundary conditions.
@@ -708,9 +708,9 @@ This is not a trivial task! With no little effort solving $\fd{\lambda}{\ks}=0$ 
 as the fastest growing mode. Alongside bounding the range of unstable modes, this computation often matches observed patterns from full numerical simulations reasonably well, and so despite the algebraic difficulty, it can be a useful heuristic for predicting the wavelength between pattern elements (e.g.~the spacing between spots) given model parameters.
 
 \begin{nem}
-I do not expect you to derive this result, it's quite (very) tedious to obtain. If, however, you feel like stretching your algebra muscles... In deriving this result you should show that the equation $\fd{\lambda}{\ks}=0$ can be written as the following quadratic,
+I do not expect you to derive this result, it's quite (very) tedious to obtain. If, however, you feel like stretching your algebra muscles\dots In deriving this result you should show that the equation $\fd{\lambda}{\ks}=0$ can be written as the following quadratic,
 \begin{equation}
-\nonumber D (D-1)^2\ks^2 + \ks 2 D(D-1)(F_u-G_v)+  ^2 \left(D \left((D+2) F_v G_u+(F_u-G_v)^2\right)+F_v G_u\right)=0.
+\nonumber D (D-1)^2\ks^2 + 2 D(D-1)(F_u-G_v)\ks + \left(D \left((D+2) F_v G_u+(F_u-G_v)^2\right)+F_v G_u\right)=0.
 \end{equation}
 \end{nem}
 
@@ -730,7 +730,7 @@ with the reaction kinetics,
 \begin{equation}
 F = a+u^2v- u,\quad G = b- u^2v,
 \end{equation}
-with $a$, $b$ both positive parameters. These are known as the Schnakenberg kinetics, or alternatively as the substrate-depleted kinetics. These reaction terms are those we used in looking at switching oscillatory behaviour in last terms notes, there called the enzyme-reaction system. Here we will go through the steps of finding parameter regimes for which this system exhibits diffusion-driven instability.
+with $a$, $b$ both positive parameters. These are known as the Schnakenberg kinetics, or alternatively as the substrate-depleted kinetics. These reaction terms are those we used in looking at switching oscillatory behaviour in last term's notes, there called the enzyme-reaction system. Here we will go through the steps of finding parameter regimes for which this system exhibits diffusion-driven instability.
 
 \subsection*{Find the homogeneous equilibrium}
 The equilibrium can be found readily by adding $F+G$ to find $u_0$, and then substituting this into $G=0$ (or $F=0$) to find $v_0$. We obtain,
@@ -753,7 +753,7 @@ As we have already solved the linear reaction--diffusion system, we can just mak
 As $F_u$ and $G_v$ must be of opposing sign $F_u>0$ so $b>a$. Further $D>1$ as $v$ is the inhibitor.  
 
 \subsubsection{Condition 1}
-Firstly we require $\tr(\m{J})=F_u+G_v<0$ which says,
+Firstly we require $\tr(\m{J})=F_u+G_v<0$, which says
 \begin{equation}
     \frac{b-a}{a+b}-(a+b)^2 <0 \implies (a+b)^3>b-a.
 \end{equation}
@@ -773,7 +773,7 @@ Now we need $DF_u+G_v>0$ which says,
 \end{equation}
 
 \subsubsection{Condition 4}
-Finally we have to check the last condition, which is often much more algebraically involved than the other three. We need $(DF_u+G_v)^2-4D(F_uG+_v-F_vG_u)>0$ which says,
+Finally we have to check the last condition, which is often much more algebraically involved than the other three. We need $(DF_u+G_v)^2-4D(F_uG_v-F_vG_u)>0$ which says,
 \begin{equation}
     \left(D\frac{b-a}{a+b}-(a+b)^2\right)^2-4D(a+b)^2 = \frac{1}{(a+b)^2}\left (D(b-a)-(a+b)^3\right)^2-4D(a+b)^2>0,
 \end{equation}
@@ -789,7 +789,7 @@ We can summarise the conditions by saying that for the homogeneous steady state 
 \end{equation}
 and that for a diffusion-driven instability, we also need,
 \begin{equation}
-    (a+b)^3<D(b-a), \quad \textrm{and} \quad (D(b-a)-(a+b)^3)^2>4D(a+b)^4.
+    (a+b)^3<D(b-a), \quad \text{and} \quad (D(b-a)-(a+b)^3)^2>4D(a+b)^4.
 \end{equation}
 As noted, the requirement that $b>a$ for $F_u$ to be positive can be seen in the first of these two conditions. We also see that, as long as $b-a>0$, both of these conditions will be automatically satisfied in the limit of $D \to \infty$. We can confirm this by plotting the conditions numerically.
 
@@ -808,7 +808,7 @@ As noted, the requirement that $b>a$ for $F_u$ to be positive can be seen in the
 
 In \cref{SchnakTuringSpace}, we plot a region in $(a,b)$ parameter space for different values of $D$. The black region corresponds to values of $a$ and $b$ where the Turing conditions are satisfied, and so for sufficiently large domains we suspect those parameters to give rise to patterned solutions. The grey regions are where the homogeneous equilibrium remains stable, and the white region is where the homogeneous equilibrium is unstable to homogeneous ($\rho_0=0$) perturbations, or equivalently where the condition in \cref{hom_ss_stab_schnack} is violated. The blue dashed line is where $a=b$. With some work, you can actually draw these boundary curves by hand, though this is much simpler to do using modern numerical software as I have done here. 
 
-As predicted, as $D$ increases the entire region with a stable homogeneous equilibrium in the absence of diffusion (the grey region) becomes Turing unstable as long as $b>a$, as given by the blue line. On the other hand, for $D=5$ we see a relatively small Turing unstable region which shrinks rapidly and disappears for $D<2.5$ or so. Again this has important implications in terms of requiring a massive difference in the diffusion rates of our two morphogens in order to realise a `large' Turing space. This is a major obstacle of robustness of this theory, as we would really want a large and robust parameter space where we see these instabilities, which is not very sensitive to small random fluctuations.
+As predicted, as $D$ increases the entire region with a stable homogeneous equilibrium in the absence of diffusion (the grey region) becomes Turing unstable as long as $b>a$, as given by the blue line. On the other hand, for $D=5$ we see a relatively small Turing unstable region which shrinks rapidly and disappears for $D<2.5$ or so. Again this has important implications in terms of requiring a massive difference in the diffusion rates of our two morphogens in order to realise a `large' Turing space. This is a major obstacle to robustness of this theory, as we would really want a large and robust parameter space where we see these instabilities, which is not very sensitive to small random fluctuations.
 
 
 
@@ -820,11 +820,11 @@ The Turing conditions tell us that when
 \begin{equation}
 (DF_u +G_v)^2 = 4D(F_uG_v-F_vG_u),
 \end{equation}
- the system is on the border of allowing turning instabilities. This occurs when 
+ the system is on the border of allowing Turing instabilities. This occurs when 
 \begin{equation}
 \ks =  \frac{D F_u + G_v}{2D}.
 \end{equation}
-So only one mode can potentially be unstable if we are just passed this threshold. One could for example demand this occur for an $n_1=5,n_2=5$ mode in a 2-D system (creating a checkerboard pattern like in  \cref{cartpat}(a)). 
+So only one mode can potentially be unstable if we are just past this threshold. One could for example demand this occur for an $n_1=5,n_2=5$ mode in a 2-D system (creating a checkerboard pattern like in  \cref{cartpat}(a)). 
 In the example we are looking at 
 \begin{equation}
 \ks = \frac{D(b-a)-(a+b)^3}{2D(a+b)} = 25\pi^2\left(\frac{1}{L_1^2} +\frac{1}{L_2^2} \right),
@@ -842,9 +842,9 @@ which would, in principle, allow us to pick parameters such that the system is u
 \section{Usefulness \& limitations of Turing-type analysis}
 Recall Mathematical Methods \S2.6: nonlinear terms generally couple spatial modes. Its non-examinable \S4.7 gives further examples. The independent modal growth rates derived here therefore predict the onset of instability, while saturation, competition between modes and the final pattern require nonlinear information.
 
-The critical  point to make regarding the Turing analysis is that it is a linear analysis. Essentially all of the interesting systems we shall consider (and indeed not consider) are nonlinear; nature is cruel like that! However this linear analysis tells us something about the permissible pattern (the unstable modes) which the system can take. In actual fact as relayed in section 2.4 of Murray, this constraint tends to be quite accurate. That is to say when the full nonlinear system is solved numerically it tends to be the case that the pattern belongs to the permissible space indicted by the Turing analysis. This can be formally justified near the onset of instability (that is, near the boundaries of the Turing space), though nonlinearity can play an important role in modifying the exact nature of the patterns presented. Of course the Turing analysis only presents us with a range of possible patterns, and especially in two and three dimensions, there can often be many. Indeed one can obtain many different patterned states from full numerical simulations of reaction--diffusion systems, and this kind of `multistability' becomes exponentially difficult to understand in larger domains.
+The critical  point to make regarding the Turing analysis is that it is a linear analysis. Essentially all of the interesting systems we shall consider (and indeed not consider) are nonlinear; nature is cruel like that! However this linear analysis tells us something about the permissible pattern (the unstable modes) which the system can take. In actual fact as relayed in section 2.4 of Murray, this constraint tends to be quite accurate. That is to say when the full nonlinear system is solved numerically it tends to be the case that the pattern belongs to the permissible space indicated by the Turing analysis. This can be formally justified near the onset of instability (that is, near the boundaries of the Turing space), though nonlinearity can play an important role in modifying the exact nature of the patterns presented. Of course the Turing analysis only presents us with a range of possible patterns, and especially in two and three dimensions, there can often be many. Indeed one can obtain many different patterned states from full numerical simulations of reaction--diffusion systems, and this kind of `multistability' becomes exponentially difficult to understand in larger domains.
 
-Of course Turing's idea was that his analysis captures the system's behaviour just as it develops the pattern. In this case some parameter of the system is  increased pushing the system just past the point of stability. We can choose the $\varepsilon$ in the linearisation to be the difference this parameter has from the loss of equilibrium. In this case the linear approximation will likely be a much more reliable indicator of the system's behaviour. In this way we can relate a Turing instability at the onset of an instability to the pitchfork bifurcation studied in  the term-one discussion of bifurcations; see \cref{PitchforkTuring}. Still, one can greatly improve an analytical prediction by using more sophisticated analytical tools, such as weakly nonlinear analysis, or the more rigorous study of `shadow-limit' systems which essentially formalise the limit $D \to \infty$ more carefully. 
+Of course Turing's idea was that his analysis captures the system's behaviour just as it develops the pattern. In this case some parameter of the system is increased, pushing the system just past the point of stability. We can choose the $\varepsilon$ in the linearisation to be the difference this parameter has from the loss of equilibrium. In this case the linear approximation will likely be a much more reliable indicator of the system's behaviour. In this way we can relate a Turing instability at the onset of an instability to the pitchfork bifurcation studied in  the term-one discussion of bifurcations; see \cref{PitchforkTuring}. Still, one can greatly improve an analytical prediction by using more sophisticated analytical tools, such as weakly nonlinear analysis, or the more rigorous study of `shadow-limit' systems which essentially formalise the limit $D \to \infty$ more carefully. 
 
 \begin{figure}
     \centering
@@ -884,13 +884,13 @@ The Turing calculation separates two questions: which spatial eigenvalues have p
 \[
 -\nabla^2w_k=\rho_kw_k.
 \]
-We reuse the box and disc results from Mathematical Methods \S4.5.3 and \S\S2.4.1--2.4.2. Our emphasis is on what geometry changes biologically: the availability of unstable modes, their spatial form, and the relationship between organism size and pattern spacing. The annular model of \emph{Acetabularia} then extends those familiar results to a new boundary-value problem.
+We reuse the box and disc results from Mathematical Methods \S4.5.3 and \SS2.4.1--2.4.2. Our emphasis is on what geometry changes biologically: the availability of unstable modes, their spatial form, and the relationship between organism size and pattern spacing. The annular model of \emph{Acetabularia} then extends those familiar results to a new boundary-value problem.
 
 \section{Three-dimensional patterns}\label{3D_Patterns}
 
-While a lot of the patterns we immediately think of in biology are two-dimensional (spots and stripes on animal coats, for example), many biological structures are inherently three-dimensional. Even animal coat patterns are induces by hair follicles, which are the buds in a developing embryo that become the roots of hairs, and these inherently have a three-dimensional structure. Other examples are the differentiation of different cell types to form different organs and tissues inside a body, leading to a wide array of complex spatial structures that have developed differently. 
+While a lot of the patterns we immediately think of in biology are two-dimensional (spots and stripes on animal coats, for example), many biological structures are inherently three-dimensional. Even animal coat patterns are induced by hair follicles, which are the buds in a developing embryo that become the roots of hairs, and these inherently have a three-dimensional structure. Other examples are the differentiation of different cell types to form different organs and tissues inside a body, leading to a wide array of complex spatial structures that have developed differently. 
 
-In this section we will consider the simplest case of three spatial dimensions by looking at eigenfunctions of the Laplacian in a cuboid or `box-like' domain. In the first row of \cref{3D}, we give examples of patterns in such a domain corresponding to simulations of the Schnakenberg system studied in \cref{Schnack_Sect}. The second row shows patterns in a cylindrical domain which we will discuss in subsequent sections. Unlike two-dimensional spatial patterns, which tend towards either spot-like structures or stripe-like structures, three-dimensional patterns have a variety of different forms, and there is often no simple classification of them (though there are analogues of `spots' and `stripes' in the form of sphere-like solutions and lamellae-like solutions). Note, however, that these three-dimensional structures are at least qualitatively similar independent of the geometry. We will come back to this point at the end of the chapter.
+In this section we will consider the simplest case of three spatial dimensions by looking at eigenfunctions of the Laplacian in a cuboid or `box-like' domain. In the first row of \cref{3D}, we give examples of patterns in such a domain corresponding to simulations of the Schnakenberg system studied in \cref{Schnack_Sect}. The second row shows patterns in a cylindrical domain which we will discuss in subsequent sections. Unlike two-dimensional spatial patterns, which tend towards either spot-like structures or stripe-like structures, three-dimensional patterns have a variety of different forms, and there is often no simple classification of them (though there are analogues of `spots' and `stripes' in the form of sphere-like solutions and lamellae-like solutions). Note, however, that these three-dimensional structures are at least qualitatively similar, independent of the geometry. We will come back to this point at the end of the chapter.
 
 \begin{figure}
 \centering
@@ -923,7 +923,7 @@ Changing one side length changes the available eigenvalues and the physical spac
 The simulations in \cref{3D} illustrate the variety of three-dimensional structures. Their comparison with the eigenmodes should be used to interpret possible spatial scales and symmetries, rather than to identify a nonlinear solution with one eigenfunction.
 
 \section{Bacterial growth in a Petri dish}\label{Petri_Sect}
-The heat equation on a disc was treated in Mathematical Methods \S\S2.4.1--2.4.2. We now use exactly that spatial eigenproblem to ask a biological question: how large must a habitat be for reproduction to overcome loss at its boundary? This scalar example concerns survival and extinction, rather than a Turing instability. 
+The heat equation on a disc was treated in Mathematical Methods \SS2.4.1--2.4.2. We now use exactly that spatial eigenproblem to ask a biological question: how large must a habitat be for reproduction to overcome loss at its boundary? This scalar example concerns survival and extinction, rather than a Turing instability. 
 \begin{do-it-yourself}
 The first half of this problem will be essentially identical to question 2 on the sheet for Problems Class 8. \textbf{I would highly recommend trying each part of that question before reading the rest of this section.}
 \end{do-it-yourself}
@@ -949,7 +949,7 @@ We have the boundary conditions,
 \begin{equation}
     {u}(t,L_r,\theta) = 0,\,\, {u}(t,r,0) ={u}(t,r,2\pi),\,\,  \pd{u}{\theta}(t,r,0) = \pd{u}{\theta}(t,r,2\pi).
 \end{equation}
-The first of these represents bacterial death at the walls, and the second two are periodic conditions conditions in $\theta$.
+The first of these represents bacterial death at the walls, and the second two are periodic conditions in $\theta$.
 
 \subsection{Homogeneous equilibrium \& linear stability analysis}
 
@@ -969,7 +969,7 @@ where the spatial eigenvalue $\rho_k$ is determined from the equation,
 \end{equation}
 
 \subsection{Reuse the disc spectrum from Mathematical Methods}
-Mathematical Methods \S\S2.4.1--2.4.2 derives the angular periodicity, radial Bessel equation and regularity condition at the origin. With $j_{n,k}$ denoting the $k$th \emph{positive} zero of $J_n$, its result in our notation is
+Mathematical Methods \SS2.4.1--2.4.2 derives the angular periodicity, radial Bessel equation and regularity condition at the origin. With $j_{n,k}$ denoting the $k$th \emph{positive} zero of $J_n$, its result in our notation is
 \begin{equation}\label{R_Bessel_BC}
 \rho_{k,n}=\left(\frac{j_{n,k}}{L_r}\right)^2,\qquad
 w_{k,n}=J_n\left(\frac{j_{n,k}r}{L_r}\right)
@@ -1014,13 +1014,13 @@ We will follow the ideas in \textsc{Murray}, vol.~II, \S3.4. Take a look there f
 \end{center}
 \caption{\label{pcs}Model set-up for the Acetabularia problem.}
 \end{figure}
-\emph{Acetabularia} is a genus of green marine algae, wherein all species are unicellular organisms, most of which are able to regenerate (see \cref{acet2}(a) for an example of the species \emph{Acetabularia ryukyuensis}). These organisms have been the subject of numerous lab experiments designed to quantitatively asses this growth process. Of particular interest in this chapter is the fact that the growth of the whorl hairs, which eventually lead to the formation of the cap (see \cref{acet2}(b)), can be shown to be mediated by the presence of calcium in the surrounding fluid. The stalk is hollow and has an annular cross-section (\cref{pcs}). The Calcium enters through the outer wall, the inner wall is impermeable.  By amputating the stalk and then charting its re-growth in the presence of various levels of calcium the following experimental findings were established:
+\emph{Acetabularia} is a genus of green marine algae, wherein all species are unicellular organisms, most of which are able to regenerate (see \cref{acet2}(a) for an example of the species \emph{Acetabularia ryukyuensis}). These organisms have been the subject of numerous lab experiments designed to quantitatively assess this growth process. Of particular interest in this chapter is the fact that the growth of the whorl hairs, which eventually lead to the formation of the cap (see \cref{acet2}(b)), can be shown to be mediated by the presence of calcium in the surrounding fluid. The stalk is hollow and has an annular cross-section (\cref{pcs}). The calcium enters through the outer wall, the inner wall is impermeable.  By amputating the stalk and then charting its re-growth in the presence of various levels of calcium the following experimental findings were established:
 
 \begin{enumerate}
 \item{The number of hairs produced  is proportional to the radius of the (hollow) stalk (assuming all other experimental conditions are fixed). Hence, there is a fixed wavelength between successive hairs, consistent with a Turing-type mechanism.}
 \item{The growth of the tip is seen to only occur for a finite range of calcium concentrations in the surrounding fluid, i.e.\  growth is halted if the levels are too high or too low (see  \cref{Acetabularia_Comparison_Plot}(a)).}
 \end{enumerate}
- So we have the spontaneous formation of a pattern (the hairs are evenly spaced around the axis of the stalk). Further it only occurs in limited scenarios in the presence of some tune-able parameter (calcium concentration). This suggests we could model it via the Turing mechanism, with calcium playing the role of $v$, and $u$ representing a morphogen triggering hair growth.\footnote{Of course this is a vast simplification of a complex process, and mechanical aspects play key roles as well. See \href{https://doi.org/10.1098/rstb.2000.0565}{this paper} for an overview of the evidence for different mechanisms at different stages of development.} This proposed model was originally developed in 1985 at a meeting on the subject, and can explain the two key phenomena listed above. 
+ So we have the spontaneous formation of a pattern (the hairs are evenly spaced around the axis of the stalk). Further it only occurs in limited scenarios in the presence of some tunable parameter (calcium concentration). This suggests we could model it via the Turing mechanism, with calcium playing the role of $v$, and $u$ representing a morphogen triggering hair growth.\footnote{Of course this is a vast simplification of a complex process, and mechanical aspects play key roles as well. See \href{https://doi.org/10.1098/rstb.2000.0565}{this paper} for an overview of the evidence for different mechanisms at different stages of development.} This proposed model was originally developed in 1985 at a meeting on the subject, and can explain the two key phenomena listed above. 
  
  We consider our domain to be the annulus, with polar coordinates $r \in [R_i, R_o]$ and $\theta \in [0, 2\pi)$. We assume the interaction equations take the following form
 \begin{align}\label{Acetabularia_Model}
@@ -1041,11 +1041,11 @@ The parameter $a$ will represent a basal (that is, in the background and not par
 The equilibrium and reaction Jacobian are already known from \cref{Schnack_Sect}:
 \[
 u_0=a+b,\qquad v_0=\frac{b}{(a+b)^2},\qquad
-J=\mat{2u_0v_0-1}{u_0^2}{-2u_0v_0}{-u_0^2}.
+\m{J}=\mat{2u_0v_0-1}{u_0^2}{-2u_0v_0}{-u_0^2}.
 \]
 The equilibrium satisfies the no-flux boundary conditions. For each annular spatial eigenfunction the temporal rates are therefore the eigenvalues of
 \begin{equation}\label{linearised}
-M_k=J-\rho_k\diag(1,D),
+\m{M}_k=\m{J}-\rho_k\diag(1,D),
 \end{equation}
 where
 \begin{equation}\label{eigeneq}
@@ -1082,12 +1082,12 @@ An important geometric prediction can be seen without solving the full Bessel de
 \end{equation}
 Hence $w_n=A\cos(n\theta)+B\sin(n\theta)$ and
 \begin{equation}\label{merged:ringmodes}
-\rho_n\simeq n^2/R^2,\qquad n=0,1,2,\ldots.
+\rho_n\approx n^2/R^2,\qquad n=0,1,2,\ldots.
 \end{equation}
 For fixed reaction parameters and diffusion coefficients, the dispersion relation selects a preferred spatial eigenvalue $\rho_*$ independently of $R$. The fastest allowed angular mode is obtained by comparing the growth rates at the discrete values $n^2/R^2$. Its mode number is approximately
 \begin{equation}
-n_*\simeq R\sqrt{\rho_*},\qquad
-\ell_*\simeq\frac{2\pi R}{n_*}\simeq\frac{2\pi}{\sqrt{\rho_*}}.
+n_*\approx R\sqrt{\rho_*},\qquad
+\ell_*\approx\frac{2\pi R}{n_*}\approx\frac{2\pi}{\sqrt{\rho_*}}.
 \end{equation}
 Thus the number of repeated features grows approximately in proportion to stalk radius, while their physical spacing remains approximately fixed. Integer mode selection produces steps rather than an exactly continuous relationship. The interpretation as hair number also assumes that one hair develops at each relevant concentration maximum.
 
@@ -1102,13 +1102,13 @@ This prediction requires fixed kinetic parameters, a thin annulus, and dominance
 
 \subsection{Comparison with regeneration rates}
 
-Experimental data shown in \cref{Acetabularia_Comparison_Plot}(a) indicate that  there is a finite range of Calcium concentrations (modelled by the parameter $b$ in our model) for which full hair growth (regeneration) can occur. We also see that, within this range the hair spacing decreases as the calcium concentration increases, quickly at first then more gradually. Further still the amplitude of the pattern decreases as the concentration approaches both ends of this range.
+Experimental data shown in \cref{Acetabularia_Comparison_Plot}(a) indicate that  there is a finite range of Calcium concentrations (modelled by the parameter $b$ in our model) for which full hair growth (regeneration) can occur. We also see that, within this range the hair spacing decreases as the calcium concentration increases, quickly at first, then more gradually. Further still the amplitude of the pattern decreases as the concentration approaches both ends of this range.
 
 In order for patterns to form we must enforce all the Turing conditions. We have already established for this system that, for fixed $D$, there is a range of values of $b$ which satisfy the Turing conditions. We can, with some effort, parametrise the boundaries given in  \cref{SchnakTuringSpace}, which correspond to values of $(a,b)$ precisely where some growth rate $\lambda_k=0$, and hence on one side we observe Turing instability, and on the other we observe stability of the spatially homogeneous state (or homogeneous instability, for the white region). We show an example of how this prediction compares for fixed $a$ and $D$ values in  \cref{Acetabularia_Comparison_Plot}.
 
 \begin{figure}
 \subfloat[]{\includegraphics[width=0.48\textwidth]{images2/AcetaRegrow.png}} \quad \subfloat[]{\includegraphics[width=0.45\textwidth]{images2/SchnakenbergD51Db.eps}}
-\caption{\label{Acetabularia_Comparison_Plot}(a) Experimentally obtained data of re-growth as a function of Calcium (b) An example 1-D Turing space corresponding to a fixed $a=0.15$ and $D=5$ value, where the value $1$ indicates that this value of $b$ satisfies the Turing conditions.}
+\caption{\label{Acetabularia_Comparison_Plot}(a) Experimentally obtained data of re-growth as a function of calcium (b) An example 1-D Turing space corresponding to a fixed $a=0.15$ and $D=5$ value, where the value $1$ indicates that this value of $b$ satisfies the Turing conditions.}
 \end{figure}
 
 
@@ -1128,7 +1128,7 @@ Mathematical Methods \S2.5, `Eigenvalues are more fundamental than separation', 
 For a homogeneous equilibrium, constant reaction and diffusion matrices, and common homogeneous boundary conditions admitting a Laplacian eigenbasis, the calculation remains
 \[
 -\nabla^2w_k=\rho_kw_k,\qquad
-\v{a}_k'=(J-\rho_k\m{D})\v{a}_k.
+\v{a}_k'=(\m{J}-\rho_k\m{D})\v{a}_k.
 \]
 The kinetics and diffusion determine the unstable band; the domain and boundary conditions determine which eigenvalues fall in it. The eigenfunctions describe the corresponding spatial variations. Changing shape can therefore change both the availability and appearance of growing modes without changing the reaction kinetics.
 
@@ -1164,18 +1164,18 @@ We will first explore a model of snake skin pattern formation where cell movemen
 \caption{\label{snakepics}Snake skin pattern, both striped and spotted}
 \end{center}
 \end{figure}
-Snake coats can exhibit a  wide variety of spotted and striped patterns, both along the length of the snake and those around the its cross-section. While some species exhibit almost identical markings, snakes within the same family can also exhibit  both length wise and width wise stripes, or mixtures of skin patterns; see  \cref{snakepics} for some examples.
+Snake coats can exhibit a  wide variety of spotted and striped patterns, both along the length of the snake and those around its cross-section. While some species exhibit almost identical markings, snakes within the same family can also exhibit  both lengthwise and widthwise stripes, or mixtures of skin patterns; see  \cref{snakepics} for some examples.
 
 Murray talks at some length about the biology of alligator stripe patterns in chapter 4, noting that there has been much experimental work on this mechanism. As Murray relates in section 4.11, there is some evidence that a similar mechanism could be at work in snake skin patterning. The basic assumptions of such a mechanism are: 
 \begin{enumerate} 
 \item{The pattern is fixed in the dermis, below the outer epidermis which is what we see. This is important as epidermal cells do not move much, whereas those in the dermis are much more motile.}
-\item{Pigment producing cells in this region exhibit phenotypes leading to different coloured regions, and this pigment production is dependent on some chemical (the `morphogen') reaching a  critical concentration.}
+\item{Pigment-producing cells in this region exhibit phenotypes leading to different coloured regions, and this pigment production is dependent on some chemical (the `morphogen') reaching a  critical concentration.}
 \item{The motion and concentrations of these cells proceeds by a chemotactic mechanism. }
 \end{enumerate}
 Given these assumptions, we now write down and analyse a model of chemotaxis-driven pattern formation.
 
 \subsection*{The model}
-We let $\tilde{n}$ denote the density of pigment producing cells and $\tilde{c}$ the concentration of a chemoattractant. We can model such a scenario by the following reaction--diffusion-type system:
+We let $\tilde{n}$ denote the density of pigment-producing cells and $\tilde{c}$ the concentration of a chemoattractant. We can model such a scenario by the following reaction--diffusion-type system:
 \begin{equation}
 \begin{aligned}
 \label{unscaledsnake}
@@ -1183,7 +1183,7 @@ We let $\tilde{n}$ denote the density of pigment producing cells and $\tilde{c}$
 \pd{\tilde{c}}{\tilde{t}} &= D_{\tilde{c}}\nabla^2\tilde{c} + h(\tilde{n},\tilde{c}) -  \gamma \tilde{c}.
 \end{aligned}
 \end{equation}
-The diffusion terms and coefficients have their usual meaning, whereas the new term involving the divergence of $g(\tilde{n},\tilde{c})\vnabla \tilde{c}$ represents a directed motion towards increasing values of $\tilde{c}$ at a rate proportional to $g(\tilde{n},\tilde{c})$. The function $f$ represents cell population dynamics (i.e.~growth and death of the cells),  $h$ models the production of the chemoattractant $\tilde{c}$, and the term $-\gamma \tilde{c}$ is the natural degradation of the chemoattractant. All parameters are considered positive.
+The diffusion terms and coefficients have their usual meaning, whereas the new term involving the divergence of $g(\tilde{n},\tilde{c})\vnabla \tilde{c}$ represents a directed motion towards increasing values of $\tilde{c}$ at a rate proportional to $g(\tilde{n},\tilde{c})$. The function $f$ represents cell population dynamics (i.e.\ growth and death of the cells),  $h$ models the production of the chemoattractant $\tilde{c}$, and the term $-\gamma \tilde{c}$ is the natural degradation of the chemoattractant. All parameters are considered positive.
 
 The new advection term can be interpreted as a bias in the flux of cells. Recalling the idea of a flux from last term, we can write the equation for $\tilde{n}$ as
 \begin{equation}
@@ -1218,7 +1218,7 @@ The developing embryo of a snake is a coiled cylindrical shape. We will perform 
 are positive-definite. That is, we assume $\rho_0=0$ and $\rho_k>0$ for $k>0$. You might ask: Why are eigenfunctions of the Laplacian important, as the spatial operators in \cref{scaledsnake} are more complicated? As we will see, after linearising the model will always reduce to a linear system involving only Laplacians as the spatial derivatives.
 
 \subsection*{Find the homogeneous equilibria}
-The system admits two homogeneous equilibria. We can find these by se 3,tting all time and space derivatives to zero to find,
+The system admits two homogeneous equilibria. We can find these by setting all time and space derivatives to zero to find,
 \begin{equation}
     0 = n_0(1-n_0), \quad 0=n_0 - Gc_0,
 \end{equation}
@@ -1306,7 +1306,7 @@ Briefly, we note that the above analysis generalises substantially to other kind
     \pd{v}{t} &= \vnabla \cdot \left (d_3(u,v)\vnabla u + d_4(u,v) \vnabla v \right ) + G(u,v),
     \end{aligned}
 \end{equation}
-where the $d_i$ and $F$, $G$ are given sufficiently smooth functions.\footnote{For systems like these, PDE-theory questions of existence and regularity of solutions become quite a bit harder, and blow-up phenomena are much more common. Here we will assume the functions are such that we can neglect these issues, but it is worth noting that one has to choose these nonlinear functions with some care.}  We now that \cref{scaledsnake} is a special case of this model with $d_1=D_u$, $d_3=0$, $d_4=D_v$ and $d_2 = -\alpha u$, and $u$ replaced by $n$, $v$ replace by $c$.  
+where the $d_i$ and $F$, $G$ are given sufficiently smooth functions.\footnote{For systems like these, PDE-theory questions of existence and regularity of solutions become quite a bit harder, and blow-up phenomena are much more common. Here we will assume the functions are such that we can neglect these issues, but it is worth noting that one has to choose these nonlinear functions with some care.}  We note that \cref{scaledsnake} is a special case of this model with $d_1=D_u$, $d_3=0$, $d_4=D_v$ and $d_2 = -\alpha u$, and $u$ replaced by $n$, $v$ replaced by $c$.  
 
 
 
@@ -1427,15 +1427,15 @@ In this case, especially for $s \gg 1$, this function approaches a very sharp an
 
 We will now use our assumptions on this kernel to perform a Taylor series of the integral term in \cref{nonlocal_PDE}. Before we do this, we note some properties of this kind of kernel. By the assumed symmetry of the argument, we see that $K(y)$ is an even function of $y$. Hence we have,
 \begin{equation}\label{K_symmetry}
-\int_{-\infty}^{\infty}y^{2m+1}K(y)\,\d y = 0, \quad \textrm{for } m=0,1,2,3,\dots
+\int_{-\infty}^{\infty}y^{2m+1}K(y)\,\d y = 0, \quad \text{for } m=0,1,2,3,\dots
 \end{equation}
 We also define the \emph{moments} of the kernel (which are just numbers) by,
 \begin{equation}
-K_{2m} = \frac{1}{(2m)!}\int_{-\infty}^{\infty}y^{2m}K(y)\, \d y, \quad \textrm{for } m=0,1,2,3,\dots
+K_{2m} = \frac{1}{(2m)!}\int_{-\infty}^{\infty}y^{2m}K(y)\, \d y, \quad \text{for } m=0,1,2,3,\dots
 \end{equation}
 
 
-Now we are ready to expand the integral term in \cref{nonlocal_PDE}, under the assumption that the kernel decays sufficiently quickly (for example, $s \gg 1$ in \cref{example_kernel}). In this case, we can think of the quantity $z = x-y$ as being `small' and use a Taylor expansion. We have that the integral term looks like,
+Now we are ready to expand the integral term in \cref{nonlocal_PDE}, under the assumption that the kernel decays sufficiently quickly (for example, $s \gg 1$ in \cref{example_kernel}). In this case, we can think of the quantity $z = x-y$ as being `small' and use a Taylor expansion. We have that the integral term looks like
 \begin{equation}
 \begin{aligned}\label{horrific_expansion}
     &\int_{-\infty}^{\infty} K(x-y) u(y,t) \, \d y = \int_{-\infty}^{\infty} K(z) u(x-z,t) \, \d z \\ &=\int_{-\infty}^{\infty} K(z) \left [u(x,t)-z\pd{u}{x}(x,t)+\frac{z^2}{2}\pdd{u}{x}(x,t)-\frac{z^3}{6}\pdn{3}{u}{x}(x,t) + \frac{z^4}{24}\pdn{4}{u}{x}(x,t) +\cdots \right] \d z\\
@@ -1459,7 +1459,7 @@ We can simplify this by writing $H(u) = uK_0+G(u)$ to find,
 \begin{equation}\label{biharmonic_PDE}
     \pd{u}{t} = K_2\pdd{u}{x}+K_4\pdn{4}{u}{x} + H(u).
 \end{equation}
-We will study this equation assuming that it is posed on a finite spatial domain, $x \in [0,L]$, in order to avoid some technicalities about eigenfunctions of the Laplacian defined on $\mathbb{R}$. This can be made sense of if the above derivation was done on a bounded domain, and the limit taken more carefully near the boundaries. It also helps explain why we think of higher-order derivatives as being less `local,' than lower-order ones.
+We will study this equation assuming that it is posed on a finite spatial domain, $x \in [0,L]$, in order to avoid some technicalities about eigenfunctions of the Laplacian defined on $\mathbb{R}$. This can be made sense of if the above derivation was done on a bounded domain, and the limit taken more carefully near the boundaries. It also helps explain why we think of higher-order derivatives as being less `local' than lower-order ones.
 
 We can impose any boundary conditions that make biological sense, but as the equation is now higher-order in space, we must have two boundary conditions at each endpoint. We will discuss different choices of these boundary conditions in the next subsection.
 
@@ -1488,7 +1488,7 @@ We let $w_k(x) = \cos(k \pi x/L)$ be the usual Laplacian eigenfunctions satisfyi
 \begin{equation}
     \pdd{w_k}{x} + \rho_k w_k = 0,
 \end{equation}
-with $\rho_k = (k\pi/L)^2$. We then note that these functions $w_k(x)$ satisfy all of the boundary conditions given in \cref{biharmonic_BCs}, and hence we can use the ansatz\footnote{There are other solutions to the eigenfunction equation \cref{eigen_biharmonic} in general, but for these boundary conditions the $w_k$, coming from just the Laplacian, are sufficient to represent any spatial perturbation of the equation.} $u_1 = e^{\lambda_k t}w_k(x)$ to find,
+with $\rho_k = (k\pi/L)^2$. We then note that these functions $w_k(x)$ satisfy all of the boundary conditions given in \cref{biharmonic_BCs}, and hence we can use the ansatz\footnote{There are other solutions to the eigenfunction \cref{eigen_biharmonic} in general, but for these boundary conditions the $w_k$, coming from just the Laplacian, are sufficient to represent any spatial perturbation of the equation.} $u_1 = \e^{\lambda_k t}w_k(x)$ to find,
 \begin{equation}\label{biharmonic_growth_rates}
 \lambda_k  = -\rho_kK_2+\rho_k^2K_4 + H'(u_0).
 \end{equation}
@@ -1641,7 +1641,7 @@ This equation is linear but has time-dependent coefficients. There is no single 
 \begin{figure}
 \centering
 \includegraphics[width=10cm]{images2/bacteriaPatternsODE.png}
-\caption{An example of solutions to \cref{ftaueq} for modes $n=1,5$ with randomise initial conditions. Note the peaks of the mode occur earlier for higher modes.}
+\caption{An example of solutions to \cref{ftaueq} for modes $n=1,5$ with randomised initial conditions. Note the peaks of the mode occur earlier for higher modes.}
 \end{figure}
 
 \section{A local approximation and what it can tell us}
@@ -1676,8 +1676,8 @@ $Dq^4-2\alpha\mu q^2/\tau^2$, whereas the frozen scalar equation includes the ad
 \subsection{An optional reduced approximation}
 If, over a particular interval, $F''$ is negligible compared with the retained terms, then
 \begin{equation}\label{approxF}
-AF'+BF\simeq0,\qquad
-F(\tau)\simeq F(\tau_a)
+AF'+BF\approx0,\qquad
+F(\tau)\approx F(\tau_a)
 \exp\left[-\int_{\tau_a}^{\tau}\frac{B(s)}{A(s)}\,\d s\right].
 \end{equation}
 This integral form is sufficient for interpreting the approximation; it avoids a lengthy partial-fraction calculation. A small value of $B$ at one time does not by itself establish a controlled approximation over the whole trajectory. Compare its shape and amplitude with the full mode equations before using it quantitatively.
@@ -1685,7 +1685,7 @@ This integral form is sufficient for interpreting the approximation; it avoids a
 \section{Returning to the biological observations}
 \begin{figure}
 \subfloat[]{\includegraphics[width=6cm]{images2/liquidBact1.png}}\quad \subfloat[]{\includegraphics[width=6cm]{images2/liquidBact3.png}}\quad\subfloat[]{\includegraphics[width=6cm]{images2/liquidBact5.png}} \quad \subfloat[]{\includegraphics[width=6cm]{images2/liquidBact15.png}}
-\caption{\label{images2/liquidbac}Solutions to $n(x_1,x_2,t)$ \cref{liquidphase} except two-dimensional with initial conditions perturbed about $n = 1$ at $t=0$. The parameters are  $D=0.33$, $\mu =1$, $\alpha=80$ and $L=20$. Note the solutions are only plotted in the range $n\in[0,2]$ so the peaks are cut-off (their values get very large). (a) t=1, a large number of small scale aggregations in density $n$. (b) t=3, the bacterial aggregations begin to merge forming larger scale aggregates. This process continues in (c), t=5 and (d) t=15. Eventually these aggregates disappear.}
+\caption{\label{images2/liquidbac}Solutions to $n(x_1,x_2,t)$ \cref{liquidphase} except two-dimensional with initial conditions perturbed about $n = 1$ at $t=0$. The parameters are  $D=0.33$, $\mu =1$, $\alpha=80$ and $L=20$. Note the solutions are only plotted in the range $n\in[0,2]$ so the peaks are cut off (their values get very large). (a) $t=1$, a large number of small scale aggregations in density $n$. (b) $t=3$, the bacterial aggregations begin to merge forming larger scale aggregates. This process continues in (c), $t=5$ and (d) $t=15$. Eventually these aggregates disappear.}
 \end{figure}
 
 \begin{figure}
@@ -1902,7 +1902,7 @@ The important assumption is instead about the \emph{regime}.  Suppose there is a
 \]
 which cross the imaginary axis as $\mu$ varies.  This is the local signature of a Hopf bifurcation.  For two variables,
 \[
-\tr J_0=0,\qquad \det J_0=\omega_0^2>0.
+\tr \m{J}_0=0,\qquad \det \m{J}_0=\omega_0^2>0.
 \]
 Near this point the local motion is approximately sinusoidal with frequency $\omega_0$, but the linearised equations alone do not determine the slowly changing size or phase of the oscillation.
 
