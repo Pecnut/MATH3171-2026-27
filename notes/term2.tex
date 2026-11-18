@@ -22,9 +22,9 @@ A general reaction--diffusion model for $m$ interacting populations or chemical 
 \end{equation}
 The vector $\v{F}$ describes the local biological or chemical interactions: growth, competition, activation, inhibition, reaction, and so on. The diffusion matrix $\m{D}$ describes spatial movement. In the simplest models it is diagonal,
 \[
-\m{D}=\operatorname{diag}(D_1,\ldots,D_m),
+\m{D}=\diag(D_1,\ldots,D_m),
 \]
-so that species $j$ diffuses with coefficient $D_j$. The scalar case is included by taking $m=1$. If for example $m=2$ and 
+so that species $\m{J}$ diffuses with coefficient $D_j$. The scalar case is included by taking $m=1$. If for example $m=2$ and 
 \[
 \m{D}  = \mat{D_{11}}{D_{12}}{D_{21}}{D_{22}}
 \]
@@ -38,7 +38,7 @@ and in the diagonal case:
 \pd{u_1}{t}&=D_{1}\nabla^2 u_1 + F_{1}(u,v),\\
 \pd{u_2}{t}&=D_{2}\nabla^2 u_2 + F_{2}(u,v).
 \end{align}
-This last pair of equations is the system we will focus on most this term. At the end of this chapter, we will use this case to show why interacting species are needed for the diffusion-driven instability studied in Chapter~\ref{turinganalysis}.
+This last pair of equations is the system we will focus on most this term. At the end of this chapter, we will use this case to show why interacting species are needed for the diffusion-driven instability studied in \cref{turinganalysis}.
 
 
 Suppose $\v{U}_*$ is a spatially homogeneous equilibrium. Since it is constant in space, $\nabla^2\v{U}_*=0$, and therefore its reaction terms must satisfy
@@ -55,17 +55,17 @@ We now ask the usual stability question: if the system is disturbed slightly fro
 Taylor expansion of the reaction terms gives
 \begin{equation}
 \v{F}(\v{U}_*+\varepsilon\v{\eta})
-=\v{F}(\v{U}_*)+\varepsilon J\v{\eta}+O(\varepsilon^2),
+=\v{F}(\v{U}_*)+\varepsilon \m{J}\v{\eta}+\order(\varepsilon^2),
 \qquad
-J=\left.\frac{\partial\v{F}}{\partial\v{U}}\right|_{\v{U}_*}.
+\m{J}=\left.\pd{\v{F}}{\v{U}}\right|_{\v{U}_*}.
 \end{equation}
-Since $\v{F}(\v{U}_*)=0$, substitution into \cref{merged:nonlinearRD}, division by $\varepsilon$, and retention of the leading terms gives the \emph{linearised reaction--diffusion equation}
+Since $\v{F}(\v{U}_*)=\vu{0}$, substitution into \cref{merged:nonlinearRD}, division by $\varepsilon$, and retention of the leading terms gives the \emph{linearised reaction--diffusion equation}
 \begin{equation}\label{merged:linearRD}
-\pd{\v{\eta}}{t}=\m{D}\nabla^2\v{\eta}+J\v{\eta}.
+\pd{\v{\eta}}{t}=\m{D}\nabla^2\v{\eta}+\m{J}\v{\eta}.
 \end{equation}
-Thus $J$ is exactly the reaction Jacobian familiar from the ODE stability calculations of last term. The only new ingredient is that the perturbation also varies in space and diffuses.
+Thus $\m{J}$ is exactly the reaction Jacobian familiar from the ODE stability calculations of last term. The only new ingredient is that the perturbation also varies in space and diffuses.
 
-The question is therefore no longer just ``which eigenvalues does $J$ have?'' A spatial disturbance can have many different shapes. We need a way to split an arbitrary perturbation into simple spatial pieces and ask how each one evolves. This is where the eigenfunction methods from Mathematical Methods enter.
+The question is therefore no longer just `which eigenvalues does $\m{J}$ have?' A spatial disturbance can have many different shapes. We need a way to split an arbitrary perturbation into simple spatial pieces and ask how each one evolves. This is where the eigenfunction methods from Mathematical Methods enter.
 
 \section{From Mathematical Methods to mathematical biology}\label{merged:methodsbridge}
 \begin{info}
@@ -115,18 +115,18 @@ Substitution into \cref{merged:linearRD} gives
 \sum_n
 \left[
 \fd{\v{a}_n}{t}
--\left(J-\rho_n\m{D}\right)\v{a}_n
+-\left(\m{J}-\rho_n\m{D}\right)\v{a}_n
 \right]w_n=\vu{0}.
 \]
 Again the $w_n$ are linearly independent, so the coefficient of each spatial mode must vanish:
 \begin{equation}\label{merged:transfer}
 \fd{\v{a}_n}{t}
-=\left(J-\rho_n\m{D}\right)\v{a}_n.
+=\left(\m{J}-\rho_n\m{D}\right)\v{a}_n.
 \end{equation}
 
-This is the central transfer from Mathematical Methods. For the scalar heat equation, each spatial mode gave one scalar ODE. For $m$ interacting species, each spatial mode gives an $m$-dimensional coupled ODE system. Different spatial modes remain separate in the \emph{linearised} problem, but the species amplitudes within one mode are coupled through the reaction Jacobian $J$.
+This is the central transfer from Mathematical Methods. For the scalar heat equation, each spatial mode gave one scalar ODE. For $m$ interacting species, each spatial mode gives an $m$-dimensional coupled ODE system. Different spatial modes remain separate in the \emph{linearised} problem, but the species amplitudes within one mode are coupled through the reaction Jacobian $\m{J}$.
 
-The boundary conditions determine which spatial functions $w_n$ and spatial eigenvalues $\rho_n$ are allowed. The matrix $J-\rho_n\m{D}$ then determines whether that particular spatial pattern grows or decays. For an initial-value problem, orthogonality lets us project the initial disturbance onto the different $w_n$ to find the starting amplitudes. For a stability calculation, we usually do not need those amplitudes: it is enough to ask whether \emph{any} admissible mode has a temporal growth rate with positive real part.
+The boundary conditions determine which spatial functions $w_n$ and spatial eigenvalues $\rho_n$ are allowed. The matrix $\m{J}-\rho_n\m{D}$ then determines whether that particular spatial pattern grows or decays. For an initial-value problem, orthogonality lets us project the initial disturbance onto the different $w_n$ to find the starting amplitudes. For a stability calculation, we usually do not need those amplitudes: it is enough to ask whether \emph{any} admissible mode has a temporal growth rate with positive real part.
 
 \begin{info}
 \textbf{A notation translation.} Mathematical Methods uses $\lambda_n$ for spatial eigenvalues and, in its discussion of growing modes, $\sigma$ for a temporal growth rate. In these Mathematical Biology notes the corresponding quantities are $\rho_n$ and $\lambda$:
@@ -161,7 +161,7 @@ u(0,t)=u(L,t)=u_0,\qquad v(0,t)=v(L,t)=v_0.
 Writing $u=u_0+\varepsilon u_1$ and $v=v_0+\varepsilon v_1$, the perturbations therefore satisfy \emph{zero} boundary values. The boundary values of the equilibrium are not the boundary values of the perturbation. This is the same subtraction of boundary data used in Mathematical Methods \S3.2.2 and \S4.2; here the subtracted function is the constant equilibrium.
 
 \section{Linearisation and the mode matrix}
-This is now the concrete two-species version of the general calculation above, with $\v{U}=(u,v)^{\mathsf T}$ and $\m{D}=\operatorname{diag}(1,\kappa)$. Keeping terms of order $\varepsilon$ gives
+This is now the concrete two-species version of the general calculation above, with $\v{U}=(u,v)^{\mathsf T}$ and $\m{D}=\diag(1,\kappa)$. Keeping terms of order $\varepsilon$ gives
 \begin{align}
 \pd{u_1}{t}&=\pdd{u_1}{x}+(1-2u_0-\gamma_1v_0)u_1-\gamma_1u_0v_1,\\
 \pd{v_1}{t}&=\kappa\pdd{v_1}{x}-\beta\gamma_2v_0u_1+
@@ -186,7 +186,7 @@ The two components use the same spatial eigenfunction because the reaction terms
 \end{pmatrix}\begin{pmatrix}a\\b\end{pmatrix}.
 \end{equation}
 Thus the growth rates are the eigenvalues of
-$M_n=J-\rho_n\operatorname{diag}(1,\kappa)$, where $J$ is the reaction Jacobian. This is the familiar ODE calculation, but repeated for every spatial mode allowed by the boundaries.
+$\m{M}_n=\m{J}-\rho_n\diag(1,\kappa)$, where $\m{J}$ is the reaction Jacobian. This is the familiar ODE calculation, but repeated for every spatial mode allowed by the boundaries.
 
 \begin{info}
 Keep three quantities distinct: $n$ labels a mode; $\rho_n$ is its spatial eigenvalue; and $\lambda_{n,+},\lambda_{n,-}$ are its two temporal growth rates. In one dimension $n\pi/L$ is the wavenumber and $\rho_n$ is its square.
@@ -196,9 +196,9 @@ An arbitrary sufficiently regular perturbation can be expanded as
 \begin{equation}\label{merged:expansion}
 \begin{pmatrix}u_1(x,t)\\v_1(x,t)\end{pmatrix}
 =\sum_{n=1}^{\infty}\v{a}_n(t)w_n(x),
-\qquad \fd{\v{a}_n}{t}=M_n\v{a}_n.
+\qquad \fd{\v{a}_n}{t}=\m{M}_n\v{a}_n.
 \end{equation}
-Linear independence separates the spatial modes; orthogonality provides the convenient projection onto them. Within each mode, the two populations remain coupled. When $M_n$ is diagonalisable its solution contains both eigenvalue branches. Stability requires both growth rates to have negative real part for every admissible mode; one positive growth rate is sufficient for linear instability. Zero growth rates require further analysis.
+Linear independence separates the spatial modes; orthogonality provides the convenient projection onto them. Within each mode, the two populations remain coupled. When $\m{M}_n$ is diagonalisable its solution contains both eigenvalue branches. Stability requires both growth rates to have negative real part for every admissible mode; one positive growth rate is sufficient for linear instability. Zero growth rates require further analysis.
 
 \section{Extinction and the size of a habitat}\label{harsh_environment}
 At $(u_0,v_0)=(0,0)$ the mode matrix is diagonal, so
@@ -214,7 +214,7 @@ L<\pi\min\{1,\sqrt{\kappa/\beta}\}.
 \end{equation}
 The word \emph{and} matters: decay of one population does not compensate for growth of the other. Without spatial losses, both populations grow from a small positive density. With zero population at the boundaries, diffusion transports individuals towards a hostile exterior. On a sufficiently small habitat, these losses dominate reproduction.
 
-Figure~\ref{extinctionzero} illustrates decay and growth on either side of a domain-size threshold. Here, and later, numerical solutions of the nonlinear model provide a check on what the linear calculation predicts near equilibrium.
+\Cref{extinctionzero} illustrates decay and growth on either side of a domain-size threshold. Here, and later, numerical solutions of the nonlinear model provide a check on what the linear calculation predicts near equilibrium.
 
 \begin{figure}
 \includegraphics[width=5cm]{images2/lotvolSpatialStabDuelDeatht0.pdf}\quad \includegraphics[width=5cm]{images2/lotvolSpatialStabDuelDeatht0p5.pdf}\quad \includegraphics[width=5cm]{images2/lotvolSpatialStabDuelDeatht10.pdf}\quad
@@ -271,7 +271,7 @@ w_{n,m}=\cos(n\pi x_1/L_1)\cos(m\pi x_2/L_2),\quad
 \end{equation}
 with $n,m\geq0$. For homogeneous Dirichlet conditions, replace cosines by sines and require $n,m\geq1$.
 
-For a reaction--diffusion system with constant diffusion matrix $\m{D}$, a homogeneous equilibrium and common homogeneous spatial boundary conditions, each spatial mode is governed by $J-\rho_k\m{D}$. The kinetics determine the growth-rate relation; the geometry and boundaries determine where it is sampled.
+For a reaction--diffusion system with constant diffusion matrix $\m{D}$, a homogeneous equilibrium and common homogeneous spatial boundary conditions, each spatial mode is governed by $\m{J}-\rho_k\m{D}$. The kinetics determine the growth-rate relation; the geometry and boundaries determine where it is sampled.
 
 \begin{do-it-yourself}
 Find the growth rates at $(u_0,v_0)=(1,0)$ in \cref{merged:population}. Compare fixed boundary values compatible with this equilibrium against no-flux boundaries. Explain the resulting invasion criterion in biological terms.
@@ -293,7 +293,7 @@ In the simplest interpretation a cell changes its behaviour when a morphogen con
 \subfloat[]{\includegraphics[width=8cm]{images2/chessBoard.png}}\quad \subfloat
 []{\includegraphics[width=8cm]{images2/spots1.png}}\quad 
 \subfloat[]{\includegraphics[width=8cm]{images2/stripes1.png}}\quad \subfloat[]{\includegraphics[width=8cm]{images2/stripes2.png}}
-\caption{\label{cartpat} Various ``patterns" formed from restricted Fourier series where $u>u_0$ is white, else dark. (a) A checkerboard pattern $n=10$ , $m=10$ $u_0=0$. (b) $n=10$, $m=10$  but with $u_0=0.5$ as the cut-off, spots!. (c) $n=1$, $m=10$, $u_0=0$, stripes . (d) $n=1$, $m=10$, $u_0=0.5$ (fins?)}
+\caption{\label{cartpat} Various `patterns" formed from restricted Fourier series where $u>u_0$ is white, else dark. (a) A checkerboard pattern $n=10$ , $m=10$ $u_0=0$. (b) $n=10$, $m=10$  but with $u_0=0.5$ as the cut-off, spots!. (c) $n=1$, $m=10$, $u_0=0$, stripes . (d) $n=1$, $m=10$, $u_0=0.5$ (fins?)}
 \end{figure}
 
 For example, a product of sine functions on a rectangle can give a checkerboard when thresholded at zero, or separated spots at a higher threshold. Unequal mode numbers can produce elongated bands. The eigenfunction and the response threshold both matter; the images alone do not identify a unique biological mechanism.
@@ -368,13 +368,13 @@ For example, the positive logistic profiles in \cref{dirichlet_rd_fig} arise wit
 \end{figure}
 
 \subsection*{What changes when species interact?}
-For two species, the scalar number $f'(u_*)$ is replaced by a reaction Jacobian $J$, and each spatial mode is governed by
+For two species, the scalar number $f'(u_*)$ is replaced by a reaction Jacobian $\m{J}$, and each spatial mode is governed by
 \[
-M_n=J-\rho_n\begin{pmatrix}D_1&0\\0&D_2\end{pmatrix}.
+\m{M}_n=\m{J}-\rho_n\begin{pmatrix}D_1&0\\0&D_2\end{pmatrix}.
 \]
-Its growth rates are the eigenvalues of this \emph{coupled matrix}. We cannot in general obtain them by subtracting $D_1\rho_n$ and $D_2\rho_n$ from the two eigenvalues of $J$ separately. If $D_1=D_2=D$, however, $M_n=J-D\rho_n I$: both eigenvalues shift left by the same amount, so a stable $J$ remains stable. Unequal diffusion can change the balance of activation and inhibition between interacting species, allowing a spatial mode to grow even though a uniform disturbance decays.
+Its growth rates are the eigenvalues of this \emph{coupled matrix}. We cannot in general obtain them by subtracting $D_1\rho_n$ and $D_2\rho_n$ from the two eigenvalues of $\m{J}$ separately. If $D_1=D_2=D$, however, $\m{M}_n=\m{J}-D\rho_n \m{I}$: both eigenvalues shift left by the same amount, so a stable $\m{J}$ remains stable. Unequal diffusion can change the balance of activation and inhibition between interacting species, allowing a spatial mode to grow even though a uniform disturbance decays.
 
-This explains why we introduced vectors: multiple interacting species provide a mechanism unavailable to one scalar density. Interactions and unequal diffusion do not guarantee a pattern; they make a Turing instability possible. Chapter~\ref{turinganalysis} determines precisely when the reaction kinetics and diffusion rates allow it.
+This explains why we introduced vectors: multiple interacting species provide a mechanism unavailable to one scalar density. Interactions and unequal diffusion do not guarantee a pattern; they make a Turing instability possible. \Cref{turinganalysis} determines precisely when the reaction kinetics and diffusion rates allow it.
 
 \chapter{The Turing instability}\label{turinganalysis}
 
@@ -480,7 +480,7 @@ and
 \begin{equation}\label{mode_numbers}
 \rho_k=|\v{k}|^2=\pi^2\sum_{i=1}^d n_i^2/L_i^2.
 \end{equation}
-The constant mode has $\rho_0=0$ and is governed by the reaction Jacobian $J$. For a Turing instability it must decay, so we require
+The constant mode has $\rho_0=0$ and is governed by the reaction Jacobian $\m{J}$. For a Turing instability it must decay, so we require
 \begin{equation}\label{homogcons}
 F_u+G_v<0,\qquad F_uG_v-F_vG_u>0.
 \end{equation}
@@ -1045,7 +1045,7 @@ J=\mat{2u_0v_0-1}{u_0^2}{-2u_0v_0}{-u_0^2}.
 \]
 The equilibrium satisfies the no-flux boundary conditions. For each annular spatial eigenfunction the temporal rates are therefore the eigenvalues of
 \begin{equation}\label{linearised}
-M_k=J-\rho_k\operatorname{diag}(1,D),
+M_k=J-\rho_k\diag(1,D),
 \end{equation}
 where
 \begin{equation}\label{eigeneq}
@@ -1091,7 +1091,7 @@ n_*\simeq R\sqrt{\rho_*},\qquad
 \end{equation}
 Thus the number of repeated features grows approximately in proportion to stalk radius, while their physical spacing remains approximately fixed. Integer mode selection produces steps rather than an exactly continuous relationship. The interpretation as hair number also assumes that one hair develops at each relevant concentration maximum.
 
-This prediction requires fixed kinetic parameters, a thin annulus, and dominance of the lowest radial branch. Changing thickness enough to excite radial structure, changing the chemistry during growth, or nonlinear competition between modes can alter it. Figure~\ref{Acetabularia_Sims} illustrates why increasing thickness must be distinguished from increasing circumference.
+This prediction requires fixed kinetic parameters, a thin annulus, and dominance of the lowest radial branch. Changing thickness enough to excite radial structure, changing the chemistry during growth, or nonlinear competition between modes can alter it. \Cref{Acetabularia_Sims} illustrates why increasing thickness must be distinguished from increasing circumference.
 
 \begin{figure}
     \centering
@@ -1641,7 +1641,7 @@ This equation is linear but has time-dependent coefficients. There is no single 
 \begin{figure}
 \centering
 \includegraphics[width=10cm]{images2/bacteriaPatternsODE.png}
-\caption{An example of solutions to \ref{ftaueq} for modes $n=1,5$ with randomise initial conditions. Note the peaks of the mode occur earlier for higher modes.}
+\caption{An example of solutions to \cref{ftaueq} for modes $n=1,5$ with randomise initial conditions. Note the peaks of the mode occur earlier for higher modes.}
 \end{figure}
 
 \section{A local approximation and what it can tell us}
@@ -1685,12 +1685,12 @@ This integral form is sufficient for interpreting the approximation; it avoids a
 \section{Returning to the biological observations}
 \begin{figure}
 \subfloat[]{\includegraphics[width=6cm]{images2/liquidBact1.png}}\quad \subfloat[]{\includegraphics[width=6cm]{images2/liquidBact3.png}}\quad\subfloat[]{\includegraphics[width=6cm]{images2/liquidBact5.png}} \quad \subfloat[]{\includegraphics[width=6cm]{images2/liquidBact15.png}}
-\caption{\label{images2/liquidbac}Solutions to $n(x_1,x_2,t)$ \ref{liquidphase} except two-dimensional with initial conditions perturbed about $n = 1$ at $t=0$. The parameters are  $D=0.33$, $\mu =1$, $\alpha=80$ and $L=20$. Note the solutions are only plotted in the range $n\in[0,2]$ so the peaks are cut-off (their values get very large). (a) t=1, a large number of small scale aggregations in density $n$. (b) t=3, the bacterial aggregations begin to merge forming larger scale aggregates. This process continues in (c), t=5 and (d) t=15. Eventually these aggregates disappear.}
+\caption{\label{images2/liquidbac}Solutions to $n(x_1,x_2,t)$ \cref{liquidphase} except two-dimensional with initial conditions perturbed about $n = 1$ at $t=0$. The parameters are  $D=0.33$, $\mu =1$, $\alpha=80$ and $L=20$. Note the solutions are only plotted in the range $n\in[0,2]$ so the peaks are cut-off (their values get very large). (a) t=1, a large number of small scale aggregations in density $n$. (b) t=3, the bacterial aggregations begin to merge forming larger scale aggregates. This process continues in (c), t=5 and (d) t=15. Eventually these aggregates disappear.}
 \end{figure}
 
 \begin{figure}
 \subfloat[]{\includegraphics[width=6cm]{images2/liquidBact1Pat.png}}\quad \subfloat[]{\includegraphics[width=6cm]{images2/liquidBact3Pat.png}}\quad\subfloat[]{\includegraphics[width=6cm]{images2/liquidBact5Pat.png}} \quad \subfloat[]{\includegraphics[width=6cm]{images2/liquidBact15Pat.png}}
-\caption{\label{liquidbacpat} Effective observed patterns corresponding to the solutions shown in Figure \ref{liquidbac}, obtained by charting the bacterial values which obtain a value above $n=2$.}
+\caption{\label{liquidbacpat} Effective observed patterns corresponding to the solutions shown in \cref{liquidbac}, obtained by charting the bacterial values which obtain a value above $n=2$.}
 \end{figure}
 
 The simulations illustrate the transient patterns. The calculation offers the following interpretation of the observed sequence:
@@ -1812,7 +1812,7 @@ Thus amplitude affects the extent and width of a thresholded arm, whereas $\psi$
 %\label{spiral:rotationexamples}
 %\end{figure}
 
-Figure~\ref{spiral:rotationexamples} isolates the time dependence. At fixed $r$, an individual arm satisfies $\theta(t)=\theta(0)-\Omega t/m$. Reversing $\Omega$ reverses rotation; changing $|m|$ changes the number of arms and, for fixed $\Omega$, the angular speed. More generally, replacing $\Omega t$ by a prescribed function $\chi(t)$ would give instantaneous angular velocity $-\chi'(t)/m$. Constant $\Omega$ is the particular choice that describes rigid rotation at constant speed.
+\Cref{spiral:rotationexamples} isolates the time dependence. At fixed $r$, an individual arm satisfies $\theta(t)=\theta(0)-\Omega t/m$. Reversing $\Omega$ reverses rotation; changing $|m|$ changes the number of arms and, for fixed $\Omega$, the angular speed. More generally, replacing $\Omega t$ by a prescribed function $\chi(t)$ would give instantaneous angular velocity $-\chi'(t)/m$. Constant $\Omega$ is the particular choice that describes rigid rotation at constant speed.
 
 \subsection{Equations for the radial profile}
 Recall the polar differential operators used in Mathematical Methods \S2.4.1. For the ansatz in \cref{spiral:form},
@@ -1848,7 +1848,7 @@ The regular branch is
 \begin{equation}
 A(r)\sim Cr^{|m|}\quad (r\to0).
 \end{equation}
-Equation~\ref{spiral:integral} then gives, under these assumptions,
+\Cref{spiral:integral} then gives, under these assumptions,
 \[
 \psi'(r)\sim\frac{\Omega-g(0)}{2D(|m|+1)}r.
 \]
@@ -1877,7 +1877,7 @@ Unlike the Turing calculation, this construction has not established growth from
 \textbf{What sort of systems are we thinking about?}  Many spatial models contain two or more interacting quantities which react locally and diffuse through space.  Examples include chemical oscillators such as the Belousov--Zhabotinsky reaction, biochemical signalling systems, electrical activity in cardiac tissue, and models of activation and recovery such as FitzHugh--Nagumo-type systems.  The detailed equations in these applications can look very different.  What matters here is that, for some parameter value, the \emph{local} dynamics are close to the onset of a sustained oscillation: a Hopf bifurcation.  Spiral waves can also occur in excitable systems far from a Hopf bifurcation, so the argument below is not a theory of every possible spiral wave.
 
 \medskip
-\textbf{What does ``weakly nonlinear'' mean?}  Linearisation tells us when a steady state first becomes oscillatory and gives the leading frequency and shape of that oscillation.  But once the oscillation begins to grow, linear theory cannot tell us what stops the growth.  A weakly nonlinear calculation assumes that we are only a small distance beyond the instability threshold, so the oscillation has small amplitude.  We introduce a small parameter $\varepsilon$ measuring that distance and retain just enough nonlinear terms to describe the first departure from linear behaviour.  These are the terms which normally determine whether the growing oscillation saturates at a finite amplitude and how its amplitude and phase vary slowly in space and time.
+\textbf{What does `weakly nonlinear' mean?}  Linearisation tells us when a steady state first becomes oscillatory and gives the leading frequency and shape of that oscillation.  But once the oscillation begins to grow, linear theory cannot tell us what stops the growth.  A weakly nonlinear calculation assumes that we are only a small distance beyond the instability threshold, so the oscillation has small amplitude.  We introduce a small parameter $\varepsilon$ measuring that distance and retain just enough nonlinear terms to describe the first departure from linear behaviour.  These are the terms which normally determine whether the growing oscillation saturates at a finite amplitude and how its amplitude and phase vary slowly in space and time.
 
 \medskip
 \textbf{Why do this?}  The reward is that, close to oscillatory onset, many different reaction--diffusion systems have the same leading amplitude equation.  The chemistry, electrophysiology or biology changes the numerical coefficients, but not the basic mathematical structure.  In the important real-diffusion case this reduced equation has exactly the amplitude--phase form of the $f$--$g$ model studied above.  So the apparently special spiral calculation is actually a local model for a much wider class of systems near a Hopf bifurcation.
@@ -2073,11 +2073,11 @@ where $a>0$, $\omega_0>0$, $D_1,D_2>0$ and $b$ is real. This is an illustrative 
 
 Here
 \[
-J_0=\begin{pmatrix}0&-\omega_0\\\omega_0&0\end{pmatrix},\qquad
+\m{J}_0=\begin{pmatrix}0&-\omega_0\\\omega_0&0\end{pmatrix},\qquad
 \v{q}=\begin{pmatrix}1\\-\i\end{pmatrix},\qquad
-\v{p}=\tfrac12\v{q},\qquad J_1=I.
+\v{p}=\tfrac12\v{q},\qquad \m{J}_1=\m{I}.
 \]
-There are no quadratic terms, so we may take $\v{U}_2=0$. The leading first component is
+There are no quadratic terms, so we may take $\v{U}_2=\vu{0}$. The leading first component is
 $u_1=Z\e^{\i\omega_0t_0}+\bar Z\e^{-\i\omega_0t_0}$.
 Its cube has first-harmonic coefficient $3|Z|^2Z$. Hence the nonlinear resonant forcing is
 \[
@@ -2090,7 +2090,7 @@ and its projection is
 \]
 Likewise $\alpha=1$ and $d=(D_1+D_2)/2$. Therefore
 \begin{equation}\label{spiral:worked}
-Z_T=\nu Z+\frac{D_1+D_2}{2}\vnabla_\v{X}^2Z
+Z_T=\nu Z+\frac{D_1+D_2}{2}\nabla_\v{X}^2Z
 -\frac32(a+\i b)|Z|^2Z.
 \end{equation}
 Writing $Z=R\e^{\i\Theta}$ gives exactly the amplitude--phase structure of \cref{spiral:A,spiral:phase}, on the slow scales, with
@@ -2108,7 +2108,7 @@ The slow phase accounts for a small correction to the fast oscillation frequency
 \section{What is shared, and what remains model-dependent}
 The example shows how a system whose nonlinear reactions lack the exact $f$--$g$ symmetry nevertheless produces that structure at leading order near oscillatory onset. The general projection explains how quadratic terms and other reaction laws alter the coefficients rather than requiring an entirely new type of leading equation.
 
-The equal-diffusion case $\m{D}=DI$ always gives $d=D$ with our normalisation. For a general diffusion matrix and general kinetics, $d$ may be complex, so the real-diffusion model in the main chapter is a restricted case. The reduced equation describes small, slowly modulated oscillations near the assumed bifurcation; it is not an exact rewriting of the original PDE. This formal expansion alone provides neither a global error bound nor a proof of spiral existence or stability.
+The equal-diffusion case $\m{D}=D\m{I}$ always gives $d=D$ with our normalisation. For a general diffusion matrix and general kinetics, $d$ may be complex, so the real-diffusion model in the main chapter is a restricted case. The reduced equation describes small, slowly modulated oscillations near the assumed bifurcation; it is not an exact rewriting of the original PDE. This formal expansion alone provides neither a global error bound nor a proof of spiral existence or stability.
 
 The lesson from Fredholm is precise: projecting out the resonant forcing determines how the amplitude must evolve for the next correction to be solvable. That connection between a linear solvability theorem and a nonlinear evolution equation is the purpose of this appendix.
 
