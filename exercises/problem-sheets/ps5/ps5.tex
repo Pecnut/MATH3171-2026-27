@@ -1,157 +1,430 @@
+
 \documentclass[a4paper,12pt]{article}
 \input{../common/preamble.tex}
-
-
-\newcommand{\sol}[1]{\\ \hrule\hfill \\ \textcolor{blue}{\textbf{SOLUTION:}} #1 \\ \hrule\hfill}
-\setbool{show_commentary}{true}
-
-%\newcommand{\sol}[1]{} \setbool{show_commentary}{false}
-\renewcommand*{\thefootnote}{\arabic{footnote}}
-\begin{document} 
+\usepackage{booktabs}
+\setbool{show_question}{true}
+\setbool{show_solution}{false}
+\setbool{show_commentary}{false}
+\begin{document}
 %
-\heading{Epiphany}{Problem sheet 5}
+\heading{Epiphany}{Problem sheet 5\solutioninheading}
 %
-  This problem sheet is due in by \textbf{5pm} on \textbf{Wednesday 4 February 2026}. You may submit it on paper to my office (\textsc{mcs}\,3114) or electronically on Gradescope.
+%
+\ifbool{show_solution}{}{
+    This problem sheet is due in by \textbf{noon} on \textbf{Monday X X 2027}.
 
-\textbf{Topics covered}: Chapter 9
+    \textbf{Topics covered}: Chapter 10.
+}
+
 \begin{enumerate}
+    % Q1
+    \question{}{
+        % Question
+        \textbf{Allee population dynamics with spatial variations}
 
-\item \textbf{Scalar Difference Equations}
-    Consider the \emph{Ricker model} originally developed to study populations of fish:
-    \begin{equation}\label{ricker_model}
-        u_n = u_{n-1}\exp \left(r-\frac{ru_{n-1}}{K} \right),
-    \end{equation}
-    where $r>0$ and $K>0$ are given parameters\footnote{Here we write the exponential function as $\exp(x) = e^x$ to avoid confusion with subscripts/superscripts.}.
-    
-    \begin{enumerate}
-        \item Why is this model more biologically plausible than the logistic map? Hint: Think in terms of permissible solutions and initial conditions.
-        \sol{
-        One reason the logistic map was poorly behaved is that the right-hand side could become negative for some parameters ($r$ too large) or initial condition choices, which would immediately lead to a solution which is not biologically permissible. Here, the right-hand side is always positive for any value of the parameters or the initial condition, so the population can never become negative.
-        }
-        \commentary{Some answers went into detailed analysis of equilibria, which is asked for later, so is not being asked about here. Some were not precise about the difference between the logistic map's behaviour and the Ricker model. The ideal answer was somewhat short, stating just that the logistic map did not automatically ensure positive populations for positive initial data, unlike the Ricker model. No need to add extra waffle here!}
-        \item What are the equilibria of this model, and what do they correspond to physically? 
-        \sol{
-        The equilibria are given by $u^*=0$ and $u^*=K$, corresponding to an extinction state, and the population being at some carrying capacity $K$.
-        }
-        \commentary{Mostly done well, though some poor English around naming the equilibrium $u^*=K$. The ``carrying capacity" is the name of the parameter in the model corresponding to the limiting population that an ecosystem can support before running out of resources.}
-        \item Linearize \cref{ricker_model} about each of the equilibria found above, and determine their stability. 
-        \sol{
-        Linearizing the model about an equilibrium $u^*$ we find that perturbations satisfy,
-        $$
-        u_{1,n} = \underbrace{\frac{K-ru^*}{K}\exp\left (r-\frac{ru^*}{K} \right)}_{f'(u^*)}u_{1,n-1}.
-        $$
-        So the extinction equilibrium $u^*=0$ is stable if $f'(0)=e^r<1$ which is never true for $r>0$. Hence this equilibrium is always unstable.
-        
-        For the positive equilibrium, $u^*=K$, we have that $f'(K) = 1-r$. Hence for $r>0$, this equilibrium is stable as long as $r<2$. 
-        }
-        \commentary{Generally done well, though two important points:
-        
-        \begin{itemize}
-            \item You \textbf{do not} need to linearize specific nonlinear functions every time. Rather, focus on just using the general result that Taylor's theorem of \emph{any} function $f(u_{n-1})$ will always reduce to the same linearized model, so you merely need to compute $f'(u^*)$. Explaining the general procedure is OK, but carrying out an expansion in $\varepsilon$ for some specific function $f$ is a waste of your time, and prone to errors.
-            \item A few students stated that $f'(u^*)<0$ was stable and $f'(u^*)>0$ was unstable, but remember that this is not how discrete time stability works.
-        \end{itemize}}
-        \item For what values of $r$ do trajectories approach the positive equilibrium monotonically? For what values of $r$ do they approach in an oscillatory way? Draw a cobweb diagram in each case.
-        \sol{
-        We note that $f'(K)>0$ for $r<1$ and $f'(K)<0$ for $r>1$. So there is monotonic stability for $0 < r < 1$, and oscillatory stability for $1 < r < 2$. 
-        \begin{figure}[h]
-            \centering
-            \includegraphics[width=0.4\textwidth]{Ricker_r0.5.png} \quad
-            \includegraphics[width=0.4\textwidth]{Ricker_r1.5.png}
-        \end{figure}
-        
-        The two cobweb diagrams are above, with $r=0.5$ on the left and $r=1.5$ on the right. See \href{https://www.desmos.com/calculator/shunsi7ohr}{here} for an interactive version.
-        }
-        \commentary{Generally done well, but there were a few issues, where one or more of the below points was absent. Full credit was given if:
-        
-        \begin{itemize}
-            \item You said that trajectories approached monotonically for $0 < r < 1$ and oscillatorily for $1 < r < 2$;
-            \item You drew the correct \emph{nonlinear} curve (not a linear one) alongside the line $u_{n} = u_{n-1}$;
-            \item You labelled the axes (and ideally the curves as well), or it was otherwise very clear what you were drawing and why.
-        \end{itemize}
-        }
-    \end{enumerate}
-    \item \textbf{Systems of Difference Equations}
-    Now let's consider a simple predator-prey system of the form,
-    \begin{align}
-        u_n &= ru_{n-1}\exp(-av_{n-1}),\\
-        v_n &= u_{n-1}\left(1-\exp(-av_{n-1})\right),
-    \end{align}
-    where $r>0$ and $a>0$ are positive parameters.
-    
-    \begin{enumerate}
-        \item Determine the equilibria of this model, and state any conditions for each equilibrium to be permissible. NB: You can neglect equilibria which only exist for special single values of parameters (e.g. $r=1$).
-        \sol{
-        The equilibria are found from the equations,
-        $$
-        u^* = ru^*\exp(-av^*), \quad
-        v^* = u^*\left(1-\exp(-av^*)\right),
-        $$
-        from which we see one solution as $u^*=v^*=0$, which is always permissible. To find others we can divide the first equation by $u^*$ to find,
-        $$
-        1 = r\exp(-av^*) \implies v^* = \frac{\ln{r}}{a}.
-        $$
-        Substituting this into the second equation we find,
-        $$
-        u^*=\frac{r\ln(r)}{a(r-1)}.
-        $$
-        The solution above for $v^*$ is only permissible if $r>1$, hence we need this condition for the second steady state to be permissible at all.
-        }
-        \commentary{Most answered well, but there were a few algebra errors which propagated into the remainder of the questions. Make sure to read carefully and clearly describe any conditions for permissibility. State this even if it is `obvious', i.e.~in the case $(u^*, v^*) = (0,0)$ note that it is always permissible etc.}
-        \item Determine the stability of each equilibrium. \emph{Hint:} Remember that the trace and determinant of a matrix can be related to the sum and product of its eigenvalues respectively. That is, $\det(\m{J}) = \lambda_1\lambda_2$ and $\tr(\m{J})=\lambda_1+\lambda_2$.
-        \sol{
-        As usual, we first find the Jacobian matrix by computing partial derivatives. This gives us,
-        $$
-        \m{J}(u^*,v^*) = \begin{pmatrix} re^{-av^*} & -aru^*e^{-av^*}\\
-        1-e^{-av^*} & au^*e^{-av^*}
-        \end{pmatrix}.
-        $$
-        Evaluation this at the extinction steady state we find,
-        $$
-        \m{J}(0,0) = \begin{pmatrix} r & 0\\
-        0 & 0
-        \end{pmatrix},
-        $$
-        which has eigenvalues $\lambda=0,r$. Hence this equilibrium is stable for $r<1$, and unstable for $r>1$.
-        
-        For the second equilibrium, we note that $e^{-av^*}=1/r$. Using this, we have,
-        $$
-        \m{J}(u^*,v^*) = \displaystyle \begin{pmatrix} 1 & \displaystyle-\frac{r\ln(r)}{r-1}\\
-        \displaystyle \frac{r-1}{r} & \displaystyle \frac{\ln{r}}{(r-1)}
-        \end{pmatrix}.
-        $$
-        Analyzing the eigenvalues of this matrix in general is difficult. However, using the hint we know that 
-        $$
-        \det(\m{J}) = \frac{\ln(r)}{r-1}+\ln{r} = \frac{r\ln(r)}{r-1} = \lambda_1\lambda_2.
-        $$
-        If the eigenvalues lie within the unit circle (that is, the equilibrium is stable), then we must have 
-        $$
-        |\det(\m{J})| = \left|\frac{r\ln(r)}{r-1} \right|=|\lambda_1\lambda_2| \leq |\lambda_1||\lambda_2| < 1.
-        $$
-        If this were true, however, for $r>1$ it would imply that $r\ln{r}<r-1$, and as these functions are equal at $r=1$ it would mean this inequality was preserved by taking derivatives, so that $1+\ln{r} < 1$, which is not true for $r>1$. Hence we must have that the positive equilibrium is unstable for all $r>1$, and so always unstable.
-        }
-        \commentary{A number of mistakes:
-        
-        \begin{itemize}
-            \item Some students did not describe what happens to the extinction equilibrium as $r$ crosses 1 (some students did not analyze $r<1$ as the other equilibrium was not permissible, but $r<1$ is still important to check for stability for this equilibrium);
-            \item Some issues remembering how discrete stability is different to ODE stability. Remember that it is no $\Re{\lambda}=0$ that is the stability boundary, but $|\lambda| = 1$!
-            \item Computing the eigenvalues is hard, and not easy to determine stability directly; the hint was meant to make it clearer that stability can be determined without computing eigenvalues directly.
-        \end{itemize}}
-        \item Is this a biologically realistic model? Justify your answer. Can you suggest ways to improve this model?
-        \sol{
-        The model seems to be well-behaved for $r<1$, giving predictions similar to other models we have seen that the populations die out. However, for $r>1$, the model predicts only unstable solutions, and there are never any stable coexistence regimes. Related to this, in the absence of predators, the prey population grows without bound. Hence this is likely not a good model. 
-        
-        There are a number of improvements one could make to the model which might help improve stability. A key one would be to add some kind of density-dependent saturation to the prey's response, so that it cannot grow without bound in the absence of predation. In fact, it turns out this leads to a much more realistic model, though one which is harder to analyze without using a computer. See \textsc{Murray}, vol.~I, Section 3.10 for more details.
-        }
-        \commentary{A few common issues on this question:
-        
-        \begin{itemize}
-            \item Some students did not give a suggested improvement, which was asked for;
-            \item Lots of vague waffle (`populations depend on each other'). Try and be clear and precise mathematically when you make claims, such as that the model represents a predator-prey interaction;
-            \item There was evidence of terms which appeared from outside the course which didn't make sense in context. It is OK to look things up or use AI, but please ensure you understand what you are saying;
-            \item A helpful hint is to look at past problem sheets/problem class sheets/lecture notes to try and get an idea of what `good' interpretation answers look like. Come talk to the lecturers to help too!
-        \end{itemize}}
-    \end{enumerate}
+        \begin{enumerate}[label=(\alph*)]
+            % (a)
+            \item Consider a population $u(t)$ evolving according to
+            \begin{equation}\label{Allee_ODE}
+                \fd{u}{t} = ru\left(\frac{u}{A}-1\right)
+                \left(1-\frac{u}{K}\right),
+            \end{equation}
+            with the parameters $r>0$, $K>0$ and $0 < A < K$.
+            Explain the biological interpretation of the three parameters.
+
+            % (b)
+            \item Using linear stability analysis and/or a graphical
+            representation of the phase space, explain the behaviour
+            of the population $u$ satisfying \cref{Allee_ODE} for
+            different initial conditions.
+
+            % (c)
+            \item Consider the spatial model for $u(x,t)$,
+            \begin{equation}\label{Allee_PDE}
+                \pd{u}{t} = D\nabla^2 u
+                + ru\left(\frac{u}{A}-1\right)
+                \left(1-\frac{u}{K}\right),
+                \quad x \in \Omega = [0,L],
+            \end{equation}
+            where $u$ satisfies Dirichlet conditions on its boundaries
+            of the form $u = u_B$ for $x = 0,L$, for some constant
+            parameter value $u_B\geq0$. For what values of $u_B$ do
+            spatially homogeneous equilibria exist? For all cases
+            where they do exist, use a linear stability analysis to
+            determine their stability as a function of the model
+            parameters. For any of these cases where the spatial model
+            can give a different stability prediction from the ODE,
+            compute the critical domain length, $L_c$, where the
+            stability of a spatially homogeneous equilibrium changes.
+
+            % (d)
+            \item Without redoing the linear stability analysis,
+            explain what is different about the number and stability
+            of equilibria of \cref{Allee_PDE} in the case of zero
+            Neumann (no-flux) boundary conditions.
+        \end{enumerate}
+    }
+    { % Solution
+        \begin{enumerate}[label=(\alph*)]
+            % (a)
+            \item Interpretation of the three parameters:
+            \begin{itemize}
+                \item $r$ is the growth rate of the population,
+                \item $K$ is the maximum carrying capacity,
+                \item $A$ is the Allee parameter determining the
+                threshold population.
+            \end{itemize}
+
+            \commentary{
+                Broadly this part was fine, and credit was given
+                generously. It is worth noting that $r$ is really a
+                timescale of the whole process, both growth and death
+                of the population, but for this course simpler
+                descriptions are fine.
+            }
+            %
+            % (b)
+            \item This example is exactly done in the Michaelmas
+            portion of the course. The three equilibria are
+            $u_0=0, A, K$, which can be seen as the right-hand side
+            is factored in terms of these three roots. Stability can
+            be determined by signing $f'(u_0)$ in each case, where
+            we compute:
+            \begin{equation}
+                f'(u_0) =
+                r\left(\frac{u_0}{A}-1\right)
+                \left(1-\frac{u_0}{K}\right)
+                + \frac{ru_0}{A}\left(1-\frac{u_0}{K}\right)
+                - \frac{ru_0}{K}
+                \left(\frac{u_0}{A}-1\right).
+            \end{equation}
+
+            This is a nice form as for each of our equilibria above,
+            two of the terms drop out in each case. So we have:
+            \begin{itemize}
+                \item $f'(0)<0$ so $u_0=0$ is stable,
+                \item $f'(A)>0$ so $u_0=A$ is unstable,
+                \item $f'(K)<0$ so $u_0=K$ is stable.
+            \end{itemize}
+
+            Another method is to compute this graphically by plotting
+            $f'(u)$ against $u$:
+            \begin{center}
+                \includegraphics{allee-phase.pdf}
+            \end{center}
+
+            For the initial population $u(0)$,
+            \begin{itemize}
+                \item if $u(0)>A$ then $u \to K$ as $t \to \infty$,
+                \item if $u(0)<A$ then $u \to 0$ as $t \to \infty$,
+                so this models death of a sufficiently small
+                population.
+            \end{itemize}
+            %
+            % (c)
+            \item Spatially homogeneous equilibria will exist only
+            when $u_B=u_0$ for one of the three kinetic equilibria,
+            \begin{equation*}
+                u_B = 0, \quad u_B=A \quad\text{or}\quad u_B=K,
+            \end{equation*}
+            and in each case there will only be a single equilibrium.
+
+            \paragraph{First consider $u_B=0$.}
+            The only spatially homogeneous equilibrium in this case
+            is $u_0=0$, as the other two would not satisfy the
+            boundary conditions. Linearising about this equilibrium
+            with $u=u_0+\varepsilon u_1$, we find:
+            \[
+                \pd{u_1}{t}
+                = D\pdd{u_1}{x} - ru_1,
+                \quad u_1(0,t)=u_1(L,t)=0,
+            \]
+            and hence perturbation growth rates (determined by
+            $U = \exp(\lambda_k t)\sin(k\pi x/L)$) are:
+            \[
+                \lambda_k =
+                -D\left(\frac{k\pi}{L}\right)^2-r,
+                \quad k=1,2,3,\dots
+            \]
+            and hence $\lambda_k < 0$ so this equilibrium is always
+            stable.
+
+            \paragraph{Similarly we find for $u_B=A$:}
+            \[
+                \lambda_k =
+                -D\left(\frac{k\pi}{L}\right)^2
+                + r\left(1-\frac{A}{K}\right),
+                \quad k=1,2,3,\dots
+            \]
+            which is more interesting.
+
+            As $A<K$, we have that $1-A/K>0$ so that this
+            equilibrium is unconditionally unstable in the ODE case.
+            But here, as $k=1$ is the smallest spatial eigenvalue,
+            we can have $\lambda_1$ with a negative sign for
+            sufficiently small values of $L$, as in the
+            `harsh environment' case seen in the lecture notes.
+            We find a critical domain length:
+            \[
+                L_c = \pi\sqrt{\frac{DK}{r(K-A)}},
+            \]
+            such that $L>L_c$ makes $u_0=A$ unstable, but
+            $L < L_c$ makes $u_0=A$ stable.
+
+            \paragraph{For $u_B=K$:}
+            we find exactly the same result as in $u_B=0$, with the
+            equilibrium always being stable as long as it exists.
+            The calculation is essentially identical in this case,
+            except with $f'(K) = r(1-K/A)$, which is negative as
+            $K>A$ so $K/A>1$.
+
+            \commentary{
+                A few issues/comments here:
+                \begin{itemize}[topsep=1ex,itemsep=0pt]
+                    \item It is worth really understanding why there
+                    is only ever at most one equilibrium where
+                    $u_B = 0, A,$ or $K$. Any solution $u(x,t)$,
+                    which includes equilibrium solutions, \emph{must}
+                    satisfy the boundary conditions.
+
+                    \item You do not need to work out the separation
+                    of variables solution every time, or even the
+                    linearisation, unless you are asked to do this
+                    precisely. As long as you know what the solution
+                    ansatz is, or what the linear equation is, you
+                    can just write it down.
+
+                    \item It is important to understand why $k=1$
+                    gives the largest growth rate here, and why this
+                    can then impact stability.
+                \end{itemize}
+            }
+
+            % (d)
+            \item With zero Neumann conditions, we would allow any
+            of the three homogeneous equilibria (as they all satisfy
+            the boundary condition, since constants have zero
+            derivative). The stability of the three equilibria would
+            also not change from the ODE case, as
+            $\lambda_0=f'(u_0)$, corresponding to $k=0$, is the
+            largest growing mode, which is exactly what the ODE
+            linear stability analysis gives as the growth rate.
+        \end{enumerate}
+    }
+    %
+    %------------------------------------------------------------------
+    %
+    % Q2
+    \question{}{
+        % Question
+        \textbf{Spatial Lotka--Volterra}
+
+        Consider the following spatial variant of the Lotka--Volterra
+        system,
+        \begin{align*}
+            \pd{u}{t} &= \nabla^2 u + u - uv,\\
+            \pd{v}{t} &= D\nabla^2 v - \gamma(v-uv),
+        \end{align*}
+        where $\gamma$ and $D$ are positive constants. The system is
+        considered on a Cartesian domain
+        $[0,L_1]\times[0,L_2]$ with a coordinate system
+        $(x_1,x_2)$. Both $u$ and $v$ take on fixed values $u_0$
+        and $v_0$ on the boundaries at all times.
+
+        \begin{enumerate}[label=(\alph*)]
+            % (a)
+            \item Find the system's homogeneous equilibria.
+
+            % (b)
+            \item Determine any conditions on the domain lengths
+            $L_1$ and $L_2$ for which the equilibria are
+            asymptotically stable (if at all). In each case assume
+            that the fixed boundary values correspond to the
+            equilibrium under consideration.
+
+            % (c)
+            \item Consider small perturbations about the homogeneous
+            equilibrium $(1,1)$. Find a condition on the domain
+            lengths $L_1$ and $L_2$, and the parameters $D$ and
+            $\gamma$, for which there exists at least one spatial
+            mode which decays with oscillations in time.
+
+            Is it possible for every spatial mode to exhibit
+            oscillatory decay? Justify your answer.
+        \end{enumerate}
+    }
+    { % Solution
+        \begin{enumerate}[label=(\alph*)]
+            % (a)
+            \item The homogeneous equilibria satisfy
+            \begin{equation*}
+                u_0(1-v_0)=0,
+                \qquad
+                \gamma v_0(u_0-1)=0.
+            \end{equation*}
+            Hence the two homogeneous equilibria are $(0,0)$ and
+            $(1,1)$.
+
+            %
+            % (b)
+            \item Assuming solutions of the form
+            \begin{equation*}
+                u(x,t)=u_0+\epsilon u_1(x,t),
+                \qquad
+                v(x,t)=v_0+\epsilon v_1(x,t),
+            \end{equation*}
+            expanding to linear order gives
+            \begin{align*}
+                \pd{u_1}{t}
+                &= \nabla^2 u_1+(1-v_0)u_1-u_0v_1,\\
+                \pd{v_1}{t}
+                &= D\nabla^2 v_1+\gamma v_0u_1
+                +\gamma(u_0-1)v_1.
+            \end{align*}
+
+            The fixed boundary conditions imply $u_1=v_1=0$
+            on the boundary of the domain. Hence we seek solutions
+            of the form
+            \begin{equation*}
+                \mvec{u_1}{v_1}=
+                \mvec{a}{b}\e^{\lambda t}
+                \sin(k_1x_1)\sin(k_2x_2),
+            \end{equation*}
+            where
+            \begin{equation*}
+                k_1=\frac{n_1\pi}{L_1},
+                \qquad
+                k_2=\frac{n_2\pi}{L_2},
+                \qquad
+                n_1,n_2=1,2,\ldots.
+            \end{equation*}
+
+            Defining
+            \begin{equation*}
+                k_s=k_1^2+k_2^2=
+                \pi^2\left(\frac{n_1^2}{L_1^2}
+                +\frac{n_2^2}{L_2^2}\right),
+            \end{equation*}
+            we obtain the matrix eigenvalue equation
+            \begin{equation*}
+                \lambda\mvec{a}{b}=
+                \mat{1-v_0-k_s}{-u_0}
+                {\gamma v_0}{\gamma(u_0-1)-Dk_s}
+                \mvec{a}{b}
+                =A_1\mvec{a}{b}.
+            \end{equation*}
+            Non-trivial solutions require
+            $\det(A_1-\lambda I)=0$.
+
+            \paragraph{The equilibrium $(0,0)$}
+            In this case the characteristic equation is
+            \begin{equation*}
+                (\lambda-(1-k_s))(\lambda+Dk_s+\gamma)=0.
+            \end{equation*}
+            Hence the eigenvalues are
+            \begin{equation*}
+                \lambda_1=1-k_s,
+                \qquad
+                \lambda_2=-Dk_s-\gamma.
+            \end{equation*}
+
+            The second eigenvalue is always negative, whilst the
+            first is negative if $k_s>1$. For asymptotic stability
+            this condition must be satisfied for every permissible
+            spatial mode. Since $k_s$ takes its smallest value
+            when $n_1=n_2=1$, the condition for asymptotic stability
+            is
+            \begin{equation*}
+                \boxed{
+                    \frac{1}{L_1^2}+\frac{1}{L_2^2}>
+                    \frac{1}{\pi^2}.
+                }
+            \end{equation*}
+
+            At equality the equilibrium is not asymptotically
+            stable, since a small perturbation of $u$ proportional
+            to the first spatial eigenfunction, with $v=0$, is
+            itself a steady state.
+
+            \paragraph{The equilibrium $(1,1)$}
+            In this case the characteristic equation is
+            \begin{align*}
+                (\lambda+k_s)(\lambda+Dk_s)+\gamma &=0,\\
+                \lambda^2+(D+1)k_s\lambda+Dk_s^2+\gamma &=0.
+            \end{align*}
+
+            The trace and determinant of $A_1$ are
+            \begin{equation*}
+                \tr(A_1)=-(D+1)k_s<0,
+                \qquad
+                \det(A_1)=Dk_s^2+\gamma>0.
+            \end{equation*}
+            These inequalities hold for every permissible spatial
+            mode, since $k_s>0$. Hence $(1,1)$ is asymptotically
+            stable for all finite positive domain lengths $L_1$
+            and $L_2$.
+
+            %
+            % (c)
+            \item From the characteristic equation for the
+            equilibrium $(1,1)$, derived in part (b), the
+            eigenvalues are
+            \begin{align*}
+                \lambda_{\pm}
+                &=\frac{1}{2}\left[-(D+1)k_s
+                \pm\sqrt{(D+1)^2k_s^2-4(Dk_s^2+\gamma)}\right]\\
+                &=\frac{1}{2}\left[-(D+1)k_s
+                \pm\sqrt{(D-1)^2k_s^2-4\gamma}\right].
+            \end{align*}
+
+            The temporal behaviour of a mode will be oscillatory
+            if its eigenvalues have a non-zero imaginary component.
+            This requires
+            \begin{equation*}
+                (D-1)^2k_s^2<4\gamma.
+            \end{equation*}
+
+            For $D\neq 1$ this can be written as
+            \begin{equation*}
+                k_s<\frac{2\sqrt{\gamma}}{|D-1|}.
+            \end{equation*}
+
+            Since the smallest permissible value of $k_s$ occurs
+            when $n_1=n_2=1$, there will be at least one
+            oscillatory mode provided
+            \begin{equation*}
+                \boxed{
+                    \frac{1}{L_1^2}+\frac{1}{L_2^2}
+                    <\frac{2\sqrt{\gamma}}{\pi^2|D-1|}.
+                }
+            \end{equation*}
+
+            For every spatial mode to exhibit oscillatory decay
+            we would require
+            \begin{equation*}
+                (D-1)^2k_s^2<4\gamma
+            \end{equation*}
+            for all permissible values of $k_s$. However, $k_s$
+            is unbounded as $n_1$ or $n_2$ tends to infinity.
+            Hence this is only possible if
+            \begin{equation*}
+                \boxed{D=1.}
+            \end{equation*}
+
+            In this case the eigenvalues reduce to
+            \begin{equation*}
+                \lambda_{\pm}=-k_s\pm\i\sqrt{\gamma}.
+            \end{equation*}
+            Thus every spatial mode exhibits oscillatory decay,
+            with the same angular frequency $\sqrt{\gamma}$ but
+            with a decay rate dependent on the spatial mode.
+            In particular, at least one oscillatory mode always
+            exists when $D=1$, irrespective of the domain lengths.
+        \end{enumerate}
+    }
+    %
+    %------------------------------------------------------------------
+    %
 \end{enumerate}
 
-    
 \end{document}
