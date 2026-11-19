@@ -15,9 +15,9 @@ Before we discuss particular patterns, we need to connect those two pieces of ma
 \section{What problem are we linearising?}\label{merged:generalrd}
 A general reaction--diffusion model for $m$ interacting populations or chemical species can be written
 \begin{equation}\label{merged:nonlinearRD}
-\pd{\v{u}}{t}=\m{D}\nabla^2\v{U}+\v{F}(\v{U}),
+\pd{\v{u}}{t}=\m{D}\nabla^2\v{u}+\v{F}(\v{u}),
 \qquad
-\v{U}(\v{x},t)=
+\v{u}(\v{x},t)=
 \begin{pmatrix}u_1(\v{x},t)\\ \vdots\\ u_m(\v{x},t)\end{pmatrix}.
 \end{equation}
 The vector $\v{F}$ describes the local biological or chemical interactions: growth, competition, activation, inhibition, reaction, and so on. The diffusion matrix $\m{D}$ describes spatial movement. In the simplest models it is diagonal,
@@ -41,25 +41,25 @@ and in the diagonal case:
 This last pair of equations is the system we will focus on most this term. At the end of this chapter, we will use this case to show why interacting species are needed for the diffusion-driven instability studied in \cref{turinganalysis}.
 
 
-Suppose $\v{U}_*$ is a spatially homogeneous equilibrium. Since it is constant in space, $\nabla^2\v{U}_*=0$, and therefore its reaction terms must satisfy
+Suppose $\v{u}_*$ is a spatially homogeneous equilibrium. Since it is constant in space, $\nabla^2\v{u}_*=0$, and therefore its reaction terms must satisfy
 \begin{equation}
-\v{F}(\v{U}_*)=\vu{0}.
+\v{F}(\v{u}_*)=\vu{0}.
 \end{equation}
 For fixed-value boundary conditions, the equilibrium must of course also be compatible with the imposed boundary values.
 
 We now ask the usual stability question: if the system is disturbed slightly from $\v{U}_*$, does the disturbance decay or grow? Write
 \begin{equation}
-\v{U}(\v{x},t)=\v{U}_*+\varepsilon\v{\eta}(\v{x},t),
+\v{u}(\v{x},t)=\v{u}_*+\varepsilon\v{\eta}(\v{x},t),
 \qquad 0<\varepsilon\ll1.
 \end{equation}
 Taylor expansion of the reaction terms gives
 \begin{equation}
-\v{F}(\v{U}_*+\varepsilon\v{\eta})
-=\v{F}(\v{U}_*)+\varepsilon \m{J}\v{\eta}+\order(\varepsilon^2),
+\v{F}(\v{u}_*+\varepsilon\v{\eta})
+=\v{F}(\v{u}_*)+\varepsilon \m{J}\v{\eta}+\order(\varepsilon^2),
 \qquad
-\m{J}=\left.\pd{\v{F}}{\v{U}}\right|_{\v{U}_*}.
+\m{J}=\left.\pd{\v{F}}{\v{u}}\right|_{\v{u}_*}.
 \end{equation}
-Since $\v{F}(\v{U}_*)=\vu{0}$, substitution into \cref{merged:nonlinearRD}, division by $\varepsilon$, and retention of the leading terms gives the \emph{linearised reaction--diffusion equation}
+Since $\v{F}(\v{u}_*)=\vu{0}$, substitution into \cref{merged:nonlinearRD}, division by $\varepsilon$, and retention of the leading terms gives the \emph{linearised reaction--diffusion equation}
 \begin{equation}\label{merged:linearRD}
 \pd{\v{\eta}}{t}=\m{D}\nabla^2\v{\eta}+\m{J}\v{\eta}.
 \end{equation}
@@ -379,7 +379,7 @@ This explains why we introduced vectors: multiple interacting species provide a 
 \chapter{The Turing instability}\label{turinganalysis}
 
 \begin{extra-reading}
-\textbf{Relevant reading:} \textsc{Murray}, vol.~II, chap.~2--2.4
+\textsc{Murray}, vol.~II, chap.~2--2.4
 \end{extra-reading}
 
 \section{How can interactions make diffusion destabilising?}
@@ -519,7 +519,7 @@ Rearranging this, our condition for instability (that $h(\rho_k^*)<0$) is equiva
 \begin{figure}
     \centering
     \includegraphics[width=0.9\textwidth]{images2/DispersionRelations}
-    \caption{In panel (a) is a plot of $h(\rho_k)=\det(\m{M})$ against $\rho_k$, and in panel (b) is a plot of $\Re(\lambda_k)$ against $\rho_k$. Note that the notation in this panel, taken from Murray's \emph{Mathematical Biology} vol.\ 2, chapter 2, is such that $k^2$ is our $\rho_k$. }
+    \caption{In panel (a) is a plot of $h(\rho_k)=\det(\m{M})$ against $\rho_k$, and in panel (b) is a plot of $\Re(\lambda_k)$ against $\rho_k$. Note that the notation in this panel, taken from Murray's \emph{Mathematical Biology} vol.~II, chapter 2, is such that $k^2$ is our $\rho_k$. }
     \label{disp_rel_fig}
 \end{figure}
 
@@ -567,7 +567,7 @@ DF_u+G_v > 0 \implies D\vert F_u\vert +\vert G_v\vert >0 \implies D>\frac{\vert 
  \begin{figure}
     \centering
     \includegraphics[width=0.85\textwidth]{images2/JacobianDiagram}
-    \caption{An image from Murray's \emph{Mathematical Biology} vol.\ 2, chapter 2, demonstrating the two permissible sign structures of the Jacobian, and what they correspond to both in terms of unstable linear patterns, and in terms of their phase planes. Panels (a) and (b) are diagrams of the signalling kinetics, panels (c) and (d) are in-phase and out-of-phase patterns respectively due to these off-diagonal terms, and panels (e) and (f) are phase portraits near the equilibrium, including the nullclines and the flow around the equilibrium.}
+    \caption{An image from Murray's \emph{Mathematical Biology} vol.~II, chapter 2, demonstrating the two permissible sign structures of the Jacobian, and what they correspond to both in terms of unstable linear patterns, and in terms of their phase planes. Panels (a) and (b) are diagrams of the signalling kinetics, panels (c) and (d) are in-phase and out-of-phase patterns respectively due to these off-diagonal terms, and panels (e) and (f) are phase portraits near the equilibrium, including the nullclines and the flow around the equilibrium.}
     \label{JacobianSignsFig}
 \end{figure}
 
@@ -842,7 +842,7 @@ which would, in principle, allow us to pick parameters such that the system is u
 \section{Usefulness \& limitations of Turing-type analysis}
 Recall Mathematical Methods \S2.6: nonlinear terms generally couple spatial modes. Its non-examinable \S4.7 gives further examples. The independent modal growth rates derived here therefore predict the onset of instability, while saturation, competition between modes and the final pattern require nonlinear information.
 
-The critical  point to make regarding the Turing analysis is that it is a linear analysis. Essentially all of the interesting systems we shall consider (and indeed not consider) are nonlinear; nature is cruel like that! However this linear analysis tells us something about the permissible pattern (the unstable modes) which the system can take. In actual fact as relayed in section 2.4 of Murray, this constraint tends to be quite accurate. That is to say when the full nonlinear system is solved numerically it tends to be the case that the pattern belongs to the permissible space indicated by the Turing analysis. This can be formally justified near the onset of instability (that is, near the boundaries of the Turing space), though nonlinearity can play an important role in modifying the exact nature of the patterns presented. Of course the Turing analysis only presents us with a range of possible patterns, and especially in two and three dimensions, there can often be many. Indeed one can obtain many different patterned states from full numerical simulations of reaction--diffusion systems, and this kind of `multistability' becomes exponentially difficult to understand in larger domains.
+The critical  point to make regarding the Turing analysis is that it is a linear analysis. Essentially all of the interesting systems we shall consider (and indeed not consider) are nonlinear; nature is cruel like that! However this linear analysis tells us something about the permissible pattern (the unstable modes) which the system can take. In actual fact as relayed in \S2.4 of \textsc{Murray}, this constraint tends to be quite accurate. That is to say when the full nonlinear system is solved numerically it tends to be the case that the pattern belongs to the permissible space indicated by the Turing analysis. This can be formally justified near the onset of instability (that is, near the boundaries of the Turing space), though nonlinearity can play an important role in modifying the exact nature of the patterns presented. Of course the Turing analysis only presents us with a range of possible patterns, and especially in two and three dimensions, there can often be many. Indeed one can obtain many different patterned states from full numerical simulations of reaction--diffusion systems, and this kind of `multistability' becomes exponentially difficult to understand in larger domains.
 
 Of course Turing's idea was that his analysis captures the system's behaviour just as it develops the pattern. In this case some parameter of the system is increased, pushing the system just past the point of stability. We can choose the $\varepsilon$ in the linearisation to be the difference this parameter has from the loss of equilibrium. In this case the linear approximation will likely be a much more reliable indicator of the system's behaviour. In this way we can relate a Turing instability at the onset of an instability to the pitchfork bifurcation studied in  the term-one discussion of bifurcations; see \cref{PitchforkTuring}. Still, one can greatly improve an analytical prediction by using more sophisticated analytical tools, such as weakly nonlinear analysis, or the more rigorous study of `shadow-limit' systems which essentially formalise the limit $D \to \infty$ more carefully. 
 
@@ -877,7 +877,7 @@ Problems 1--7 of Problem Sheet 5 are all based on the Turing analysis, and are p
 
 \chapter{Reaction--diffusion patterning in complex domains}
 \begin{extra-reading}
-\textbf{Relevant reading:} \textsc{Murray}, vol.~II, chap.~3, especially \S3.4
+\textsc{Murray}, vol.~II, chap.~3, especially \S3.4
 \end{extra-reading}
 
 The Turing calculation separates two questions: which spatial eigenvalues have positive temporal growth rates, and which of those eigenvalues are permitted by the domain and its boundaries? The first is answered by the reaction--diffusion mode matrix. The second is the spatial eigenproblem from Mathematical Methods:
@@ -1050,7 +1050,7 @@ The equilibrium satisfies the no-flux boundary conditions. For each annular spat
 where
 \begin{equation}\label{eigeneq}
 -\nabla^2w_k=\rho_kw_k,\qquad
-\partial_rw_k(R_i,\theta)=\partial_rw_k(R_o,\theta)=0.
+\pd{}{r} w_k(R_i,\theta) = \pd{}{r} w_k(R_o,\theta)=0.
 \end{equation}
 The Turing inequalities and dispersion relation are unchanged. We must determine which values of $\rho_k$ the annulus permits.
 
@@ -1156,7 +1156,9 @@ We will first explore a model of snake skin pattern formation where cell movemen
 
 
 \subsection{Snake skin pattern formation via chemotaxis}
-\textbf{Relevant reading:} Murray book I, chapter 11.4; and book II, chapter 4.11.
+\begin{extra-reading}
+\textsc{Murray} vol.~I, \S11.4; and vol.~II, \S4.11.
+\end{extra-reading}
 
 \begin{figure}
 \begin{center}
@@ -1166,7 +1168,7 @@ We will first explore a model of snake skin pattern formation where cell movemen
 \end{figure}
 Snake coats can exhibit a  wide variety of spotted and striped patterns, both along the length of the snake and those around its cross-section. While some species exhibit almost identical markings, snakes within the same family can also exhibit  both lengthwise and widthwise stripes, or mixtures of skin patterns; see  \cref{snakepics} for some examples.
 
-Murray talks at some length about the biology of alligator stripe patterns in chapter 4, noting that there has been much experimental work on this mechanism. As Murray relates in section 4.11, there is some evidence that a similar mechanism could be at work in snake skin patterning. The basic assumptions of such a mechanism are: 
+Murray talks at some length about the biology of alligator stripe patterns in chapter 4, noting that there has been much experimental work on this mechanism. As Murray relates in \S4.11, there is some evidence that a similar mechanism could be at work in snake skin patterning. The basic assumptions of such a mechanism are: 
 \begin{enumerate} 
 \item{The pattern is fixed in the dermis, below the outer epidermis which is what we see. This is important as epidermal cells do not move much, whereas those in the dermis are much more motile.}
 \item{Pigment-producing cells in this region exhibit phenotypes leading to different coloured regions, and this pigment production is dependent on some chemical (the `morphogen') reaching a  critical concentration.}
@@ -1404,7 +1406,7 @@ The following derivation of the higher-order PDE given by \cref{biharmonic_PDE_p
 \end{nem}
 
 \begin{extra-reading}
-\textbf{Relevant reading:} \textsc{Murray}, vol.~I, \S11.5; and vol.~II, chaps~6 and 12 (only a cursory look!)
+\textsc{Murray}, vol.~I, \S11.5; and vol.~II, chaps~6 and 12 (only a cursory look!)
 \end{extra-reading}
 
 So far in this course we have covered models which were either spatially homogeneous (ODEs), or which involved only the Laplacian or relatively simple nonlinear generalisations of it. There are many other model formulations one can use, especially to consider interactions in space. In this section, we will briefly look at models involving integrals of the unknown functions, in addition to partial derivatives. These are sometimes called \emph{integro-differential} equations, and their general theory and behaviour can be quite a lot more exotic than the corresponding case of PDEs or ODEs. Nevertheless, in many useful contexts we can transform these equations into systems of PDEs, and this is the approach we will take in this section. For simplicity we will only consider models of a single species.
@@ -1547,7 +1549,7 @@ which is positive as long as $a^2 > 4b$. You can see simulations of this model i
 \chapter{Transient bacterial patterns: an evolving background}
 \label{merged:bacteria}
 \begin{extra-reading}
-\textbf{Relevant reading:} Murray, vol.~II, chapter 5. Here we extend the method to a time-dependent homogeneous solution.
+\textsc{Murray}, vol.~II, chapter 5. Here we extend the method to a time-dependent homogeneous solution.
 \end{extra-reading}
 Our previous pattern-forming instabilities were calculated around a homogeneous equilibrium. Bacterial aggregation provides a useful reason to go beyond this assumption: an added stimulant changes the chemical environment over time, and observed aggregates can form, become larger, and eventually disappear.
 
@@ -1606,11 +1608,11 @@ c(x,t)&=c_b(t)+\varepsilon\sum_{m=1}^{\infty}g_m(t)\cos(q_mx).
 \end{align}
 We have fixed the mean bacterial density, so its zero-mode perturbation is absent. A spatially uniform offset in $c$ can be treated separately. We do not assume exponential time dependence: the coefficients of the linearised equations will depend on $c_b(t)$.
 
-Because $\partial_xc_b=0$, the linearised chemotactic flux involves only
-$(1+c_b)^{-2}\partial_xc_1$. Also,
+Because $\pd{c_b}{x}=0$, the linearised chemotactic flux involves only
+$(1+c_b)^{-2}\pd{c_1}{x}$. Also,
 \begin{equation}
 \frac{n^2}{\mu+n^2}=\frac{1}{1+\mu}
-+\varepsilon\frac{2\mu}{(1+\mu)^2}n_1+O(\varepsilon^2).
++\varepsilon\frac{2\mu}{(1+\mu)^2}n_1+\order(\varepsilon^2).
 \end{equation}
 For each nonzero spatial mode this gives
 \begin{align}\label{feq}
@@ -1737,7 +1739,7 @@ The fields can represent deviations from a reference state, so they need not the
 \end{equation}
 Without spatial variation, writing $w=a\e^{\i\phi}$ gives
 \[
-\dot a=af(a),\qquad \dot\phi=g(a).
+\pd{a}{t}=af(a),\qquad \pd{\phi}{t}=g(a).
 \]
 Thus $f$ controls amplitude growth and saturation, while $g$ gives the angular frequency in the $(u,v)$ plane. A positive root $a_*$ of $f$ gives a periodic orbit if $g(a_*)\ne0$; it is radially attracting when $a_*f'(a_*)<0$. For example,
 \[
@@ -1748,14 +1750,14 @@ has an attracting amplitude $a_*=\sqrt\mu$ for $\mu>0$, with frequency $\omega-b
 \section{Amplitude and phase equations}\label{spiral:amplitudephase}
 Write $w(\v{x},t)=A(\v{x},t)\e^{\i\phi(\v{x},t)}$, with $A>0$ where the phase is defined. Using the product and chain rules from Mathematical Methods,
 \begin{align*}
-w_t&=\e^{\i\phi}(A_t+\i A\phi_t),\\
+\pd{w}{t}&=\e^{\i\phi}\left(\pd{A}{t}+\i A\pd{\phi}{t}\right),\\
 \nabla^2w&=\e^{\i\phi}\left[\nabla^2A-A|\vnabla\phi|^2
 +\i\left(2\vnabla A\cdot\vnabla\phi+A\nabla^2\phi\right)\right].
 \end{align*}
 Substitution into \cref{spiral:complex} and separation into real and imaginary parts gives
 \begin{align}
-A_t&=D\nabla^2A+Af(A)-DA|\vnabla\phi|^2,\label{spiral:A}\\
-\phi_t&=D\nabla^2\phi+g(A)+\frac{2D}{A}\vnabla A\cdot\vnabla\phi.\label{spiral:phase}
+\pd{A}{t}&=D\nabla^2A+Af(A)-DA|\vnabla\phi|^2,\label{spiral:A}\\
+\pd{\phi}{t}&=D\nabla^2\phi+g(A)+\frac{2D}{A}\vnabla A\cdot\vnabla\phi.\label{spiral:phase}
 \end{align}
 Spatial variation in phase affects the amplitude through the negative term $-DA|\vnabla\phi|^2$. Phase evolution also depends on amplitude gradients. This coupling is absent from the local oscillator equations.
 
@@ -1890,8 +1892,8 @@ The Fredholm alternative from Mathematical Methods enters only as the mechanism 
 Consider, for example,
 \begin{equation}\label{spiral:generalclass}
 \begin{aligned}
-u_t&=D_u\nabla^2u+F(u,v;\mu),\\
-v_t&=D_v\nabla^2v+G(u,v;\mu),\qquad D_u,D_v>0.
+\pd{u}{t}&=D_u\nabla^2u+F(u,v;\mu),\\
+\pd{v}{t}&=D_v\nabla^2v+G(u,v;\mu),\qquad D_u,D_v>0.
 \end{aligned}
 \end{equation}
 The functions $F$ and $G$ may represent quite different mechanisms in different applications.  A FitzHugh--Nagumo-type model, for instance, couples a rapidly responding activation variable to a slower recovery variable.  Related two-variable reaction--diffusion systems are used in chemical oscillations and in models of propagating electrical or biochemical activity.  Nothing here requires the exact rotational symmetry built into the $f$--$g$ equations.
@@ -1917,7 +1919,7 @@ $J_0\v{q}=\i\omega_0\v{q}$, the leading disturbance has the form
 \v{U}=
 \varepsilon\left[Z(\v{X},T)\v{q}\e^{\i\omega_0t}
 +\bar Z\bar{\v{q}}\e^{-\i\omega_0t}\right]
-+O(\varepsilon^2).
++\order(\varepsilon^2).
 \end{equation}
 Here $Z$ is a complex \emph{slow amplitude}.  Its modulus tells us the slowly varying strength of the oscillation and its argument gives a slowly varying phase correction.  Thus the calculation separates two effects which occur on very different scales:
 \begin{itemize}
@@ -1932,7 +1934,7 @@ At leading order the oscillatory mode lies in the kernel of the linear operator.
 At order $\varepsilon^3$ the correction has schematic form
 \[
 \mathcal L\v{U}_3=\v{h},
-\qquad \mathcal L=\partial_t-J_0.
+\qquad \mathcal L=\pd{}{t}-\m{J}_0.
 \]
 If $\v{p}$ is the adjoint oscillatory eigenvector, the Fredholm alternative says that the resonant part is solvable only when
 \[
@@ -1942,17 +1944,17 @@ This is the same orthogonality-to-the-adjoint-kernel idea encountered in Mathema
 
 The result is a complex amplitude equation of the form
 \begin{equation}\label{spiral:shortcgle}
-Z_T=\alpha\nu Z+d\vnabla_\v{X}^2Z+c|Z|^2Z,
+\pd{Z}{T}=\alpha\nu Z+d\nabla_\v{X}^2Z+c|Z|^2Z,
 \end{equation}
 where the coefficients $\alpha,d,c$ are calculated from the original reaction laws and diffusion coefficients.  The first term describes growth or decay as the bifurcation is crossed, the diffusion term couples neighbouring oscillators, and the cubic term is the leading nonlinear correction which can saturate the growth.
 
 \subsection*{Connection with the spiral model}
 If $d>0$ is real, write $Z=R\e^{\i\Theta}$.  Then \cref{spiral:shortcgle} becomes
 \[
-R_T=d\nabla^2R-dR|\vnabla\Theta|^2+R f(R),
+\pd{R}{T}=d\nabla^2R-dR|\vnabla\Theta|^2+R f(R),
 \]
 \[
-\Theta_T=d\nabla^2\Theta+\frac{2d}{R}\vnabla R\cdot\vnabla\Theta+g(R),
+\pd{\Theta}{T}=d\nabla^2\Theta+\frac{2d}{R}\vnabla R\cdot\vnabla\Theta+g(R),
 \]
 for suitable functions $f$ and $g$ determined by $\alpha$ and $c$.  These are precisely the amplitude--phase equations developed in \cref{spiral:A,spiral:phase}.  A rotating-wave ansatz for $Z$ therefore leads back to the same radial spiral equations.
 
@@ -1964,22 +1966,22 @@ This term has connected familiar eigenfunction methods to population survival, T
 % This is the final chapter of the term-two subfile. Appendix numbering starts here.
 \appendix
 \chapter{Weakly nonlinear oscillations and Fredholm solvability: non-examinable}\label{spiral:appendix}
-\begin{info}
+\begin{nem}
 \textbf{This entire appendix is non-examinable.} It expands \cref{spiral:shortfredholm}; none of its perturbation calculations or coefficient formulae is required for assessment. The connection to Mathematical Methods \S3.4 is the solvability condition for a linear problem with a nontrivial kernel.
-\end{info}
+\end{nem}
 
 \section{Assumptions and a consistent scaling}
 Consider a smooth real two-component reaction--diffusion system. Subtract its smooth homogeneous equilibrium branch and write the deviation as $\v{U}$, so that
 \begin{equation}
-\v{U}_t=\m{D}\nabla^2\v{U}+J(\mu)\v{U}
-+\frac12B(\v{U},\v{U})+\frac16C(\v{U},\v{U},\v{U})+\cdots.
+\pd{\v{U}}{t} = \m{D}\nabla^2\v{U}+\m{J}(\mu)\v{U}
++\frac12\v{B}(\v{U},\v{U})+\frac16\v{C}(\v{U},\v{U},\v{U})+\cdots.
 \end{equation}
-Here $\m{D}$ is a constant real diffusion matrix. The symmetric multilinear maps $B,C$ are the second and third derivatives of the reaction vector at the critical equilibrium and parameter; extend them complex-linearly when using complex vectors. We assume enough smoothness for this Taylor expansion. Parameter dependence of $B,C$ contributes only at higher orders in the scaling below.
+Here $\m{D}$ is a constant real diffusion matrix. The symmetric multilinear maps $\v{B},\v{C}$ are the second and third derivatives of the reaction vector at the critical equilibrium and parameter; extend them complex-linearly when using complex vectors. We assume enough smoothness for this Taylor expansion. Parameter dependence of $\v{B},\v{C}$ contributes only at higher orders in the scaling below.
 
-At $\mu=0$, assume $J_0=J(0)$ has a simple pair $\pm\i\omega_0$, with $\omega_0>0$. Choose right and adjoint eigenvectors satisfying
+At $\mu=0$, assume $\m{J}_0=\m{J}(0)$ has a simple pair of eigenvalues $\pm\i\omega_0$, with $\omega_0>0$. Choose right and adjoint eigenvectors satisfying
 \begin{equation}\label{spiral:adjoint}
-J_0\v{q}=\i\omega_0\v{q},\qquad
-J_0^\dagger\v{p}=-\i\omega_0\v{p},\qquad
+\m{J}_0\v{q}=\i\omega_0\v{q},\qquad
+\m{J}_0^\dagger\v{p}=-\i\omega_0\v{p},\qquad
 \v{p}^\dagger\v{q}=1.
 \end{equation}
 The dagger denotes conjugate transpose. The adjoint vector projects forcing onto the resonant mode. In higher-dimensional kinetic systems one also requires that other kinetic modes are separated from the critical pair; we keep the two-component case here.
@@ -1990,22 +1992,24 @@ Set
 T=\varepsilon^2t,\qquad
 \v{U}=\varepsilon\v{U}_1+\varepsilon^2\v{U}_2+\varepsilon^3\v{U}_3+\cdots.
 \]
-Write $J(\mu)=J_0+\mu J_1+O(\mu^2)$. The cubic saturation, parameter-dependent linear growth and slow diffusion all first enter at order $\varepsilon^3$. We seek long spatial modulations on the plane or on a compatible large domain; on a fixed small domain the available modes may not support this spatial scaling.
+Write $\m{J}(\mu)=\m{J}_0+\mu \m{J}_1+\order(\mu^2)$. The cubic saturation, parameter-dependent linear growth and slow diffusion all first enter at order $\varepsilon^3$. We seek long spatial modulations on the plane or on a compatible large domain; on a fixed small domain the available modes may not support this spatial scaling.
 
-Let $t_0=t$ denote the fast time. Then $\partial_t=\partial_{t_0}+\varepsilon^2\partial_T$ and $\vnabla_{\v{x}}^2=\varepsilon^2\vnabla_\v{X}^2$. At each order we seek a correction periodic in $t_0$ with period $2\pi/\omega_0$, and define
+Let $t_0=t$ denote the fast time. Then
+\[\pd{}{t}=\pd{}{t_0}+\varepsilon^2\pd{}{T} \quad \text{and} \quad \nabla_{\v{x}}^2=\varepsilon^2\nabla_\v{X}^2.\]
+At each order we seek a correction periodic in $t_0$ with period $2\pi/\omega_0$, and define
 \[
-\mathcal L=\partial_{t_0}-J_0.
+\mathcal L = \pd{}{t_0}-\m{J}_0.
 \]
 
 \section{The first two orders}
-At order $\varepsilon$, $\mathcal L\v{U}_1=0$, hence
+At order $\varepsilon$, $\mathcal L\v{U}_1=\vu{0}$, hence
 \begin{equation}
 \v{U}_1=Z(\v{X},T)\v{q}\,\e^{\i\omega_0t_0}
 +\bar Z\,\bar{\v{q}}\,\e^{-\i\omega_0t_0}.
 \end{equation}
 At order $\varepsilon^2$,
 \[
-\mathcal L\v{U}_2=\frac12B(\v{U}_1,\v{U}_1).
+\mathcal L\v{U}_2=\frac12\v{B}(\v{U}_1,\v{U}_1).
 \]
 The forcing contains a mean and second harmonics, so choose
 \[
@@ -2015,8 +2019,8 @@ The forcing contains a mean and second harmonics, so choose
 \]
 where
 \begin{align}
--J_0\v{h}_{11}&=B(\v{q},\bar{\v{q}}),\\
-(2\i\omega_0I-J_0)\v{h}_{20}&=\tfrac12B(\v{q},\v{q}).
+-\m{J}_0\v{h}_{11}&=\v{B}(\v{q},\bar{\v{q}}),\\
+(2\i\omega_0\m{I}-\m{J}_0)\v{h}_{20}&=\tfrac12\v{B}(\v{q},\v{q}).
 \end{align}
 These matrices are invertible in the two-component setting assumed here. A homogeneous first-harmonic contribution can be absorbed into the definition of $Z$. The second-order correction matters: quadratic reaction terms can affect the final cubic amplitude coefficient through this correction.
 
@@ -2024,9 +2028,9 @@ These matrices are invertible in the two-component setting assumed here. A homog
 At order $\varepsilon^3$,
 \begin{equation}\label{spiral:orderthree}
 \mathcal L\v{U}_3=
--\partial_T\v{U}_1+\nu J_1\v{U}_1
-+\m{D}\vnabla_\v{X}^2\v{U}_1
-+B(\v{U}_1,\v{U}_2)+\tfrac16C(\v{U}_1,\v{U}_1,\v{U}_1).
+-\pd{\v{U}_1}{T}+\nu \m{J}_1\v{U}_1
++\m{D}\nabla_\v{X}^2\v{U}_1
++\v{B}(\v{U}_1,\v{U}_2)+\frac16\v{C}(\v{U}_1,\v{U}_1,\v{U}_1).
 \end{equation}
 For periodic vector functions use the inner product
 \[
@@ -2035,7 +2039,7 @@ For periodic vector functions use the inner product
 \]
 Integration by parts has no boundary term because the functions are periodic. Therefore
 \[
-\mathcal L^\dagger=-\partial_{t_0}-J_0^\dagger,\qquad
+\mathcal L^\dagger=-\pd{}{t_0}-\m{J}_0^\dagger,\qquad
 \mathcal L^\dagger(\v{p}\e^{\i\omega_0t_0})=0.
 \]
 The Fredholm condition from Mathematical Methods \S3.4 says that the right-hand side of \cref{spiral:orderthree} must be orthogonal to this adjoint nullvector and its conjugate. Equivalently, if $\v{h}_1$ is its coefficient of $\e^{\i\omega_0t_0}$, then
@@ -2043,31 +2047,31 @@ The Fredholm condition from Mathematical Methods \S3.4 says that the right-hand 
 \v{p}^\dagger\v{h}_1=0.
 \end{equation}
 One can also see this as the finite-dimensional solvability condition for
-$(\i\omega_0I-J_0)\v{z}=\v{h}_1$: left multiplication by $\v{p}^\dagger$ gives zero on the left. If the condition fails, a resonant forcing creates a secular term proportional to $t_0\e^{\i\omega_0t_0}$ instead of the bounded periodic correction sought here.
+$(\i\omega_0\m{I}-\m{J}_0)\v{z}=\v{h}_1$: left multiplication by $\v{p}^\dagger$ gives zero on the left. If the condition fails, a resonant forcing creates a secular term proportional to $t_0\e^{\i\omega_0t_0}$ instead of the bounded periodic correction sought here.
 
 Collect the first temporal harmonic in \cref{spiral:orderthree}. Its nonlinear part is
 \[
-|Z|^2Z\left[B(\v{q},\v{h}_{11})+B(\bar{\v{q}},\v{h}_{20})
-+\tfrac12C(\v{q},\v{q},\bar{\v{q}})\right].
+|Z|^2Z\left[\v{B}(\v{q},\v{h}_{11})+\v{B}(\bar{\v{q}},\v{h}_{20})
++\frac12\v{C}(\v{q},\v{q},\bar{\v{q}})\right].
 \]
 Using $\v{p}^\dagger\v{q}=1$, the solvability condition becomes
 \begin{equation}\label{spiral:cgle}
-Z_T=\alpha\nu Z+d\vnabla_\v{X}^2Z+c|Z|^2Z,
+\pd{Z}{T}=\alpha\nu Z+d\nabla_\v{X}^2Z+c|Z|^2Z,
 \end{equation}
 with
 \begin{align}
-\alpha&=\v{p}^\dagger J_1\v{q},\qquad
+\alpha&=\v{p}^\dagger \m{J}_1\v{q},\qquad
  d=\v{p}^\dagger\m{D}\v{q},\\
-c&=\v{p}^\dagger\left[B(\v{q},\v{h}_{11})
-+B(\bar{\v{q}},\v{h}_{20})+\tfrac12C(\v{q},\v{q},\bar{\v{q}})\right].
+c&=\v{p}^\dagger\left[\v{B}(\v{q},\v{h}_{11})
++\v{B}(\bar{\v{q}},\v{h}_{20})+\frac12\v{C}(\v{q},\v{q},\bar{\v{q}})\right].
 \end{align}
 This is a leading complex amplitude equation, commonly called a complex Ginzburg--Landau equation. Its coefficients are generally complex. A nondegenerate Hopf crossing requires $\Re\alpha\ne0$, and a nondegenerate cubic saturation requires $\Re c\ne0$. Their signs determine on which side the small homogeneous oscillation branch occurs and whether its radial dynamics are attracting at this order.
 
 \section{A worked projection without quadratic algebra}
 To see the solvability calculation explicitly, take
 \begin{align}
-u_t&=\mu u-\omega_0v-a u^3+D_1\nabla^2u,\\
-v_t&=\omega_0u+\mu v-b u^3+D_2\nabla^2v,
+\pd{u}{t}&=\mu u-\omega_0v-a u^3+D_1\nabla^2u,\\
+\pd{v}{t}&=\omega_0u+\mu v-b u^3+D_2\nabla^2v,
 \end{align}
 where $a>0$, $\omega_0>0$, $D_1,D_2>0$ and $b$ is real. This is an illustrative local oscillator model, not a fitted biological reaction scheme. Its nonlinear terms do not have the rotationally symmetric $f$--$g$ form.
 
@@ -2090,7 +2094,7 @@ and its projection is
 \]
 Likewise $\alpha=1$ and $d=(D_1+D_2)/2$. Therefore
 \begin{equation}\label{spiral:worked}
-Z_T=\nu Z+\frac{D_1+D_2}{2}\nabla_\v{X}^2Z
+\pd{Z}{T}=\nu Z+\frac{D_1+D_2}{2}\nabla_\v{X}^2Z
 -\frac32(a+\i b)|Z|^2Z.
 \end{equation}
 Writing $Z=R\e^{\i\Theta}$ gives exactly the amplitude--phase structure of \cref{spiral:A,spiral:phase}, on the slow scales, with
